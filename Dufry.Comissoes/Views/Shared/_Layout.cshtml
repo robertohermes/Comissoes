@@ -1,0 +1,43 @@
+﻿@model ControleAcesso
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/content/site")
+</head>
+<body>
+    @{
+        string currentUser = "usuário sem permissão de acesso";
+        
+        if (Model != null)
+        {
+            currentUser = Model.LOGIN;
+        }
+    }
+
+    <div id="header">
+        <h1>
+            @{
+                string action = "~/Home/Index/";    
+                
+                @Html.Raw(string.Format("<a href=\"{0}\">Dufry</a>", Url.Content(action)))
+            }
+        </h1>
+        <ul id="navlist">
+            @{
+                @Html.Raw(string.Format("<li class=\"first\">{0}</li>", currentUser))
+            }
+        </ul>
+    </div>
+
+    <div id="main">
+        @RenderBody()
+    </div>
+
+    <div id="footer">
+        Dufry 2015
+    </div>
+
+    @Scripts.Render("~/scripts/jquery")
+</body>
+</html>
