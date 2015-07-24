@@ -10,14 +10,14 @@ namespace Dufry.Comissoes.Data.Context
         private readonly ContextManager<TContext> _contextManager =
             ServiceLocator.Current.GetInstance<IContextManager<TContext>>() as ContextManager<TContext>;
 
-        private readonly IDbContext _dbContext;
-        private readonly IDbContext _dbContext2;
+        private readonly IDbContext _dbComissoesContext;
+        private readonly IDbContext _dbBIVendasContext;
         private bool _disposed;
 
         public UnitOfWork()
         {
-            _dbContext = _contextManager.GetContext();
-            _dbContext2 = _contextManager.GetContext2();
+            _dbComissoesContext = _contextManager.GetComissoesContext();
+            _dbBIVendasContext = _contextManager.GetBIVendasContext();
             
         }
 
@@ -34,7 +34,7 @@ namespace Dufry.Comissoes.Data.Context
 
         public void SaveChanges()
         {
-            _dbContext.SaveChanges();
+            _dbComissoesContext.SaveChanges();
         }
 
         protected virtual void Dispose(bool disposing)
@@ -43,7 +43,7 @@ namespace Dufry.Comissoes.Data.Context
             {
                 if (disposing)
                 {
-                    _dbContext.Dispose();
+                    _dbComissoesContext.Dispose();
                 }
             }
             _disposed = true;

@@ -13,7 +13,7 @@ namespace Dufry.Comissoes.Data.Repository.EntityFramework.Common
     public class Repository<TEntity> : IRepository<TEntity>, IDisposable
         where TEntity : class
     {
-        private readonly IDbContext _dbContext;
+        private readonly IDbContext _dbComissoesContext;
         private readonly IDbSet<TEntity> _dbSet;
 
         public Repository()
@@ -21,13 +21,13 @@ namespace Dufry.Comissoes.Data.Repository.EntityFramework.Common
             var contextManager = ServiceLocator.Current.GetInstance<IContextManager<ComissoesContext>>()
                 as ContextManager<ComissoesContext>;
 
-            _dbContext = contextManager.GetContext();
-            _dbSet = _dbContext.Set<TEntity>();
+            _dbComissoesContext = contextManager.GetComissoesContext();
+            _dbSet = _dbComissoesContext.Set<TEntity>();
         }
 
         protected IDbContext Context
         {
-            get { return _dbContext; }
+            get { return _dbComissoesContext; }
         }
 
         protected IDbSet<TEntity> DbSet

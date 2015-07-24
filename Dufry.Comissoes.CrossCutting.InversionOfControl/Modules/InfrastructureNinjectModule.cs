@@ -9,7 +9,7 @@ namespace Dufry.Comissoes.CrossCutting.InversionOfControl.Modules
         public override void Load()
         {
             Bind<IDbContext>().To<ComissoesContext>();
-            Bind<IDbContext>().To<Vendas_DMContext>();
+            Bind<IDbContext>().To<BIVendasContext>();
             Bind(typeof (IContextManager<>)).To(typeof (ContextManager<>));
             Bind(typeof(IUnitOfWork<>)).To((typeof(UnitOfWork<>)));
         }

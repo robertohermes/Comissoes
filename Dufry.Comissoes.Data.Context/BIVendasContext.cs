@@ -6,9 +6,9 @@ using Dufry.Comissoes.Domain.Entities;
 
 namespace Dufry.Comissoes.Data.Context
 {
-    public class Vendas_DMContext : BaseDbContext
+    public class BIVendasContext : BaseDbContext
     {
-        public Vendas_DMContext()
+        public BIVendasContext()
             : base("Dufry.Vendas_DMEntities_BI")
         {
         }

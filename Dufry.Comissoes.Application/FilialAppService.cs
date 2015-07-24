@@ -13,7 +13,7 @@ using Dufry.Comissoes.Domain.Validation;
 
 namespace Dufry.Comissoes.Application
 {
-    public class FilialAppService : AppService<Vendas_DMContext>, IFilialAppService
+    public class FilialAppService : AppService<BIVendasContext>, IFilialAppService
     {
         private readonly IFilialService _service;
 

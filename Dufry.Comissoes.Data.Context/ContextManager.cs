@@ -6,27 +6,30 @@ namespace Dufry.Comissoes.Data.Context
     public class ContextManager<TContext> : IContextManager<TContext>
         where TContext : IDbContext, new()
     {
-        private const string ContextKey = "ContextManager.Context";
-        private const string ContextKey2 = "ContextManager.Context2";
+        private const string ComissoesContextKey = "ContextManager.ComissoesContext";
+        private const string BIVendasContextKey = "ContextManager.BIVendasContext";
 
-        public IDbContext GetContext()
+        public IDbContext GetComissoesContext()
         {
-            if (HttpContext.Current.Items[ContextKey] == null)
-                HttpContext.Current.Items[ContextKey] = new TContext();
-            return HttpContext.Current.Items[ContextKey] as IDbContext;
+            if (HttpContext.Current.Items[ComissoesContextKey] == null)
+                HttpContext.Current.Items[ComissoesContextKey] = new TContext();
+            return HttpContext.Current.Items[ComissoesContextKey] as IDbContext;
         }
 
-        public IDbContext GetContext2()
+        public IDbContext GetBIVendasContext()
         {
-            if (HttpContext.Current.Items[ContextKey2] == null)
-                HttpContext.Current.Items[ContextKey2] = new TContext();
-            return HttpContext.Current.Items[ContextKey2] as IDbContext;
+            if (HttpContext.Current.Items[BIVendasContextKey] == null)
+                HttpContext.Current.Items[BIVendasContextKey] = new TContext();
+            return HttpContext.Current.Items[BIVendasContextKey] as IDbContext;
         }
 
         public void Finish()
         {
-            if (HttpContext.Current.Items[ContextKey] != null)
-                (HttpContext.Current.Items[ContextKey] as IDbContext).Dispose();
+            if (HttpContext.Current.Items[ComissoesContextKey] != null)
+                (HttpContext.Current.Items[ComissoesContextKey] as IDbContext).Dispose();
+
+            if (HttpContext.Current.Items[BIVendasContextKey] != null)
+                (HttpContext.Current.Items[BIVendasContextKey] as IDbContext).Dispose();
         }
     }
 }

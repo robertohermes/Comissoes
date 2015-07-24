@@ -13,21 +13,21 @@ namespace Dufry.Comissoes.Data.Repository.EntityFramework.Common
     public class RepositoryBI<TEntity> : IRepository<TEntity>, IDisposable
         where TEntity : class
     {
-        private readonly IDbContext _dbContext2;
+        private readonly IDbContext _dbBIVendasContext;
         private readonly IDbSet<TEntity> _dbSet;
 
         public RepositoryBI()
         {
-            var contextManager = ServiceLocator.Current.GetInstance<IContextManager<Vendas_DMContext>>()
-                as ContextManager<Vendas_DMContext>;
+            var contextManager = ServiceLocator.Current.GetInstance<IContextManager<BIVendasContext>>()
+                as ContextManager<BIVendasContext>;
 
-            _dbContext2 = contextManager.GetContext2();
-            _dbSet = _dbContext2.Set<TEntity>();
+            _dbBIVendasContext = contextManager.GetBIVendasContext();
+            _dbSet = _dbBIVendasContext.Set<TEntity>();
         }
 
         protected IDbContext Context
         {
-            get { return _dbContext2; }
+            get { return _dbBIVendasContext; }
         }
 
         protected IDbSet<TEntity> DbSet
