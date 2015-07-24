@@ -69,6 +69,9 @@
     <Compile Include="EntityFramework\Common\RepositoryBI.cs" />
     <Compile Include="EntityFramework\ControleAcessoRepository.cs" />
     <Compile Include="EntityFramework\Common\Repository.cs" />
+    <Compile Include="EntityFramework\EmpresaRepository.cs" />
+    <Compile Include="EntityFramework\ColaboradorRepository.cs" />
+    <Compile Include="EntityFramework\LojaRepository.cs" />
     <Compile Include="EntityFramework\FilialRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

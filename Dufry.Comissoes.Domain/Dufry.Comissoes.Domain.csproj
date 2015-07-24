@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Entities\ControleAcesso.cs" />
     <Compile Include="Entities\Filial.cs" />
+    <Compile Include="Entities\Empresa.cs" />
+    <Compile Include="Entities\Colaborador.cs" />
     <Compile Include="Entities\Loja.cs" />
     <Compile Include="Entities\Specifications\ControleAcessoSpecs\ControleAcessoLoginLenthMustBeLowerThan100Spec.cs" />
     <Compile Include="Entities\Validations\ControleAcessoIsValidValidation.cs" />
@@ -49,11 +51,20 @@
     <Compile Include="Interfaces\Repository\Common\IRepository.cs" />
     <Compile Include="Interfaces\Repository\IControleAcessoRepository.cs" />
     <Compile Include="Interfaces\Repository\IFilialRepository.cs" />
+    <Compile Include="Interfaces\Repository\IEmpresaRepository.cs" />
+    <Compile Include="Interfaces\Repository\IColaboradorRepository.cs" />
+    <Compile Include="Interfaces\Repository\ILojaRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IControleAcessoReadOnlyRepository.cs" />
+    <Compile Include="Interfaces\Repository\ReadOnly\IEmpresaReadOnlyRepository.cs" />
+    <Compile Include="Interfaces\Repository\ReadOnly\IColaboradorReadOnlyRepository.cs" />
+    <Compile Include="Interfaces\Repository\ReadOnly\ILojaReadOnlyRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IFilialReadOnlyRepository.cs" />
     <Compile Include="Interfaces\Service\Common\IReadOnlyService.cs" />
     <Compile Include="Interfaces\Service\Common\IService.cs" />
     <Compile Include="Interfaces\Service\IControleAcessoService.cs" />
+    <Compile Include="Interfaces\Service\IEmpresaService.cs" />
+    <Compile Include="Interfaces\Service\IColaboradorService.cs" />
+    <Compile Include="Interfaces\Service\ILojaService.cs" />
     <Compile Include="Interfaces\Service\IFilialService.cs" />
     <Compile Include="Interfaces\Specification\ISpecification.cs" />
     <Compile Include="Interfaces\Validation\ISelfValidation.cs" />
@@ -61,6 +72,9 @@
     <Compile Include="Interfaces\Validation\IValidationRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ControleAcessoService.cs" />
+    <Compile Include="Services\EmpresaService.cs" />
+    <Compile Include="Services\ColaboradorService.cs" />
+    <Compile Include="Services\LojaService.cs" />
     <Compile Include="Services\FilialService.cs" />
     <Compile Include="Services\Helpers\LinqExtentions.cs" />
     <Compile Include="Services\Common\ReadOnlyService.cs" />
