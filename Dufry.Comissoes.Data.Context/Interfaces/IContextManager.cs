@@ -3,9 +3,7 @@
     public interface IContextManager<TContext>
         where TContext : IDbContext, new()
     {
-        IDbContext GetComissoesContext();
-
-        IDbContext GetBIVendasContext();
+        IDbContext GetContext();
 
         void Finish();
     }

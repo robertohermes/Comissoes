@@ -21,7 +21,7 @@ namespace Dufry.Comissoes.Data.Repository.EntityFramework.Common
             var contextManager = ServiceLocator.Current.GetInstance<IContextManager<ComissoesContext>>()
                 as ContextManager<ComissoesContext>;
 
-            _dbComissoesContext = contextManager.GetComissoesContext();
+            _dbComissoesContext = contextManager.GetContext();
             _dbSet = _dbComissoesContext.Set<TEntity>();
         }
 

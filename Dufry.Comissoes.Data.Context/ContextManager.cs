@@ -6,30 +6,25 @@ namespace Dufry.Comissoes.Data.Context
     public class ContextManager<TContext> : IContextManager<TContext>
         where TContext : IDbContext, new()
     {
-        private const string ComissoesContextKey = "ContextManager.ComissoesContext";
-        private const string BIVendasContextKey = "ContextManager.BIVendasContext";
 
-        public IDbContext GetComissoesContext()
+        private string ContextKey = "ContextManager.Context";
+
+        public ContextManager()
         {
-            if (HttpContext.Current.Items[ComissoesContextKey] == null)
-                HttpContext.Current.Items[ComissoesContextKey] = new TContext();
-            return HttpContext.Current.Items[ComissoesContextKey] as IDbContext;
+            ContextKey = "ContextKey." + typeof(TContext).Name;
         }
 
-        public IDbContext GetBIVendasContext()
+        public IDbContext GetContext()
         {
-            if (HttpContext.Current.Items[BIVendasContextKey] == null)
-                HttpContext.Current.Items[BIVendasContextKey] = new TContext();
-            return HttpContext.Current.Items[BIVendasContextKey] as IDbContext;
+            if (HttpContext.Current.Items[ContextKey] == null)
+                HttpContext.Current.Items[ContextKey] = new TContext();
+            return HttpContext.Current.Items[ContextKey] as IDbContext;
         }
 
         public void Finish()
         {
-            if (HttpContext.Current.Items[ComissoesContextKey] != null)
-                (HttpContext.Current.Items[ComissoesContextKey] as IDbContext).Dispose();
-
-            if (HttpContext.Current.Items[BIVendasContextKey] != null)
-                (HttpContext.Current.Items[BIVendasContextKey] as IDbContext).Dispose();
+            if (HttpContext.Current.Items[ContextKey] != null)
+                (HttpContext.Current.Items[ContextKey] as IDbContext).Dispose();
         }
     }
 }

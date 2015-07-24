@@ -21,7 +21,7 @@ namespace Dufry.Comissoes.Data.Repository.EntityFramework.Common
             var contextManager = ServiceLocator.Current.GetInstance<IContextManager<BIVendasContext>>()
                 as ContextManager<BIVendasContext>;
 
-            _dbBIVendasContext = contextManager.GetBIVendasContext();
+            _dbBIVendasContext = contextManager.GetContext();
             _dbSet = _dbBIVendasContext.Set<TEntity>();
         }
 

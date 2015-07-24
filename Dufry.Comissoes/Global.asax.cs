@@ -27,16 +27,10 @@ namespace Dufry.Comissoes
 
         protected void Application_EndRequest()
         {
-            var comissoesContextManager = ServiceLocator.Current.GetInstance<IContextManager<ComissoesContext>>() as ContextManager<ComissoesContext>;
-            if (comissoesContextManager != null)
+            var contextManager = ServiceLocator.Current.GetInstance<IContextManager<BIVendasContext>>() as ContextManager<BIVendasContext>;
+            if (contextManager != null)
             {
-                comissoesContextManager.GetComissoesContext().Dispose();
-            }
-
-            var biVendasContextManager = ServiceLocator.Current.GetInstance<IContextManager<BIVendasContext>>() as ContextManager<BIVendasContext>;
-            if (biVendasContextManager != null)
-            {
-                biVendasContextManager.GetBIVendasContext().Dispose();
+                contextManager.GetContext().Dispose();
             }
         }
     }
