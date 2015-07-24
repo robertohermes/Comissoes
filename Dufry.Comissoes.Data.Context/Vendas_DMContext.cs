@@ -6,11 +6,10 @@ using Dufry.Comissoes.Domain.Entities;
 
 namespace Dufry.Comissoes.Data.Context
 {
-    public class ComissoesContext : BaseDbContext
+    public class Vendas_DMContext : BaseDbContext
     {
-
-        public ComissoesContext()
-            : base("Dufry.ComissoesEntities_BI")
+        public Vendas_DMContext()
+            : base("Dufry.Vendas_DMEntities_BI")
         {
         }
 
@@ -20,23 +19,20 @@ namespace Dufry.Comissoes.Data.Context
 
             base.OnModelCreating(modelBuilder);
 
-
-            //modelBuilder.Configurations.Add(new CategoriaMap());
-            modelBuilder.Configurations.Add(new ControleAcessoMap());
-            
-                        
+            modelBuilder.Configurations.Add(new LojaMap());
+            modelBuilder.Configurations.Add(new FilialMap());
 
         }
-  
+
         #region DbSet
 
 
-        //public DbSet<Categoria> Categorias { get; set; }
-        public DbSet<ControleAcesso> ControleAcessos { get; set; }
-        
+        public DbSet<Loja> Lojas { get; set; }
+        public DbSet<Filial> Filiais { get; set; }
 
-        
+
 
         #endregion
+
     }
 }

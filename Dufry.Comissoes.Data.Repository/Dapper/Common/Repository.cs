@@ -14,6 +14,11 @@ namespace Dufry.Comissoes.Data.Repository.Dapper.Common
             get { return new SqlConnection(ConfigurationManager.ConnectionStrings["Dufry.ComissoesEntities_BI"].ConnectionString); }
         }
 
+        public IDbConnection Vendas_DMConnection
+        {
+            get { return new SqlConnection(ConfigurationManager.ConnectionStrings["Dufry.Vendas_DMEntities_BI"].ConnectionString); }
+        }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);

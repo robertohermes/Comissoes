@@ -11,11 +11,13 @@ namespace Dufry.Comissoes.Data.Context
             ServiceLocator.Current.GetInstance<IContextManager<TContext>>() as ContextManager<TContext>;
 
         private readonly IDbContext _dbContext;
+        private readonly IDbContext _dbContext2;
         private bool _disposed;
 
         public UnitOfWork()
         {
             _dbContext = _contextManager.GetContext();
+            _dbContext2 = _contextManager.GetContext2();
             
         }
 

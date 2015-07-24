@@ -4,6 +4,9 @@
         where TContext : IDbContext, new()
     {
         IDbContext GetContext();
+
+        IDbContext GetContext2();
+
         void Finish();
     }
 }

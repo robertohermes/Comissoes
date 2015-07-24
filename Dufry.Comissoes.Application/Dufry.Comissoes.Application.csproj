@@ -53,11 +53,13 @@
   <ItemGroup>
     <Compile Include="AppService.cs" />
     <Compile Include="ControleAcessoAppService.cs" />
+    <Compile Include="FilialAppService.cs" />
     <Compile Include="Interfaces\IControleAcessoAppService.cs" />
     <Compile Include="Interfaces\Common\IBasicAppService.cs" />
     <Compile Include="Interfaces\Common\IWriteOnlyAppService.cs" />
     <Compile Include="Interfaces\Common\IReadOnlyAppService.cs" />
     <Compile Include="Interfaces\Common\ITransactionAppService.cs" />
+    <Compile Include="Interfaces\IFilialAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -18,6 +18,10 @@ namespace Dufry.Comissoes.CrossCutting.InversionOfControl.Modules
             Bind<IControleAcessoRepository>().To<ControleAcessoRepository>();
             Bind<IControleAcessoReadOnlyRepository>().To<ControleAcessoDapperRepository>();
             Bind<IReadOnlyRepository<ControleAcesso>>().To<ControleAcessoDapperRepository>();
+
+            Bind<IFilialRepository>().To<FilialRepository>();
+            Bind<IFilialReadOnlyRepository>().To<FilialDapperRepository>();
+            Bind<IReadOnlyRepository<Filial>>().To<FilialDapperRepository>();
            
         }
     }

@@ -13,6 +13,7 @@ namespace Dufry.Comissoes.CrossCutting.InversionOfControl.Modules
             Bind(typeof (IService<>)).To(typeof (Service<>));
 
             Bind<IControleAcessoService>().To<ControleAcessoService>();
+            Bind<IFilialService>().To<FilialService>();
         }
     }
 }

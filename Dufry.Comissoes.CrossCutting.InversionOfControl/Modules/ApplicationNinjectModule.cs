@@ -9,6 +9,7 @@ namespace Dufry.Comissoes.CrossCutting.InversionOfControl.Modules
         public override void Load()
         {
             Bind<IControleAcessoAppService>().To<ControleAcessoAppService>();
+            Bind<IFilialAppService>().To<FilialAppService>();
         }
     }
 }

@@ -32,6 +32,12 @@ namespace Dufry.Comissoes
             {
                 contextManager.GetContext().Dispose();
             }
+
+            var contextManager2 = ServiceLocator.Current.GetInstance<IContextManager<Vendas_DMContext>>() as ContextManager<Vendas_DMContext>;
+            if (contextManager2 != null)
+            {
+                contextManager2.GetContext2().Dispose();
+            }
         }
     }
 }
