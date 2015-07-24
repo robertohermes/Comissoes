@@ -13,7 +13,7 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
     {
         public Filial Get(int id)
         {
-            using (var cn = Vendas_DMConnection)
+            using (var cn = BIVendasConnection)
             {
                 var filiais = cn.Query<Filial>("SELECT * FROM DimFilial WHERE Id_Filial = @Id_Filial",
                     new { ColaboradorKey = id }).FirstOrDefault();
@@ -23,7 +23,7 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
 
         public IEnumerable<Filial> All()
         {
-            using (var cn = Vendas_DMConnection)
+            using (var cn = BIVendasConnection)
             {
                 var filial = cn.Query<Filial>("SELECT * FROM DimFilial");
                 return filial;
@@ -32,7 +32,7 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
 
         public IEnumerable<Filial> Find(Expression<Func<Filial, bool>> predicate)
         {
-            using (var cn = Vendas_DMConnection)
+            using (var cn = BIVendasConnection)
             {
                 var filiais = cn.GetList<Filial>(predicate);
                 return filiais;

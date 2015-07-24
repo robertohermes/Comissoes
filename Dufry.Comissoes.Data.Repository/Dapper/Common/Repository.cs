@@ -14,7 +14,7 @@ namespace Dufry.Comissoes.Data.Repository.Dapper.Common
             get { return new SqlConnection(ConfigurationManager.ConnectionStrings["Dufry.ComissoesEntities_BI"].ConnectionString); }
         }
 
-        public IDbConnection Vendas_DMConnection
+        public IDbConnection BIVendasConnection
         {
             get { return new SqlConnection(ConfigurationManager.ConnectionStrings["Dufry.Vendas_DMEntities_BI"].ConnectionString); }
         }
