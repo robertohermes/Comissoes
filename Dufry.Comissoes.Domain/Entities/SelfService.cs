@@ -1,5 +1,4 @@
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dufry.Comissoes.Domain.Entities.Validations;
 using Dufry.Comissoes.Domain.Interfaces.Validation;
@@ -7,13 +6,13 @@ using Dufry.Comissoes.Domain.Validation;
 
 namespace Dufry.Comissoes.Domain.Entities
 {
-    
-    public partial class Categoria
+    public partial class SelfService
     {
-        public int ID_CATEGORIA { get; set; }
-        public string DESC_CATEGORIA { get; set; }
-        public string TAB_ORIGEM { get; set; }
-        public string COL_ORIGEM { get; set; }
+        public int ID_SELF_SERVICE { get; set; }
+        public string CODIGOCARGOALTERNATE { get; set; }
+        public string CODIGOLOJAALTERNATE { get; set; }
+        public DateTime DT_INI { get; set; }
+        public DateTime DT_FIM { get; set; }
         public string STATUS { get; set; }
         public DateTime CREATED_DATETIME { get; set; }
         public string CREATED_USERNAME { get; set; }
@@ -26,10 +25,11 @@ namespace Dufry.Comissoes.Domain.Entities
         {
             get
             {
-                var fiscal = new CategoriaIsValidValidation();
+                var fiscal = new SelfServiceIsValidValidation();
                 ValidationResult = fiscal.Valid(this);
                 return ValidationResult.IsValid;
             }
         }
+
     }
 }

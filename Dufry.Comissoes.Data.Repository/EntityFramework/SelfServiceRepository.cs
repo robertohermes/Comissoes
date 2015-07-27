@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Dufry.Comissoes.Data.Repository.EntityFramework
 {
-    public class CategoriaRepository : Repository<Categoria>, ICategoriaRepository
+    public class SelfServiceRepository : Repository<SelfService>, ISelfServiceRepository
     {
 
 

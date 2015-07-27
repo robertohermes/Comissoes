@@ -4,11 +4,10 @@ using Dufry.Comissoes.Domain.Entities;
 
 namespace Dufry.Comissoes.ViewModels
 {
-    public class AusenciaRemuneradaViewModel
+    public class DolarMedioViewModel
     {
-        public int ID_AUSENCIA_REMUNERADA { get; set; }
-        public int COLABORADORKEY { get; set; }
-        public string DESC_AUSENCIA { get; set; }
+        public int ID_PLANO { get; set; }
+        public decimal VALOR_DOLAR_MEDIO { get; set; }
         public DateTime DT_INI { get; set; }
         public DateTime DT_FIM { get; set; }
         public string STATUS { get; set; }
@@ -17,9 +16,9 @@ namespace Dufry.Comissoes.ViewModels
         public DateTime LAST_MODIFY_DATE { get; set; }
         public string LAST_MODIFY_USERNAME { get; set; }
 
-        public static AusenciaRemuneradaViewModel ToViewModel(AusenciaRemunerada ausenciaremunerada)
+        public static DolarMedioViewModel ToViewModel(DolarMedio dolarmedio)
         {
-            return Mapper.Map<AusenciaRemuneradaViewModel>(ausenciaremunerada);
+            return Mapper.Map<DolarMedioViewModel>(dolarmedio);
         }
     }
 }

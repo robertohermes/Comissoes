@@ -1,5 +1,4 @@
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dufry.Comissoes.Domain.Entities.Validations;
 using Dufry.Comissoes.Domain.Interfaces.Validation;
@@ -7,14 +6,11 @@ using Dufry.Comissoes.Domain.Validation;
 
 namespace Dufry.Comissoes.Domain.Entities
 {
-    
-    public partial class Categoria
+    public partial class PlanoCategoria
     {
-        public int ID_CATEGORIA { get; set; }
-        public string DESC_CATEGORIA { get; set; }
-        public string TAB_ORIGEM { get; set; }
-        public string COL_ORIGEM { get; set; }
-        public string STATUS { get; set; }
+        public int ID_PLANO { get; set; }
+        public int ID_CATEGORIA_PERCENTUAL { get; set; }
+        public int ORDEM_HIERARQUIA { get; set; }
         public DateTime CREATED_DATETIME { get; set; }
         public string CREATED_USERNAME { get; set; }
         public DateTime LAST_MODIFY_DATE { get; set; }
@@ -26,10 +22,11 @@ namespace Dufry.Comissoes.Domain.Entities
         {
             get
             {
-                var fiscal = new CategoriaIsValidValidation();
+                var fiscal = new PlanoCategoriaIsValidValidation();
                 ValidationResult = fiscal.Valid(this);
                 return ValidationResult.IsValid;
             }
         }
+
     }
 }

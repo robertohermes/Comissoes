@@ -164,22 +164,36 @@
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Controllers\AusenciaRemuneradaController.cs" />
+    <Compile Include="Controllers\CategoriaController.cs" />
+    <Compile Include="Controllers\CategoriaPercentualController.cs" />
     <Compile Include="Controllers\ControleAcessoController.cs" />
+    <Compile Include="Controllers\DolarMedioController.cs" />
+    <Compile Include="Controllers\DSRController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\ColaboradorController.cs" />
     <Compile Include="Controllers\LojaController.cs" />
     <Compile Include="Controllers\FilialController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlanoCategoriaController.cs" />
+    <Compile Include="Controllers\PlanoController.cs" />
+    <Compile Include="Controllers\SelfServiceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AusenciaRemuneradaViewModel.cs" />
+    <Compile Include="ViewModels\CategoriaPercentualViewModel.cs" />
+    <Compile Include="ViewModels\CategoriaViewModel.cs" />
     <Compile Include="ViewModels\ControleAcessoViewModel.cs" />
+    <Compile Include="ViewModels\DolarMedioViewModel.cs" />
+    <Compile Include="ViewModels\DSRViewModel.cs" />
     <Compile Include="ViewModels\EmpresaViewModel.cs" />
     <Compile Include="ViewModels\ColaboradorViewModel.cs" />
     <Compile Include="ViewModels\LojaViewModel.cs" />
     <Compile Include="ViewModels\FilialViewModel.cs" />
+    <Compile Include="ViewModels\PlanoCategoriaViewModel.cs" />
+    <Compile Include="ViewModels\PlanoViewModel.cs" />
+    <Compile Include="ViewModels\SelfServiceViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Dufry.css" />

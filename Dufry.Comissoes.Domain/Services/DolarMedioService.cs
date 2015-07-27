@@ -6,11 +6,11 @@ using Dufry.Comissoes.Domain.Services.Common;
 
 namespace Dufry.Comissoes.Domain.Services
 {
-    public class CategoriaService : Service<Categoria>, ICategoriaService
+    public class DolarMedioService : Service<DolarMedio>, IDolarMedioService
     {
-        private readonly ICategoriaReadOnlyRepository _readOnlyRepository;
-        private readonly ICategoriaRepository _repository;
-        public CategoriaService(ICategoriaRepository repository, ICategoriaReadOnlyRepository readOnlyRepository, ICategoriaReadOnlyRepository readOnlyRepository1)
+        private readonly IDolarMedioReadOnlyRepository _readOnlyRepository;
+        private readonly IDolarMedioRepository _repository;
+        public DolarMedioService(IDolarMedioRepository repository, IDolarMedioReadOnlyRepository readOnlyRepository, IDolarMedioReadOnlyRepository readOnlyRepository1)
             : base(repository, readOnlyRepository)
         {
             _readOnlyRepository = readOnlyRepository1;

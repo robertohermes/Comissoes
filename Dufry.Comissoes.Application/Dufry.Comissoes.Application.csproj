@@ -53,12 +53,23 @@
   <ItemGroup>
     <Compile Include="AppService.cs" />
     <Compile Include="AusenciaRemuneradaAppService.cs" />
+    <Compile Include="CategoriaAppService.cs" />
+    <Compile Include="CategoriaPercentualAppService.cs" />
     <Compile Include="ControleAcessoAppService.cs" />
+    <Compile Include="DolarMedioAppService.cs" />
+    <Compile Include="DSRAppService.cs" />
     <Compile Include="Interfaces\IAusenciaRemuneradaAppService.cs" />
+    <Compile Include="Interfaces\ICategoriaAppService.cs" />
+    <Compile Include="Interfaces\ICategoriaPercentualAppService.cs" />
+    <Compile Include="Interfaces\IDolarMedioAppService.cs" />
+    <Compile Include="Interfaces\IDSRAppService.cs" />
     <Compile Include="Interfaces\IEmpresaAppService.cs" />
     <Compile Include="EmpresaAppService.cs" />
     <Compile Include="Interfaces\IColaboradorAppService.cs" />
     <Compile Include="ColaboradorAppService.cs" />
+    <Compile Include="Interfaces\IPlanoAppService.cs" />
+    <Compile Include="Interfaces\IPlanoCategoriaAppService.cs" />
+    <Compile Include="Interfaces\ISelfServiceAppService.cs" />
     <Compile Include="LojaAppService.cs" />
     <Compile Include="FilialAppService.cs" />
     <Compile Include="Interfaces\IControleAcessoAppService.cs" />
@@ -68,7 +79,10 @@
     <Compile Include="Interfaces\Common\ITransactionAppService.cs" />
     <Compile Include="Interfaces\ILojaAppService.cs" />
     <Compile Include="Interfaces\IFilialAppService.cs" />
+    <Compile Include="PlanoAppService.cs" />
+    <Compile Include="PlanoCategoriaAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelfServiceAppService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dufry.Comissoes.Data.Context\Dufry.Comissoes.Data.Context.csproj">

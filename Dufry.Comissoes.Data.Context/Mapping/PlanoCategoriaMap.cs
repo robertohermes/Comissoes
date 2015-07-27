@@ -3,31 +3,21 @@ using Dufry.Comissoes.Domain.Entities;
 
 namespace Dufry.Comissoes.Data.Context.Mapping
 {
-    public class CategoriaMap : EntityTypeConfiguration<Categoria>
+    public class PlanoCategoriaMap : EntityTypeConfiguration<PlanoCategoria>
     {
-        public const string TableName = "COMIS_CATEGORIA";
-        public CategoriaMap()
+        public const string TableName = "COMIS_PLANO_CATEGORIA";
+        public PlanoCategoriaMap()
         {
             ToTable(TableName);
 
+
             // Primary Key
-            HasKey(t => t.ID_CATEGORIA);
+            HasKey(t => t.ID_PLANO);
+            HasKey(t => t.ID_CATEGORIA_PERCENTUAL);
+
 
             // Properties
-            Property(t => t.DESC_CATEGORIA)
-                .HasMaxLength(255)
-                .IsRequired();
-
-            Property(t => t.TAB_ORIGEM)
-                .HasMaxLength(255)
-                .IsRequired();
-
-            Property(t => t.COL_ORIGEM)
-                .HasMaxLength(255)
-                .IsRequired();
-
-            Property(t => t.STATUS)
-                .HasMaxLength(1)
+            Property(t => t.ORDEM_HIERARQUIA)
                 .IsRequired();
 
             Property(t => t.CREATED_DATETIME)

@@ -3,27 +3,30 @@ using Dufry.Comissoes.Domain.Entities;
 
 namespace Dufry.Comissoes.Data.Context.Mapping
 {
-    public class CategoriaMap : EntityTypeConfiguration<Categoria>
+    public class SelfServiceMap : EntityTypeConfiguration<SelfService>
     {
-        public const string TableName = "COMIS_CATEGORIA";
-        public CategoriaMap()
+        public const string TableName = "COMIS_SELF_SERVICE";
+        public SelfServiceMap()
         {
             ToTable(TableName);
 
+
             // Primary Key
-            HasKey(t => t.ID_CATEGORIA);
+            HasKey(t => t.ID_SELF_SERVICE);
 
             // Properties
-            Property(t => t.DESC_CATEGORIA)
-                .HasMaxLength(255)
+            Property(t => t.CODIGOCARGOALTERNATE)
+                .HasMaxLength(2)
                 .IsRequired();
 
-            Property(t => t.TAB_ORIGEM)
-                .HasMaxLength(255)
+            Property(t => t.CODIGOLOJAALTERNATE)
+                .HasMaxLength(2)
                 .IsRequired();
 
-            Property(t => t.COL_ORIGEM)
-                .HasMaxLength(255)
+            Property(t => t.DT_INI)
+                .IsRequired();
+
+            Property(t => t.DT_FIM)
                 .IsRequired();
 
             Property(t => t.STATUS)

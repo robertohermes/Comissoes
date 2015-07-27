@@ -66,14 +66,21 @@
     <Compile Include="Dapper\Common\Repository.cs" />
     <Compile Include="Dapper\ControleAcessoDapperRepository.cs" />
     <Compile Include="Dapper\FilialDapperRepository.cs" />
+    <Compile Include="EntityFramework\CategoriaPercentualRepository.cs" />
+    <Compile Include="EntityFramework\CategoriaRepository.cs" />
     <Compile Include="EntityFramework\Common\RepositoryBI.cs" />
     <Compile Include="EntityFramework\AusenciaRemuneradaRepository.cs" />
     <Compile Include="EntityFramework\ControleAcessoRepository.cs" />
     <Compile Include="EntityFramework\Common\Repository.cs" />
+    <Compile Include="EntityFramework\DolarMedioRepository.cs" />
+    <Compile Include="EntityFramework\DSRRepository.cs" />
     <Compile Include="EntityFramework\EmpresaRepository.cs" />
     <Compile Include="EntityFramework\ColaboradorRepository.cs" />
     <Compile Include="EntityFramework\LojaRepository.cs" />
     <Compile Include="EntityFramework\FilialRepository.cs" />
+    <Compile Include="EntityFramework\PlanoCategoriaRepository.cs" />
+    <Compile Include="EntityFramework\PlanoRepository.cs" />
+    <Compile Include="EntityFramework\SelfServiceRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
