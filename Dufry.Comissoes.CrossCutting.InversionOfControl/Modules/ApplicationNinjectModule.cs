@@ -9,6 +9,16 @@ namespace Dufry.Comissoes.CrossCutting.InversionOfControl.Modules
         public override void Load()
         {
             Bind<IControleAcessoAppService>().To<ControleAcessoAppService>();
+
+            Bind<IAusenciaRemuneradaAppService>().To<AusenciaRemuneradaAppService>();
+            Bind<ICategoriaAppService>().To<CategoriaAppService>();
+            Bind<ISelfServiceAppService>().To<SelfServiceAppService>();
+            Bind<IPlanoAppService>().To<PlanoAppService>();
+            Bind<IDolarMedioAppService>().To<DolarMedioAppService>();
+            Bind<IPlanoCategoriaAppService>().To<PlanoCategoriaAppService>();
+            Bind<IDSRAppService>().To<DSRAppService>();
+            Bind<ICategoriaPercentualAppService>().To<CategoriaPercentualAppService>();
+
             Bind<IFilialAppService>().To<FilialAppService>();
             Bind<ILojaAppService>().To<LojaAppService>();
             Bind<IEmpresaAppService>().To<EmpresaAppService>();

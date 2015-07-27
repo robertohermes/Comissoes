@@ -53,6 +53,7 @@
     <Compile Include="Entities\Plano.cs" />
     <Compile Include="Entities\PlanoCategoria.cs" />
     <Compile Include="Entities\SelfService.cs" />
+    <Compile Include="Entities\Specifications\ControleAcessoSpecs\ControleAcessoLoginIsRequiredSpec.cs" />
     <Compile Include="Entities\Specifications\ControleAcessoSpecs\ControleAcessoLoginLenthMustBeLowerThan100Spec.cs" />
     <Compile Include="Entities\Validations\AusenciaRemuneradaIsValidValidation.cs" />
     <Compile Include="Entities\Validations\CategoriaIsValidValidation.cs" />

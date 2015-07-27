@@ -33,6 +33,10 @@ namespace Dufry.Comissoes.Data.Context.Mapping
                 .HasMaxLength(255)
                 .IsRequired();
 
+            Property(t => t.ADMIN)
+                .HasMaxLength(1)
+                .IsRequired();
+
             Property(t => t.STATUS)
                 .HasMaxLength(1)
                 .IsRequired();

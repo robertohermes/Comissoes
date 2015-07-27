@@ -23,6 +23,8 @@ namespace Dufry.Comissoes.Domain.Entities
         public string CODIGOFILIALALTERNATE { get; set; }
 
         public string LOGIN { get; set; }
+
+        public string ADMIN { get; set; }
         
         public string STATUS { get; set; }
         public DateTime CREATED_DATETIME { get; set; }
