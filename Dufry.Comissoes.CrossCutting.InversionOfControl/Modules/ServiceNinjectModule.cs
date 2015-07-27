@@ -14,6 +14,9 @@ namespace Dufry.Comissoes.CrossCutting.InversionOfControl.Modules
 
             Bind<IControleAcessoService>().To<ControleAcessoService>();
             Bind<IFilialService>().To<FilialService>();
+            Bind<ILojaService>().To<LojaService>();
+            Bind<IEmpresaService>().To<EmpresaService>();
+            Bind<IColaboradorService>().To<ColaboradorService>();
         }
     }
 }

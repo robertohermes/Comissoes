@@ -22,6 +22,18 @@ namespace Dufry.Comissoes.CrossCutting.InversionOfControl.Modules
             Bind<IFilialRepository>().To<FilialRepository>();
             Bind<IFilialReadOnlyRepository>().To<FilialDapperRepository>();
             Bind<IReadOnlyRepository<Filial>>().To<FilialDapperRepository>();
+
+            Bind<ILojaRepository>().To<LojaRepository>();
+            //Bind<ILojaReadOnlyRepository>().To<LojaDapperRepository>();
+            //Bind<IReadOnlyRepository<Loja>>().To<LojaDapperRepository>();
+
+            Bind<IEmpresaRepository>().To<EmpresaRepository>();
+            //Bind<IEmpresaReadOnlyRepository>().To<EmpresaDapperRepository>();
+            //Bind<IReadOnlyRepository<Empresa>>().To<EmpresaDapperRepository>();
+
+            Bind<IColaboradorRepository>().To<ColaboradorRepository>();
+            //Bind<IColaboradorReadOnlyRepository>().To<ColaboradorDapperRepository>();
+            //Bind<IReadOnlyRepository<Colaborador>>().To<ColaboradorDapperRepository>();
            
         }
     }
