@@ -52,7 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppService.cs" />
+    <Compile Include="AusenciaRemuneradaAppService.cs" />
     <Compile Include="ControleAcessoAppService.cs" />
+    <Compile Include="Interfaces\IAusenciaRemuneradaAppService.cs" />
     <Compile Include="Interfaces\IEmpresaAppService.cs" />
     <Compile Include="EmpresaAppService.cs" />
     <Compile Include="Interfaces\IColaboradorAppService.cs" />

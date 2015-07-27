@@ -59,6 +59,7 @@
     <Compile Include="Interfaces\IContextManager.cs" />
     <Compile Include="Interfaces\IDbContext.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Mapping\AusenciaRemuneradaMap.cs" />
     <Compile Include="Mapping\ControleAcessoMap.cs" />
     <Compile Include="Mapping\FilialMap.cs" />
     <Compile Include="Mapping\EmpresaMap.cs" />

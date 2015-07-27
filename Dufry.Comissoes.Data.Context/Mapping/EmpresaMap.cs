@@ -33,7 +33,8 @@ namespace Dufry.Comissoes.Data.Context.Mapping
                 .IsRequired();
 
             Property(t => t.NomeReduzido)
-                .HasMaxLength(11);
+                .HasMaxLength(11)
+                .IsOptional();
         }
     }
 }

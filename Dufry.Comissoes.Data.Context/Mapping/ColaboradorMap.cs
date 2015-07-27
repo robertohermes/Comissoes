@@ -29,17 +29,22 @@ namespace Dufry.Comissoes.Data.Context.Mapping
                 .HasMaxLength(40)
                 .IsRequired();
 
-            Property(t => t.DataAdmissao);
+            Property(t => t.DataAdmissao)
+                .IsOptional();
 
-            Property(t => t.DataNascimento);
+            Property(t => t.DataNascimento)
+                .IsOptional();
 
             Property(t => t.Email)
-                .HasMaxLength(50);
+                .HasMaxLength(50)
+                .IsOptional();
 
             Property(t => t.Genero)
-                .HasMaxLength(1);
+                .HasMaxLength(1)
+                .IsOptional();
 
-            Property(t => t.Comissao);
+            Property(t => t.Comissao)
+                .IsOptional();
 
         }
     }
