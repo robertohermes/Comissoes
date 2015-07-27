@@ -1,4 +1,4 @@
-﻿//using System;
+﻿using System;
 using System.Collections.Generic;
 //using System.Linq;
 //using System.Text;
@@ -25,9 +25,9 @@ namespace Dufry.Comissoes.Domain.Entities
         public string LOGIN { get; set; }
         
         public string STATUS { get; set; }
-        public System.DateTime CREATED_DATETIME { get; set; }
+        public DateTime CREATED_DATETIME { get; set; }
         public string CREATED_USERNAME { get; set; }
-        public System.DateTime LAST_MODIFY_DATE { get; set; }
+        public DateTime LAST_MODIFY_DATE { get; set; }
         public string LAST_MODIFY_USERNAME { get; set; }
 
         public ValidationResult ValidationResult { get; private set; }

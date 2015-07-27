@@ -1,4 +1,4 @@
-﻿//using System;
+﻿using System;
 using System.Collections.Generic;
 //using System.Linq;
 //using System.Text;
@@ -17,8 +17,8 @@ namespace Dufry.Comissoes.Domain.Entities
         public int Id_Cargo { get; set; }
         public string CodigoSecundario { get; set; }
         public string NomeCompleto { get; set; }
-        public System.DateTime ? DataAdmissao { get; set; }
-        public System.DateTime ? DataNascimento { get; set; }
+        public DateTime ? DataAdmissao { get; set; }
+        public DateTime ? DataNascimento { get; set; }
         public string  Email { get; set; }
         public string  Genero { get; set; }
         public decimal ? Comissao { get; set; }
