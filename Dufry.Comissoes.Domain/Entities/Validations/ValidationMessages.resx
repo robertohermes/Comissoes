@@ -117,10 +117,190 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CategoriaDesc_CategoriaLenthMustBeLowerThan100" xml:space="preserve">
-    <value>Descrição da Categoria deve possuir menos de 100 caracteres</value>
+  <data name="AusenciaRemuneradaDescAusenciaIsRequired" xml:space="preserve">
+    <value>Descrição da ausência é obrigatório</value>
   </data>
-  <data name="ControleAcessoLoginLenthMustBeLowerThan100" xml:space="preserve">
-    <value>O Login do usuário deve possuir menos de 100 caracteres</value>
+  <data name="AusenciaRemuneradaDescAusenciaLenthMustBeLowerThan255" xml:space="preserve">
+    <value>Descrição da ausência não deve exceder 255 caracteres</value>
+  </data>
+  <data name="AusenciaRemuneradaDtFimIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AusenciaRemuneradaDtIniIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AusenciaRemuneradaStatusIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AusenciaRemuneradaStatusLenthMustBeLowerThan1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CategoriaColOrigemIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CategoriaColOrigemLenthMustBeLowerThan255" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CategoriaDescCategoriaIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CategoriaDescCategoriaLenthMustBeLowerThan255" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CategoriaPercentualAtributoIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CategoriaPercentualAtributoLenthMustBeLowerThan255" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CategoriaPercentualCodigoLojaAlternateIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CategoriaPercentualCodigoLojaAlternateLenthMustBeLowerThan1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CategoriaPercentualDtFimIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CategoriaPercentualDtIniIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CategoriaPercentualPercentualShouldBeGraterThanZero" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CategoriaPercentualPercentualShouldBeLowerThanOne" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CategoriaPercentualStatusIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CategoriaPercentualStatusLenthMustBeLowerThan1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CategoriaStatusIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CategoriaStatusLenthMustBeLowerThan1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CategoriaTabOrigemIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CategoriaTabOrigemLenthMustBeLowerThan255" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControleAcessoAdminIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControleAcessoAdminLenthMustBeLowerThan1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControleAcessoCodigoEmpresaAlternateIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControleAcessoCodigoEmpresaAlternateLenthMustBeLowerThan2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControleAcessoCodigoFilialAlternateIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControleAcessoCodigoFilialAlternateLenthMustBeLowerThan2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControleAcessoCodigoSecundarioIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControleAcessoCodigoSecundarioLenthMustBeLowerThan40" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControleAcessoLoginIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControleAcessoLoginLenthMustBeLowerThan255" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControleAcessoStatusIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControleAcessoStatusLenthMustBeLowerThan1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DolarMedioDtFimIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DolarMedioDtIniIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DolarMedioValorDolarMedioShouldBeGraterThanZero" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DsrCodigoLojaAlternateIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DsrCodigoLojaAlternateLenthMustBeLowerThan2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DsrDtFimIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DsrDtIniIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DsrPercentualShouldBeGraterThanZero" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DsrPercentualShouldBeLowerThanOne" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DsrStatusIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DsrStatusLenthMustBeLowerThan1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PlanoCategoriaOrdemHierarquiaIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PlanoDescPlanoIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PlanoDescPlanoLenthMustBeLowerThan255" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PlanoDtFimIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PlanoDtIniIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PlanoStatusIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PlanoStatusLenthMustBeLowerThan1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SelfServiceCodigoCargoAlternateIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SelfServiceCodigoCargoAlternateLenthMustBeLowerThan2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SelfServiceCodigoLojaAlternateIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SelfServiceCodigoLojaAlternateLenthMustBeLowerThan2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SelfServiceDtFimIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SelfServiceDtIniIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SelfServiceStatusIsRequired" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SelfServiceStatusLenthMustBeLowerThan1" xml:space="preserve">
+    <value />
   </data>
 </root>

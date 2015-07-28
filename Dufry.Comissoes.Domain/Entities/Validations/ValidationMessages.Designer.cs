@@ -61,20 +61,560 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Descrição da Categoria deve possuir menos de 100 caracteres.
+        ///   Looks up a localized string similar to Descrição da ausência é obrigatório.
         /// </summary>
-        public static string CategoriaDesc_CategoriaLenthMustBeLowerThan100 {
+        public static string AusenciaRemuneradaDescAusenciaIsRequired {
             get {
-                return ResourceManager.GetString("CategoriaDesc_CategoriaLenthMustBeLowerThan100", resourceCulture);
+                return ResourceManager.GetString("AusenciaRemuneradaDescAusenciaIsRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to O Login do usuário deve possuir menos de 100 caracteres.
+        ///   Looks up a localized string similar to Descrição da ausência não deve exceder 255 caracteres.
         /// </summary>
-        public static string ControleAcessoLoginLenthMustBeLowerThan100 {
+        public static string AusenciaRemuneradaDescAusenciaLenthMustBeLowerThan255 {
             get {
-                return ResourceManager.GetString("ControleAcessoLoginLenthMustBeLowerThan100", resourceCulture);
+                return ResourceManager.GetString("AusenciaRemuneradaDescAusenciaLenthMustBeLowerThan255", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string AusenciaRemuneradaDtFimIsRequired {
+            get {
+                return ResourceManager.GetString("AusenciaRemuneradaDtFimIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string AusenciaRemuneradaDtIniIsRequired {
+            get {
+                return ResourceManager.GetString("AusenciaRemuneradaDtIniIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string AusenciaRemuneradaStatusIsRequired {
+            get {
+                return ResourceManager.GetString("AusenciaRemuneradaStatusIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string AusenciaRemuneradaStatusLenthMustBeLowerThan1 {
+            get {
+                return ResourceManager.GetString("AusenciaRemuneradaStatusLenthMustBeLowerThan1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CategoriaColOrigemIsRequired {
+            get {
+                return ResourceManager.GetString("CategoriaColOrigemIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CategoriaColOrigemLenthMustBeLowerThan255 {
+            get {
+                return ResourceManager.GetString("CategoriaColOrigemLenthMustBeLowerThan255", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CategoriaDescCategoriaIsRequired {
+            get {
+                return ResourceManager.GetString("CategoriaDescCategoriaIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CategoriaDescCategoriaLenthMustBeLowerThan255 {
+            get {
+                return ResourceManager.GetString("CategoriaDescCategoriaLenthMustBeLowerThan255", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CategoriaPercentualAtributoIsRequired {
+            get {
+                return ResourceManager.GetString("CategoriaPercentualAtributoIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CategoriaPercentualAtributoLenthMustBeLowerThan255 {
+            get {
+                return ResourceManager.GetString("CategoriaPercentualAtributoLenthMustBeLowerThan255", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CategoriaPercentualCodigoLojaAlternateIsRequired {
+            get {
+                return ResourceManager.GetString("CategoriaPercentualCodigoLojaAlternateIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CategoriaPercentualCodigoLojaAlternateLenthMustBeLowerThan1 {
+            get {
+                return ResourceManager.GetString("CategoriaPercentualCodigoLojaAlternateLenthMustBeLowerThan1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CategoriaPercentualDtFimIsRequired {
+            get {
+                return ResourceManager.GetString("CategoriaPercentualDtFimIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CategoriaPercentualDtIniIsRequired {
+            get {
+                return ResourceManager.GetString("CategoriaPercentualDtIniIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CategoriaPercentualPercentualShouldBeGraterThanZero {
+            get {
+                return ResourceManager.GetString("CategoriaPercentualPercentualShouldBeGraterThanZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CategoriaPercentualPercentualShouldBeLowerThanOne {
+            get {
+                return ResourceManager.GetString("CategoriaPercentualPercentualShouldBeLowerThanOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CategoriaPercentualStatusIsRequired {
+            get {
+                return ResourceManager.GetString("CategoriaPercentualStatusIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CategoriaPercentualStatusLenthMustBeLowerThan1 {
+            get {
+                return ResourceManager.GetString("CategoriaPercentualStatusLenthMustBeLowerThan1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CategoriaStatusIsRequired {
+            get {
+                return ResourceManager.GetString("CategoriaStatusIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CategoriaStatusLenthMustBeLowerThan1 {
+            get {
+                return ResourceManager.GetString("CategoriaStatusLenthMustBeLowerThan1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CategoriaTabOrigemIsRequired {
+            get {
+                return ResourceManager.GetString("CategoriaTabOrigemIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CategoriaTabOrigemLenthMustBeLowerThan255 {
+            get {
+                return ResourceManager.GetString("CategoriaTabOrigemLenthMustBeLowerThan255", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ControleAcessoAdminIsRequired {
+            get {
+                return ResourceManager.GetString("ControleAcessoAdminIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ControleAcessoAdminLenthMustBeLowerThan1 {
+            get {
+                return ResourceManager.GetString("ControleAcessoAdminLenthMustBeLowerThan1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ControleAcessoCodigoEmpresaAlternateIsRequired {
+            get {
+                return ResourceManager.GetString("ControleAcessoCodigoEmpresaAlternateIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ControleAcessoCodigoEmpresaAlternateLenthMustBeLowerThan2 {
+            get {
+                return ResourceManager.GetString("ControleAcessoCodigoEmpresaAlternateLenthMustBeLowerThan2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ControleAcessoCodigoFilialAlternateIsRequired {
+            get {
+                return ResourceManager.GetString("ControleAcessoCodigoFilialAlternateIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ControleAcessoCodigoFilialAlternateLenthMustBeLowerThan2 {
+            get {
+                return ResourceManager.GetString("ControleAcessoCodigoFilialAlternateLenthMustBeLowerThan2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ControleAcessoCodigoSecundarioIsRequired {
+            get {
+                return ResourceManager.GetString("ControleAcessoCodigoSecundarioIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ControleAcessoCodigoSecundarioLenthMustBeLowerThan40 {
+            get {
+                return ResourceManager.GetString("ControleAcessoCodigoSecundarioLenthMustBeLowerThan40", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ControleAcessoLoginIsRequired {
+            get {
+                return ResourceManager.GetString("ControleAcessoLoginIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ControleAcessoLoginLenthMustBeLowerThan255 {
+            get {
+                return ResourceManager.GetString("ControleAcessoLoginLenthMustBeLowerThan255", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ControleAcessoStatusIsRequired {
+            get {
+                return ResourceManager.GetString("ControleAcessoStatusIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ControleAcessoStatusLenthMustBeLowerThan1 {
+            get {
+                return ResourceManager.GetString("ControleAcessoStatusLenthMustBeLowerThan1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DolarMedioDtFimIsRequired {
+            get {
+                return ResourceManager.GetString("DolarMedioDtFimIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DolarMedioDtIniIsRequired {
+            get {
+                return ResourceManager.GetString("DolarMedioDtIniIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DolarMedioValorDolarMedioShouldBeGraterThanZero {
+            get {
+                return ResourceManager.GetString("DolarMedioValorDolarMedioShouldBeGraterThanZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DsrCodigoLojaAlternateIsRequired {
+            get {
+                return ResourceManager.GetString("DsrCodigoLojaAlternateIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DsrCodigoLojaAlternateLenthMustBeLowerThan2 {
+            get {
+                return ResourceManager.GetString("DsrCodigoLojaAlternateLenthMustBeLowerThan2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DsrDtFimIsRequired {
+            get {
+                return ResourceManager.GetString("DsrDtFimIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DsrDtIniIsRequired {
+            get {
+                return ResourceManager.GetString("DsrDtIniIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DsrPercentualShouldBeGraterThanZero {
+            get {
+                return ResourceManager.GetString("DsrPercentualShouldBeGraterThanZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DsrPercentualShouldBeLowerThanOne {
+            get {
+                return ResourceManager.GetString("DsrPercentualShouldBeLowerThanOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DsrStatusIsRequired {
+            get {
+                return ResourceManager.GetString("DsrStatusIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DsrStatusLenthMustBeLowerThan1 {
+            get {
+                return ResourceManager.GetString("DsrStatusLenthMustBeLowerThan1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string PlanoCategoriaOrdemHierarquiaIsRequired {
+            get {
+                return ResourceManager.GetString("PlanoCategoriaOrdemHierarquiaIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string PlanoDescPlanoIsRequired {
+            get {
+                return ResourceManager.GetString("PlanoDescPlanoIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string PlanoDescPlanoLenthMustBeLowerThan255 {
+            get {
+                return ResourceManager.GetString("PlanoDescPlanoLenthMustBeLowerThan255", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string PlanoDtFimIsRequired {
+            get {
+                return ResourceManager.GetString("PlanoDtFimIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string PlanoDtIniIsRequired {
+            get {
+                return ResourceManager.GetString("PlanoDtIniIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string PlanoStatusIsRequired {
+            get {
+                return ResourceManager.GetString("PlanoStatusIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string PlanoStatusLenthMustBeLowerThan1 {
+            get {
+                return ResourceManager.GetString("PlanoStatusLenthMustBeLowerThan1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string SelfServiceCodigoCargoAlternateIsRequired {
+            get {
+                return ResourceManager.GetString("SelfServiceCodigoCargoAlternateIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string SelfServiceCodigoCargoAlternateLenthMustBeLowerThan2 {
+            get {
+                return ResourceManager.GetString("SelfServiceCodigoCargoAlternateLenthMustBeLowerThan2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string SelfServiceCodigoLojaAlternateIsRequired {
+            get {
+                return ResourceManager.GetString("SelfServiceCodigoLojaAlternateIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string SelfServiceCodigoLojaAlternateLenthMustBeLowerThan2 {
+            get {
+                return ResourceManager.GetString("SelfServiceCodigoLojaAlternateLenthMustBeLowerThan2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string SelfServiceDtFimIsRequired {
+            get {
+                return ResourceManager.GetString("SelfServiceDtFimIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string SelfServiceDtIniIsRequired {
+            get {
+                return ResourceManager.GetString("SelfServiceDtIniIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string SelfServiceStatusIsRequired {
+            get {
+                return ResourceManager.GetString("SelfServiceStatusIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string SelfServiceStatusLenthMustBeLowerThan1 {
+            get {
+                return ResourceManager.GetString("SelfServiceStatusLenthMustBeLowerThan1", resourceCulture);
             }
         }
     }
