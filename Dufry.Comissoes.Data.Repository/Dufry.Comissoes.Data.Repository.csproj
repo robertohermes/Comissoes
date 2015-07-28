@@ -63,7 +63,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dapper\EmpresaDapperRepository.cs" />
+    <Compile Include="Dapper\ColaboradorDapperRepository.cs" />
+    <Compile Include="Dapper\LojaDapperRepository.cs" />
+    <Compile Include="Dapper\SelfServiceDapperRepository.cs" />
+    <Compile Include="Dapper\PlanoCategoriaDapperRepository.cs" />
+    <Compile Include="Dapper\PlanoDapperRepository.cs" />
+    <Compile Include="Dapper\DsrDapperRepository.cs" />
+    <Compile Include="Dapper\DolarMedioDapperRepository.cs" />
+    <Compile Include="Dapper\CategoriaPercentualDapperRepository.cs" />
+    <Compile Include="Dapper\CategoriaDapperRepository.cs" />
     <Compile Include="Dapper\Common\Repository.cs" />
+    <Compile Include="Dapper\AusenciaRemuneradaDapperRepository.cs" />
     <Compile Include="Dapper\ControleAcessoDapperRepository.cs" />
     <Compile Include="Dapper\FilialDapperRepository.cs" />
     <Compile Include="EntityFramework\CategoriaPercentualRepository.cs" />
