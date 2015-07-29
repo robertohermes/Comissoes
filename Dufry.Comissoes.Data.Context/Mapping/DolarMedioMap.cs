@@ -20,10 +20,6 @@ namespace Dufry.Comissoes.Data.Context.Mapping
             Property(t => t.VALOR_DOLAR_MEDIO)
                 .IsRequired();
 
-            Property(t => t.STATUS)
-                .HasMaxLength(1)
-                .IsRequired();
-
             Property(t => t.CREATED_DATETIME)
                 .IsRequired();
 

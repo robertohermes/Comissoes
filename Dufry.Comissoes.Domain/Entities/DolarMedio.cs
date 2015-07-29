@@ -12,7 +12,6 @@ namespace Dufry.Comissoes.Domain.Entities
         public decimal VALOR_DOLAR_MEDIO { get; set; }
         public DateTime DT_INI { get; set; }
         public DateTime DT_FIM { get; set; }
-        public string STATUS { get; set; }
         public DateTime CREATED_DATETIME { get; set; }
         public string CREATED_USERNAME { get; set; }
         public DateTime LAST_MODIFY_DATE { get; set; }

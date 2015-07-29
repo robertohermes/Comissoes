@@ -21,6 +21,8 @@ namespace Dufry.Comissoes.Data.Context
 
             modelBuilder.Configurations.Add(new LojaMap());
             modelBuilder.Configurations.Add(new FilialMap());
+            modelBuilder.Configurations.Add(new EmpresaMap());
+            modelBuilder.Configurations.Add(new ColaboradorMap());
 
         }
 
@@ -29,6 +31,8 @@ namespace Dufry.Comissoes.Data.Context
 
         public DbSet<Loja> Lojas { get; set; }
         public DbSet<Filial> Filiais { get; set; }
+        public DbSet<Empresa> Empresas { get; set; }
+        public DbSet<Colaborador> Colaboradors { get; set; }
 
 
 
