@@ -61,7 +61,7 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Descrição da ausência é obrigatório.
+        ///   Looks up a localized string similar to A descrição da ausência é obrigatória.
         /// </summary>
         public static string AusenciaRemuneradaDescAusenciaIsRequired {
             get {
@@ -70,16 +70,16 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Descrição da ausência não deve exceder 255 caracteres.
+        ///   Looks up a localized string similar to A descrição da ausência não deve exceder 255 caracteres.
         /// </summary>
-        public static string AusenciaRemuneradaDescAusenciaLenthMustBeLowerThan255 {
+        public static string AusenciaRemuneradaDescAusenciaLengthMustBeLowerThan255 {
             get {
-                return ResourceManager.GetString("AusenciaRemuneradaDescAusenciaLenthMustBeLowerThan255", resourceCulture);
+                return ResourceManager.GetString("AusenciaRemuneradaDescAusenciaLengthMustBeLowerThan255", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to A data de término da ausência é obrigatória.
         /// </summary>
         public static string AusenciaRemuneradaDtFimIsRequired {
             get {
@@ -88,7 +88,7 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to A data de início da ausência é obrigatória.
         /// </summary>
         public static string AusenciaRemuneradaDtIniIsRequired {
             get {
@@ -97,7 +97,7 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to O status da vigência da ausência é obrigatório.
         /// </summary>
         public static string AusenciaRemuneradaStatusIsRequired {
             get {
@@ -106,16 +106,16 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to O status da vigência da ausência não deve exceder 1 caracter.
         /// </summary>
-        public static string AusenciaRemuneradaStatusLenthMustBeLowerThan1 {
+        public static string AusenciaRemuneradaStatusLengthMustBeLowerThan1 {
             get {
-                return ResourceManager.GetString("AusenciaRemuneradaStatusLenthMustBeLowerThan1", resourceCulture);
+                return ResourceManager.GetString("AusenciaRemuneradaStatusLengthMustBeLowerThan1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to A coluna de origem da categoria é obrigatória.
         /// </summary>
         public static string CategoriaColOrigemIsRequired {
             get {
@@ -126,14 +126,14 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        public static string CategoriaColOrigemLenthMustBeLowerThan255 {
+        public static string CategoriaColOrigemLengthMustBeLowerThan255 {
             get {
-                return ResourceManager.GetString("CategoriaColOrigemLenthMustBeLowerThan255", resourceCulture);
+                return ResourceManager.GetString("CategoriaColOrigemLengthMustBeLowerThan255", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to A descrição da categoria é obrigatória.
         /// </summary>
         public static string CategoriaDescCategoriaIsRequired {
             get {
@@ -144,14 +144,14 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        public static string CategoriaDescCategoriaLenthMustBeLowerThan255 {
+        public static string CategoriaDescCategoriaLengthMustBeLowerThan255 {
             get {
-                return ResourceManager.GetString("CategoriaDescCategoriaLenthMustBeLowerThan255", resourceCulture);
+                return ResourceManager.GetString("CategoriaDescCategoriaLengthMustBeLowerThan255", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to A descrição do atributo é obrigatória.
         /// </summary>
         public static string CategoriaPercentualAtributoIsRequired {
             get {
@@ -162,9 +162,9 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        public static string CategoriaPercentualAtributoLenthMustBeLowerThan255 {
+        public static string CategoriaPercentualAtributoLengthMustBeLowerThan255 {
             get {
-                return ResourceManager.GetString("CategoriaPercentualAtributoLenthMustBeLowerThan255", resourceCulture);
+                return ResourceManager.GetString("CategoriaPercentualAtributoLengthMustBeLowerThan255", resourceCulture);
             }
         }
         
@@ -180,14 +180,14 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        public static string CategoriaPercentualCodigoLojaAlternateLenthMustBeLowerThan1 {
+        public static string CategoriaPercentualCodigoLojaAlternateLengthMustBeLowerThan1 {
             get {
-                return ResourceManager.GetString("CategoriaPercentualCodigoLojaAlternateLenthMustBeLowerThan1", resourceCulture);
+                return ResourceManager.GetString("CategoriaPercentualCodigoLojaAlternateLengthMustBeLowerThan1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to A data de término do percentual é obrigatória.
         /// </summary>
         public static string CategoriaPercentualDtFimIsRequired {
             get {
@@ -196,7 +196,7 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to A data de início do percentual é obrigatória.
         /// </summary>
         public static string CategoriaPercentualDtIniIsRequired {
             get {
@@ -223,7 +223,7 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to O status da vigência do percentual é obrigatório.
         /// </summary>
         public static string CategoriaPercentualStatusIsRequired {
             get {
@@ -232,16 +232,16 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to O status da vigência do percentual não deve exceder 1 caracter.
         /// </summary>
-        public static string CategoriaPercentualStatusLenthMustBeLowerThan1 {
+        public static string CategoriaPercentualStatusLengthMustBeLowerThan1 {
             get {
-                return ResourceManager.GetString("CategoriaPercentualStatusLenthMustBeLowerThan1", resourceCulture);
+                return ResourceManager.GetString("CategoriaPercentualStatusLengthMustBeLowerThan1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to O status da categoria é obrigatório.
         /// </summary>
         public static string CategoriaStatusIsRequired {
             get {
@@ -250,11 +250,11 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to O status da categoria não deve exceder 1 caracter.
         /// </summary>
-        public static string CategoriaStatusLenthMustBeLowerThan1 {
+        public static string CategoriaStatusLengthMustBeLowerThan1 {
             get {
-                return ResourceManager.GetString("CategoriaStatusLenthMustBeLowerThan1", resourceCulture);
+                return ResourceManager.GetString("CategoriaStatusLengthMustBeLowerThan1", resourceCulture);
             }
         }
         
@@ -270,9 +270,9 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        public static string CategoriaTabOrigemLenthMustBeLowerThan255 {
+        public static string CategoriaTabOrigemLengthMustBeLowerThan255 {
             get {
-                return ResourceManager.GetString("CategoriaTabOrigemLenthMustBeLowerThan255", resourceCulture);
+                return ResourceManager.GetString("CategoriaTabOrigemLengthMustBeLowerThan255", resourceCulture);
             }
         }
         
@@ -288,9 +288,9 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        public static string ControleAcessoAdminLenthMustBeLowerThan1 {
+        public static string ControleAcessoAdminLengthMustBeLowerThan1 {
             get {
-                return ResourceManager.GetString("ControleAcessoAdminLenthMustBeLowerThan1", resourceCulture);
+                return ResourceManager.GetString("ControleAcessoAdminLengthMustBeLowerThan1", resourceCulture);
             }
         }
         
@@ -306,9 +306,9 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        public static string ControleAcessoCodigoEmpresaAlternateLenthMustBeLowerThan2 {
+        public static string ControleAcessoCodigoEmpresaAlternateLengthMustBeLowerThan2 {
             get {
-                return ResourceManager.GetString("ControleAcessoCodigoEmpresaAlternateLenthMustBeLowerThan2", resourceCulture);
+                return ResourceManager.GetString("ControleAcessoCodigoEmpresaAlternateLengthMustBeLowerThan2", resourceCulture);
             }
         }
         
@@ -324,9 +324,9 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        public static string ControleAcessoCodigoFilialAlternateLenthMustBeLowerThan2 {
+        public static string ControleAcessoCodigoFilialAlternateLengthMustBeLowerThan2 {
             get {
-                return ResourceManager.GetString("ControleAcessoCodigoFilialAlternateLenthMustBeLowerThan2", resourceCulture);
+                return ResourceManager.GetString("ControleAcessoCodigoFilialAlternateLengthMustBeLowerThan2", resourceCulture);
             }
         }
         
@@ -342,9 +342,9 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        public static string ControleAcessoCodigoSecundarioLenthMustBeLowerThan40 {
+        public static string ControleAcessoCodigoSecundarioLengthMustBeLowerThan40 {
             get {
-                return ResourceManager.GetString("ControleAcessoCodigoSecundarioLenthMustBeLowerThan40", resourceCulture);
+                return ResourceManager.GetString("ControleAcessoCodigoSecundarioLengthMustBeLowerThan40", resourceCulture);
             }
         }
         
@@ -360,9 +360,9 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        public static string ControleAcessoLoginLenthMustBeLowerThan255 {
+        public static string ControleAcessoLoginLengthMustBeLowerThan255 {
             get {
-                return ResourceManager.GetString("ControleAcessoLoginLenthMustBeLowerThan255", resourceCulture);
+                return ResourceManager.GetString("ControleAcessoLoginLengthMustBeLowerThan255", resourceCulture);
             }
         }
         
@@ -378,14 +378,14 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        public static string ControleAcessoStatusLenthMustBeLowerThan1 {
+        public static string ControleAcessoStatusLengthMustBeLowerThan1 {
             get {
-                return ResourceManager.GetString("ControleAcessoStatusLenthMustBeLowerThan1", resourceCulture);
+                return ResourceManager.GetString("ControleAcessoStatusLengthMustBeLowerThan1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to A data de término do valor da cotação média é obrigatória.
         /// </summary>
         public static string DolarMedioDtFimIsRequired {
             get {
@@ -394,7 +394,7 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to A data de início do valor da cotação média é obrigatória.
         /// </summary>
         public static string DolarMedioDtIniIsRequired {
             get {
@@ -423,14 +423,14 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        public static string DsrCodigoLojaAlternateLenthMustBeLowerThan2 {
+        public static string DsrCodigoLojaAlternateLengthMustBeLowerThan2 {
             get {
-                return ResourceManager.GetString("DsrCodigoLojaAlternateLenthMustBeLowerThan2", resourceCulture);
+                return ResourceManager.GetString("DsrCodigoLojaAlternateLengthMustBeLowerThan2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to A data de término do descanso semanal remunerado é obrigatória.
         /// </summary>
         public static string DsrDtFimIsRequired {
             get {
@@ -439,7 +439,7 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to A data de início do descanso semanal remunerado é obrigatória.
         /// </summary>
         public static string DsrDtIniIsRequired {
             get {
@@ -466,7 +466,7 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to O status da vigência do descanso semanal remunerado é obrigatório.
         /// </summary>
         public static string DsrStatusIsRequired {
             get {
@@ -475,11 +475,11 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to O status da vigência do descanso semanal remunerado não deve exceder 1 caracter.
         /// </summary>
-        public static string DsrStatusLenthMustBeLowerThan1 {
+        public static string DsrStatusLengthMustBeLowerThan1 {
             get {
-                return ResourceManager.GetString("DsrStatusLenthMustBeLowerThan1", resourceCulture);
+                return ResourceManager.GetString("DsrStatusLengthMustBeLowerThan1", resourceCulture);
             }
         }
         
@@ -504,14 +504,14 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        public static string PlanoDescPlanoLenthMustBeLowerThan255 {
+        public static string PlanoDescPlanoLengthMustBeLowerThan255 {
             get {
-                return ResourceManager.GetString("PlanoDescPlanoLenthMustBeLowerThan255", resourceCulture);
+                return ResourceManager.GetString("PlanoDescPlanoLengthMustBeLowerThan255", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to A data de término do plano de comissões é obrigatória.
         /// </summary>
         public static string PlanoDtFimIsRequired {
             get {
@@ -520,7 +520,7 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to A data de início do plano de comissões é obrigatória.
         /// </summary>
         public static string PlanoDtIniIsRequired {
             get {
@@ -529,7 +529,7 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to O status da vigência do plano de comissões é obrigatório.
         /// </summary>
         public static string PlanoStatusIsRequired {
             get {
@@ -538,11 +538,11 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to O status da vigência do plano de comissões não deve exceder 1 caracter.
         /// </summary>
-        public static string PlanoStatusLenthMustBeLowerThan1 {
+        public static string PlanoStatusLengthMustBeLowerThan1 {
             get {
-                return ResourceManager.GetString("PlanoStatusLenthMustBeLowerThan1", resourceCulture);
+                return ResourceManager.GetString("PlanoStatusLengthMustBeLowerThan1", resourceCulture);
             }
         }
         
@@ -558,9 +558,9 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        public static string SelfServiceCodigoCargoAlternateLenthMustBeLowerThan2 {
+        public static string SelfServiceCodigoCargoAlternateLengthMustBeLowerThan2 {
             get {
-                return ResourceManager.GetString("SelfServiceCodigoCargoAlternateLenthMustBeLowerThan2", resourceCulture);
+                return ResourceManager.GetString("SelfServiceCodigoCargoAlternateLengthMustBeLowerThan2", resourceCulture);
             }
         }
         
@@ -576,14 +576,14 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        public static string SelfServiceCodigoLojaAlternateLenthMustBeLowerThan2 {
+        public static string SelfServiceCodigoLojaAlternateLengthMustBeLowerThan2 {
             get {
-                return ResourceManager.GetString("SelfServiceCodigoLojaAlternateLenthMustBeLowerThan2", resourceCulture);
+                return ResourceManager.GetString("SelfServiceCodigoLojaAlternateLengthMustBeLowerThan2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to A data de término do percentual é obrigatória.
         /// </summary>
         public static string SelfServiceDtFimIsRequired {
             get {
@@ -592,7 +592,7 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to A data de início do percentual é obrigatória.
         /// </summary>
         public static string SelfServiceDtIniIsRequired {
             get {
@@ -601,7 +601,7 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to O status da vigência do percentual é obrigatório.
         /// </summary>
         public static string SelfServiceStatusIsRequired {
             get {
@@ -610,11 +610,11 @@ namespace Dufry.Comissoes.Domain.Entities.Validations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to O status da vigência do percentual não deve exceder 1 caracter.
         /// </summary>
-        public static string SelfServiceStatusLenthMustBeLowerThan1 {
+        public static string SelfServiceStatusLengthMustBeLowerThan1 {
             get {
-                return ResourceManager.GetString("SelfServiceStatusLenthMustBeLowerThan1", resourceCulture);
+                return ResourceManager.GetString("SelfServiceStatusLengthMustBeLowerThan1", resourceCulture);
             }
         }
     }

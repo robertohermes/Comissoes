@@ -2,7 +2,7 @@
 
 namespace Dufry.Comissoes.Domain.Entities.Specifications.DsrSpecs
 {
-    public class DsrStatusLenthMustBeLowerThan1Spec : ISpecification<DSR>
+    public class DsrStatusLengthMustBeLowerThan1Spec : ISpecification<DSR>
     {
         public bool IsSatisfiedBy(DSR dsr)
         {

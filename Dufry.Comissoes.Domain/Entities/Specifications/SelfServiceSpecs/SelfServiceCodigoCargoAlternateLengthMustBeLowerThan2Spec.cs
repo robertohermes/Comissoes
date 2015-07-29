@@ -2,7 +2,7 @@
 
 namespace Dufry.Comissoes.Domain.Entities.Specifications.SelfServiceSpecs
 {
-    public class SelfServiceCodigoCargoAlternateLenthMustBeLowerThan2Spec : ISpecification<SelfService>
+    public class SelfServiceCodigoCargoAlternateLengthMustBeLowerThan2Spec : ISpecification<SelfService>
     {
         public bool IsSatisfiedBy(SelfService selfservice)
         {

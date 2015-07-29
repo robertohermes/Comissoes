@@ -2,11 +2,11 @@
 
 namespace Dufry.Comissoes.Domain.Entities.Specifications.ControleAcessoSpecs
 {
-    public class ControleAcessoCodigoFilialAlternateLenthMustBeLowerThan2Spec : ISpecification<ControleAcesso>
+    public class ControleAcessoCodigoSecundarioLengthMustBeLowerThan40Spec : ISpecification<ControleAcesso>
     {
         public bool IsSatisfiedBy(ControleAcesso controleacesso)
         {
-            return controleacesso.CODIGOFILIALALTERNATE.Trim().Length <= 2;
+            return controleacesso.CODIGOSECUNDARIO.Trim().Length <= 40;
         }
     }
 }

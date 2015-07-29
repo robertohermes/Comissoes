@@ -2,11 +2,11 @@
 
 namespace Dufry.Comissoes.Domain.Entities.Specifications.CategoriaSpecs
 {
-    public class CategoriaColOrigemLenthMustBeLowerThan255Spec : ISpecification<Categoria>
+    public class CategoriaStatusLengthMustBeLowerThan1Spec : ISpecification<Categoria>
     {
         public bool IsSatisfiedBy(Categoria categoria)
         {
-            return categoria.COL_ORIGEM.Trim().Length <= 255;
+            return categoria.STATUS.Trim().Length <= 255;
         }
     }
 }

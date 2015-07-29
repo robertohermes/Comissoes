@@ -2,7 +2,7 @@
 
 namespace Dufry.Comissoes.Domain.Entities.Specifications.ControleAcessoSpecs
 {
-    public class ControleAcessoStatusLenthMustBeLowerThan1Spec : ISpecification<ControleAcesso>
+    public class ControleAcessoStatusLengthMustBeLowerThan1Spec : ISpecification<ControleAcesso>
     {
         public bool IsSatisfiedBy(ControleAcesso controleacesso)
         {

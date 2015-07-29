@@ -2,11 +2,11 @@
 
 namespace Dufry.Comissoes.Domain.Entities.Specifications.AusenciaRemuneradaSpecs
 {
-    public class AusenciaRemuneradaDescAusenciaLenthMustBeLowerThan255Spec : ISpecification<AusenciaRemunerada>
+    public class AusenciaRemuneradaStatusLengthMustBeLowerThan1Spec : ISpecification<AusenciaRemunerada>
     {
         public bool IsSatisfiedBy(AusenciaRemunerada ausenciaremunerada)
         {
-            return ausenciaremunerada.DESC_AUSENCIA.Trim().Length <= 255;
+            return ausenciaremunerada.STATUS.Trim().Length <= 1;
         }
     }
 }

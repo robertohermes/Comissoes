@@ -2,7 +2,7 @@
 
 namespace Dufry.Comissoes.Domain.Entities.Specifications.PlanoSpecs
 {
-    public class PlanoDescPlanoLenthMustBeLowerThan255Spec : ISpecification<Plano>
+    public class PlanoDescPlanoLengthMustBeLowerThan255Spec : ISpecification<Plano>
     {
         public bool IsSatisfiedBy(Plano plano)
         {

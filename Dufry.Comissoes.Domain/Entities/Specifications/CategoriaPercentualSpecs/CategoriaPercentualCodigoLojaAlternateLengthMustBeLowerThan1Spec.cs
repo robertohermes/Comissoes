@@ -2,11 +2,11 @@
 
 namespace Dufry.Comissoes.Domain.Entities.Specifications.CategoriaPercentualSpecs
 {
-    public class CategoriaPercentualStatusLenthMustBeLowerThan1Spec : ISpecification<CategoriaPercentual>
+    public class CategoriaPercentualCodigoLojaAlternateLengthMustBeLowerThan1Spec : ISpecification<CategoriaPercentual>
     {
         public bool IsSatisfiedBy(CategoriaPercentual categoriapercentual)
         {
-            return categoriapercentual.STATUS.Trim().Length <= 1;
+            return categoriapercentual.CODIGOLOJAALTERNATE.Trim().Length <= 1;
         }
     }
 }
