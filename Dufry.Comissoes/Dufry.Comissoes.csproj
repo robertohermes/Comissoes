@@ -273,6 +273,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\ControleAcesso\Browse.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Categoria\CategoriaBusca.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

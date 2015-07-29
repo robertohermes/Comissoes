@@ -61,6 +61,13 @@ ul
 	font-size: 14px;
 }
 
+ul#controleacesso
+{
+	/*list-style-type: square;*/
+	margin-left: 0px;
+	font-size: 14px;
+}
+
 ul#album-list
 {
 	list-style: none;
@@ -217,23 +224,29 @@ a:active
 
 /***************************** sidebar navigation ****************************/
 
-#categories
+#sidemenu   
 {
-	font-family: Constantia, Georgia, serif;
+	/*font-family: Constantia, Georgia, serif;*/
 	list-style-type: none;
 	border-right: #5d5a53 1px dotted;
-	padding-right: 10px;
-	margin: 0 25px 0 0;
+	padding-right: 15px;
+	margin: 0 5px 0 0;
 	float: left;
 }
 
-#categories a:link, #categories a:visited
+ul#sidemenu
+{
+	font-size: 14px;
+    line-height: 200%;
+}
+
+#sidemenu a:link, #sidemenus a:visited
 {
 	color: #9B9993;
 	text-decoration: none;
 }
 
-#categories a:hover
+#sidemenu a:hover
 {
 	color: #F46739;
 }

@@ -8,10 +8,12 @@
 <body>
     @{
         string currentUser = "usuário sem permissão de acesso";
+        string admin = "N";
         
         if (Model != null)
         {
             currentUser = Model.LOGIN;
+            admin = Model.ADMIN;
         }
     }
 
@@ -29,6 +31,23 @@
             }
         </ul>
     </div>
+
+    <ul id="sidemenu">
+    @{
+        if (admin == "S")
+        {
+            <li>@Html.Raw(string.Format("<a href=\"{0}\">Categorias</a>", Url.Content("~/Categoria/CategoriaBusca/")))</li>
+            <li>Categorias e percentuais por loja</li>
+            <li>Planos de comissões e hierarquias</li>
+            <li>Comissões “Self Service”</li>
+            <li>Ausência Remunerada</li>
+            <li>DSR</li>
+            <li>Taxa de dólar</li>
+            <li>Controle de Acesso</li>
+        }
+    }
+        <li>Comissões</li>                
+    </ul>
 
     <div id="main">
         @RenderBody()

@@ -16,5 +16,15 @@ namespace Dufry.Comissoes.Controllers
             _categoriaAppService = categoriaAppService;
         }
 
+
+        // GET: /Categoria/CategoriaBusca
+        public ActionResult CategoriaBusca()
+        {
+            var categoriaModel = _categoriaAppService.All();
+
+
+            return View(categoriaModel);
+        }
+
     }
 }
