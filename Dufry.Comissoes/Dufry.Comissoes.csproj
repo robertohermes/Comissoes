@@ -171,6 +171,7 @@
     <Compile Include="Controllers\DSRController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\ColaboradorController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\LojaController.cs" />
     <Compile Include="Controllers\FilialController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -274,6 +275,7 @@
     <Content Include="Views\ControleAcesso\Browse.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Categoria\CategoriaBusca.cshtml" />
+    <Content Include="Views\Menu\SideMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

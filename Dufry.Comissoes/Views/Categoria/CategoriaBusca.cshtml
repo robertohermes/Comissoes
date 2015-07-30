@@ -4,8 +4,12 @@
 }
 
 <div class="categorias">
-
-    Teste
+    <ul id="zzzz">
+            @foreach (var categoria in Model)
+            {
+                <li>@categoria.DESC_CATEGORIA</li>
+            }
+        </ul>
 
 
 </div>

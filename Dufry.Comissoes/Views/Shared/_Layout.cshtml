@@ -17,19 +17,7 @@
         </h1>
     </div>
 
-    <ul id="sidemenu">
-
-            <li>@Html.Raw(string.Format("<a href=\"{0}\">Categorias</a>", Url.Content("~/Categoria/CategoriaBusca/")))</li>
-            <li>Categorias e percentuais por loja</li>
-            <li>Planos de comissões e hierarquias</li>
-            <li>Comissões “Self Service”</li>
-            <li>Ausência Remunerada</li>
-            <li>DSR</li>
-            <li>Taxa de dólar</li>
-            <li>Controle de Acesso</li>
-
-        <li>Comissões</li>                
-    </ul>
+    @{Html.RenderAction("SideMenu", "Menu");}
 
     <div id="main">
         @RenderBody()
