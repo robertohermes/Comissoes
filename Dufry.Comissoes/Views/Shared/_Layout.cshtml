@@ -1,21 +1,11 @@
-﻿@model ControleAcesso
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>@ViewBag.Title</title>
     @Styles.Render("~/content/site")
 </head>
 <body>
-    @{
-        string currentUser = "usuário sem permissão de acesso";
-        string admin = "N";
-        
-        if (Model != null)
-        {
-            currentUser = Model.LOGIN;
-            admin = Model.ADMIN;
-        }
-    }
+
 
     <div id="header">
         <h1>
@@ -25,17 +15,10 @@
                 @Html.Raw(string.Format("<a href=\"{0}\">Dufry</a>", Url.Content(action)))
             }
         </h1>
-        <ul id="navlist">
-            @{
-                @Html.Raw(string.Format("<li class=\"first\">{0}</li>", currentUser))
-            }
-        </ul>
     </div>
 
     <ul id="sidemenu">
-    @{
-        if (admin == "S")
-        {
+
             <li>@Html.Raw(string.Format("<a href=\"{0}\">Categorias</a>", Url.Content("~/Categoria/CategoriaBusca/")))</li>
             <li>Categorias e percentuais por loja</li>
             <li>Planos de comissões e hierarquias</li>
@@ -44,8 +27,7 @@
             <li>DSR</li>
             <li>Taxa de dólar</li>
             <li>Controle de Acesso</li>
-        }
-    }
+
         <li>Comissões</li>                
     </ul>
 
