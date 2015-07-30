@@ -1,0 +1,61 @@
+﻿@model PagedList.IPagedList<Categoria>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Categorias";
+}
+
+<h2>Categorias</h2>
+
+<p>
+    @Html.ActionLink("Inserir nova Categoria", "CategoriaCreate")
+</p>
+@using (Html.BeginForm("CategoriaIndex", "Categoria", FormMethod.Get))
+{
+    <p>
+        Buscar: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Buscar" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Descrição", "CategoriaIndex", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            Tabela de Origem
+        </th>
+        <th>
+            @Html.ActionLink("Coluna de Origem", "CategoriaIndex", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DESC_CATEGORIA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TAB_ORIGEM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.COL_ORIGEM)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.ID_CATEGORIA }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.ID_CATEGORIA }) |
+                @Html.ActionLink("Excluir", "Delete", new { id = item.ID_CATEGORIA })
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("CategoriaIndex",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
