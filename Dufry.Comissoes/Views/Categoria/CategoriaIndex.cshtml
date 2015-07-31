@@ -21,13 +21,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Descrição", "CategoriaIndex", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Descrição", "CategoriaIndex", new { sortOrder = ViewBag.DescCategoriaSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            Tabela de Origem
+            @Html.ActionLink("Tabela de Origem", "CategoriaIndex", new { sortOrder = ViewBag.TabOrigemSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink("Coluna de Origem", "CategoriaIndex", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Coluna de Origem", "CategoriaIndex", new { sortOrder = ViewBag.ColOrigemSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Status", "CategoriaIndex", new { sortOrder = ViewBag.StatusSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th></th>
     </tr>
@@ -44,6 +47,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.COL_ORIGEM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.STATUS)
             </td>
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id = item.ID_CATEGORIA }) |
