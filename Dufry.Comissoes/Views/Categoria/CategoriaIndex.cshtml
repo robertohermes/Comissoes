@@ -13,24 +13,43 @@
 </p>
 @using (Html.BeginForm("CategoriaIndex", "Categoria", FormMethod.Get))
 {
-    <p>
-        Buscar: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Buscar" />
-    </p>
+    <p>Descrição: @Html.TextBox("descricaoSearchString", ViewBag.DescricaoFilter as string)</p>
+    <p>Tabela: @Html.TextBox("tabelaSearchString", ViewBag.TabelaFilter as string)</p>
+    <p>Coluna: @Html.TextBox("colunaSearchString", ViewBag.ColunaFilter as string)</p>
+                               <p>Status: @Html.RadioButton("statusSearchString", "A", true, ViewBag.StatusFilter as string)Ativo
+                               @Html.RadioButton("statusSearchString", "I", ViewBag.StatusFilter as string)Inativo</p>
+    
+    <p><input type="submit" value="Buscar" /></p>
+        
+        
+        
+
 }
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Descrição", "CategoriaIndex", new { sortOrder = ViewBag.DescCategoriaSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Descrição", "CategoriaIndex"
+            , new { sortOrder = ViewBag.DescCategoriaSortParm, descricaoFilter = ViewBag.DescricaoFilter
+                , tabelaFilter = ViewBag.TabelaFilter, colunaFilter = ViewBag.ColunaFilter
+                , statusFilter = ViewBag.StatusFilter })
         </th>
         <th>
-            @Html.ActionLink("Tabela de Origem", "CategoriaIndex", new { sortOrder = ViewBag.TabOrigemSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Tabela de Origem", "CategoriaIndex"
+            , new { sortOrder = ViewBag.TabOrigemSortParm, descricaoFilter = ViewBag.DescricaoFilter
+                , tabelaFilter = ViewBag.TabelaFilter, colunaFilter = ViewBag.ColunaFilter
+                , statusFilter = ViewBag.StatusFilter })
         </th>
         <th>
-            @Html.ActionLink("Coluna de Origem", "CategoriaIndex", new { sortOrder = ViewBag.ColOrigemSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Coluna de Origem", "CategoriaIndex"
+            , new { sortOrder = ViewBag.ColOrigemSortParm, descricaoFilter = ViewBag.DescricaoFilter
+                , tabelaFilter = ViewBag.TabelaFilter, colunaFilter = ViewBag.ColunaFilter
+                , statusFilter = ViewBag.StatusFilter })
         </th>
         <th>
-            @Html.ActionLink("Status", "CategoriaIndex", new { sortOrder = ViewBag.StatusSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Status", "CategoriaIndex"
+            , new { sortOrder = ViewBag.StatusSortParm, descricaoFilter = ViewBag.DescricaoFilter
+                , tabelaFilter = ViewBag.TabelaFilter, colunaFilter = ViewBag.ColunaFilter
+                , statusFilter = ViewBag.StatusFilter })
         </th>
         <th></th>
     </tr>
@@ -48,9 +67,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.COL_ORIGEM)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.STATUS)
-            </td>
+            @if (item.STATUS == "A") {
+            <td>Ativo</td>
+            } else {
+           <td>Inativo</td>
+            }
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id = item.ID_CATEGORIA }) |
                 @Html.ActionLink("Detalhes", "Details", new { id = item.ID_CATEGORIA }) |
@@ -64,4 +85,6 @@
 Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
 @Html.PagedListPager(Model, page => Url.Action("CategoriaIndex",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        new { page, sortOrder = ViewBag.CurrentSort, descricaoFilter = ViewBag.DescricaoFilter
+            , tabelaFilter = ViewBag.TabelaFilter, colunaFilter = ViewBag.ColunaFilter
+            , statusFilter = ViewBag.StatusFilter }))

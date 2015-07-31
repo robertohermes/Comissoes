@@ -19,7 +19,12 @@ namespace Dufry.Comissoes.Controllers
         }
 
         // GET: /Categoria/CategoriaIndex
-        public ViewResult CategoriaIndex(string sortOrder, string currentFilter, string searchString, int? page)
+        public ViewResult CategoriaIndex(int? page
+            , string sortOrder
+            , string descricaoFilter, string descricaoSearchString
+            , string tabelaFilter, string tabelaSearchString
+            , string colunaFilter, string colunaSearchString
+            , string statusFilter, string statusSearchString)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.DescCategoriaSortParm = String.IsNullOrEmpty(sortOrder) ? "DESC_CATEGORIA_desc" : "";
@@ -27,28 +32,32 @@ namespace Dufry.Comissoes.Controllers
             ViewBag.ColOrigemSortParm = sortOrder == "COL_ORIGEM" ? "COL_ORIGEM_desc" : "COL_ORIGEM";
             ViewBag.StatusSortParm = sortOrder == "STATUS" ? "STATUS_desc" : "STATUS";
 
-            if (searchString != null)
+            if (descricaoSearchString != null && tabelaSearchString != null && colunaSearchString != null)
             {
                 page = 1;
             }
             else
             {
-                searchString = currentFilter;
+                descricaoSearchString = descricaoFilter;
+                tabelaSearchString = tabelaFilter;
+                colunaSearchString = colunaFilter;
+                statusSearchString = statusFilter;
             }
 
-            ViewBag.CurrentFilter = searchString;
+            ViewBag.CurrentFilter = descricaoSearchString;
 
             IEnumerable<Categoria> categorias = new List<Categoria>();
 
-            if (String.IsNullOrEmpty(searchString))
+            if (String.IsNullOrEmpty(descricaoSearchString) && String.IsNullOrEmpty(tabelaSearchString) && String.IsNullOrEmpty(colunaSearchString) && String.IsNullOrEmpty(statusSearchString))
             {
                 categorias = _categoriaAppService.All();
             }
             else
             {
-                categorias = _categoriaAppService.Find(s => s.DESC_CATEGORIA.Contains(searchString)
-                                           || s.TAB_ORIGEM.Contains(searchString)
-                                           || s.COL_ORIGEM.Contains(searchString));
+                categorias = _categoriaAppService.Find(s => s.DESC_CATEGORIA.Contains(descricaoSearchString)
+                                           && s.TAB_ORIGEM.Contains(tabelaSearchString)
+                                           && s.COL_ORIGEM.Contains(colunaSearchString)
+                                           && s.STATUS.Contains(statusSearchString));
             }
 
             switch (sortOrder)
