@@ -22,7 +22,8 @@ body
 {
 	float: left;
 	width: 100%;
-	border-bottom: 1px dotted #5D5A53;
+	/*border-bottom: 1px dotted #5D5A53;*/
+    border-bottom: 1px dotted #FF0000;
 	margin-bottom: 10px;
 }
 

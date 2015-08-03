@@ -12,7 +12,9 @@
             @{
                 string action = "~/Home/Index/";    
                 
-                @Html.Raw(string.Format("<a href=\"{0}\">Dufry</a>", Url.Content(action)))
+                @*@Html.Raw(string.Format("<a href=\"{0}\">Dufry</a>", Url.Content(action)))*@
+                @Html.Raw(string.Format("<a href=\"{0}\"><img src=/content/Images/dufry_logo.jpg></a>", Url.Content(action)))
+                
             }
         </h1>
     </div>

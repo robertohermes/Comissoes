@@ -3,37 +3,69 @@
 	margin: 0px;
 	padding: 0px;
 	border: none;
+
 }
 
 body
 {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 14px;
-	background-color: #FBF9EF;
-	padding: 0px 6%;
+	font-size: 10px;
+    background-color: #F8F8FF;
+    /*background-color: #c2101c;*/
+	padding: 0px 2%;
 }
+
+#header
+{
+	/*float: left;*/
+	width: 100%;
+    background-color: #c2101c;
+    border-bottom: 1px solid #FF0000;
+	margin-bottom: 10px;
+
+}
+
+#header h1
+{
+	/*font-size: 18px;
+	float: left;*/
+    padding: 0px 0px 0px 0px;
+}
+
+#main
+{
+	overflow: hidden;
+	padding: 0 0 15px 10px;
+	float: left;
+    height: 613px;
+    width: 1108px;
+    background-color: #F8F8FF;
+ }
+
+#footer
+{
+    clear: both;
+    padding: 10px;
+    text-align: right;
+    background-color: #c2101c;
+    border-top: 1px solid #FF0000;
+    border-bottom: 1px solid #FF0000;
+    color: #FFFFFF;
+}
+
+/************************************************************************************/
+/*                                    até aqui ok                                   */
+/************************************************************************************/
 
 #container
 {
 	float: left;
 }
 
-#header
-{
-	float: left;
-	width: 100%;
-	border-bottom: 1px dotted #5D5A53;
-	margin-bottom: 10px;
-}
 
-#header h1
-{
-	font-size: 18px;
-	float: left;
-	/*background: url(/content/Images/dufry_logo.jpg) no-repeat;*/
-	/*padding: 100px 98px 20px 20px;*/
-    padding: 18px 18px 20px 20px;
-}
+
+
+
 
 /*#promotion
 {
@@ -47,12 +79,12 @@ ul li a
 	font-size: 16px;
 }
 
-#main
+/*#main
 {
 	overflow: hidden;
 	padding: 0 0 15px 10px;
 	float: left;
-}
+}*/
 
 ul
 {
@@ -123,15 +155,15 @@ ul#album-list li a span
 	color: #fff !important;
 }
 
-#footer
+/*#footer
 {
 	clear: both;
 	padding: 10px;
 	text-align: right;
-	border-top: 1px dotted #8A8575;
-	border-bottom: 1px dotted #8A8575;
+    border-top: 1px solid #FF0000;
+    border-bottom: 1px solid #FF0000;
 	font-family: Constantia, Georgia, serif;
-}
+}*/
 
 /******************** Top Navigation ************************/
 ul#navlist
@@ -226,29 +258,32 @@ a:active
 
 #sidemenu   
 {
-	/*font-family: Constantia, Georgia, serif;*/
+    background-color: #F8F8FF;
 	list-style-type: none;
-	border-right: #5d5a53 1px dotted;
+    border-right: 1px solid #FF0000;
 	padding-right: 15px;
 	margin: 0 5px 0 0;
 	float: left;
+    height: 613px;
 }
 
 ul#sidemenu
 {
-	font-size: 14px;
+	font-size: 12px;
     line-height: 200%;
 }
 
-#sidemenu a:link, #sidemenus a:visited
+#sidemenu a:link, #sidemenu a:visited
 {
-	color: #9B9993;
+	color: #000000;
+    font-size: 12px;
 	text-decoration: none;
 }
 
 #sidemenu a:hover
 {
-	color: #F46739;
+    font-size: 12px;
+	color: #c2101c;
 }
 
 div#album-details p
