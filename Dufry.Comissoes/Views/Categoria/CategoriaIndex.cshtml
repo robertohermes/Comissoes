@@ -11,49 +11,55 @@
 <p>
     @Html.ActionLink("Inserir nova Categoria", "CategoriaCreate")
 </p>
+    
+@**************************************************************************************************************************@
+@*                                                 Filtros de Busca                                                       *@
+@**************************************************************************************************************************@
 @using (Html.BeginForm("CategoriaIndex", "Categoria", FormMethod.Get))
 {
-    <p>Descrição: @Html.TextBox("descricaoSearchString", ViewBag.DescricaoFilter as string)</p>
-    <p>Tabela: @Html.TextBox("tabelaSearchString", ViewBag.TabelaFilter as string)</p>
-    <p>Coluna: @Html.TextBox("colunaSearchString", ViewBag.ColunaFilter as string)</p>
-                               <p>Status: @Html.RadioButton("statusSearchString", "A", true, ViewBag.StatusFilter as string)Ativo
-                               @Html.RadioButton("statusSearchString", "I", ViewBag.StatusFilter as string)Inativo</p>
-    
-    <p><input type="submit" value="Buscar" /></p>
-        
-        
-        
+    <p>Descrição:   @Html.TextBox("descricaoSearchString", ViewBag.DescricaoFilter as string)</p>
+    <p>Tabela:      @Html.TextBox("tabelaSearchString", ViewBag.TabelaFilter as string)</p>
+    <p>Coluna:      @Html.TextBox("colunaSearchString", ViewBag.ColunaFilter as string)</p>
+    <p>Status:      @Html.RadioButton("statusSearchString", "A", true, ViewBag.StatusFilter as string)Ativo
+                    @Html.RadioButton("statusSearchString", "I", ViewBag.StatusFilter as string)Inativo</p>
 
+    <p><input type="submit" value="Buscar" /></p>
 }
+
+
+@**************************************************************************************************************************@
+@*                                          Cabeçalho e loop do resultado da busca                                        *@
+@**************************************************************************************************************************@
 <table class="table">
     <tr>
         <th>
             @Html.ActionLink("Descrição", "CategoriaIndex"
-            , new { sortOrder = ViewBag.DescCategoriaSortParm, descricaoFilter = ViewBag.DescricaoFilter
-                , tabelaFilter = ViewBag.TabelaFilter, colunaFilter = ViewBag.ColunaFilter
-                , statusFilter = ViewBag.StatusFilter })
+            , new { sortOrder = ViewBag.DescCategoriaSortParam
+                , descricaoSearchString = ViewBag.DescricaoFilter , tabelaSearchString = ViewBag.TabelaFilter
+                , colunaSearchString = ViewBag.ColunaFilter, statusSearchString = ViewBag.StatusFilter })
         </th>
         <th>
             @Html.ActionLink("Tabela de Origem", "CategoriaIndex"
-            , new { sortOrder = ViewBag.TabOrigemSortParm, descricaoFilter = ViewBag.DescricaoFilter
-                , tabelaFilter = ViewBag.TabelaFilter, colunaFilter = ViewBag.ColunaFilter
-                , statusFilter = ViewBag.StatusFilter })
+            , new { sortOrder = ViewBag.TabOrigemSortParam
+                , descricaoSearchString = ViewBag.DescricaoFilter, tabelaSearchString = ViewBag.TabelaFilter
+                , colunaSearchString = ViewBag.ColunaFilter, statusSearchString = ViewBag.StatusFilter })
         </th>
         <th>
             @Html.ActionLink("Coluna de Origem", "CategoriaIndex"
-            , new { sortOrder = ViewBag.ColOrigemSortParm, descricaoFilter = ViewBag.DescricaoFilter
-                , tabelaFilter = ViewBag.TabelaFilter, colunaFilter = ViewBag.ColunaFilter
-                , statusFilter = ViewBag.StatusFilter })
+            , new { sortOrder = ViewBag.ColOrigemSortParam
+                , descricaoSearchString = ViewBag.DescricaoFilter, tabelaSearchString = ViewBag.TabelaFilter
+                , colunaSearchString = ViewBag.ColunaFilter, statusSearchString = ViewBag.StatusFilter
+            })
         </th>
         <th>
             @Html.ActionLink("Status", "CategoriaIndex"
-            , new { sortOrder = ViewBag.StatusSortParm, descricaoFilter = ViewBag.DescricaoFilter
-                , tabelaFilter = ViewBag.TabelaFilter, colunaFilter = ViewBag.ColunaFilter
-                , statusFilter = ViewBag.StatusFilter })
+            , new { sortOrder = ViewBag.StatusSortParam
+                , descricaoSearchString = ViewBag.DescricaoFilter, tabelaSearchString = ViewBag.TabelaFilter
+                , colunaSearchString = ViewBag.ColunaFilter, statusSearchString = ViewBag.StatusFilter
+            })
         </th>
         <th></th>
     </tr>
-
 
     @foreach (var item in Model)
     {
@@ -79,12 +85,16 @@
             </td>
         </tr>
     }
-
 </table>
+    
+                  
+@**************************************************************************************************************************@
+@*                                                        Paginação                                                       *@
+@**************************************************************************************************************************@
 <br />
 Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("CategoriaIndex",
-        new { page, sortOrder = ViewBag.CurrentSort, descricaoFilter = ViewBag.DescricaoFilter
-            , tabelaFilter = ViewBag.TabelaFilter, colunaFilter = ViewBag.ColunaFilter
-            , statusFilter = ViewBag.StatusFilter }))
+@Html.PagedListPager(Model, page => Url.Action("CategoriaIndex" 
+, new { sortOrder = ViewBag.CurrentSort
+    , descricaoSearchString = ViewBag.DescricaoFilter, tabelaSearchString = ViewBag.TabelaFilter
+    , colunaSearchString = ViewBag.ColunaFilter, statusSearchString = ViewBag.StatusFilter, page }))

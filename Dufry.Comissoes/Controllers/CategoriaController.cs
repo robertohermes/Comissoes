@@ -26,25 +26,39 @@ namespace Dufry.Comissoes.Controllers
             , string colunaFilter, string colunaSearchString
             , string statusFilter, string statusSearchString)
         {
+            #region trataParametrosOrdenacao
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.DescCategoriaSortParm = String.IsNullOrEmpty(sortOrder) ? "DESC_CATEGORIA_desc" : "";
-            ViewBag.TabOrigemSortParm = sortOrder == "TAB_ORIGEM" ? "TAB_ORIGEM_desc" : "TAB_ORIGEM";
-            ViewBag.ColOrigemSortParm = sortOrder == "COL_ORIGEM" ? "COL_ORIGEM_desc" : "COL_ORIGEM";
-            ViewBag.StatusSortParm = sortOrder == "STATUS" ? "STATUS_desc" : "STATUS";
+            ViewBag.DescCategoriaSortParam = String.IsNullOrEmpty(sortOrder) ? "DESC_CATEGORIA_desc" : "";
+            ViewBag.TabOrigemSortParam = sortOrder == "TAB_ORIGEM" ? "TAB_ORIGEM_desc" : "TAB_ORIGEM";
+            ViewBag.ColOrigemSortParam = sortOrder == "COL_ORIGEM" ? "COL_ORIGEM_desc" : "COL_ORIGEM";
+            ViewBag.StatusSortParam = sortOrder == "STATUS" ? "STATUS_desc" : "STATUS";
+            #endregion trataParametrosOrdenacao
 
-            if (descricaoSearchString != null && tabelaSearchString != null && colunaSearchString != null)
+            #region trataParametrosBusca
+            if (String.IsNullOrEmpty(descricaoSearchString))
             {
-                page = 1;
+                descricaoSearchString = "";
             }
-            else
-            {
-                descricaoSearchString = descricaoFilter;
-                tabelaSearchString = tabelaFilter;
-                colunaSearchString = colunaFilter;
-                statusSearchString = statusFilter;
-            }
+            ViewBag.descricaoFilter = descricaoSearchString;
 
-            ViewBag.CurrentFilter = descricaoSearchString;
+            if (String.IsNullOrEmpty(tabelaSearchString))
+            {
+                tabelaSearchString = "";
+            }
+            ViewBag.tabelaFilter = tabelaSearchString;
+
+            if (String.IsNullOrEmpty(colunaSearchString))
+            {
+                colunaSearchString = "";
+            }
+            ViewBag.colunaFilter = colunaSearchString;
+
+            if (String.IsNullOrEmpty(statusSearchString))
+            {
+                statusSearchString = "";
+            }
+            ViewBag.statusFilter = statusSearchString;
+            #endregion trataParametrosBusca
 
             IEnumerable<Categoria> categorias = new List<Categoria>();
 
@@ -60,6 +74,7 @@ namespace Dufry.Comissoes.Controllers
                                            && s.STATUS.Contains(statusSearchString));
             }
 
+            #region ordenacao
             switch (sortOrder)
             {
                 case "COL_ORIGEM":
@@ -87,6 +102,7 @@ namespace Dufry.Comissoes.Controllers
                     categorias = categorias.OrderBy(s => s.DESC_CATEGORIA);
                     break;
             }
+            #endregion ordenacao
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
