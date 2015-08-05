@@ -8,9 +8,11 @@
 
 <h2>Categorias</h2>
 
-<p>
-    @Html.ActionLink("Inserir nova Categoria", "CategoriaCreate")
-</p>
+
+    <p>
+        @Html.ActionLink("Inserir nova Categoria", "CategoriaCreate", "Categoria", null, new { @class = "create" })
+    </p>
+
     
 @**************************************************************************************************************************@
 @*                                                 Filtros de Busca                                                       *@
@@ -33,30 +35,33 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Descrição", "CategoriaIndex"
+            @Html.ActionLink("Descrição", "CategoriaIndex", "Categoria"
             , new { sortOrder = ViewBag.DescCategoriaSortParam
                 , descricaoSearchString = ViewBag.DescricaoFilter , tabelaSearchString = ViewBag.TabelaFilter
-                , colunaSearchString = ViewBag.ColunaFilter, statusSearchString = ViewBag.StatusFilter })
+                , colunaSearchString = ViewBag.ColunaFilter, statusSearchString = ViewBag.StatusFilter }
+                , new { @class = "tableheadlink" })
         </th>
         <th>
-            @Html.ActionLink("Tabela de Origem", "CategoriaIndex"
+            @Html.ActionLink("Tabela de Origem", "CategoriaIndex", "Categoria"
             , new { sortOrder = ViewBag.TabOrigemSortParam
                 , descricaoSearchString = ViewBag.DescricaoFilter, tabelaSearchString = ViewBag.TabelaFilter
-                , colunaSearchString = ViewBag.ColunaFilter, statusSearchString = ViewBag.StatusFilter })
+                , colunaSearchString = ViewBag.ColunaFilter, statusSearchString = ViewBag.StatusFilter }
+                , new { @class = "tableheadlink" })
         </th>
         <th>
-            @Html.ActionLink("Coluna de Origem", "CategoriaIndex"
+            @Html.ActionLink("Coluna de Origem", "CategoriaIndex", "Categoria"
             , new { sortOrder = ViewBag.ColOrigemSortParam
                 , descricaoSearchString = ViewBag.DescricaoFilter, tabelaSearchString = ViewBag.TabelaFilter
-                , colunaSearchString = ViewBag.ColunaFilter, statusSearchString = ViewBag.StatusFilter
-            })
+                , colunaSearchString = ViewBag.ColunaFilter, statusSearchString = ViewBag.StatusFilter}
+                , new { @class = "tableheadlink" })
         </th>
         <th>
-            @Html.ActionLink("Status", "CategoriaIndex"
+            @Html.ActionLink("Status", "CategoriaIndex", "Categoria"
             , new { sortOrder = ViewBag.StatusSortParam
                 , descricaoSearchString = ViewBag.DescricaoFilter, tabelaSearchString = ViewBag.TabelaFilter
-                , colunaSearchString = ViewBag.ColunaFilter, statusSearchString = ViewBag.StatusFilter
-            })
+                , colunaSearchString = ViewBag.ColunaFilter, statusSearchString = ViewBag.StatusFilter}
+                , new { @class = "tableheadlink" })
+            
         </th>
         <th></th>
     </tr>
@@ -65,7 +70,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DESC_CATEGORIA)
+                @Html.ActionLink(item.DESC_CATEGORIA, "Edit", "Categoria", new { id = item.ID_CATEGORIA }, new { @class = "tablerowlink" })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TAB_ORIGEM)
@@ -79,9 +84,7 @@
            <td>Inativo</td>
             }
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.ID_CATEGORIA }) |
-                @Html.ActionLink("Detalhes", "Details", new { id = item.ID_CATEGORIA }) |
-                @Html.ActionLink("Excluir", "Delete", new { id = item.ID_CATEGORIA })
+                @Html.ActionLink("Excluir", "Delete", "Categoria", new { id = item.ID_CATEGORIA }, new { @class = "tablerowlink" })
             </td>
         </tr>
     }
