@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using Dufry.Comissoes.Application.Interfaces;
 using PagedList;
 using Dufry.Comissoes.Domain.Entities;
+using Dufry.Comissoes.Filters;
 
 namespace Dufry.Comissoes.Controllers
 {
+    [ControleAcessoAdminFilter]
     public class CategoriaController : Controller
     {
         private readonly ICategoriaAppService _categoriaAppService;
@@ -19,6 +21,7 @@ namespace Dufry.Comissoes.Controllers
         }
 
         // GET: /Categoria/CategoriaIndex
+        //[ControleAcessoAdminFilter]
         public ViewResult CategoriaIndex(int? page
             , string sortOrder
             , string descricaoFilter, string descricaoSearchString

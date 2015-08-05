@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Dufry.Comissoes.Application.Interfaces;
+using System.Web.Security;
 
 namespace Dufry.Comissoes.Controllers
 {
@@ -20,18 +21,22 @@ namespace Dufry.Comissoes.Controllers
 
             var controleacessoModel = _controleacessoAppService.FindByActiveLogin(login);
 
+            //---------------------------------------------------------------------------------------------
+            //<REVER>
+            //---------------------------------------------------------------------------------------------
+            if (ModelState.IsValid)
+            {
+                if (controleacessoModel != null)
+                {
+                    FormsAuthentication.SetAuthCookie(controleacessoModel.LOGIN, false);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "O usuário [" + login + "] não está cadatrado no sistema.");
+                }
+            }
+
             return View(controleacessoModel);
         }
-
-        //
-        // GET: /ControleAcesso/Browse
-
-        public ActionResult Browse()
-        {
-            var controleacessoModel = _controleacessoAppService.GetFirstLogin();
-
-            return View(controleacessoModel);
-        }
-
     }
 }
