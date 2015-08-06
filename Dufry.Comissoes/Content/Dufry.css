@@ -426,6 +426,16 @@ tr:hover a.tablerowlink {
 	font-size: 16px;
     margin-bottom: 20px;
 }
+.errorMessage, .confirmMessage
+{
+	font-size: 16px;
+    margin-bottom: 20px;
+}
+.confirmMessage
+{
+    color: #c2101c;
+    font-weight: bold;
+}
 a.create
 {
 	color: #c2101c;

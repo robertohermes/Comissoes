@@ -118,10 +118,8 @@ namespace Dufry.Comissoes.Controllers
         // GET: /Categoria/CategoriaDelete/5
         public ActionResult CategoriaDelete(int id)
         {
-            CategoriaViewModel categoriaVM = new CategoriaViewModel();
-            categoriaVM.ToViewModel(_categoriaAppService.Get(id, @readonly: true));
-
-            return View(categoriaVM);
+            var categoria = _categoriaAppService.Get(id, @readonly: true);
+            return View(categoria);
         }
 
         // POST: /Categoria/Delete/5
