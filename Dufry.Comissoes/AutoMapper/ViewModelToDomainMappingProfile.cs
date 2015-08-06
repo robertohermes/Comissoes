@@ -13,7 +13,7 @@ namespace Dufry.Comissoes.AutoMapper
 
         protected override void Configure()
         {
-            
+            Mapper.CreateMap<Categoria, CategoriaViewModel>();
         }
     }
 }

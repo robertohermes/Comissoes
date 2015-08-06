@@ -18,7 +18,7 @@ namespace Dufry.Comissoes.ViewModels
         public decimal? Comissao { get; set; }
 
 
-        public static ColaboradorViewModel ToViewModel(Colaborador Colaborador)
+        public ColaboradorViewModel ToViewModel(Colaborador Colaborador)
         {
             return Mapper.Map<ColaboradorViewModel>(Colaborador);
         }

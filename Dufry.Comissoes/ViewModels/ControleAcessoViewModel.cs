@@ -26,7 +26,7 @@ namespace Dufry.Comissoes.ViewModels
         public DateTime LAST_MODIFY_DATE { get; set; }
         public string LAST_MODIFY_USERNAME { get; set; }
 
-        public static ControleAcessoViewModel ToViewModel(ControleAcesso controleacesso)
+        public ControleAcessoViewModel ToViewModel(ControleAcesso controleacesso)
         {
             return Mapper.Map<ControleAcessoViewModel>(controleacesso);
         }

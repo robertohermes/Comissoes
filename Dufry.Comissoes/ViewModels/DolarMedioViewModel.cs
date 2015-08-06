@@ -15,7 +15,7 @@ namespace Dufry.Comissoes.ViewModels
         public DateTime LAST_MODIFY_DATE { get; set; }
         public string LAST_MODIFY_USERNAME { get; set; }
 
-        public static DolarMedioViewModel ToViewModel(DolarMedio dolarmedio)
+        public DolarMedioViewModel ToViewModel(DolarMedio dolarmedio)
         {
             return Mapper.Map<DolarMedioViewModel>(dolarmedio);
         }

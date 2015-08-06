@@ -19,7 +19,7 @@ namespace Dufry.Comissoes.ViewModels
         public DateTime LAST_MODIFY_DATE { get; set; }
         public string LAST_MODIFY_USERNAME { get; set; }
 
-        public static CategoriaPercentualViewModel ToViewModel(CategoriaPercentual categoriapercentual)
+        public CategoriaPercentualViewModel ToViewModel(CategoriaPercentual categoriapercentual)
         {
             return Mapper.Map<CategoriaPercentualViewModel>(categoriapercentual);
         }

@@ -17,7 +17,7 @@ namespace Dufry.Comissoes.ViewModels
         public DateTime LAST_MODIFY_DATE { get; set; }
         public string LAST_MODIFY_USERNAME { get; set; }
 
-        public static AusenciaRemuneradaViewModel ToViewModel(AusenciaRemunerada ausenciaremunerada)
+        public AusenciaRemuneradaViewModel ToViewModel(AusenciaRemunerada ausenciaremunerada)
         {
             return Mapper.Map<AusenciaRemuneradaViewModel>(ausenciaremunerada);
         }

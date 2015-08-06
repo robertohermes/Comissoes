@@ -7,6 +7,7 @@ using Dufry.Comissoes.Application.Interfaces;
 using PagedList;
 using Dufry.Comissoes.Domain.Entities;
 using Dufry.Comissoes.Filters;
+using Dufry.Comissoes.ViewModels;
 
 namespace Dufry.Comissoes.Controllers
 {
@@ -111,6 +112,28 @@ namespace Dufry.Comissoes.Controllers
             int pageNumber = (page ?? 1);
             return View(categorias.ToPagedList(pageNumber, pageSize));
         }
+
+
+        //
+        // GET: /Categoria/CategoriaDelete/5
+        public ActionResult CategoriaDelete(int id)
+        {
+            CategoriaViewModel categoriaVM = new CategoriaViewModel();
+            categoriaVM.ToViewModel(_categoriaAppService.Get(id, @readonly: true));
+
+            return View(categoriaVM);
+        }
+
+        // POST: /Categoria/Delete/5
+
+        //[HttpPost, ActionName("Delete")]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    var categoria = _categoriaAppService.Get(id);
+        //    //_categoriaAppService.Remove(categoria);
+
+        //    return RedirectToAction("Index");
+        //}
 
     }
 }

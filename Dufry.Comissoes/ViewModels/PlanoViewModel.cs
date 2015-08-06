@@ -16,7 +16,7 @@ namespace Dufry.Comissoes.ViewModels
         public DateTime LAST_MODIFY_DATE { get; set; }
         public string LAST_MODIFY_USERNAME { get; set; }
 
-        public static PlanoViewModel ToViewModel(Plano plano)
+        public PlanoViewModel ToViewModel(Plano plano)
         {
             return Mapper.Map<PlanoViewModel>(plano);
         }

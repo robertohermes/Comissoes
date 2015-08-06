@@ -14,7 +14,7 @@ namespace Dufry.Comissoes.ViewModels
         public string NomeReduzido { get; set; }
 
 
-        public static EmpresaViewModel ToViewModel(Empresa empresa)
+        public EmpresaViewModel ToViewModel(Empresa empresa)
         {
             return Mapper.Map<EmpresaViewModel>(empresa);
         }

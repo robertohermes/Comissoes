@@ -12,7 +12,7 @@ namespace Dufry.Comissoes.ViewModels
         public string NomeFilial { get; set; }
 
 
-        public static FilialViewModel ToViewModel(Filial filial)
+        public FilialViewModel ToViewModel(Filial filial)
         {
             return Mapper.Map<FilialViewModel>(filial);
         }

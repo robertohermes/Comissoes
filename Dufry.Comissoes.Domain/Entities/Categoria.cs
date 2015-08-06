@@ -5,6 +5,7 @@ using Dufry.Comissoes.Domain.Entities.Validations;
 using Dufry.Comissoes.Domain.Interfaces.Validation;
 using Dufry.Comissoes.Domain.Validation;
 
+
 namespace Dufry.Comissoes.Domain.Entities
 {
     
@@ -19,6 +20,8 @@ namespace Dufry.Comissoes.Domain.Entities
         public string CREATED_USERNAME { get; set; }
         public DateTime LAST_MODIFY_DATE { get; set; }
         public string LAST_MODIFY_USERNAME { get; set; }
+
+        public virtual ICollection<CategoriaPercentual> CategoriaPercentuals { get; set; }
 
         public ValidationResult ValidationResult { get; private set; }
 

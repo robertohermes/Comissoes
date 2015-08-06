@@ -17,7 +17,7 @@ namespace Dufry.Comissoes.ViewModels
         public DateTime LAST_MODIFY_DATE { get; set; }
         public string LAST_MODIFY_USERNAME { get; set; }
 
-        public static DSRViewModel ToViewModel(DSR dsr)
+        public DSRViewModel ToViewModel(DSR dsr)
         {
             return Mapper.Map<DSRViewModel>(dsr);
         }

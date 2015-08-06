@@ -17,7 +17,7 @@ namespace Dufry.Comissoes.ViewModels
         public DateTime LAST_MODIFY_DATE { get; set; }
         public string LAST_MODIFY_USERNAME { get; set; }
 
-        public static SelfServiceViewModel ToViewModel(SelfService selfservice)
+        public SelfServiceViewModel ToViewModel(SelfService selfservice)
         {
             return Mapper.Map<SelfServiceViewModel>(selfservice);
         }

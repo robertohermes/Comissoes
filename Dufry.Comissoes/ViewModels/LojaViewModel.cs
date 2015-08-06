@@ -13,7 +13,7 @@ namespace Dufry.Comissoes.ViewModels
         public string NomeLoja { get; set; }
 
 
-        public static LojaViewModel ToViewModel(Loja loja)
+        public LojaViewModel ToViewModel(Loja loja)
         {
             return Mapper.Map<LojaViewModel>(loja);
         }

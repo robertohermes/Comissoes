@@ -286,6 +286,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Menu\SideMenu.cshtml" />
     <Content Include="Views\Categoria\CategoriaIndex.cshtml" />
+    <Content Include="Views\Categoria\CategoriaDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -343,7 +344,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>26641</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:26661/</IISUrl>
+          <IISUrl>http://localhost:26651/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
