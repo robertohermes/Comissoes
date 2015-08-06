@@ -13,7 +13,19 @@ namespace Dufry.Comissoes.AutoMapper
 
         protected override void Configure()
         {
+            Mapper.CreateMap<AusenciaRemunerada, AusenciaRemuneradaViewModel>();
             Mapper.CreateMap<Categoria, CategoriaViewModel>();
+            Mapper.CreateMap<CategoriaPercentual, CategoriaPercentualViewModel>();
+            Mapper.CreateMap<Colaborador, ColaboradorViewModel>();
+            Mapper.CreateMap<ControleAcesso, ControleAcessoViewModel>();
+            Mapper.CreateMap<DolarMedio, DolarMedioViewModel>();
+            Mapper.CreateMap<DSR, DSRViewModel>();
+            Mapper.CreateMap<Empresa, EmpresaViewModel>();
+            Mapper.CreateMap<Filial, FilialViewModel>();
+            Mapper.CreateMap<Loja, LojaViewModel>();
+            Mapper.CreateMap<Plano, PlanoViewModel>();
+            Mapper.CreateMap<PlanoCategoria, PlanoCategoriaViewModel>();
+            Mapper.CreateMap<SelfService, SelfServiceViewModel>();
         }
     }
 }
