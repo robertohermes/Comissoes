@@ -138,7 +138,7 @@ ul#album-list li a span
 	font-weight: bold;
 }
 
-.button, input[type=submit]
+/*.button, input[type=submit]
 {
 	clear: both;
 	display: inline-block;
@@ -148,7 +148,7 @@ ul#album-list li a span
 	background: #5e5b54;
 	color: #fff;
 	font-weight: bold;
-}
+}*/
 
 .button a
 {
@@ -218,7 +218,7 @@ h2
 h1
 {
 	font-size: 16px;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
 }
 
 h2, h3
@@ -403,19 +403,83 @@ tr:link, a:hover
 	color: #000000;
 }
 
-/************************************************************************************/
-/*                                      classes                                     */
-/************************************************************************************/
-a.create
-{
-	color: #c2101c;
-}
 a.tablerowlink
 {
 	color: #c2101c;
 }
+
 a.tableheadlink
 {
 	color: #F8F8FF;
 }
+
+tr:hover a.tablerowlink {
+    color: white;
+}
+
+
+/************************************************************************************/
+/*                                      classes                                     */
+/************************************************************************************/
+.headerForm
+{
+	font-size: 16px;
+    margin-bottom: 20px;
+}
+a.create
+{
+	color: #c2101c;
+}
+
+.editor label {
+  float: left;
+  width: 30px;   
+  text-align: right; 
+}
+
+.editor input[type=text] {
+  width: 80px; 
+  margin: 0 0 0 50px; 
+}
+
+.botoes input[type=submit] {
+    font-weight: bold;
+    color: #fff;
+    padding:5px 15px; background:#c2101c; border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+    margin: 10px 10px 10px 0; 
+}
+
+/************************************************************************************/
+.editorCategoria label {
+  float: left;
+  width: 70px;   
+  text-align: right; 
+}
+
+.editorCategoria input[type=text] {
+  width: 250px; 
+  margin: 0 0 0 10px; 
+}
+.editorCategoria input[type=radio] {
+  margin: 0 0 0 10px;
+  text: right;  
+}
+.botoesCategoria, a.botoesCategoria {
+    font-weight: bold;
+    background-color:#c2101c; 
+    color: #fff;
+    padding:5px 15px; 
+    border:0 none;
+    cursor:pointer;
+    border-radius: 5px; 
+    -webkit-border-radius: 5px;
+    margin: 10px 10px 10px 0; 
+}
+
+
+
+/************************************************************************************/
 

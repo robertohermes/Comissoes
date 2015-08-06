@@ -6,26 +6,24 @@
     ViewBag.Title = "Categorias";
 }
 
-<h1>Busca de Categorias</h1>
-
-
-    <p>
-        @Html.ActionLink("Inserir nova Categoria", "CategoriaCreate", "Categoria", null, new { @class = "create" })
-    </p>
-
+<h1 class="headerForm">Busca de Categorias</h1>
     
 @**************************************************************************************************************************@
 @*                                                 Filtros de Busca                                                       *@
 @**************************************************************************************************************************@
 @using (Html.BeginForm("CategoriaIndex", "Categoria", FormMethod.Get))
 {
-    <p>Descrição:   @Html.TextBox("descricaoSearchString", ViewBag.DescricaoFilter as string)</p>
-    <p>Tabela:      @Html.TextBox("tabelaSearchString", ViewBag.TabelaFilter as string)</p>
-    <p>Coluna:      @Html.TextBox("colunaSearchString", ViewBag.ColunaFilter as string)</p>
-    <p>Status:      @Html.RadioButton("statusSearchString", "A", true, ViewBag.StatusFilter as string)Ativo
-                    @Html.RadioButton("statusSearchString", "I", ViewBag.StatusFilter as string)Inativo</p>
+    <div class="editorCategoria">
+        <p><label for="descricaoSearchString">Descrição:</label>@Html.TextBox("descricaoSearchString", ViewBag.DescricaoFilter as string, new { maxlength = "255" })</p>
+        <p><label for="tabelaSearchString">Tabela:</label>      @Html.TextBox("tabelaSearchString", ViewBag.TabelaFilter as string, new { maxlength = "255" })</p>
+        <p><label for="colunaSearchString">Coluna:</label>      @Html.TextBox("colunaSearchString", ViewBag.ColunaFilter as string, new { maxlength = "255" })</p>
+        <p><label for="statusSearchString">Status:</label>      @Html.RadioButton("statusSearchString", "A", true, ViewBag.StatusFilter as string)Ativo
+                                                                @Html.RadioButton("statusSearchString", "I", ViewBag.StatusFilter as string)Inativo</p>
+    </div>
+    <p><input type="submit" id="buscaCategoria" value="Buscar" class="botoesCategoria" />
+       @Html.ActionLink("Limpar", "CategoriaIndex", "Categoria", null, new { @class = "botoesCategoria" })
+       @Html.ActionLink("Novo", "CategoriaCreate", "Categoria", null, new { @class = "botoesCategoria" })</p>
 
-    <p><input type="submit" value="Buscar" /></p>
 }
 
 
