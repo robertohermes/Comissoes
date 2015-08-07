@@ -4,9 +4,25 @@
     ViewBag.Title = "Exclusão de Categorias";
 }
 
+@{
+    string confirmMessage = "Tem certeza que deseja excluir essa categoria?";
+    bool exibeBotaoExcluir = true;
+    
+    if (Model.CategoriaPercentuals.Count() > 0)
+    {
+        confirmMessage = "A Categoria não pode ser excluída, por haver Percentual associado. Exclua todos os Pespectivos percentuais primeiro.";
+        exibeBotaoExcluir = false;
+    }    
+}
+
+
+
 <h1 class="headerForm">@ViewBag.Title</h1>
 <p class="errorMessage">@ViewBag.ErrorMessage</p>
-<p class="confirmMessage">Tem certeza que deseja excluir essa categoria?</p>
+
+
+
+<p class="confirmMessage">@confirmMessage</p>
 
 <div>   
 
@@ -21,9 +37,13 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-
-            <input type="submit" value="Excluir" class="botoesCategoria" />
-            @Html.ActionLink("Cancelar", "CategoriaIndex", "Categoria", null, new { @class = "botoesCategoria" })
+            
+            if (exibeBotaoExcluir)
+            {
+                <input type="submit" value="Excluir" class="botoesCategoria" />                    
+            }
+            
+            @Html.ActionLink("Voltar", "CategoriaIndex", "Categoria", null, new { @class = "botoesCategoria" })
         }
     </p>
 </div>

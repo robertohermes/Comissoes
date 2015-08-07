@@ -122,7 +122,9 @@ namespace Dufry.Comissoes.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //throw new InvalidOperationException("Something very bad happened while doing important stuff");
+                throw new Exception();
             }
 
             if (saveChangesError.GetValueOrDefault())
@@ -134,12 +136,8 @@ namespace Dufry.Comissoes.Controllers
 
             if (categoria == null)
             {
-                return HttpNotFound();
-            }
-
-            if (categoria.CategoriaPercentuals.Count() > 0)
-            {
-                return RedirectToAction("CategoriaIndex");
+                //return HttpNotFound();
+                throw new Exception();
             }
 
             CategoriaViewModel categoriaVM = new CategoriaViewModel();
