@@ -8,6 +8,8 @@ using PagedList;
 using Dufry.Comissoes.Domain.Entities;
 using Dufry.Comissoes.Filters;
 using Dufry.Comissoes.ViewModels;
+using System.Net;
+using System.Data.Entity.Infrastructure;
 
 namespace Dufry.Comissoes.Controllers
 {
@@ -116,22 +118,63 @@ namespace Dufry.Comissoes.Controllers
 
         //
         // GET: /Categoria/CategoriaDelete/5
-        public ActionResult CategoriaDelete(int id)
+        public ActionResult CategoriaDelete(int ? id, bool? saveChangesError = false)
         {
-            var categoria = _categoriaAppService.Get(id, @readonly: true);
-            return View(categoria);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Erro na exclusão. Tente novamente ou, se o problema persistir, entre em contato com o suporte.";
+            }
+
+            var categoria = _categoriaAppService.Get(id ?? default(int));
+
+            if (categoria == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (categoria.CategoriaPercentuals.Count() > 0)
+            {
+                return RedirectToAction("CategoriaIndex");
+            }
+
+            CategoriaViewModel categoriaVM = new CategoriaViewModel();
+
+            return  View(categoriaVM.ToViewModel(categoria));
         }
 
-        // POST: /Categoria/Delete/5
+        //POST: /Categoria/CategoriaDelete/5
+        [HttpPost, ActionName("CategoriaDelete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                var categoria = _categoriaAppService.Get(id);
 
-        //[HttpPost, ActionName("Delete")]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    var categoria = _categoriaAppService.Get(id);
-        //    //_categoriaAppService.Remove(categoria);
+                if (categoria.CategoriaPercentuals.Count() == 0)
+                {
+                    _categoriaAppService.Remove(categoria);
+                }
+            }
+            catch (RetryLimitExceededException/* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                return RedirectToAction("CategoriaDelete", new { id = id, saveChangesError = true });
+            }
+            return RedirectToAction("CategoriaIndex");
 
-        //    return RedirectToAction("Index");
-        //}
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _categoriaAppService.Dispose();
+
+            base.Dispose(disposing);
+        }
 
     }
 }

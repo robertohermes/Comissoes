@@ -38,58 +38,46 @@
         <tr>
             <th>
                 @Html.ActionLink("Descrição", "CategoriaIndex", "Categoria"
-            , new
-            {
-                sortOrder = ViewBag.DescCategoriaSortParam
-                ,
-                descricaoSearchString = ViewBag.DescricaoFilter,
-                tabelaSearchString = ViewBag.TabelaFilter
-                ,
-                colunaSearchString = ViewBag.ColunaFilter,
-                statusSearchString = ViewBag.StatusFilter
-            }
+                , new
+                {   sortOrder = ViewBag.DescCategoriaSortParam,
+                    descricaoSearchString = ViewBag.DescricaoFilter,
+                    tabelaSearchString = ViewBag.TabelaFilter,
+                    colunaSearchString = ViewBag.ColunaFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
                 , new { @class = "tableheadlink" })
             </th>
             <th>
                 @Html.ActionLink("Tabela de Origem", "CategoriaIndex", "Categoria"
-            , new
-            {
-                sortOrder = ViewBag.TabOrigemSortParam
-                ,
-                descricaoSearchString = ViewBag.DescricaoFilter,
-                tabelaSearchString = ViewBag.TabelaFilter
-                ,
-                colunaSearchString = ViewBag.ColunaFilter,
-                statusSearchString = ViewBag.StatusFilter
-            }
+                , new
+                {   sortOrder = ViewBag.TabOrigemSortParam,
+                    descricaoSearchString = ViewBag.DescricaoFilter,
+                    tabelaSearchString = ViewBag.TabelaFilter,
+                    colunaSearchString = ViewBag.ColunaFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
                 , new { @class = "tableheadlink" })
             </th>
             <th>
                 @Html.ActionLink("Coluna de Origem", "CategoriaIndex", "Categoria"
-            , new
-            {
-                sortOrder = ViewBag.ColOrigemSortParam
-                ,
-                descricaoSearchString = ViewBag.DescricaoFilter,
-                tabelaSearchString = ViewBag.TabelaFilter
-                ,
-                colunaSearchString = ViewBag.ColunaFilter,
-                statusSearchString = ViewBag.StatusFilter
-            }
+                , new
+                {   sortOrder = ViewBag.ColOrigemSortParam,
+                    descricaoSearchString = ViewBag.DescricaoFilter,
+                    tabelaSearchString = ViewBag.TabelaFilter,
+                    colunaSearchString = ViewBag.ColunaFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
                 , new { @class = "tableheadlink" })
             </th>
             <th>
                 @Html.ActionLink("Status", "CategoriaIndex", "Categoria"
-            , new
-            {
-                sortOrder = ViewBag.StatusSortParam
-                ,
-                descricaoSearchString = ViewBag.DescricaoFilter,
-                tabelaSearchString = ViewBag.TabelaFilter
-                ,
-                colunaSearchString = ViewBag.ColunaFilter,
-                statusSearchString = ViewBag.StatusFilter
-            }
+                , new
+                {   sortOrder = ViewBag.StatusSortParam,
+                    descricaoSearchString = ViewBag.DescricaoFilter,
+                    tabelaSearchString = ViewBag.TabelaFilter,
+                    colunaSearchString = ViewBag.ColunaFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
                 , new { @class = "tableheadlink" })
 
             </th>
@@ -117,7 +105,10 @@
                     <td>Inativo</td>
                 }
                 <td>
+                @if (item.CategoriaPercentuals.Count() == 0)
+                {
                     @Html.ActionLink("Excluir", "CategoriaDelete", "Categoria", new { id = item.ID_CATEGORIA }, new { @class = "tablerowlink" })
+                }
                 </td>
             </tr>
         }
@@ -131,14 +122,14 @@
     Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
     @Html.PagedListPager(Model, page => Url.Action("CategoriaIndex"
-, new
-{
-    sortOrder = ViewBag.CurrentSort
-    ,
-    descricaoSearchString = ViewBag.DescricaoFilter,
-    tabelaSearchString = ViewBag.TabelaFilter
-    ,
-    colunaSearchString = ViewBag.ColunaFilter,
-    statusSearchString = ViewBag.StatusFilter,
-    page
-}))
+    , new
+    {
+        sortOrder = ViewBag.CurrentSort
+        ,
+        descricaoSearchString = ViewBag.DescricaoFilter,
+        tabelaSearchString = ViewBag.TabelaFilter
+        ,
+        colunaSearchString = ViewBag.ColunaFilter,
+        statusSearchString = ViewBag.StatusFilter,
+        page
+    }))

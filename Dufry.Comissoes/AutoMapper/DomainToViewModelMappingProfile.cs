@@ -4,28 +4,28 @@ using Dufry.Comissoes.ViewModels;
 
 namespace Dufry.Comissoes.AutoMapper
 {
-    public class ViewModelToDomainMappingProfile : Profile
+    public class DomainToViewModelMappingProfile : Profile
     {
         public override string ProfileName
         {
-            get { return "ViewModelToDomainMappings"; }
+            get { return "DomainToViewModelMappings"; }
         }
 
         protected override void Configure()
         {
-            Mapper.CreateMap<AusenciaRemuneradaViewModel, AusenciaRemunerada>();
-            Mapper.CreateMap<CategoriaViewModel, Categoria>();
-            Mapper.CreateMap<CategoriaPercentualViewModel, CategoriaPercentual>();
-            Mapper.CreateMap<ColaboradorViewModel, Colaborador>();
-            Mapper.CreateMap<ControleAcessoViewModel, ControleAcesso>();
-            Mapper.CreateMap<DolarMedioViewModel, DolarMedio>();
-            Mapper.CreateMap<DSRViewModel, DSR>();
-            Mapper.CreateMap<EmpresaViewModel, Empresa>();
-            Mapper.CreateMap<FilialViewModel, Filial>();
-            Mapper.CreateMap<LojaViewModel, Loja>();
-            Mapper.CreateMap<PlanoViewModel, Plano>();
-            Mapper.CreateMap<PlanoCategoriaViewModel, PlanoCategoria>();
-            Mapper.CreateMap<SelfServiceViewModel, SelfService>();
+            Mapper.CreateMap<AusenciaRemunerada, AusenciaRemuneradaViewModel>();
+            Mapper.CreateMap<Categoria, CategoriaViewModel>();
+            Mapper.CreateMap<CategoriaPercentual, CategoriaPercentualViewModel>();
+            Mapper.CreateMap<Colaborador, ColaboradorViewModel>();
+            Mapper.CreateMap<ControleAcesso, ControleAcessoViewModel>();
+            Mapper.CreateMap<DolarMedio, DolarMedioViewModel>();
+            Mapper.CreateMap<DSR, DSRViewModel>();
+            Mapper.CreateMap<Empresa, EmpresaViewModel>();
+            Mapper.CreateMap<Filial, FilialViewModel>();
+            Mapper.CreateMap<Loja, LojaViewModel>();
+            Mapper.CreateMap<Plano, PlanoViewModel>();
+            Mapper.CreateMap<PlanoCategoria, PlanoCategoriaViewModel>();
+            Mapper.CreateMap<SelfService, SelfServiceViewModel>();
         }
     }
 }
