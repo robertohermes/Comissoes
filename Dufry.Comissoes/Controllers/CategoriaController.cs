@@ -17,11 +17,17 @@ namespace Dufry.Comissoes.Controllers
     public class CategoriaController : Controller
     {
         private readonly ICategoriaAppService _categoriaAppService;
+        private readonly IControleAcessoAppService _controleacessoAppService;
 
-        public CategoriaController(ICategoriaAppService categoriaAppService)
+        //---------------------------------------------------------------------------------------------
+        //<REVER>
+        //---------------------------------------------------------------------------------------------
+        public CategoriaController(ICategoriaAppService categoriaAppService, IControleAcessoAppService controleacessoAppService)
         {
             _categoriaAppService = categoriaAppService;
+            _controleacessoAppService = controleacessoAppService;
         }
+        //---------------------------------------------------------------------------------------------
 
         // GET: /Categoria/CategoriaIndex
         //[ControleAcessoAdminFilter]
@@ -147,7 +153,7 @@ namespace Dufry.Comissoes.Controllers
 
         //POST: /Categoria/CategoriaDelete/5
         [HttpPost, ActionName("CategoriaDelete")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult CategoriaDeleteConfirmed(int id)
         {
             try
             {
@@ -165,6 +171,65 @@ namespace Dufry.Comissoes.Controllers
             }
             return RedirectToAction("CategoriaIndex");
 
+        }
+
+        // GET: Categoria/CategoriaEdit/5
+        public ActionResult CategoriaEdit(int? id)
+        {
+            if (id == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception();
+            }
+            var categoria = _categoriaAppService.Get(id ?? default(int));
+            if (categoria == null)
+            {
+                //return HttpNotFound();
+                throw new Exception();
+            }
+
+            CategoriaViewModel categoriaVM = new CategoriaViewModel();
+
+            return View(categoriaVM.ToViewModel(categoria));
+        }
+
+        // POST: /Categoria/CategoriaEdit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost, ActionName("CategoriaEdit")]
+        //[ValidateAntiForgeryToken]
+        public ActionResult CategoriaEditConfirmed(int? id)
+        {
+            if (id == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception();
+            }
+            var categoriaToUpdate = _categoriaAppService.Get(id ?? default(int));
+
+            //---------------------------------------------------------------------------------------------
+            //<REVER>
+            //---------------------------------------------------------------------------------------------
+            categoriaToUpdate.LAST_MODIFY_DATE = DateTime.Now;
+            categoriaToUpdate.LAST_MODIFY_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
+            //---------------------------------------------------------------------------------------------
+
+            if (TryUpdateModel(categoriaToUpdate, "",
+               new string[] { "DESC_CATEGORIA", "TAB_ORIGEM", "COL_ORIGEM", "STATUS", "LAST_MODIFY_DATE", "LAST_MODIFY_USERNAME" }))
+            {
+                try
+                {
+                    _categoriaAppService.Update(categoriaToUpdate);
+
+                    return RedirectToAction("CategoriaIndex");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(categoriaToUpdate);
         }
 
         protected override void Dispose(bool disposing)

@@ -3,6 +3,7 @@
 <head>
     <title>@ViewBag.Title</title>
     @Styles.Render("~/content/site")
+    @Scripts.Render("~/scripts/modernizr")
 </head>
 <body>
     <div id="header">
@@ -25,5 +26,7 @@
     </div>
 
     @Scripts.Render("~/scripts/jquery")
+    @Scripts.Render("~/scripts/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
