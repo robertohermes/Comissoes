@@ -226,10 +226,13 @@ namespace Dufry.Comissoes.Controllers
                 catch (RetryLimitExceededException /* dex */)
                 {
                     //Log the error (uncomment dex variable name and add a line here to write a log.
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                    ModelState.AddModelError("", "Erro na alteração. Tente novamente ou, se o problema persistir, entre em contato com o suporte.");
                 }
             }
-            return View(categoriaToUpdate);
+
+            CategoriaViewModel categoriaVM = new CategoriaViewModel();
+
+            return View(categoriaVM.ToViewModel(categoriaToUpdate));
         }
 
         protected override void Dispose(bool disposing)
