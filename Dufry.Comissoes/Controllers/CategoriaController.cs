@@ -29,6 +29,50 @@ namespace Dufry.Comissoes.Controllers
         }
         //---------------------------------------------------------------------------------------------
 
+        // GET: /Categoria/CategoriaCreate
+        public ActionResult CategoriaCreate()
+        {
+            return View();
+        }
+
+
+        // POST: /Categoria/CategoriaCreate
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult CategoriaCreate([Bind(Include = "DESC_CATEGORIA, TAB_ORIGEM, COL_ORIGEM, STATUS")]Categoria categoria)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    //---------------------------------------------------------------------------------------------
+                    //<REVER>
+                    //---------------------------------------------------------------------------------------------
+                    categoria.CREATED_DATETIME = DateTime.Now;
+                    categoria.CREATED_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
+
+                    categoria.LAST_MODIFY_DATE = categoria.CREATED_DATETIME;
+                    categoria.LAST_MODIFY_USERNAME = categoria.CREATED_USERNAME;
+                    //---------------------------------------------------------------------------------------------
+
+                    _categoriaAppService.Create(categoria);
+                    return RedirectToAction("CategoriaIndex");
+                }
+            }
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Erro ao salvar. Tente novamente ou, se o problema persistir, entre em contato com o suporte.");
+            }
+
+            //return View(categoria);
+            CategoriaViewModel categoriaVM = new CategoriaViewModel();
+
+            return View(categoriaVM.ToViewModel(categoria));
+        }
+
         // GET: /Categoria/CategoriaIndex
         //[ControleAcessoAdminFilter]
         public ViewResult CategoriaIndex(int? page
