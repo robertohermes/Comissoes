@@ -21,17 +21,17 @@ namespace Dufry.Comissoes.Domain.Entities
         public DateTime LAST_MODIFY_DATE { get; set; }
         public string LAST_MODIFY_USERNAME { get; set; }
 
-        public ValidationResult ValidationResult { get; private set; }
+        //public ValidationResult ValidationResult { get; private set; }
 
-        public bool IsValid
-        {
-            get
-            {
-                var fiscal = new CategoriaPercentualIsValidValidation();
-                ValidationResult = fiscal.Valid(this);
-                return ValidationResult.IsValid;
-            }
-        }
+        //public bool IsValid
+        //{
+        //    get
+        //    {
+        //        var fiscal = new CategoriaPercentualIsValidValidation();
+        //        ValidationResult = fiscal.Valid(this);
+        //        return ValidationResult.IsValid;
+        //    }
+        //}
 
     }
 }

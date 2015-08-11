@@ -55,7 +55,7 @@ namespace Dufry.Comissoes.Data.Context.Mapping
                 .HasMaxLength(255)
                 .IsRequired();
 
-            Ignore(t => t.ValidationResult);
+            //Ignore(t => t.ValidationResult);
         }
     }
 }

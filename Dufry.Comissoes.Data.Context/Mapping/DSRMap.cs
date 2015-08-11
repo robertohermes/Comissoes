@@ -40,7 +40,7 @@ namespace Dufry.Comissoes.Data.Context.Mapping
                 .IsRequired();
 
 
-            Ignore(t => t.ValidationResult);
+            //Ignore(t => t.ValidationResult);
         }
     }
 }

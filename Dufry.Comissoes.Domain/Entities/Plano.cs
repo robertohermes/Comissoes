@@ -20,17 +20,17 @@ namespace Dufry.Comissoes.Domain.Entities
         public string LAST_MODIFY_USERNAME { get; set; }
 
 
-        public ValidationResult ValidationResult { get; private set; }
+        //public ValidationResult ValidationResult { get; private set; }
 
-        public bool IsValid
-        {
-            get
-            {
-                var fiscal = new PlanoIsValidValidation();
-                ValidationResult = fiscal.Valid(this);
-                return ValidationResult.IsValid;
-            }
-        }
+        //public bool IsValid
+        //{
+        //    get
+        //    {
+        //        var fiscal = new PlanoIsValidValidation();
+        //        ValidationResult = fiscal.Valid(this);
+        //        return ValidationResult.IsValid;
+        //    }
+        //}
 
     }
 }
