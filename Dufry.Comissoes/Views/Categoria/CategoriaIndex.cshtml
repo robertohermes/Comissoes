@@ -13,12 +13,12 @@
     @**************************************************************************************************************************@
     @using (Html.BeginForm("CategoriaIndex", "Categoria", FormMethod.Get))
     {
-        <div class="editorCategoria">
-            <p><label for="descricaoSearchString">Descrição:</label>@Html.TextBox("descricaoSearchString", ViewBag.DescricaoFilter as string, new { maxlength = "255" })</p>
-            <p><label for="tabelaSearchString">Tabela:</label>      @Html.TextBox("tabelaSearchString", ViewBag.TabelaFilter as string, new { maxlength = "255" })</p>
-            <p><label for="colunaSearchString">Coluna:</label>      @Html.TextBox("colunaSearchString", ViewBag.ColunaFilter as string, new { maxlength = "255" })</p>
+        <div class="buscaCategoria">
+            <p><label for="descricaoSearchString">Descrição</label>@Html.TextBox("descricaoSearchString", ViewBag.DescricaoFilter as string, new { maxlength = "255" })</p>
+            <p><label for="tabelaSearchString">Tabela</label>      @Html.TextBox("tabelaSearchString", ViewBag.TabelaFilter as string, new { maxlength = "255" })</p>
+            <p><label for="colunaSearchString">Coluna</label>      @Html.TextBox("colunaSearchString", ViewBag.ColunaFilter as string, new { maxlength = "255" })</p>
             <p>
-                <label for="statusSearchString">Status:</label>      @Html.RadioButton("statusSearchString", "A", true, ViewBag.StatusFilter as string)Ativo
+                <label for="statusSearchString">Status</label>      @Html.RadioButton("statusSearchString", "A", true, ViewBag.StatusFilter as string)Ativo
                 @Html.RadioButton("statusSearchString", "I", ViewBag.StatusFilter as string)Inativo
             </p>
         </div>

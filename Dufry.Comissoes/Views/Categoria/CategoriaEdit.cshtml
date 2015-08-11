@@ -15,21 +15,20 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID_CATEGORIA)
 
-        <p>@Html.LabelFor(model => model.DESC_CATEGORIA):
+        <p>@Html.LabelFor(model => model.DESC_CATEGORIA)
             @Html.EditorFor(model => model.DESC_CATEGORIA)
-            @Html.ValidationMessageFor(model => model.DESC_CATEGORIA)</p>
-        <p>@Html.LabelFor(model => model.TAB_ORIGEM):
+            @Html.ValidationMessageFor(model => model.DESC_CATEGORIA, String.Empty, new { @style = "padding-left: 10px;!important" })</p>
+        <p>@Html.LabelFor(model => model.TAB_ORIGEM)
             @Html.EditorFor(model => model.TAB_ORIGEM)
-            @Html.ValidationMessageFor(model => model.TAB_ORIGEM)</p>
-        <p>@Html.LabelFor(model => model.COL_ORIGEM):
+            @Html.ValidationMessageFor(model => model.TAB_ORIGEM, String.Empty, new { @style = "padding-left: 10px;!important" })</p>
+        <p>@Html.LabelFor(model => model.COL_ORIGEM)
             @Html.EditorFor(model => model.COL_ORIGEM)
-            @Html.ValidationMessageFor(model => model.COL_ORIGEM)</p>
-        <p>@Html.LabelFor(model => model.STATUS):
+            @Html.ValidationMessageFor(model => model.COL_ORIGEM, String.Empty, new { @style = "padding-left: 10px;!important" })</p>
+        <p>@Html.LabelFor(model => model.STATUS)
             @Html.RadioButtonFor(model => model.STATUS, "A") Ativo
-            @Html.RadioButtonFor(model => model.STATUS, "I") Inativo</p>
+            @Html.RadioButtonFor(model => model.STATUS, "I") Inativo
+            @Html.ValidationMessageFor(model => model.STATUS, String.Empty, new { @style = "padding-left: 127px;!important" })</p>
     </div>
-
-
 
     <input type="submit" id="salvaCategoria" value="Salvar" class="botoesCategoria" />
     @Html.ActionLink("Voltar", "CategoriaIndex", "Categoria", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })

@@ -417,7 +417,6 @@ tr:hover a.tablerowlink {
     color: white;
 }
 
-
 /************************************************************************************/
 /*                                      classes                                     */
 /************************************************************************************/
@@ -465,7 +464,6 @@ a.create
   text-align: left; 
 }
 
-
 .botoes input[type=submit] {
     font-weight: bold;
     color: #fff;
@@ -477,20 +475,81 @@ a.create
 }
 
 /************************************************************************************/
+.buscaCategoria label {
+  float: left;
+  width: 70px;   
+  text-align: right; 
+  padding-top: 6px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.buscaCategoria input[type=text] {
+  width: 200px; 
+  margin: 0 0 0 10px; 
+
+  /*display: block;*/
+    /*width: 100%;*/
+    height: 12px;
+    padding: 6px 12px;
+    font-size: 12px;
+    line-height: 1.428571429;
+    color: #555;
+    vertical-align: middle;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+
+}
+.buscaCategoria input[type=radio] {
+  margin: 5px 0 0 10px;
+  text: right;  
+}
+
 .editorCategoria label {
   float: left;
   width: 70px;   
   text-align: right; 
+  padding-top: 6px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 
 .editorCategoria input[type=text] {
-  width: 250px; 
+  width: 200px; 
   margin: 0 0 0 10px; 
+
+  /*display: block;*/
+    /*width: 100%;*/
+    height: 12px;
+    padding: 6px 12px;
+    font-size: 12px;
+    line-height: 1.428571429;
+    color: #555;
+    vertical-align: middle;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+
 }
+
 .editorCategoria input[type=radio] {
-  margin: 0 0 0 10px;
+  margin: 5px 0 0 10px;
   text: right;  
 }
+
 .botoesCategoria, a.botoesCategoria {
     font-weight: bold;
     background-color:#c2101c; 
