@@ -38,7 +38,7 @@
 
 
             <input type="submit" id="salvaCategoria" value="Salvar e incluir" class="botoesCategoria" />
-            @Html.ActionLink("Voltar", "CategoriaIndex", "Categoria", null, new { @class = "botoesCategoria" })
+            @Html.ActionLink("Voltar", "CategoriaIndex", "Categoria", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
 
     </div>
 }

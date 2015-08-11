@@ -43,7 +43,7 @@
                 <input type="submit" value="Excluir" class="botoesCategoria" />                    
             }
             
-            @Html.ActionLink("Voltar", "CategoriaIndex", "Categoria", null, new { @class = "botoesCategoria" })
+            @Html.ActionLink("Voltar", "CategoriaIndex", "Categoria", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
         }
     </p>
 </div>
