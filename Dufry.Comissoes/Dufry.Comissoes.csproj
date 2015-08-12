@@ -304,6 +304,7 @@
     <Content Include="Views\Categoria\CategoriaEdit.cshtml" />
     <Content Include="Views\Categoria\CategoriaCreate.cshtml" />
     <Content Include="Views\CategoriaPercentual\CategoriaPercentualIndex.cshtml" />
+    <Content Include="Views\CategoriaPercentual\CategoriaPercentualCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

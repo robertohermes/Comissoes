@@ -17,14 +17,37 @@ namespace Dufry.Comissoes.Controllers
     public class CategoriaPercentualController : Controller
     {
         private readonly ICategoriaPercentualAppService _categoriapercentualAppService;
+        private readonly ICategoriaAppService _categoriaAppService;
         private readonly ILojaAppService _lojaAppService;
         private readonly IControleAcessoAppService _controleacessoAppService;
 
-        public CategoriaPercentualController(ICategoriaPercentualAppService categoriapercentualAppService, IControleAcessoAppService controleacessoAppService, ILojaAppService lojaAppService)
+        public CategoriaPercentualController(ICategoriaPercentualAppService categoriapercentualAppService, ICategoriaAppService categoriaAppService, IControleAcessoAppService controleacessoAppService, ILojaAppService lojaAppService)
         {
             _categoriapercentualAppService = categoriapercentualAppService;
+            _categoriaAppService = categoriaAppService;
             _lojaAppService = lojaAppService;
             _controleacessoAppService = controleacessoAppService;
+        }
+
+        // GET: CategoriaPercentual/CategoriaPercentualCreate
+        public ActionResult CategoriaPercentualCreate()
+        {
+            List<Categoria> categoriaList = new List<Categoria>();
+
+            categoriaList.Add(new Categoria { ID_CATEGORIA = 0, DESC_CATEGORIA = "--- Selecione ---" });
+            categoriaList.AddRange(_categoriaAppService.All().ToList());
+
+            ViewBag.ID_CATEGORIA = new SelectList(categoriaList, "ID_CATEGORIA", "DESC_CATEGORIA");
+
+
+            List<Loja> lojaList = new List<Loja>();
+
+            lojaList.Add(new Loja { CodigoLojaAlternate = 0, NomeLoja = "--- Selecione ---" });
+            lojaList.AddRange(_lojaAppService.All(true).ToList());
+
+            ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojaList, "CodigoLojaAlternate", "NomeLoja");
+
+            return View();
         }
 
         // GET: /CategoriaPercentual/CategoriaPercentualIndex

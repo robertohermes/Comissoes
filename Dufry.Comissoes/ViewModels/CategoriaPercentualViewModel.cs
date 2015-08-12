@@ -55,6 +55,8 @@ namespace Dufry.Comissoes.ViewModels
         public DateTime LAST_MODIFY_DATE { get; set; }
         public string LAST_MODIFY_USERNAME { get; set; }
 
+        public virtual Categoria Categoria { get; set; }
+
         public virtual ICollection<PlanoCategoria> PlanoCategorias { get; set; }
 
         public CategoriaPercentualViewModel ToViewModel(CategoriaPercentual categoriapercentual)

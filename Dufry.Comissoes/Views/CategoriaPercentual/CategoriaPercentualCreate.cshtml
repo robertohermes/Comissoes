@@ -1,0 +1,47 @@
+﻿@model CategoriaPercentualViewModel
+
+@{
+    ViewBag.Title = "Inclusão de Categorias e Percentuais por Loja";
+}
+
+<h1 class="headerForm">@ViewBag.Title</h1>
+
+
+@using (Html.BeginForm()) 
+{
+    @*@Html.AntiForgeryToken()*@
+
+    <div class="editorCategoria">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <p>
+            @Html.LabelFor(model => model.ID_CATEGORIA)
+            @Html.DropDownList("ID_CATEGORIA", null, new { @style = "padding-left: 10px;!important" })
+            @Html.ValidationMessageFor(model => model.ID_CATEGORIA, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.CODIGOLOJAALTERNATE)
+            @Html.DropDownList("CODIGOLOJAALTERNATE", null, new { @style = "padding-left: 10px;!important" })
+            @Html.ValidationMessageFor(model => model.CODIGOLOJAALTERNATE, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.STATUS)
+        @Html.RadioButtonFor(model => model.STATUS, "A") Ativo
+        @Html.RadioButtonFor(model => model.STATUS, "I") Inativo
+        @Html.ValidationMessageFor(model => model.STATUS, String.Empty, new { @style = "padding-left: 127px;!important" })
+        </p>
+    </div>
+
+    <input type="submit" id="salvaCategoriaPercentual" value="Salvar e incluir" class="botoesCategoria" />
+    @Html.ActionLink("Voltar", "CategoriaPercentualIndex", "CategoriaPercentual", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/scripts/jquery-validate")
+}
+
+
