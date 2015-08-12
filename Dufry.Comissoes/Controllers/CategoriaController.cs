@@ -282,6 +282,7 @@ namespace Dufry.Comissoes.Controllers
         protected override void Dispose(bool disposing)
         {
             _categoriaAppService.Dispose();
+            _controleacessoAppService.Dispose();
 
             base.Dispose(disposing);
         }
