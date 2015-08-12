@@ -10,7 +10,6 @@ namespace Dufry.Comissoes.Domain.Entities.Validations
             base.AddRule(new ValidationRule<CategoriaPercentual>(new CategoriaPercentualAtributoIsRequiredSpec(), ValidationMessages.CategoriaPercentualAtributoIsRequired));
             base.AddRule(new ValidationRule<CategoriaPercentual>(new CategoriaPercentualAtributoLengthMustBeLowerThan255Spec(), ValidationMessages.CategoriaPercentualAtributoLengthMustBeLowerThan255));
             base.AddRule(new ValidationRule<CategoriaPercentual>(new CategoriaPercentualCodigoLojaAlternateIsRequiredSpec(), ValidationMessages.CategoriaPercentualCodigoLojaAlternateIsRequired));
-            base.AddRule(new ValidationRule<CategoriaPercentual>(new CategoriaPercentualCodigoLojaAlternateLengthMustBeLowerThan1Spec(), ValidationMessages.CategoriaPercentualCodigoLojaAlternateLengthMustBeLowerThan1));
             base.AddRule(new ValidationRule<CategoriaPercentual>(new CategoriaPercentualDtFimIsRequiredSpec(), ValidationMessages.CategoriaPercentualDtFimIsRequired));
             base.AddRule(new ValidationRule<CategoriaPercentual>(new CategoriaPercentualDtIniIsRequiredSpec(), ValidationMessages.CategoriaPercentualDtIniIsRequired));
             base.AddRule(new ValidationRule<CategoriaPercentual>(new CategoriaPercentualPercentualShouldBeGraterThanZeroSpec(), ValidationMessages.CategoriaPercentualPercentualShouldBeGraterThanZero));

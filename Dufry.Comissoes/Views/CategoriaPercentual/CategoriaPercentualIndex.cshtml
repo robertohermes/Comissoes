@@ -1,0 +1,106 @@
+﻿@model PagedList.IPagedList<CategoriaPercentual>
+    @using PagedList.Mvc;
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+    @{
+        ViewBag.Title = "Busca de Categorias e Percentuais por Loja";
+    }
+
+    <h1 class="headerForm">@ViewBag.Title</h1>
+
+
+                               @*int? page
+                               , string sortOrder
+                               , int idCategoriaFilter, int idCategoriaSearchString
+                               , string atributoFilter, string atributoSearchString
+                               , decimal codigolojaalternateFilter, decimal codigolojaalternateSearchString
+                               , decimal percentualFilter, decimal percentualSearchString
+                               , string dtiniFilter, string dtiniSearchString
+                               , string dtfimFilter, string dtfimSearchString
+                               , string statusFilter, string statusSearchString)*@
+
+
+    @**************************************************************************************************************************@
+    @*                                                 Filtros de Busca                                                       *@
+    @**************************************************************************************************************************@
+    @using (Html.BeginForm("CategoriaPercentualIndex", "CategoriaPercentual", FormMethod.Get))
+    {
+        <div class="buscaCategoriaPercentual">
+            <p><label for="descricaoSearchString">Atributo</label>@Html.TextBox("atributoSearchString", ViewBag.atributoFilter as string, new { maxlength = "255" })</p>
+            <p>
+                <label for="statusSearchString">Status</label>      @Html.RadioButton("statusSearchString", "A", true, ViewBag.StatusFilter as string)Ativo
+                @Html.RadioButton("statusSearchString", "I", ViewBag.StatusFilter as string)Inativo
+            </p>
+        </div>
+        <p>
+            <input type="submit" id="buscaCategoriaPercentual" value="Buscar" class="botoesCategoriaPercentual" />
+            @Html.ActionLink("Limpar", "CategoriaPercentualIndex", "CategoriaPercentual", null, new { @class = "botoesCategoriaPercentual" })
+            @Html.ActionLink("Novo", "CategoriaPercentualCreate", "CategoriaPercentual", null, new { @class = "botoesCategoriaPercentual" })
+        </p>
+
+    }
+
+
+    @**************************************************************************************************************************@
+    @*                                          Cabeçalho e loop do resultado da busca                                        *@
+    @**************************************************************************************************************************@
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Atributo", "CategoriaPercentualIndex", "CategoriaPercentual"
+                , new
+                {   sortOrder = ViewBag.DescCategoriaSortParam,
+                    atributoSearchString = ViewBag.atributoFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
+                , new { @class = "tableheadlink" })
+            </th>
+            <th>
+                @Html.ActionLink("Status", "CategoriaPercentualIndex", "CategoriaPercentual"
+                , new
+                {   sortOrder = ViewBag.StatusSortParam,
+                    atributoSearchString = ViewBag.atributoFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
+                , new { @class = "tableheadlink" })
+
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.ATRIBUTO, "CategoriaPercentualEdit", "CategoriaPercentual", new { id = item.ID_CATEGORIA }, new { @class = "tablerowlink" })
+                </td>
+                @if (item.STATUS == "A")
+                {
+                    <td>Ativo</td>
+                }
+                else
+                {
+                    <td>Inativo</td>
+                }
+                <td>
+                    @Html.ActionLink("Excluir", "CategoriaPercentualDelete", "CategoriaPercentual", new { id = item.ID_CATEGORIA }, new { @class = "tablerowlink" })
+                </td>
+            </tr>
+        }
+    </table>
+
+
+    @**************************************************************************************************************************@
+    @*                                                        Paginação                                                       *@
+    @**************************************************************************************************************************@
+    <br />
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("CategoriaPercentualIndex"
+    , new
+    {
+        sortOrder = ViewBag.CurrentSort,
+        atributoSearchString = ViewBag.atributoFilter,
+        statusSearchString = ViewBag.StatusFilter,
+        page
+    }))

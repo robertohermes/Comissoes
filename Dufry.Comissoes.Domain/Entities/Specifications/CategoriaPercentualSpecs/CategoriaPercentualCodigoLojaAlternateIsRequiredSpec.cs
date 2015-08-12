@@ -6,7 +6,7 @@ namespace Dufry.Comissoes.Domain.Entities.Specifications.CategoriaPercentualSpec
     {
         public bool IsSatisfiedBy(CategoriaPercentual categoriapercentual)
         {
-            return categoriapercentual.CODIGOLOJAALTERNATE.Trim().Length > 0;
+            return categoriapercentual.CODIGOLOJAALTERNATE.ToString().Trim().Length > 0;
         }
     }
 }

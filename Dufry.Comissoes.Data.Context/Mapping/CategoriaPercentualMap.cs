@@ -22,7 +22,6 @@ namespace Dufry.Comissoes.Data.Context.Mapping
                 .IsRequired();
 
             Property(t => t.CODIGOLOJAALTERNATE)
-                .HasMaxLength(2)
                 .IsRequired();
 
             Property(t => t.PERCENTUAL)

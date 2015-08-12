@@ -18,20 +18,29 @@ namespace Dufry.Comissoes.Data.Context.Mapping
             Property(t => t.Id_Filial)
                 .IsRequired();
 
-            Property(t => t.Id_TipoLoja)
+            Property(t => t.Id_Grouping)
                 .IsRequired();
 
-            Property(t => t.Id_Aeroporto)
+            Property(t => t.Id_DataOpen)
+                .IsRequired();
+
+            Property(t => t.Id_DataClose)
                 .IsRequired();
 
             Property(t => t.CodigoLojaAlternate)
-                .HasMaxLength(2)
+                .IsRequired();
+
+            Property(t => t.CodigoLojaLegado)
+                .HasMaxLength(3)
                 .IsRequired();
 
             Property(t => t.NomeLoja)
-                .HasMaxLength(30)
+                .HasMaxLength(150)
                 .IsRequired();
 
+            Property(t => t.NomeReduzido)
+                .HasMaxLength(10)
+                .IsRequired();
         }
     }
 }

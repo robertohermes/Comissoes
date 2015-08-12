@@ -14,10 +14,13 @@ namespace Dufry.Comissoes.Domain.Entities
     {
         public int Id_Loja { get; set; }
         public int Id_Filial { get; set; }
-        public int Id_TipoLoja { get; set; }
-        public int Id_Aeroporto { get; set; }
-        public string CodigoLojaAlternate { get; set; }
+        public int Id_Grouping { get; set; }
+        public int Id_DataOpen { get; set; }
+        public int Id_DataClose { get; set; }
+        public decimal CodigoLojaAlternate { get; set; }
+        public string CodigoLojaLegado { get; set; }
         public string NomeLoja { get; set; }
+        public string NomeReduzido { get; set; }
 
     }
 }
