@@ -303,6 +303,7 @@
     <Content Include="Views\Categoria\CategoriaDelete.cshtml" />
     <Content Include="Views\Categoria\CategoriaEdit.cshtml" />
     <Content Include="Views\Categoria\CategoriaCreate.cshtml" />
+    <Content Include="Views\CategoriaPercentual\CategoriaPercentualIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
