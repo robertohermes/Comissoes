@@ -15,6 +15,8 @@ namespace Dufry.Comissoes.Data.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            Database.SetInitializer<BIVendasContext>(null);
+
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             base.OnModelCreating(modelBuilder);
