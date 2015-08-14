@@ -12,9 +12,7 @@ namespace Dufry.Comissoes.Data.Context.Mapping
 
 
             // Primary Key
-            HasKey(t => t.ID_PLANO);
-            HasKey(t => t.DT_INI);
-            HasKey(t => t.DT_FIM);
+            HasKey(t => new { t.ID_PLANO, t.DT_INI, t.DT_FIM });
 
             // Properties
             Property(t => t.VALOR_DOLAR_MEDIO)

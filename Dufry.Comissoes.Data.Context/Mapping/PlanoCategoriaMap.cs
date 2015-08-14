@@ -12,9 +12,7 @@ namespace Dufry.Comissoes.Data.Context.Mapping
 
 
             // Primary Key
-            HasKey(t => t.ID_PLANO);
-            HasKey(t => t.ID_CATEGORIA_PERCENTUAL);
-
+            HasKey(t => new { t.ID_PLANO, t.ID_CATEGORIA_PERCENTUAL });
 
             // Properties
             Property(t => t.ORDEM_HIERARQUIA)
