@@ -30,19 +30,21 @@ namespace Dufry.Comissoes.ViewModels
         [Required(ErrorMessage = "O percentual de comissão é obrigatório")]
         [Range(0.01, 100.00, ErrorMessage = "O valor do percentual de comissão deve estar entre 0.01 e 100.00")]
         [Display(Name = "Percentual de Comissão")]
+        [DisplayFormat(DataFormatString = "{0:P2}", ApplyFormatInEditMode = true)]
+        [RegularExpression(@"^\d+(\,\d)?$", ErrorMessage = "Apenas valores decimais são permitidos")]
         public decimal PERCENTUAL { get; set; }
-        
-        
-        [DataType(DataType.Date)]
+
+
         [Required(ErrorMessage = "A data inicial da vigência é obrigatória")]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.Date, ErrorMessage = "A data inicial da vigência está em formato inválido")]
         [Display(Name = "Data inicial da vigência")]
         public DateTime DT_INI { get; set; }
 
 
-        [DataType(DataType.Date)]
         [Required(ErrorMessage = "A data final da vigência é obrigatória")]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [DataType(DataType.Date, ErrorMessage = "A data final da vigência está em formato inválido")]
         [Display(Name = "Data final da vigência")]        
         public DateTime DT_FIM { get; set; }
 

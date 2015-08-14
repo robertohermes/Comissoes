@@ -3,7 +3,6 @@
 <head>
     <title>@ViewBag.Title</title>
     @Styles.Render("~/content/site")
-    @Scripts.Render("~/scripts/modernizr")
     @Styles.Render("~/content/jqueryui")
 </head>
 <body>
@@ -26,9 +25,12 @@
         Dufry 2015
     </div>
 
-    @Scripts.Render("~/scripts/jquery")
-    @Scripts.Render("~/scripts/bootstrap")
-    @Scripts.Render("~/scripts/jqueryui")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
+
 </body>
 </html>

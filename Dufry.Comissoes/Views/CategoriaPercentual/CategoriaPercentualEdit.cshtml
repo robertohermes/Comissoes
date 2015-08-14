@@ -1,18 +1,20 @@
 ﻿@model CategoriaPercentualViewModel
 
 @{
-    ViewBag.Title = "Inclusão de Categorias e Percentuais por Loja";
+    ViewBag.Title = "Edição de Categorias e Percentuais por Loja";
 }
 
 <h1 class="headerForm">@ViewBag.Title</h1>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @*@Html.AntiForgeryToken()*@
 
     <div class="editorCategoria">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID_CATEGORIA_PERCENTUAL)
+
         <p>
             @Html.LabelFor(model => model.ID_CATEGORIA)
             @Html.DropDownList("ID_CATEGORIA", null, new { @style = "padding-left: 10px;!important" })
@@ -23,11 +25,11 @@
             @Html.EditorFor(model => model.ATRIBUTO)
             @Html.ValidationMessageFor(model => model.ATRIBUTO, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
-        <p>
+        @*<p>
             @Html.LabelFor(model => model.CODIGOLOJAALTERNATE)
             @Html.DropDownList("CODIGOLOJAALTERNATE", null, new { @style = "padding-left: 10px;!important" })
             @Html.ValidationMessageFor(model => model.CODIGOLOJAALTERNATE, String.Empty, new { @style = "padding-left: 10px;!important" })
-        </p>
+        </p>*@
         <p>
             @Html.LabelFor(model => model.PERCENTUAL)
             @Html.EditorFor(model => model.PERCENTUAL)
@@ -35,28 +37,40 @@
         </p>
         <p>
             @Html.LabelFor(model => model.DT_INI)
-            @Html.EditorFor(model => model.DT_INI)  
+            @Html.TextBoxFor(model => model.DT_INI, null, new { @class = "dp", @Value = Model.DT_INI.ToString("dd/MM/yyyy") })
             @Html.ValidationMessageFor(model => model.DT_INI, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
         <p>
             @Html.LabelFor(model => model.DT_FIM)
-            @Html.EditorFor(model => model.DT_FIM)
+            @Html.TextBoxFor(model => model.DT_FIM, null, new { @class = "dp", @Value = Model.DT_FIM.ToString("dd/MM/yyyy") })
             @Html.ValidationMessageFor(model => model.DT_FIM, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
 
         <p>
             @Html.LabelFor(model => model.STATUS)
-        @Html.RadioButtonFor(model => model.STATUS, "A") Ativo
-        @Html.RadioButtonFor(model => model.STATUS, "I") Inativo
-        @Html.ValidationMessageFor(model => model.STATUS, String.Empty, new { @style = "padding-left: 127px;!important" })
+            @Html.RadioButtonFor(model => model.STATUS, "A") Ativo
+            @Html.RadioButtonFor(model => model.STATUS, "I") Inativo
+            @Html.ValidationMessageFor(model => model.STATUS, String.Empty, new { @style = "padding-left: 127px;!important" })
         </p>
     </div>
 
-    <input type="submit" id="salvaCategoriaPercentual" value="Salvar e incluir" class="botoesCategoria" />
+    <input type="submit" id="salvaCategoriaPercentual" value="Salvar" class="botoesCategoria" />
     @Html.ActionLink("Voltar", "CategoriaPercentualIndex", "CategoriaPercentual", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
 
 }
 
+@section Scripts {
+    @Styles.Render("~/content/themes/base/css")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    
+
+    <script type="text/javascript">
+        $(function () {
+            $('.dp').datepicker({ dateFormat: "dd/mm/yy" });
+        });
+    </script>
 
 
 
+}
