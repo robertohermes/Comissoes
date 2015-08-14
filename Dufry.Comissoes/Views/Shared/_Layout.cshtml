@@ -4,6 +4,7 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/content/site")
     @Scripts.Render("~/scripts/modernizr")
+    @Styles.Render("~/content/jqueryui")
 </head>
 <body>
     <div id="header">
@@ -27,6 +28,7 @@
 
     @Scripts.Render("~/scripts/jquery")
     @Scripts.Render("~/scripts/bootstrap")
+    @Scripts.Render("~/scripts/jqueryui")
     @RenderSection("scripts", required: false)
 </body>
 </html>

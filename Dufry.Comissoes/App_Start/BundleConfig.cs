@@ -8,6 +8,10 @@ namespace Dufry.Comissoes
         {
             bundles.Add(new ScriptBundle("~/scripts/jquery").Include(
                 "~/scripts/jquery-{version}.js"));
+            
+            bundles.Add(new ScriptBundle("~/scripts/jqueryui").Include("~/scripts/jquery-ui-{version}.js"));
+
+            bundles.Add(new StyleBundle("~/content/jqueryui").Include("~/content/themes/base/all.css"));
 
             bundles.Add(new ScriptBundle("~/scripts/jquery-validate").Include(
                 "~/scripts/jquery.validate.js",
