@@ -61,13 +61,25 @@
 
 @section Scripts {
     @Styles.Render("~/content/themes/base/css")
-    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")*@
+    
     
 
     <script type="text/javascript">
         $(function () {
-            $('.dp').datepicker({ dateFormat: "dd/mm/yy" });
+            $('.dp').datepicker({
+                dateFormat: "dd/mm/yy",
+                //showStatus: true,
+                //showWeeks: true,
+                //highlightWeek: false,
+                //numberOfMonths: 1,
+                showAnim: "scale",
+                showOptions: {
+                    origin: ["top", "right"]
+            }
+            });
         });
     </script>
 

@@ -1,4 +1,5 @@
-﻿using System.Web.Optimization;
+﻿using System.Collections.Generic;
+using System.Web.Optimization;
 
 namespace Dufry.Comissoes
 {
@@ -9,19 +10,27 @@ namespace Dufry.Comissoes
             bundles.IgnoreList.Clear();
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/jquery.replace-text.js"));
+                        "~/scripts/jquery-{version}.js",
+                        "~/scripts/jquery.replace-text.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                 "~/scripts/jquery-ui-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                //"~/scripts/jquery.unobtrusive-ajax.js",
-                "~/scripts/jquery.validate-vsdoc.js",
-                "~/scripts/jquery.validate.js",
-                "~/scripts/jquery.validate.unobtrusive.js", 
-                "~/scripts/globalize.js", 
-                "~/scripts/jquery.validate.globalize.js"));
+            var bundle = new ScriptBundle("~/bundles/jqueryval") { Orderer = new AsIsBundleOrderer() };
+
+            bundle
+                //.Include("~/scripts/jquery.unobtrusive-ajax.js")
+                .Include("~/scripts/jquery.validate-vsdoc.js")
+                .Include("~/scripts/jquery.validate.js")
+                .Include("~/scripts/jquery.validate.unobtrusive.js")
+                .Include("~/scripts/globalize.js")
+                .Include("~/scripts/globalize/currency.js")
+                .Include("~/scripts/globalize/date.js")
+                .Include("~/scripts/globalize/message.js")
+                .Include("~/scripts/globalize/number.js")
+                .Include("~/scripts/globalize/plural.js")
+                .Include("~/scripts/globalize/relative-time.js");
+            bundles.Add(bundle);
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -31,6 +40,8 @@ namespace Dufry.Comissoes
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/scripts/bootstrap.js",
                       "~/scripts/respond.js"));
+
+            //------------------------------------------------------------------------------------------------------------
 
             bundles.Add(new StyleBundle("~/content/site").Include(
                 "~/content/dufry.css"));
@@ -61,6 +72,14 @@ namespace Dufry.Comissoes
             BundleTable.EnableOptimizations = true;
 #endif
 
+        }
+    }
+
+    public class AsIsBundleOrderer : IBundleOrderer
+    {
+        public IEnumerable<BundleFile> OrderFiles(BundleContext context, IEnumerable<BundleFile> files)
+        {
+            return files;
         }
     }
 }
