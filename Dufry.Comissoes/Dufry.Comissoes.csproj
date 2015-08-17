@@ -348,6 +348,7 @@
     <Content Include="Scripts\cldr\supplemental.js" />
     <Content Include="Scripts\cldr\unresolved.js" />
     <Content Include="Scripts\globalize.js" />
+    <Content Include="Scripts\globalize\cultures\globalize.culture.pt-BR.js" />
     <Content Include="Scripts\globalize\currency.js" />
     <Content Include="Scripts\globalize\date.js" />
     <Content Include="Scripts\globalize\message.js" />

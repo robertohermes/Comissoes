@@ -30,6 +30,8 @@ namespace Dufry.Comissoes
                 .Include("~/scripts/globalize/number.js")
                 .Include("~/scripts/globalize/plural.js")
                 .Include("~/scripts/globalize/relative-time.js");
+                //.Include("~/scripts/globalize/cultures/globalize.culture.pt-BR.js");
+
             bundles.Add(bundle);
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
