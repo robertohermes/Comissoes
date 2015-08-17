@@ -16,6 +16,8 @@ namespace Dufry.Comissoes
     {
         protected void Application_Start()
         {
+            System.Globalization.CultureInfo.DefaultThreadCurrentCulture = new System.Globalization.CultureInfo("pt-BR");
+
             AreaRegistration.RegisterAllAreas();
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

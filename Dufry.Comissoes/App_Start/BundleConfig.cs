@@ -10,7 +10,7 @@ namespace Dufry.Comissoes
             bundles.IgnoreList.Clear();
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/scripts/jquery-{version}.js",
+                        "~/scripts/jquery-{version}.js", 
                         "~/scripts/jquery.replace-text.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
@@ -20,16 +20,18 @@ namespace Dufry.Comissoes
 
             bundle
                 //.Include("~/scripts/jquery.unobtrusive-ajax.js")
-                .Include("~/scripts/jquery.validate-vsdoc.js")
+                //.Include("~/scripts/jquery.unobtrusive*")
+                //.Include("~/scripts/jquery.validate-vsdoc.js")
                 .Include("~/scripts/jquery.validate.js")
-                .Include("~/scripts/jquery.validate.unobtrusive.js")
-                .Include("~/scripts/globalize.js")
-                .Include("~/scripts/globalize/currency.js")
-                .Include("~/scripts/globalize/date.js")
-                .Include("~/scripts/globalize/message.js")
-                .Include("~/scripts/globalize/number.js")
-                .Include("~/scripts/globalize/plural.js")
-                .Include("~/scripts/globalize/relative-time.js");
+                .Include("~/scripts/methods_pt.js")
+                .Include("~/scripts/jquery.validate.unobtrusive.js");
+                //.Include("~/scripts/globalize.js")
+                //.Include("~/scripts/globalize/currency.js")
+                //.Include("~/scripts/globalize/date.js")
+                //.Include("~/scripts/globalize/message.js")
+                //.Include("~/scripts/globalize/number.js")
+                //.Include("~/scripts/globalize/plural.js")
+                //.Include("~/scripts/globalize/relative-time.js");
                 //.Include("~/scripts/globalize/cultures/globalize.culture.pt-BR.js");
 
             bundles.Add(bundle);
