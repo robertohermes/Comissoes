@@ -25,14 +25,14 @@
             @Html.EditorFor(model => model.ATRIBUTO)
             @Html.ValidationMessageFor(model => model.ATRIBUTO, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
-        @*<p>
+        <p>
             @Html.LabelFor(model => model.CODIGOLOJAALTERNATE)
             @Html.DropDownList("CODIGOLOJAALTERNATE", null, new { @style = "padding-left: 10px;!important" })
             @Html.ValidationMessageFor(model => model.CODIGOLOJAALTERNATE, String.Empty, new { @style = "padding-left: 10px;!important" })
-        </p>*@
+        </p>
         <p>
             @Html.LabelFor(model => model.PERCENTUAL)
-            @Html.EditorFor(model => model.PERCENTUAL)
+            @Html.EditorFor(model => model.PERCENTUAL, null, new { @class = "percent" })
             @Html.ValidationMessageFor(model => model.PERCENTUAL, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
         <p>
@@ -60,29 +60,23 @@
 }
 
 @section Scripts {
-    @Styles.Render("~/content/themes/base/css")
-    @*@Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/jqueryval")*@
-    
-    
-
     <script type="text/javascript">
         $(function () {
             $('.dp').datepicker({
-                dateFormat: "dd/mm/yy",
-                //showStatus: true,
-                //showWeeks: true,
-                //highlightWeek: false,
-                //numberOfMonths: 1,
                 showAnim: "scale",
                 showOptions: {
                     origin: ["top", "right"]
             }
             });
         });
-    </script>
 
+        $(document).ready(function(){  
+            $('.dp').mask('00/00/0000', { 'translation': { 0: { pattern: /[0-9]/ } } });
+            $('.percent').mask('##0,00%', { reverse: true });
+        });
+
+
+</script> 
 
 
 }

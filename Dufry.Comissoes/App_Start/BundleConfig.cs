@@ -10,8 +10,7 @@ namespace Dufry.Comissoes
             bundles.IgnoreList.Clear();
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/scripts/jquery-{version}.js", 
-                        "~/scripts/jquery.replace-text.js"));
+                        "~/scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                 "~/scripts/jquery-ui-{version}.js"));
@@ -19,21 +18,12 @@ namespace Dufry.Comissoes
             var bundle = new ScriptBundle("~/bundles/jqueryval") { Orderer = new AsIsBundleOrderer() };
 
             bundle
-                //.Include("~/scripts/jquery.unobtrusive-ajax.js")
-                //.Include("~/scripts/jquery.unobtrusive*")
-                //.Include("~/scripts/jquery.validate-vsdoc.js")
+                .Include("~/scripts/jquery.unobtrusive*")
                 .Include("~/scripts/jquery.validate.js")
-                .Include("~/scripts/methods_pt.js")
+                .Include("~/scripts/moment.js")
+                .Include("~/scripts/moment-with-locales.js")
+                .Include("~/scripts/dufry.config.js")
                 .Include("~/scripts/jquery.validate.unobtrusive.js");
-                //.Include("~/scripts/globalize.js")
-                //.Include("~/scripts/globalize/currency.js")
-                //.Include("~/scripts/globalize/date.js")
-                //.Include("~/scripts/globalize/message.js")
-                //.Include("~/scripts/globalize/number.js")
-                //.Include("~/scripts/globalize/plural.js")
-                //.Include("~/scripts/globalize/relative-time.js");
-                //.Include("~/scripts/globalize/cultures/globalize.culture.pt-BR.js");
-
             bundles.Add(bundle);
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -45,6 +35,8 @@ namespace Dufry.Comissoes
                       "~/scripts/bootstrap.js",
                       "~/scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jquerymask").Include(
+                    "~/scripts/jquery.mask.js"));
             //------------------------------------------------------------------------------------------------------------
 
             bundles.Add(new StyleBundle("~/content/site").Include(
@@ -52,22 +44,6 @@ namespace Dufry.Comissoes
 
             bundles.Add(new StyleBundle("~/content/jqueryui").Include(
                 "~/content/themes/base/all.css"));
-
-
-            bundles.Add(new StyleBundle("~/content/themes/base/css").Include(
-                "~/content/themes/base/jquery.ui.core.css", 
-                "~/content/themes/base/jquery.ui.resizable.css", 
-                "~/content/themes/base/jquery.ui.selectable.css", 
-                "~/content/themes/base/jquery.ui.accordion.css", 
-                "~/content/themes/base/jquery.ui.autocomplete.css", 
-                "~/content/themes/base/jquery.ui.button.css", 
-                "~/content/themes/base/jquery.ui.dialog.css", 
-                "~/content/themes/base/jquery.ui.slider.css", 
-                "~/content/themes/base/jquery.ui.tabs.css", 
-                "~/content/themes/base/jquery.ui.datepicker.css", 
-                "~/content/themes/base/jquery.ui.progressbar.css", 
-                "~/content/themes/base/jquery.ui.theme.css"));
-
 
 
 #if DEBUG

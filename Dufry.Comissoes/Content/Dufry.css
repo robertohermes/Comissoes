@@ -364,21 +364,22 @@ table
 	border: 1px solid #000;
 	border-collapse: collapse;
 	color: #000;
-	min-width: 500px;
-	width: 100%;
+	/*min-width: 500px;*/           /*<<<<< AQUI*/
+	/*width: 100%;*/                /*<<<<< AQUI*/
 }
 
 tr
 {
 	border: 1px solid #000;
-	line-height: 25px;
+	/*line-height: 25px;*/          /*<<<<< AQUI*/
 }
 
 th
 {
-	background-color: #c2101c;
+	background-color: #c2101c;      /*<<<<< AQUI*/
 	color: #ffffff;
-	font-size: 13px;
+	/*font-size: 13px;*/            /*<<<<< AQUI*/
+    font-size: 9px;                 /*<<<<< AQUI*/
 	text-align: left;
 }
 
@@ -389,7 +390,7 @@ th, td
 
 tr:hover
 {
-	background-color: #808080;
+	/*background-color: #808080;*/  /*<<<<< AQUI*/
     color: #ffffff;
 }
 
