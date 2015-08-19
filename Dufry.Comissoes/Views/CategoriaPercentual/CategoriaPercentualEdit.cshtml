@@ -25,14 +25,14 @@
             @Html.EditorFor(model => model.ATRIBUTO)
             @Html.ValidationMessageFor(model => model.ATRIBUTO, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
-        <p>
+        @*<p>
             @Html.LabelFor(model => model.CODIGOLOJAALTERNATE)
             @Html.DropDownList("CODIGOLOJAALTERNATE", null, new { @style = "padding-left: 10px;!important" })
             @Html.ValidationMessageFor(model => model.CODIGOLOJAALTERNATE, String.Empty, new { @style = "padding-left: 10px;!important" })
-        </p>
+        </p>*@
         <p>
             @Html.LabelFor(model => model.PERCENTUAL)
-            @Html.TextBoxFor(model => model.PERCENTUAL, null, new { @class = "percent" })
+            @Html.TextBoxFor(model => model.PERCENTUAL, null, new { @class = "decimal" })
             @Html.ValidationMessageFor(model => model.PERCENTUAL, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
         <p>
@@ -72,7 +72,11 @@
 
         $(document).ready(function(){  
             $('.dp').mask('00/00/0000', { 'translation': { 0: { pattern: /[0-9]/ } } });
-            $('.percent').mask('##0,0000%', { reverse: true });
+            //$('.percent').mask('##0,0000%', { reverse: true });
+            $('.decimal').mask('000,0000', { reverse: true });
+            //$('.decimalBaca').rules("remove", "number");
+
+            //console.log($('.decimalBaca').rules());
         });
 
 

@@ -22,8 +22,8 @@ namespace Dufry.Comissoes
                 .Include("~/scripts/jquery.validate.js")
                 .Include("~/scripts/moment.js")
                 .Include("~/scripts/moment-with-locales.js")
-                .Include("~/scripts/dufry.config.js")
-                .Include("~/scripts/jquery.validate.unobtrusive.js");
+                .Include("~/scripts/jquery.validate.unobtrusive.js")
+                .Include("~/scripts/dufry.config.js");
             bundles.Add(bundle);
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
