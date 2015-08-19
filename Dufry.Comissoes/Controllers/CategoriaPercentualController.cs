@@ -62,20 +62,26 @@ namespace Dufry.Comissoes.Controllers
                 throw new Exception();
             }
 
-            List<Categoria> categoriaList = new List<Categoria>();
-            categoriaList.Add(new Categoria { ID_CATEGORIA = 0, DESC_CATEGORIA = "--- Selecione ---" });
-            //categoriaList.AddRange(_categoriaAppService.All().ToList());
-            categoriaList.AddRange(_categoriaAppService.Find(t => t.STATUS == "A").ToList());
-            ViewBag.ID_CATEGORIA = new SelectList(categoriaList, "ID_CATEGORIA", "DESC_CATEGORIA", categoriapercentual.ID_CATEGORIA);
+
+            ViewBag.ID_CATEGORIA = new SelectList(_categoriaAppService.Find(t => t.STATUS == "A"), "ID_CATEGORIA", "DESC_CATEGORIA", categoriapercentual.ID_CATEGORIA);
+
+
 
             //List<Loja> lojaList = new List<Loja>();
             //lojaList.Add(new Loja { CodigoLojaAlternate = 0, NomeLoja = "--- Selecione ---" });
             //lojaList.AddRange(_lojaAppService.All(true).ToList());
             //ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojaList, "CodigoLojaAlternate", "NomeLoja", categoriapercentual.CODIGOLOJAALTERNATE);
 
+
             CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel();
 
+            //---------------------------------------------------------------------------------
+            //categoriaPercentualVM = categoriaPercentualVM.ToViewModel(categoriapercentual);
+            //categoriaPercentualVM.Categorias = new SelectList(categoriaList, "ID_CATEGORIA", "DESC_CATEGORIA", categoriapercentual.ID_CATEGORIA);
+            //---------------------------------------------------------------------------------
+
             return View(categoriaPercentualVM.ToViewModel(categoriapercentual));
+
         }
 
         // GET: /CategoriaPercentual/CategoriaPercentualIndex

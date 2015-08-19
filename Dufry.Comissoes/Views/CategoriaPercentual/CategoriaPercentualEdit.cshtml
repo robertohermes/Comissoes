@@ -16,9 +16,11 @@
         @Html.HiddenFor(model => model.ID_CATEGORIA_PERCENTUAL)
 
         <p>
-            @Html.LabelFor(model => model.ID_CATEGORIA)
-            @Html.DropDownList("ID_CATEGORIA", null, new { @style = "padding-left: 10px;!important" })
-            @Html.ValidationMessageFor(model => model.ID_CATEGORIA, String.Empty, new { @style = "padding-left: 10px;!important" })
+            @Html.LabelFor(model => model.ID_CATEGORIA, "Categoria")
+            @*@Html.DropDownList("ID_CATEGORIA", null, new { @style = "padding-left: 10px;!important" })
+            @Html.ValidationMessageFor(model => model.ID_CATEGORIA, String.Empty, new { @style = "padding-left: 10px;!important" })*@
+            @Html.DropDownList("ID_CATEGORIA", "--- Selecione ---")
+            @Html.ValidationMessageFor(model => model.ID_CATEGORIA)
         </p>
         <p>
             @Html.LabelFor(model => model.ATRIBUTO)
@@ -72,11 +74,7 @@
 
         $(document).ready(function(){  
             $('.dp').mask('00/00/0000', { 'translation': { 0: { pattern: /[0-9]/ } } });
-            //$('.percent').mask('##0,0000%', { reverse: true });
             $('.decimal').mask('000,0000', { reverse: true });
-            //$('.decimalBaca').rules("remove", "number");
-
-            //console.log($('.decimalBaca').rules());
         });
 
 

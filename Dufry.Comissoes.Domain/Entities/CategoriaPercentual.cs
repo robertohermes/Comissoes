@@ -30,10 +30,8 @@ namespace Dufry.Comissoes.Domain.Entities
 
 
         [Required(ErrorMessage = "O percentual de comissão é obrigatório")]
-        [Range(0.01, 100.00, ErrorMessage = "O valor do percentual de comissão deve estar entre 0.01 e 100.00")]
+        [Range(0.01, 100.00, ErrorMessage = "O valor do percentual de comissão deve estar entre 0,01 e 100,00")]
         [Display(Name = "Percentual de Comissão")]
-        [DisplayFormat(DataFormatString = "{0:P2}", ApplyFormatInEditMode = true)]
-        [RegularExpression(@"^\d+(\.\d)?$", ErrorMessage = "Only one decimal point value allowed")]
         public decimal PERCENTUAL { get; set; }
 
 

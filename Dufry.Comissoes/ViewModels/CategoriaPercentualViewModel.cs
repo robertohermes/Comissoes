@@ -12,6 +12,7 @@ namespace Dufry.Comissoes.ViewModels
 
 
         [Required(ErrorMessage = "A escolha de uma categoria é obrigatória")]
+        //[Range(1, int.MaxValue, ErrorMessage = "A escolha de uma categoria é obrigatória")]
         [Display(Name = "Categoria")]
         public int ID_CATEGORIA { get; set; }
 
@@ -28,10 +29,8 @@ namespace Dufry.Comissoes.ViewModels
         
         
         [Required(ErrorMessage = "O percentual de comissão é obrigatório")]
-        //[Range(0.01, 100.00, ErrorMessage = "O valor do percentual de comissão deve estar entre 0.01 e 100.00")]
+        [Range(0.01, 100.00, ErrorMessage = "O valor do percentual de comissão deve estar entre 0,01 e 100,00")]
         [Display(Name = "Percentual de Comissão")]
-        //[DisplayFormat(DataFormatString = "{0:P4}", ApplyFormatInEditMode = true)]
-        //[RegularExpression(@"^\d+(\,\d)?$", ErrorMessage = "Apenas valores decimais são permitidos")]
         public decimal PERCENTUAL { get; set; }
 
 
