@@ -1,4 +1,4 @@
-﻿@model CategoriaPercentualViewModel
+﻿@model Dufry.Comissoes.ViewModels.CategoriaPercentualViewModel
 
 @{
     ViewBag.Title = "Edição de Categorias e Percentuais por Loja";
@@ -13,46 +13,44 @@
 
     <div class="editorCategoria">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID_CATEGORIA_PERCENTUAL)
+        @Html.HiddenFor(model => model.CategoriaPercentual.ID_CATEGORIA_PERCENTUAL)
 
         <p>
-            @Html.LabelFor(model => model.ID_CATEGORIA, "Categoria")
-            @*@Html.DropDownList("ID_CATEGORIA", null, new { @style = "padding-left: 10px;!important" })
-            @Html.ValidationMessageFor(model => model.ID_CATEGORIA, String.Empty, new { @style = "padding-left: 10px;!important" })*@
-            @Html.DropDownList("ID_CATEGORIA", "--- Selecione ---")
-            @Html.ValidationMessageFor(model => model.ID_CATEGORIA)
+            @Html.LabelFor(model => model.CategoriaPercentual.ID_CATEGORIA)
+            @Html.DropDownListFor(model => model.CategoriaPercentual.ID_CATEGORIA, Model.CategoriasSelectListItem, "--- Selecione ---", new { @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.CategoriaPercentual.ID_CATEGORIA, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
         <p>
-            @Html.LabelFor(model => model.ATRIBUTO)
-            @Html.EditorFor(model => model.ATRIBUTO)
-            @Html.ValidationMessageFor(model => model.ATRIBUTO, String.Empty, new { @style = "padding-left: 10px;!important" })
+            @Html.LabelFor(model => model.CategoriaPercentual.ATRIBUTO)
+            @Html.EditorFor(model => model.CategoriaPercentual.ATRIBUTO)
+            @Html.ValidationMessageFor(model => model.CategoriaPercentual.ATRIBUTO, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
         @*<p>
-            @Html.LabelFor(model => model.CODIGOLOJAALTERNATE)
-            @Html.DropDownList("CODIGOLOJAALTERNATE", null, new { @style = "padding-left: 10px;!important" })
-            @Html.ValidationMessageFor(model => model.CODIGOLOJAALTERNATE, String.Empty, new { @style = "padding-left: 10px;!important" })
+            @Html.LabelFor(model => model.CategoriaPercentual.CODIGOLOJAALTERNATE)
+            @Html.DropDownListFor(model => model.CategoriaPercentual.CODIGOLOJAALTERNATE, Model.LojasSelectListItem, "--- Selecione ---", new { @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.CategoriaPercentual.CODIGOLOJAALTERNATE, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>*@
         <p>
-            @Html.LabelFor(model => model.PERCENTUAL)
-            @Html.TextBoxFor(model => model.PERCENTUAL, null, new { @class = "decimal" })
-            @Html.ValidationMessageFor(model => model.PERCENTUAL, String.Empty, new { @style = "padding-left: 10px;!important" })
+            @Html.LabelFor(model => model.CategoriaPercentual.PERCENTUAL)
+            @Html.TextBoxFor(model => model.CategoriaPercentual.PERCENTUAL, null, new { @class = "decimal" })
+            @Html.ValidationMessageFor(model => model.CategoriaPercentual.PERCENTUAL, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
         <p>
-            @Html.LabelFor(model => model.DT_INI)
-            @Html.TextBoxFor(model => model.DT_INI, null, new { @class = "dp", @Value = Model.DT_INI.ToString("dd/MM/yyyy") })
-            @Html.ValidationMessageFor(model => model.DT_INI, String.Empty, new { @style = "padding-left: 10px;!important" })
+            @Html.LabelFor(model => model.CategoriaPercentual.DT_INI)
+            @Html.TextBoxFor(model => model.CategoriaPercentual.DT_INI, null, new { @class = "dp", @Value = Model.CategoriaPercentual.DT_INI.ToString("dd/MM/yyyy") })
+            @Html.ValidationMessageFor(model => model.CategoriaPercentual.DT_INI, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
         <p>
-            @Html.LabelFor(model => model.DT_FIM)
-            @Html.TextBoxFor(model => model.DT_FIM, null, new { @class = "dp", @Value = Model.DT_FIM.ToString("dd/MM/yyyy") })
-            @Html.ValidationMessageFor(model => model.DT_FIM, String.Empty, new { @style = "padding-left: 10px;!important" })
+            @Html.LabelFor(model => model.CategoriaPercentual.DT_FIM)
+            @Html.TextBoxFor(model => model.CategoriaPercentual.DT_FIM, null, new { @class = "dp", @Value = Model.CategoriaPercentual.DT_FIM.ToString("dd/MM/yyyy") })
+            @Html.ValidationMessageFor(model => model.CategoriaPercentual.DT_FIM, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
 
         <p>
-            @Html.LabelFor(model => model.STATUS)
-            @Html.RadioButtonFor(model => model.STATUS, "A") Ativo
-            @Html.RadioButtonFor(model => model.STATUS, "I") Inativo
-            @Html.ValidationMessageFor(model => model.STATUS, String.Empty, new { @style = "padding-left: 127px;!important" })
+            @Html.LabelFor(model => model.CategoriaPercentual.STATUS)
+            @Html.RadioButtonFor(model => model.CategoriaPercentual.STATUS, "A") Ativo
+            @Html.RadioButtonFor(model => model.CategoriaPercentual.STATUS, "I") Inativo
+            @Html.ValidationMessageFor(model => model.CategoriaPercentual.STATUS, String.Empty, new { @style = "padding-left: 127px;!important" })
         </p>
     </div>
 

@@ -62,25 +62,25 @@ namespace Dufry.Comissoes.Controllers
                 throw new Exception();
             }
 
+            var categorias = _categoriaAppService.Find(t => t.STATUS == "A");
 
-            ViewBag.ID_CATEGORIA = new SelectList(_categoriaAppService.Find(t => t.STATUS == "A"), "ID_CATEGORIA", "DESC_CATEGORIA", categoriapercentual.ID_CATEGORIA);
+            IEnumerable<SelectListItem> categoriaSelectListItem = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA");
+            ViewBag.ID_CATEGORIA = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA", categoriapercentual.ID_CATEGORIA);
 
-
-
+            #region desfazer
             //List<Loja> lojaList = new List<Loja>();
             //lojaList.Add(new Loja { CodigoLojaAlternate = 0, NomeLoja = "--- Selecione ---" });
             //lojaList.AddRange(_lojaAppService.All(true).ToList());
             //ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojaList, "CodigoLojaAlternate", "NomeLoja", categoriapercentual.CODIGOLOJAALTERNATE);
 
+            //var lojas = _lojaAppService.All(true);
+            //IEnumerable<SelectListItem> lojaSelectListItem = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
+            //ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja", categoriapercentual.CODIGOLOJAALTERNATE);
+            #endregion desfazer
 
-            CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel();
+            CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel(categoriapercentual, categoriaSelectListItem);
 
-            //---------------------------------------------------------------------------------
-            //categoriaPercentualVM = categoriaPercentualVM.ToViewModel(categoriapercentual);
-            //categoriaPercentualVM.Categorias = new SelectList(categoriaList, "ID_CATEGORIA", "DESC_CATEGORIA", categoriapercentual.ID_CATEGORIA);
-            //---------------------------------------------------------------------------------
-
-            return View(categoriaPercentualVM.ToViewModel(categoriapercentual));
+            return View(categoriaPercentualVM);
 
         }
 

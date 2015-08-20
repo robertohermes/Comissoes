@@ -15,7 +15,7 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                //REVER
+                //<REVER>
                 var controleacessos = cn.Query<DolarMedio>("SELECT * FROM COMIS_DOLAR_MEDIO WHERE ID_PLANO = @id_plano",
                     new { ColaboradorKey = id }).FirstOrDefault();
                 return controleacessos;
