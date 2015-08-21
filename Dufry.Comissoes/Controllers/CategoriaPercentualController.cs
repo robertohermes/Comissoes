@@ -84,6 +84,54 @@ namespace Dufry.Comissoes.Controllers
 
         }
 
+        // POST: /CategoriaPercentual/CategoriaPercentualEdit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost, ActionName("CategoriaPercentualEdit")]
+        //[ValidateAntiForgeryToken]
+        public ActionResult CategoriaPercentualEditConfirmed(int? id)
+        {
+            if (id == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception();
+            }
+            var categoriapercentualToUpdate = _categoriapercentualAppService.Get(id ?? default(int));
+
+            //---------------------------------------------------------------------------------------------
+            //<REVER>
+            //---------------------------------------------------------------------------------------------
+            categoriapercentualToUpdate.LAST_MODIFY_DATE = DateTime.Now;
+            categoriapercentualToUpdate.LAST_MODIFY_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
+            //---------------------------------------------------------------------------------------------
+
+            if (TryUpdateModel(categoriapercentualToUpdate, "",
+               new string[] { "CategoriaPercentual_ID_CATEGORIA", "CategoriaPercentual_ATRIBUTO", "CategoriaPercentual_CODIGOLOJAALTERNATE", "CategoriaPercentual_PERCENTUAL", "CategoriaPercentual_DT_INI", "CategoriaPercentual_DT_FIM", "CategoriaPercentual_STATUS", "CategoriaPercentual_LAST_MODIFY_DATE", "CategoriaPercentual_LAST_MODIFY_USERNAME" }))
+            {
+                try
+                {
+                    //<RETIRAR>
+                    //categoriapercentualToUpdate.CODIGOLOJAALTERNATE = -2;
+
+                    _categoriapercentualAppService.Update(categoriapercentualToUpdate);
+
+                    return RedirectToAction("CategoriaPercentualIndex");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Erro na alteração. Tente novamente ou, se o problema persistir, entre em contato com o suporte.");
+                }
+            }
+
+            //---------------------------------------------------------------------------------------------
+            //CategoriaPercentualViewModel categoriapercentualVM = new CategoriaPercentualViewModel(categoriapercentualToUpdate, categoriaSelectListItem);
+            //return View(categoriaPercentualVM);
+
+            return View(categoriapercentualToUpdate);
+            //---------------------------------------------------------------------------------------------
+        }
+
         // GET: /CategoriaPercentual/CategoriaPercentualIndex
         //[ControleAcessoAdminFilter]
         public ViewResult CategoriaPercentualIndex(int? page

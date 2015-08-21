@@ -217,7 +217,7 @@ namespace Dufry.Comissoes.Controllers
 
         }
 
-        // GET: Categoria/CategoriaEdit/5
+        // GET: /Categoria/CategoriaEdit/5
         public ActionResult CategoriaEdit(int? id)
         {
             if (id == null)
