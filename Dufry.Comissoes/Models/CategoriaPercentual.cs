@@ -46,6 +46,7 @@ namespace Dufry.Comissoes.Models
         [Required(ErrorMessage = "A data final da vigência é obrigatória")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [DataType(DataType.Date, ErrorMessage = "A data final da vigência está em formato inválido")]
+        [DateGreaterThan("DT_INI", "A data final da vigência deve ser maior que a data inicial")]
         [Display(Name = "Data final da vigência")]
         public DateTime DT_FIM { get; set; }
 

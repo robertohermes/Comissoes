@@ -73,6 +73,13 @@
         $(document).ready(function(){  
             $('.dp').mask('00/00/0000', { 'translation': { 0: { pattern: /[0-9]/ } } });
             $('.decimal').mask('000,0000', { reverse: true });
+
+            $("input[name='CategoriaPercentual.DT_FIM']").rules("add", {
+                DateGtEq: $("input[name='CategoriaPercentual.DT_INI']"),
+                messages: { DateGtEq: "A data final da vigência deve ser maior que a data inicial" }
+            });
+
+
         });
 
 
