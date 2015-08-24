@@ -1,4 +1,4 @@
-﻿@model Dufry.Comissoes.ViewModels.CategoriaPercentualViewModel
+﻿@model CategoriaPercentualViewModel
 
 @{
     ViewBag.Title = "Edição de Categorias e Percentuais por Loja";
@@ -72,14 +72,12 @@
 
         $(document).ready(function(){  
             $('.dp').mask('00/00/0000', { 'translation': { 0: { pattern: /[0-9]/ } } });
-            $('.decimal').mask('000,0000', { reverse: true });
+            //$('.decimal').mask('000,0000', { reverse: true });
 
             $("input[name='CategoriaPercentual.DT_FIM']").rules("add", {
                 DateGtEq: $("input[name='CategoriaPercentual.DT_INI']"),
                 messages: { DateGtEq: "A data final da vigência deve ser maior que a data inicial" }
             });
         });
-</script> 
-
-
+    </script> 
 }

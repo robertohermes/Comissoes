@@ -32,19 +32,27 @@ namespace Dufry.Comissoes.Controllers
         // GET: /CategoriaPercentual/CategoriaPercentualCreate
         public ActionResult CategoriaPercentualCreate()
         {
-            List<Categoria> categoriaList = new List<Categoria>();
-            categoriaList.Add(new Categoria { ID_CATEGORIA = 0, DESC_CATEGORIA = "--- Selecione ---" });
-            //categoriaList.AddRange(_categoriaAppService.All().ToList());
-            categoriaList.AddRange(_categoriaAppService.Find(t => t.STATUS == "A").ToList());
-            ViewBag.ID_CATEGORIA = new SelectList(categoriaList, "ID_CATEGORIA", "DESC_CATEGORIA");
+            var categorias = _categoriaAppService.Find(t => t.STATUS == "A");
 
+            IEnumerable<SelectListItem> categoriaSelectListItem = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA");
+            ViewBag.ID_CATEGORIA = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA");
 
-            List<Loja> lojaList = new List<Loja>();
-            lojaList.Add(new Loja { CodigoLojaAlternate = 0, NomeLoja = "--- Selecione ---" });
-            lojaList.AddRange(_lojaAppService.All(true).ToList());
-            ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojaList, "CodigoLojaAlternate", "NomeLoja");
+            #region desfazer
+            //List<Loja> lojaList = new List<Loja>();
+            //lojaList.Add(new Loja { CodigoLojaAlternate = 0, NomeLoja = "--- Selecione ---" });
+            //lojaList.AddRange(_lojaAppService.All(true).ToList());
+            //ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojaList, "CodigoLojaAlternate", "NomeLoja", categoriapercentual.CODIGOLOJAALTERNATE);
 
-            return View();
+            //var lojas = _lojaAppService.All(true);
+            //IEnumerable<SelectListItem> lojaSelectListItem = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
+            //ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja", categoriapercentual.CODIGOLOJAALTERNATE);
+            #endregion desfazer
+
+            CategoriaPercentual categoriapercentual = new CategoriaPercentual();
+
+            CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel(categoriapercentual, categoriaSelectListItem);
+
+            return View(categoriaPercentualVM);
         }
 
         // GET: /CategoriaPercentual/CategoriaPercentualEdit/5
@@ -91,12 +99,26 @@ namespace Dufry.Comissoes.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult CategoriaPercentualEditConfirmed(int? id)
         {
+
             if (id == null)
             {
                 //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 throw new Exception();
             }
+
             var categoriapercentualToUpdate = _categoriapercentualAppService.Get(id ?? default(int));
+
+            //---------------------------------------------------------------------------------------------
+            //<REVER>
+            //---------------------------------------------------------------------------------------------
+            categoriapercentualToUpdate.ID_CATEGORIA = Convert.ToInt32(Request["CategoriaPercentual.ID_CATEGORIA"]);
+            categoriapercentualToUpdate.ATRIBUTO = Request["CategoriaPercentual.ATRIBUTO"];
+            categoriapercentualToUpdate.CODIGOLOJAALTERNATE = -2;   //<REVER>
+            categoriapercentualToUpdate.PERCENTUAL = Convert.ToDecimal(Request["CategoriaPercentual.PERCENTUAL"]);
+            categoriapercentualToUpdate.DT_INI = Convert.ToDateTime(Request["CategoriaPercentual.DT_INI"]);
+            categoriapercentualToUpdate.DT_FIM = Convert.ToDateTime(Request["CategoriaPercentual.DT_FIM"]);
+            categoriapercentualToUpdate.STATUS = Request["CategoriaPercentual.STATUS"];
+            //---------------------------------------------------------------------------------------------
 
             //---------------------------------------------------------------------------------------------
             //<REVER>
@@ -105,14 +127,10 @@ namespace Dufry.Comissoes.Controllers
             categoriapercentualToUpdate.LAST_MODIFY_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
             //---------------------------------------------------------------------------------------------
 
-            if (TryUpdateModel(categoriapercentualToUpdate, "",
-               new string[] { "CategoriaPercentual_ID_CATEGORIA", "CategoriaPercentual_ATRIBUTO", "CategoriaPercentual_CODIGOLOJAALTERNATE", "CategoriaPercentual_PERCENTUAL", "CategoriaPercentual_DT_INI", "CategoriaPercentual_DT_FIM", "CategoriaPercentual_STATUS", "CategoriaPercentual_LAST_MODIFY_DATE", "CategoriaPercentual_LAST_MODIFY_USERNAME" }))
+            if (ModelState.IsValid)
             {
                 try
                 {
-                    //<RETIRAR>
-                    //categoriapercentualToUpdate.CODIGOLOJAALTERNATE = -2;
-
                     _categoriapercentualAppService.Update(categoriapercentualToUpdate);
 
                     return RedirectToAction("CategoriaPercentualIndex");
@@ -123,6 +141,8 @@ namespace Dufry.Comissoes.Controllers
                     ModelState.AddModelError("", "Erro na alteração. Tente novamente ou, se o problema persistir, entre em contato com o suporte.");
                 }
             }
+
+
 
             //---------------------------------------------------------------------------------------------
             //CategoriaPercentualViewModel categoriapercentualVM = new CategoriaPercentualViewModel(categoriapercentualToUpdate, categoriaSelectListItem);

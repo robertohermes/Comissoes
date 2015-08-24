@@ -14,42 +14,43 @@
     <div class="editorCategoria">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <p>
-            @Html.LabelFor(model => model.ID_CATEGORIA)
-            @Html.DropDownList("ID_CATEGORIA", null, new { @style = "padding-left: 10px;!important" })
-            @Html.ValidationMessageFor(model => model.ID_CATEGORIA, String.Empty, new { @style = "padding-left: 10px;!important" })
+            @Html.LabelFor(model => model.CategoriaPercentual.ID_CATEGORIA)
+            @Html.DropDownListFor(model => model.CategoriaPercentual.ID_CATEGORIA, Model.CategoriasSelectListItem, "--- Selecione ---", new { @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.CategoriaPercentual.ID_CATEGORIA, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
         <p>
-            @Html.LabelFor(model => model.ATRIBUTO)
-            @Html.EditorFor(model => model.ATRIBUTO)
-            @Html.ValidationMessageFor(model => model.ATRIBUTO, String.Empty, new { @style = "padding-left: 10px;!important" })
+            @Html.LabelFor(model => model.CategoriaPercentual.ATRIBUTO)
+            @Html.EditorFor(model => model.CategoriaPercentual.ATRIBUTO)
+            @Html.ValidationMessageFor(model => model.CategoriaPercentual.ATRIBUTO, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+        @*<p>
+            @Html.LabelFor(model => model.CategoriaPercentual.CODIGOLOJAALTERNATE)
+            @Html.DropDownListFor(model => model.CategoriaPercentual.CODIGOLOJAALTERNATE, Model.LojasSelectListItem, "--- Selecione ---", new { @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.CategoriaPercentual.CODIGOLOJAALTERNATE, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>*@
+        <p>
+            @Html.LabelFor(model => model.CategoriaPercentual.PERCENTUAL)
+            @Html.TextBoxFor(model => model.CategoriaPercentual.PERCENTUAL, null, new { @class = "decimal", @Value = Model.CategoriaPercentual.PERCENTUAL.ToString().Equals("0") ? string.Empty : Model.CategoriaPercentual.PERCENTUAL.ToString("0") })
+            @Html.ValidationMessageFor(model => model.CategoriaPercentual.PERCENTUAL, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
         <p>
-            @Html.LabelFor(model => model.CODIGOLOJAALTERNATE)
-            @Html.DropDownList("CODIGOLOJAALTERNATE", null, new { @style = "padding-left: 10px;!important" })
-            @Html.ValidationMessageFor(model => model.CODIGOLOJAALTERNATE, String.Empty, new { @style = "padding-left: 10px;!important" })
+            @Html.LabelFor(model => model.CategoriaPercentual.DT_INI)
+            @Html.TextBoxFor(model => model.CategoriaPercentual.DT_INI, null, new { @class = "dp", @Value = Model.CategoriaPercentual.DT_INI.ToString().Equals("01/01/0001 00:00:00") ? string.Empty : Model.CategoriaPercentual.DT_INI.ToString("dd/MM/yyyy") })
+            @Html.ValidationMessageFor(model => model.CategoriaPercentual.DT_INI, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
         <p>
-            @Html.LabelFor(model => model.PERCENTUAL)
-            @Html.EditorFor(model => model.PERCENTUAL)
-            @Html.ValidationMessageFor(model => model.PERCENTUAL, String.Empty, new { @style = "padding-left: 10px;!important" })
-        </p>
-        <p>
-            @Html.LabelFor(model => model.DT_INI)
-            @Html.EditorFor(model => model.DT_INI)  
-            @Html.ValidationMessageFor(model => model.DT_INI, String.Empty, new { @style = "padding-left: 10px;!important" })
-        </p>
-        <p>
-            @Html.LabelFor(model => model.DT_FIM)
-            @Html.EditorFor(model => model.DT_FIM)
-            @Html.ValidationMessageFor(model => model.DT_FIM, String.Empty, new { @style = "padding-left: 10px;!important" })
+            @Html.LabelFor(model => model.CategoriaPercentual.DT_FIM)
+            @Html.TextBoxFor(model => model.CategoriaPercentual.DT_FIM, null, new { @class = "dp", @Value = Model.CategoriaPercentual.DT_FIM.ToString().Equals("01/01/0001 00:00:00") ? string.Empty : Model.CategoriaPercentual.DT_FIM.ToString("dd/MM/yyyy") })
+            @Html.ValidationMessageFor(model => model.CategoriaPercentual.DT_FIM, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
 
         <p>
-            @Html.LabelFor(model => model.STATUS)
-        @Html.RadioButtonFor(model => model.STATUS, "A") Ativo
-        @Html.RadioButtonFor(model => model.STATUS, "I") Inativo
-        @Html.ValidationMessageFor(model => model.STATUS, String.Empty, new { @style = "padding-left: 127px;!important" })
+            @Html.LabelFor(model => model.CategoriaPercentual.STATUS)
+            @Html.RadioButtonFor(model => model.CategoriaPercentual.STATUS, "A") Ativo
+            @Html.RadioButtonFor(model => model.CategoriaPercentual.STATUS, "I") Inativo
+            @Html.ValidationMessageFor(model => model.CategoriaPercentual.STATUS, String.Empty, new { @style = "padding-left: 127px;!important" })
         </p>
+
     </div>
 
     <input type="submit" id="salvaCategoriaPercentual" value="Salvar e incluir" class="botoesCategoria" />
@@ -57,6 +58,29 @@
 
 }
 
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('.dp').datepicker({
+                showAnim: "scale",
+                showOptions: {
+                    origin: ["top", "right"]
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('.dp').mask('00/00/0000', { 'translation': { 0: { pattern: /[0-9]/ } } });
+            //$('.decimal').mask('000,0000', { reverse: true });
+
+            $("input[name='CategoriaPercentual.DT_FIM']").rules("add", {
+                DateGtEq: $("input[name='CategoriaPercentual.DT_INI']"),
+                messages: { DateGtEq: "A data final da vigência deve ser maior que a data inicial" }
+            });
+        });
+    </script>
+}
 
 
 
