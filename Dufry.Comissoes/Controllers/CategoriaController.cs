@@ -45,18 +45,18 @@ namespace Dufry.Comissoes.Controllers
         {
             try
             {
+                //---------------------------------------------------------------------------------------------
+                //<REVER>
+                //---------------------------------------------------------------------------------------------
+                categoria.CREATED_DATETIME = DateTime.Now;
+                categoria.CREATED_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
+
+                categoria.LAST_MODIFY_DATE = categoria.CREATED_DATETIME;
+                categoria.LAST_MODIFY_USERNAME = categoria.CREATED_USERNAME;
+                //---------------------------------------------------------------------------------------------
+
                 if (ModelState.IsValid)
                 {
-                    //---------------------------------------------------------------------------------------------
-                    //<REVER>
-                    //---------------------------------------------------------------------------------------------
-                    categoria.CREATED_DATETIME = DateTime.Now;
-                    categoria.CREATED_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
-
-                    categoria.LAST_MODIFY_DATE = categoria.CREATED_DATETIME;
-                    categoria.LAST_MODIFY_USERNAME = categoria.CREATED_USERNAME;
-                    //---------------------------------------------------------------------------------------------
-
                     _categoriaAppService.Create(categoria);
                     return RedirectToAction("CategoriaIndex");
                 }

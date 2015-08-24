@@ -55,6 +55,49 @@ namespace Dufry.Comissoes.Controllers
             return View(categoriaPercentualVM);
         }
 
+        // POST: /CategoriaPercentual/CategoriaPercentualCreate
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult CategoriaPercentualCreate(CategoriaPercentual categoriapercentual)
+        {
+            try
+            {
+                //---------------------------------------------------------------------------------------------
+                //<REVER>
+                //---------------------------------------------------------------------------------------------
+                categoriapercentual.ID_CATEGORIA = Convert.ToInt32(Request["CategoriaPercentual.ID_CATEGORIA"]);
+                categoriapercentual.ATRIBUTO = Request["CategoriaPercentual.ATRIBUTO"];
+                categoriapercentual.CODIGOLOJAALTERNATE = -2;   //<REVER>
+                categoriapercentual.PERCENTUAL = Convert.ToDecimal(Request["CategoriaPercentual.PERCENTUAL"]);
+                categoriapercentual.DT_INI = Convert.ToDateTime(Request["CategoriaPercentual.DT_INI"]);
+                categoriapercentual.DT_FIM = Convert.ToDateTime(Request["CategoriaPercentual.DT_FIM"]);
+                categoriapercentual.STATUS = Request["CategoriaPercentual.STATUS"];
+
+                //---------------------------------------------------------------------------------------------
+                //<REVER>
+                //---------------------------------------------------------------------------------------------
+                categoriapercentual.CREATED_DATETIME = DateTime.Now;
+                categoriapercentual.CREATED_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
+
+                categoriapercentual.LAST_MODIFY_DATE = categoriapercentual.CREATED_DATETIME;
+                categoriapercentual.LAST_MODIFY_USERNAME = categoriapercentual.CREATED_USERNAME;
+                //---------------------------------------------------------------------------------------------
+
+                if (ModelState.IsValid)
+                {
+                    _categoriapercentualAppService.Create(categoriapercentual);
+                    return RedirectToAction("CategoriaPercentualIndex");
+                }
+            }
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Erro ao salvar. Tente novamente ou, se o problema persistir, entre em contato com o suporte.");
+            }
+
+            return View(categoriapercentual);
+        }
+
         // GET: /CategoriaPercentual/CategoriaPercentualEdit/5
         public ActionResult CategoriaPercentualEdit(int? id)
         {
