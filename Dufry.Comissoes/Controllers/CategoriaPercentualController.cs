@@ -185,42 +185,44 @@ namespace Dufry.Comissoes.Controllers
                 }
             }
 
-
-
-            //---------------------------------------------------------------------------------------------
-            //CategoriaPercentualViewModel categoriapercentualVM = new CategoriaPercentualViewModel(categoriapercentualToUpdate, categoriaSelectListItem);
-            //return View(categoriaPercentualVM);
-
             return View(categoriapercentualToUpdate);
-            //---------------------------------------------------------------------------------------------
         }
 
         // GET: /CategoriaPercentual/CategoriaPercentualIndex
         //[ControleAcessoAdminFilter]
         public ViewResult CategoriaPercentualIndex(int? page
             , string sortOrder
-            , int idCategoriaFilter, int idCategoriaSearchString
+            , int? idCategoriaSearchString
+            , decimal? percentualSearchString
             , string atributoFilter, string atributoSearchString
-            , decimal codigolojaalternateFilter, decimal codigolojaalternateSearchString
-            , decimal percentualFilter, decimal percentualSearchString
-            , string dtiniFilter, string dtiniSearchString
-            , string dtfimFilter, string dtfimSearchString
             , string statusFilter, string statusSearchString)
         {
+
+            #region populaobjetos
+            var categorias = _categoriaAppService.Find(t => t.STATUS == "A");
+            ViewBag.idCategoriaSearchString = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA", idCategoriaSearchString);
+
+            #region desfazer
+            //var lojas = _lojaAppService.All(true);
+            //ViewBag.codigolojaalternateSearchString = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja", codigolojaalternateSearchString);
+            #endregion desfazer
+            #endregion populaobjetos
+
             #region trataParametrosOrdenacao
             ViewBag.CurrentSort = sortOrder;
             ViewBag.AtributoSortParam = String.IsNullOrEmpty(sortOrder) ? "ATRIBUTO_desc" : "";
-            ViewBag.DescCategoriaSortParam = sortOrder == "DESC_CATEGORIA" ? "DESC_CATEGORIA_desc" : "DESC_CATEGORIA";
-            ViewBag.NomeLojaSortParam = sortOrder == "NomeLoja" ? "NomeLoja_desc" : "NomeLoja";
+            //ViewBag.DescCategoriaSortParam = sortOrder == "DESC_CATEGORIA" ? "DESC_CATEGORIA_desc" : "DESC_CATEGORIA";
+            //ViewBag.NomeLojaSortParam = sortOrder == "NomeLoja" ? "NomeLoja_desc" : "NomeLoja";
             ViewBag.PercentualSortParam = sortOrder == "PERCENTUAL" ? "PERCENTUAL_desc" : "PERCENTUAL";
-            ViewBag.DtIniSortParam = sortOrder == "DT_INI" ? "DT_INI_desc" : "DT_INI";
-            ViewBag.DtFimSortParam = sortOrder == "DT_FIM" ? "DT_FIM_desc" : "DT_FIM";
+            //ViewBag.DtIniSortParam = sortOrder == "DT_INI" ? "DT_INI_desc" : "DT_INI";
+            //ViewBag.DtFimSortParam = sortOrder == "DT_FIM" ? "DT_FIM_desc" : "DT_FIM";
             ViewBag.StatusSortParam = sortOrder == "STATUS" ? "STATUS_desc" : "STATUS";
             #endregion trataParametrosOrdenacao
 
             #region trataParametrosBusca
 
-            ViewBag.idCategoriaFilter = idCategoriaSearchString;
+            int idCategoriaFilter = idCategoriaSearchString.GetValueOrDefault();
+            ViewBag.idCategoriaFilter = idCategoriaFilter;
 
             if (String.IsNullOrEmpty(atributoSearchString))
             {
@@ -228,21 +230,26 @@ namespace Dufry.Comissoes.Controllers
             }
             ViewBag.atributoFilter = atributoSearchString;
 
-            ViewBag.codigolojaalternateFilter = codigolojaalternateSearchString;
+            #region desfazer
+            //int codigolojaalternateFilter = codigolojaalternateSearchString.GetValueOrDefault();
+            //ViewBag.codigolojaalternateFilter = codigolojaalternateFilter;
+            #endregion desfazer
 
-            ViewBag.percentualFilter = percentualSearchString;
+            decimal percentualFilter = percentualSearchString.GetValueOrDefault();
+            ViewBag.percentualFilter = percentualFilter;
 
-            if (String.IsNullOrEmpty(dtiniSearchString))
-            {
-                dtiniSearchString = "";
-            }
-            ViewBag.dtiniFilter = dtiniSearchString;
 
-            if (String.IsNullOrEmpty(dtfimSearchString))
-            {
-                dtfimSearchString = "";
-            }
-            ViewBag.dtfimFilter = dtfimSearchString;
+            //if (String.IsNullOrEmpty(dtiniSearchString))
+            //{
+            //    dtiniSearchString = "";
+            //}
+            //ViewBag.dtiniFilter = dtiniSearchString;
+
+            //if (String.IsNullOrEmpty(dtfimSearchString))
+            //{
+            //    dtfimSearchString = "";
+            //}
+            //ViewBag.dtfimFilter = dtfimSearchString;
 
             if (String.IsNullOrEmpty(statusSearchString))
             {
@@ -254,22 +261,31 @@ namespace Dufry.Comissoes.Controllers
 
             IEnumerable<CategoriaPercentual> categoriapercentuals = new List<CategoriaPercentual>();
 
-            if (idCategoriaSearchString == 0 && String.IsNullOrEmpty(atributoSearchString) 
-                && codigolojaalternateSearchString == 0 && percentualSearchString == 0
-                && String.IsNullOrEmpty(dtiniSearchString) && String.IsNullOrEmpty(dtfimSearchString)
+            //if (idCategoriaSearchString == 0 && String.IsNullOrEmpty(atributoSearchString) 
+            //    && codigolojaalternateSearchString == 0 && percentualSearchString == 0
+            //    && String.IsNullOrEmpty(dtiniSearchString) && String.IsNullOrEmpty(dtfimSearchString)
+            //    && String.IsNullOrEmpty(statusSearchString))
+            if (idCategoriaFilter == 0 && String.IsNullOrEmpty(atributoSearchString)
+                && percentualFilter == 0
                 && String.IsNullOrEmpty(statusSearchString))
             {
                 categoriapercentuals = _categoriapercentualAppService.All();
             }
             else
             {
-                categoriapercentuals = _categoriapercentualAppService.Find( s => s.ID_CATEGORIA.Equals(idCategoriaSearchString) 
-                                           && s.ATRIBUTO.Contains(atributoSearchString)
-                                           && s.CODIGOLOJAALTERNATE.Equals(codigolojaalternateSearchString)
-                                           && s.PERCENTUAL.Equals(percentualSearchString)
-                                           && s.DT_INI.Equals(dtiniSearchString)
-                                           && s.DT_FIM.Equals(dtfimSearchString)
-                                           && s.STATUS.Contains(statusSearchString));
+                //categoriapercentuals = _categoriapercentualAppService.Find( s => s.ID_CATEGORIA.Equals(idCategoriaSearchString) 
+                //                           && s.ATRIBUTO.Contains(atributoSearchString)
+                //                           && s.CODIGOLOJAALTERNATE.Equals(codigolojaalternateSearchString)
+                //                           && s.PERCENTUAL.Equals(percentualSearchString)
+                //                           && s.DT_INI.Equals(dtiniSearchString)
+                //                           && s.DT_FIM.Equals(dtfimSearchString)
+                //                           && s.STATUS.Contains(statusSearchString));
+
+                categoriapercentuals = _categoriapercentualAppService.Find(s => s.ID_CATEGORIA.Equals(idCategoriaFilter)
+                                            && s.ATRIBUTO.Contains(atributoSearchString)
+                                            && s.PERCENTUAL.Equals(percentualFilter)
+                                            && s.STATUS.Contains(statusSearchString));
+
             }
 
             #region ordenacao
