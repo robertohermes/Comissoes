@@ -602,6 +602,42 @@ a.create
 }
 
 
+/* dufry Tables */
+.dufry table
+{
+	border: 1px solid #000;
+	border-collapse: collapse;
+	color: #000;
+	min-width: 500px;           /*<<<<< AQUI*/
+	width: 80% !important;                /*<<<<< AQUI*/
+}
+
+.dufry tr
+{
+	border: 1px solid #000;
+	line-height: 25px;          /*<<<<< AQUI*/
+}
+
+.dufry th
+{
+	background-color: #c2101c;      /*<<<<< AQUI*/
+	color: #ffffff;
+	font-size: 13px;            /*<<<<< AQUI*/
+    /*font-size: 9px;*/                 /*<<<<< AQUI*/
+	text-align: left;
+}
+
+.dufry th, td
+{
+	padding-left: 5px;
+}
+
+.dufry tr:hover
+{
+	background-color: #808080;  /*<<<<< AQUI*/
+    color: #ffffff;
+}
+
 
 /************************************************************************************/
 
