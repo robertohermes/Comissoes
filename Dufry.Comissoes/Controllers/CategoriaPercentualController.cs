@@ -10,6 +10,7 @@ using Dufry.Comissoes.Filters;
 using Dufry.Comissoes.ViewModels;
 using System.Net;
 using System.Data.Entity.Infrastructure;
+using Dufry.Comissoes.Controllers.Helpers;
 
 namespace Dufry.Comissoes.Controllers
 {
@@ -194,8 +195,11 @@ namespace Dufry.Comissoes.Controllers
             , string sortOrder
             , int? idCategoriaSearchString
             , decimal? percentualSearchString
-            , string atributoFilter, string atributoSearchString
-            , string statusFilter, string statusSearchString)
+            //, decimal ? codigolojaalternateSearchString
+            , string atributoSearchString
+            , string dtiniSearchString
+            , string dtfimSearchString
+            , string statusSearchString)
         {
 
             #region populaobjetos
@@ -221,72 +225,64 @@ namespace Dufry.Comissoes.Controllers
 
             #region trataParametrosBusca
 
-            int idCategoriaFilter = idCategoriaSearchString.GetValueOrDefault();
-            ViewBag.idCategoriaFilter = idCategoriaFilter;
+            var predicate = PredicateBuilder.True<CategoriaPercentual>();
+            //atributoSearchString = "";
 
-            if (String.IsNullOrEmpty(atributoSearchString))
+            if (idCategoriaSearchString.HasValue)
             {
-                atributoSearchString = "";
+                int idCategoriaFilter = idCategoriaSearchString.GetValueOrDefault();
+                predicate = predicate.And(i => i.ID_CATEGORIA.Equals(idCategoriaFilter));
+                ViewBag.idCategoriaFilter = idCategoriaFilter;
             }
-            ViewBag.atributoFilter = atributoSearchString;
 
+            if (!String.IsNullOrEmpty(atributoSearchString))
+            {
+                predicate = predicate.And(i => i.ATRIBUTO.Contains(atributoSearchString));
+                ViewBag.atributoFilter = atributoSearchString;
+            }
+            
             #region desfazer
-            //int codigolojaalternateFilter = codigolojaalternateSearchString.GetValueOrDefault();
-            //ViewBag.codigolojaalternateFilter = codigolojaalternateFilter;
+            //if (codigolojaalternateSearchString.HasValue)
+            //{
+            //    int codigolojaalternateFilter = codigolojaalternateSearchString.GetValueOrDefault()
+            //    predicate = predicate.And(i => i.CODIGOLOJAALTERNATE.Equals(codigolojaalternateFilter));
+            //    ViewBag.codigolojaalternateFilter = codigolojaalternateFilter;
+            //}
             #endregion desfazer
 
-            decimal percentualFilter = percentualSearchString.GetValueOrDefault();
-            ViewBag.percentualFilter = percentualFilter;
-
-
-            //if (String.IsNullOrEmpty(dtiniSearchString))
-            //{
-            //    dtiniSearchString = "";
-            //}
-            //ViewBag.dtiniFilter = dtiniSearchString;
-
-            //if (String.IsNullOrEmpty(dtfimSearchString))
-            //{
-            //    dtfimSearchString = "";
-            //}
-            //ViewBag.dtfimFilter = dtfimSearchString;
-
-            if (String.IsNullOrEmpty(statusSearchString))
+            if (percentualSearchString.HasValue)
             {
-                statusSearchString = "";
+                decimal percentualFilter = percentualSearchString.GetValueOrDefault();
+                predicate = predicate.And(i => i.PERCENTUAL.Equals(percentualFilter));
+                ViewBag.percentualFilter = percentualFilter;
             }
-            ViewBag.statusFilter = statusSearchString;
+
+            if (!String.IsNullOrEmpty(dtiniSearchString))
+            {
+                DateTime dtiniFilter = Convert.ToDateTime(dtiniSearchString);
+                predicate = predicate.And(i => i.DT_INI.Equals(dtiniFilter));
+                ViewBag.dtiniFilter = dtiniFilter;
+            }
+
+            if (!String.IsNullOrEmpty(dtfimSearchString))
+            {
+                DateTime dtfimFilter = Convert.ToDateTime(dtfimSearchString);
+                predicate = predicate.And(i => i.DT_FIM.Equals(dtfimFilter));
+                ViewBag.dtfimFilter = dtfimFilter;
+            }
+
+            if (!String.IsNullOrEmpty(statusSearchString))
+            {
+                predicate = predicate.And(i => i.STATUS.Equals(statusSearchString));
+                ViewBag.statusFilter = statusSearchString;
+            }
 
             #endregion trataParametrosBusca
 
             IEnumerable<CategoriaPercentual> categoriapercentuals = new List<CategoriaPercentual>();
 
-            //if (idCategoriaSearchString == 0 && String.IsNullOrEmpty(atributoSearchString) 
-            //    && codigolojaalternateSearchString == 0 && percentualSearchString == 0
-            //    && String.IsNullOrEmpty(dtiniSearchString) && String.IsNullOrEmpty(dtfimSearchString)
-            //    && String.IsNullOrEmpty(statusSearchString))
-            if (idCategoriaFilter == 0 && String.IsNullOrEmpty(atributoSearchString)
-                && percentualFilter == 0
-                && String.IsNullOrEmpty(statusSearchString))
-            {
-                categoriapercentuals = _categoriapercentualAppService.All();
-            }
-            else
-            {
-                //categoriapercentuals = _categoriapercentualAppService.Find( s => s.ID_CATEGORIA.Equals(idCategoriaSearchString) 
-                //                           && s.ATRIBUTO.Contains(atributoSearchString)
-                //                           && s.CODIGOLOJAALTERNATE.Equals(codigolojaalternateSearchString)
-                //                           && s.PERCENTUAL.Equals(percentualSearchString)
-                //                           && s.DT_INI.Equals(dtiniSearchString)
-                //                           && s.DT_FIM.Equals(dtfimSearchString)
-                //                           && s.STATUS.Contains(statusSearchString));
-
-                categoriapercentuals = _categoriapercentualAppService.Find(s => s.ID_CATEGORIA.Equals(idCategoriaFilter)
-                                            && s.ATRIBUTO.Contains(atributoSearchString)
-                                            && s.PERCENTUAL.Equals(percentualFilter)
-                                            && s.STATUS.Contains(statusSearchString));
-
-            }
+            //categoriapercentuals = _categoriapercentualAppService.All();
+            categoriapercentuals = _categoriapercentualAppService.Find(predicate);
 
             #region ordenacao
             switch (sortOrder)

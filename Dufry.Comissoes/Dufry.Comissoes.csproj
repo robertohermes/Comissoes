@@ -180,6 +180,7 @@
     <Compile Include="Controllers\DSRController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\ColaboradorController.cs" />
+    <Compile Include="Controllers\Helpers\PredicateBuilder.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\LojaController.cs" />
     <Compile Include="Controllers\FilialController.cs" />
@@ -419,7 +420,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dufry.Comissoes.Application\Dufry.Comissoes.Application.csproj">

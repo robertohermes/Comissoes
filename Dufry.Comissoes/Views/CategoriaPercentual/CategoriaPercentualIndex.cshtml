@@ -15,9 +15,10 @@
     {
         <div class="editorCategoria">
             <p><label for="idCategoriaSearchString">Categoria</label>@Html.DropDownList("idCategoriaSearchString", "--- Selecione ---")</p>
-            <p><label for="atributoSearchString">Atributo</label>@Html.TextBox("atributoSearchString", ViewBag.atributoFilter as string, new { maxlength = "255" })</p>
-            @*<p><label for="percentualSearchString">Percentual de Comissão</label>@Html.TextBox("percentualSearchString", ViewBag.percentualFilter as string, new { maxlength = "255" })</p>*@
-
+            <p><label for="atributoSearchString">Atributo</label>@Html.TextBox("atributoSearchString", null, new { maxlength = "255" })</p>
+            <p><label for="percentualSearchString">Percentual de Comissão</label>@Html.TextBox("percentualSearchString", null, new { @class = "decimal" })</p>
+            <p><label for="dtiniSearchString">Data inicial da vigência</label>@Html.TextBox("dtiniSearchString", null, new { @class = "dp" })</p>
+            <p><label for="dtfimSearchString">Data final da vigência</label>@Html.TextBox("dtfimSearchString", null, new { @class = "dp" })</p>
             <p>
                 <label for="statusSearchString">Status</label>      @Html.RadioButton("statusSearchString", "A", true, ViewBag.StatusFilter as string)Ativo
                 @Html.RadioButton("statusSearchString", "I", ViewBag.StatusFilter as string)Inativo
@@ -51,7 +52,8 @@
             <th>
                 @Html.ActionLink("Atributo", "CategoriaPercentualIndex", "CategoriaPercentual"
                 , new
-                {   sortOrder = ViewBag.AtributoSortParam,
+                {
+                    sortOrder = ViewBag.AtributoSortParam,
                     atributoSearchString = ViewBag.atributoFilter,
                     //percentualSearchString = ViewBag.percentualFilter,
                     statusSearchString = ViewBag.StatusFilter
@@ -64,7 +66,7 @@
                 {
                     sortOrder = ViewBag.PercentualSortParam,
                     atributoSearchString = ViewBag.atributoFilter,
-                 //   percentualSearchString = ViewBag.percentualFilter,
+                    //   percentualSearchString = ViewBag.percentualFilter,
                     statusSearchString = ViewBag.StatusFilter
                 }
                 , new { @class = "tableheadlink" })
@@ -94,9 +96,10 @@
             <th>
                 @Html.ActionLink("Status", "CategoriaPercentualIndex", "CategoriaPercentual"
                 , new
-                {   sortOrder = ViewBag.StatusSortParam,
+                {
+                    sortOrder = ViewBag.StatusSortParam,
                     atributoSearchString = ViewBag.atributoFilter,
-                  //  percentualSearchString = ViewBag.percentualFilter,                    
+                    //  percentualSearchString = ViewBag.percentualFilter,
                     statusSearchString = ViewBag.StatusFilter
                 }
                 , new { @class = "tableheadlink" })
@@ -150,7 +153,28 @@
     {
         sortOrder = ViewBag.CurrentSort,
         atributoSearchString = ViewBag.atributoFilter,
-        //percentualSearchString = ViewBag.percentualFilter,                            
+        //percentualSearchString = ViewBag.percentualFilter,
         statusSearchString = ViewBag.StatusFilter,
         page
     }))
+
+
+    @section Scripts {
+        <script type="text/javascript">
+            $(function () {
+                $('.dp').datepicker({
+                    showAnim: "scale",
+                    showOptions: {
+                        origin: ["top", "right"]
+                    }
+                });
+            });
+
+            $(document).ready(function () {
+                $('.dp').mask('00/00/0000', { 'translation': { 0: { pattern: /[0-9]/ } } });
+                //$('.decimal').mask('000,0000', { reverse: true });
+
+            });
+        </script>
+    }
+
