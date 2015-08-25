@@ -11,6 +11,7 @@ using Dufry.Comissoes.ViewModels;
 using System.Net;
 using System.Data.Entity.Infrastructure;
 using Dufry.Comissoes.Controllers.Helpers;
+using System.Globalization;
 
 namespace Dufry.Comissoes.Controllers
 {
@@ -259,14 +260,14 @@ namespace Dufry.Comissoes.Controllers
 
             if (!String.IsNullOrEmpty(dtiniSearchString))
             {
-                DateTime dtiniFilter = Convert.ToDateTime(dtiniSearchString);
+                DateTime dtiniFilter = DateTime.ParseExact(dtiniSearchString, "dd/MM/yyyy", new CultureInfo("pt-BR"));
                 predicate = predicate.And(i => i.DT_INI.Equals(dtiniFilter));
                 ViewBag.dtiniFilter = dtiniFilter;
             }
 
             if (!String.IsNullOrEmpty(dtfimSearchString))
             {
-                DateTime dtfimFilter = Convert.ToDateTime(dtfimSearchString);
+                DateTime dtfimFilter = DateTime.ParseExact(dtfimSearchString, "dd/MM/yyyy", new CultureInfo("pt-BR"));
                 predicate = predicate.And(i => i.DT_FIM.Equals(dtfimFilter));
                 ViewBag.dtfimFilter = dtfimFilter;
             }
@@ -335,6 +336,55 @@ namespace Dufry.Comissoes.Controllers
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(categoriapercentuals.ToPagedList(pageNumber, pageSize));
+        }
+
+        //
+        // GET: /CategoriaPercentual/CategoriaPercentualDelete/5
+        public ActionResult CategoriaPercentualDelete(int? id, bool? saveChangesError = false)
+        {
+            if (id == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //throw new InvalidOperationException("Something very bad happened while doing important stuff");
+                throw new Exception();
+            }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Erro na exclusão. Tente novamente ou, se o problema persistir, entre em contato com o suporte.";
+            }
+
+            var categoriapercentual = _categoriapercentualAppService.Get(id ?? default(int));
+
+            if (categoriapercentual == null)
+            {
+                //return HttpNotFound();
+                throw new Exception();
+            }
+
+            return View(categoriapercentual);
+        }
+
+        //POST: /CategoriaPercentual/CategoriaPercentualDelete/5
+        [HttpPost, ActionName("CategoriaPercentualDelete")]
+        public ActionResult CategoriaPercentualDeleteConfirmed(int id)
+        {
+            try
+            {
+                var categoriapercentual = _categoriapercentualAppService.Get(id);
+
+                if (categoriapercentual.PlanoCategorias.Count() == 0)
+                {
+                    _categoriapercentualAppService.Remove(categoriapercentual);
+                }
+            }
+            catch (RetryLimitExceededException/* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                return RedirectToAction("CategoriaPercentualDelete", new { id = id, saveChangesError = true });
+            }
+            return RedirectToAction("CategoriaPercentualIndex");
+
         }
 
         protected override void Dispose(bool disposing)

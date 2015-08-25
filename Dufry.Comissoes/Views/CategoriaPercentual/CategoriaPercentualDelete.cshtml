@@ -1,0 +1,52 @@
+﻿@model CategoriaPercentual
+
+@{
+    ViewBag.Title = "Exclusão de Categorias e Percentuais por Loja";
+}
+
+@{
+    string confirmMessage = "Tem certeza que deseja excluir esse percentual da categoria " + Html.DisplayFor(model => model.Categoria.DESC_CATEGORIA) + " ?";
+    bool exibeBotaoExcluir = true;
+
+    if (Model.PlanoCategorias.Count() > 0)
+    {
+        confirmMessage = "O percentual da categoria " + Html.DisplayFor(model => model.Categoria.DESC_CATEGORIA) + " não pode ser excluído, por haver Plano de Categoria associado. Exclua todos os respectivos planos de categoria primeiro.";
+        exibeBotaoExcluir = false;
+    }    
+}
+
+
+
+<h1 class="headerForm">@ViewBag.Title</h1>
+<p class="errorMessage">@ViewBag.ErrorMessage</p>
+
+
+
+<p class="confirmMessage">@confirmMessage</p>
+
+<div>   
+
+    <div>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.Categoria.DESC_CATEGORIA)</label><label>@Html.DisplayFor(model => model.Categoria.DESC_CATEGORIA)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.ATRIBUTO)</label><label>@Html.DisplayFor(model => model.ATRIBUTO)</label></p>
+        @*<p><label class="caption">@Html.DisplayNameFor(model => model.CODIGOLOJAALTERNATE)</label><label>@Html.DisplayFor(model => model.CODIGOLOJAALTERNATE)</label></p>*@
+        <p><label class="caption">@Html.DisplayNameFor(model => model.PERCENTUAL)</label><label>@Html.DisplayFor(model => model.PERCENTUAL)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.DT_INI)</label><label>@Html.DisplayFor(model => model.DT_INI)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.DT_FIM)</label><label>@Html.DisplayFor(model => model.DT_FIM)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.STATUS) </label><label>@Html.DisplayFor(model => model.STATUS)</label></p>
+    </div>
+
+    <p>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            
+            if (exibeBotaoExcluir)
+            {
+                <input type="submit" value="Excluir" class="botoesCategoria" />                    
+            }
+            
+            @Html.ActionLink("Voltar", "CategoriaPercentualIndex", "CategoriaPercentual", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
+        }
+    </p>
+</div>
