@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Dufry.Comissoes.Application.Interfaces;
 using PagedList;
 using Dufry.Comissoes.Domain.Entities;
 using Dufry.Comissoes.Filters;
 using Dufry.Comissoes.ViewModels;
-using System.Net;
 using System.Data.Entity.Infrastructure;
 using Dufry.Comissoes.Controllers.Helpers;
 using System.Globalization;

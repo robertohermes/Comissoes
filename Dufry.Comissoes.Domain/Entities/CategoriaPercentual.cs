@@ -50,7 +50,7 @@ namespace Dufry.Comissoes.Domain.Entities
 
 
         [Display(Name = "Status")]
-        [Required(ErrorMessage = "O status do percentual é obrigatório")]
+        [Required(ErrorMessage = "O status é obrigatório")]
         public string STATUS { get; set; }
         public DateTime CREATED_DATETIME { get; set; }
         public string CREATED_USERNAME { get; set; }

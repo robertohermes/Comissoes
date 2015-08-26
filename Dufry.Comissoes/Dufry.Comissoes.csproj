@@ -380,6 +380,9 @@
     <Content Include="Views\Home\Main.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Plano\PlanoEdit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -411,6 +414,7 @@
     <Content Include="Views\CategoriaPercentual\CategoriaPercentualIndex.cshtml" />
     <Content Include="Views\CategoriaPercentual\CategoriaPercentualCreate.cshtml" />
     <Content Include="Views\CategoriaPercentual\CategoriaPercentualEdit.cshtml" />
+    <Content Include="Views\CategoriaPercentual\CategoriaPercentualDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
