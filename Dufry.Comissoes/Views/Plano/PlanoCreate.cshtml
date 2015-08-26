@@ -1,0 +1,63 @@
+﻿@model PlanoViewModel
+
+@{
+    ViewBag.Title = "Inclusão de Planos de Comissões";
+}
+
+<h1 class="headerForm">@ViewBag.Title</h1>
+
+@using (Html.BeginForm())
+{
+    @*@Html.AntiForgeryToken()*@
+
+    <div class="editorCategoria">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <p>
+            @Html.LabelFor(model => model.Plano.DESC_PLANO)
+            @Html.EditorFor(model => model.Plano.DESC_PLANO)
+            @Html.ValidationMessageFor(model => model.Plano.DESC_PLANO, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Plano.DT_INI)
+            @Html.TextBoxFor(model => model.Plano.DT_INI, null, new { @class = "dp", @Value = Model.Plano.DT_INI.ToString().Equals("01/01/0001 00:00:00") ? string.Empty : Model.Plano.DT_INI.ToString("dd/MM/yyyy") })
+            @Html.ValidationMessageFor(model => model.Plano.DT_INI, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Plano.DT_FIM)
+            @Html.TextBoxFor(model => model.Plano.DT_FIM, null, new { @class = "dp", @Value = Model.Plano.DT_FIM.ToString().Equals("01/01/0001 00:00:00") ? string.Empty : Model.Plano.DT_FIM.ToString("dd/MM/yyyy") })
+            @Html.ValidationMessageFor(model => model.Plano.DT_FIM, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.Plano.STATUS)
+            @Html.RadioButtonFor(model => model.Plano.STATUS, "A") Ativo
+            @Html.RadioButtonFor(model => model.Plano.STATUS, "I") Inativo
+            @Html.ValidationMessageFor(model => model.Plano.STATUS, String.Empty, new { @style = "padding-left: 127px;!important" })
+        </p>
+    </div>
+
+    <input type="submit" id="salvaPlano" value="Salvar e Incluir" class="botoesCategoria" />
+    @Html.ActionLink("Voltar", "PlanoIndex", "Plano", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
+
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('.dp').datepicker({
+                showAnim: "scale",
+                showOptions: {
+                    origin: ["top", "right"]
+            }
+            });
+        });
+
+        $(document).ready(function(){  
+            $("input[name='Plano.DT_FIM']").rules("add", {
+                DateGtEq: $("input[name='Plano.DT_INI']"),
+                messages: { DateGtEq: "A data final da vigência deve ser maior que a data inicial" }
+            });
+        });
+    </script> 
+}

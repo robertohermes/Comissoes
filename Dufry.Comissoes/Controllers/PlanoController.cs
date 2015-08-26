@@ -25,6 +25,55 @@ namespace Dufry.Comissoes.Controllers
             _controleacessoAppService = controleacessoAppService;
         }
 
+        // GET: /Plano/PlanoCreate
+        public ActionResult PlanoCreate()
+        {
+            Plano plano = new Plano();
+
+            PlanoViewModel planoVM = new PlanoViewModel(plano);
+
+            return View(planoVM);
+        }
+
+        // POST: /Plano/PlanoCreate
+        [HttpPost, ActionName("PlanoCreate")]
+        //[ValidateAntiForgeryToken]
+        public ActionResult PlanoCreateConfirmed(Plano plano)
+        {
+            try
+            {
+                //---------------------------------------------------------------------------------------------
+                //<REVER>
+                //---------------------------------------------------------------------------------------------
+                plano.DESC_PLANO = Request["Plano.DESC_PLANO"];
+                plano.DT_INI = Convert.ToDateTime(Request["Plano.DT_INI"]);
+                plano.DT_FIM = Convert.ToDateTime(Request["Plano.DT_FIM"]);
+                plano.STATUS = Request["Plano.STATUS"];
+                //---------------------------------------------------------------------------------------------
+                //<REVER>
+                //---------------------------------------------------------------------------------------------
+                plano.CREATED_DATETIME = DateTime.Now;
+                plano.CREATED_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
+
+                plano.LAST_MODIFY_DATE = plano.CREATED_DATETIME;
+                plano.LAST_MODIFY_USERNAME = plano.CREATED_USERNAME;
+                //---------------------------------------------------------------------------------------------
+
+                if (ModelState.IsValid)
+                {
+                    _planoAppService.Create(plano);
+                    return RedirectToAction("PlanoIndex");
+                }
+            }
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Erro ao salvar. Tente novamente ou, se o problema persistir, entre em contato com o suporte.");
+            }
+
+            return View(plano);
+        }
+
 
         // GET: /Plano/PlanoEdit/5
         public ActionResult PlanoEdit(int? id)
@@ -51,7 +100,7 @@ namespace Dufry.Comissoes.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("PlanoEdit")]
         //[ValidateAntiForgeryToken]
-        public ActionResult PlanoConfirmed(int? id)
+        public ActionResult PlanoEditConfirmed(int? id)
         {
 
             if (id == null)
@@ -94,6 +143,14 @@ namespace Dufry.Comissoes.Controllers
             }
 
             return View(planoToUpdate);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _planoAppService.Dispose();
+            _controleacessoAppService.Dispose();
+
+            base.Dispose(disposing);
         }
 
     }

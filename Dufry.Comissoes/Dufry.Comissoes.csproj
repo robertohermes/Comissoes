@@ -415,6 +415,7 @@
     <Content Include="Views\CategoriaPercentual\CategoriaPercentualCreate.cshtml" />
     <Content Include="Views\CategoriaPercentual\CategoriaPercentualEdit.cshtml" />
     <Content Include="Views\CategoriaPercentual\CategoriaPercentualDelete.cshtml" />
+    <Content Include="Views\Plano\PlanoCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

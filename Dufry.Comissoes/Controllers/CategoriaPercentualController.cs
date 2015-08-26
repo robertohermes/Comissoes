@@ -56,9 +56,9 @@ namespace Dufry.Comissoes.Controllers
         }
 
         // POST: /CategoriaPercentual/CategoriaPercentualCreate
-        [HttpPost]
+        [HttpPost, ActionName("CategoriaPercentualCreate")]
         //[ValidateAntiForgeryToken]
-        public ActionResult CategoriaPercentualCreate(CategoriaPercentual categoriapercentual)
+        public ActionResult CategoriaPercentualCreateConfirmed(CategoriaPercentual categoriapercentual)
         {
             try
             {
