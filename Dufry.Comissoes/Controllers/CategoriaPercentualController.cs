@@ -197,7 +197,7 @@ namespace Dufry.Comissoes.Controllers
             ViewBag.CurrentSort = sortOrder;
             ViewBag.AtributoSortParam = String.IsNullOrEmpty(sortOrder) ? "ATRIBUTO_desc" : "";
             ViewBag.DescCategoriaSortParam = sortOrder == "DESC_CATEGORIA" ? "DESC_CATEGORIA_desc" : "DESC_CATEGORIA";
-            ViewBag.NomeLojaSortParam = sortOrder == "NomeLoja" ? "NomeLoja_desc" : "NomeLoja";
+            ViewBag.CodigoLojaAlternateSortParam = sortOrder == "NomeLoja" ? "NomeLoja_desc" : "NomeLoja";
             ViewBag.PercentualSortParam = sortOrder == "PERCENTUAL" ? "PERCENTUAL_desc" : "PERCENTUAL";
             ViewBag.DtIniSortParam = sortOrder == "DT_INI" ? "DT_INI_desc" : "DT_INI";
             ViewBag.DtFimSortParam = sortOrder == "DT_FIM" ? "DT_FIM_desc" : "DT_FIM";
@@ -260,7 +260,6 @@ namespace Dufry.Comissoes.Controllers
 
             IEnumerable<CategoriaPercentual> categoriapercentuals = new List<CategoriaPercentual>();
 
-            //categoriapercentuals = _categoriapercentualAppService.All();
             categoriapercentuals = _categoriapercentualAppService.Find(predicate);
 
             #region ordenacao

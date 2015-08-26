@@ -44,6 +44,7 @@
                 , new
                 {
                     sortOrder = ViewBag.DescCategoriaSortParam,
+                    idCategoriaSearchString = ViewBag.idCategoriaFilter,
                     atributoSearchString = ViewBag.atributoFilter,
                     codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
                     percentualSearchString = ViewBag.percentualFilter,
@@ -58,6 +59,22 @@
                 , new
                 {
                     sortOrder = ViewBag.AtributoSortParam,
+                    idCategoriaSearchString = ViewBag.idCategoriaFilter,
+                    atributoSearchString = ViewBag.atributoFilter,
+                    codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+                    percentualSearchString = ViewBag.percentualFilter,
+                    dtiniSearchString = ViewBag.dtiniFilter,
+                    dtfimSearchString = ViewBag.dtfimFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
+                , new { @class = "tableheadlink" })
+            </th>
+            <th>
+                @Html.ActionLink("Loja", "CategoriaPercentualIndex", "CategoriaPercentual"
+                , new
+                {
+                    sortOrder = ViewBag.CodigoLojaAlternateSortParam,
+                    idCategoriaSearchString = ViewBag.idCategoriaFilter,
                     atributoSearchString = ViewBag.atributoFilter,
                     codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
                     percentualSearchString = ViewBag.percentualFilter,
@@ -72,6 +89,7 @@
                 , new
                 {
                     sortOrder = ViewBag.PercentualSortParam,
+                    idCategoriaSearchString = ViewBag.idCategoriaFilter,
                     atributoSearchString = ViewBag.atributoFilter,
                     codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
                     percentualSearchString = ViewBag.percentualFilter,
@@ -86,6 +104,7 @@
                 , new
                 {
                     sortOrder = ViewBag.DtIniSortParam,
+                    idCategoriaSearchString = ViewBag.idCategoriaFilter,
                     atributoSearchString = ViewBag.atributoFilter,
                     codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
                     percentualSearchString = ViewBag.percentualFilter,
@@ -100,6 +119,7 @@
                 , new
                 {
                     sortOrder = ViewBag.DtFimSortParam,
+                    idCategoriaSearchString = ViewBag.idCategoriaFilter,
                     atributoSearchString = ViewBag.atributoFilter,
                     codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
                     percentualSearchString = ViewBag.percentualFilter,
@@ -114,6 +134,7 @@
                 , new
                 {
                     sortOrder = ViewBag.StatusSortParam,
+                    idCategoriaSearchString = ViewBag.idCategoriaFilter,
                     atributoSearchString = ViewBag.atributoFilter,
                     codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
                     percentualSearchString = ViewBag.percentualFilter,
@@ -135,6 +156,9 @@
                 </td>
                 <td>
                     @Html.ActionLink(item.ATRIBUTO, "CategoriaPercentualEdit", "CategoriaPercentual", new { id = item.ID_CATEGORIA_PERCENTUAL }, new { @class = "tablerowlink" })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CODIGOLOJAALTERNATE)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PERCENTUAL)%
@@ -171,6 +195,7 @@
     , new
     {
         sortOrder = ViewBag.CurrentSort,
+        idCategoriaSearchString = ViewBag.idCategoriaFilter,
         atributoSearchString = ViewBag.atributoFilter,
         codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
         percentualSearchString = ViewBag.percentualFilter,
