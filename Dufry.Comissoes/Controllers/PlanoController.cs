@@ -16,13 +16,17 @@ namespace Dufry.Comissoes.Controllers
     [ControleAcessoAdminFilter]
     public class PlanoController : Controller
     {
-        private readonly IPlanoAppService _planoAppService;
         private readonly IControleAcessoAppService _controleacessoAppService;
+        private readonly IPlanoAppService _planoAppService;
+        private readonly ICategoriaAppService _categoriaAppService;
+        private readonly ILojaAppService _lojaAppService;
 
-        public PlanoController(IPlanoAppService planoAppService, IControleAcessoAppService controleacessoAppService)
+        public PlanoController(IControleAcessoAppService controleacessoAppService, IPlanoAppService planoAppService, ICategoriaAppService categoriaAppService, ILojaAppService lojaAppService)
         {
-            _planoAppService = planoAppService;
             _controleacessoAppService = controleacessoAppService;
+            _planoAppService = planoAppService;
+            _categoriaAppService = categoriaAppService;
+            _lojaAppService = lojaAppService;
         }
 
         // GET: /Plano/PlanoCreate
@@ -30,7 +34,15 @@ namespace Dufry.Comissoes.Controllers
         {
             Plano plano = new Plano();
 
-            PlanoViewModel planoVM = new PlanoViewModel(plano);
+            var categorias = _categoriaAppService.Find(t => t.STATUS == "A");
+            IEnumerable<SelectListItem> categoriaSelectListItem = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA");
+            ViewBag.ID_CATEGORIA = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA");
+
+            var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1"); ;
+            IEnumerable<SelectListItem> lojaSelectListItem = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
+            ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
+
+            PlanoViewModel planoVM = new PlanoViewModel(plano, categoriaSelectListItem, lojaSelectListItem);
 
             return View(planoVM);
         }

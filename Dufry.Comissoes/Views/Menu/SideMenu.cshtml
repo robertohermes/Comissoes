@@ -23,7 +23,7 @@
         {
             <li>@Html.Raw(string.Format("<a href=\"{0}\">Categorias</a>", Url.Content("~/Categoria/CategoriaIndex?statusSearchString=A")))</li>
             <li>@Html.Raw(string.Format("<a href=\"{0}\">Categorias e percentuais por loja</a>", Url.Content("~/CategoriaPercentual/CategoriaPercentualIndex?statusSearchString=A")))</li>
-            <li>Planos de comissões e hierarquias</li>
+            <li>@Html.Raw(string.Format("<a href=\"{0}\">Planos de comissões e hierarquias</a>", Url.Content("~/Plano/PlanoCreate")))</li>
             <li>Comissões “Self Service”</li>
             <li>Ausência Remunerada</li>
             <li>DSR</li>

@@ -28,13 +28,37 @@
             @Html.TextBoxFor(model => model.Plano.DT_FIM, null, new { @class = "dp", @Value = Model.Plano.DT_FIM.ToString().Equals("01/01/0001 00:00:00") ? string.Empty : Model.Plano.DT_FIM.ToString("dd/MM/yyyy") })
             @Html.ValidationMessageFor(model => model.Plano.DT_FIM, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
-
         <p>
             @Html.LabelFor(model => model.Plano.STATUS)
             @Html.RadioButtonFor(model => model.Plano.STATUS, "A") Ativo
             @Html.RadioButtonFor(model => model.Plano.STATUS, "I") Inativo
             @Html.ValidationMessageFor(model => model.Plano.STATUS, String.Empty, new { @style = "padding-left: 127px;!important" })
         </p>
+
+        <p>
+            @Html.LabelFor(model => model.CategoriaPercentual.ID_CATEGORIA)
+            @Html.DropDownListFor(model => model.CategoriaPercentual.ID_CATEGORIA, Model.CategoriasSelectListItem, "--- Selecione ---", new { @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.CategoriaPercentual.ID_CATEGORIA, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.CategoriaPercentual.CODIGOLOJAALTERNATE)
+            @Html.DropDownListFor(model => model.CategoriaPercentual.CODIGOLOJAALTERNATE, Model.LojasSelectListItem, "--- Selecione ---", new { @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.CategoriaPercentual.CODIGOLOJAALTERNATE, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.CategoriaPercentual.ATRIBUTO)
+            @Html.EditorFor(model => model.CategoriaPercentual.ATRIBUTO)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.CategoriaPercentual.PERCENTUAL)
+            @Html.TextBoxFor(model => model.CategoriaPercentual.PERCENTUAL)
+        </p>
+        <p>
+            @Html.LabelFor(model => model.PlanoCategoria.ORDEM_HIERARQUIA)
+            @Html.TextBoxFor(model => model.PlanoCategoria.ORDEM_HIERARQUIA)
+            @Html.ValidationMessageFor(model => model.PlanoCategoria.ORDEM_HIERARQUIA, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+
     </div>
 
     <input type="submit" id="salvaPlano" value="Salvar e Incluir" class="botoesCategoria" />
