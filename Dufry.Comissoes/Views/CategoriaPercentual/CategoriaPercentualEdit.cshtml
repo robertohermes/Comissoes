@@ -25,11 +25,11 @@
             @Html.EditorFor(model => model.CategoriaPercentual.ATRIBUTO)
             @Html.ValidationMessageFor(model => model.CategoriaPercentual.ATRIBUTO, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
-        @*<p>
+        <p>
             @Html.LabelFor(model => model.CategoriaPercentual.CODIGOLOJAALTERNATE)
             @Html.DropDownListFor(model => model.CategoriaPercentual.CODIGOLOJAALTERNATE, Model.LojasSelectListItem, "--- Selecione ---", new { @style = "padding-left: 7px;!important" })
             @Html.ValidationMessageFor(model => model.CategoriaPercentual.CODIGOLOJAALTERNATE, String.Empty, new { @style = "padding-left: 10px;!important" })
-        </p>*@
+        </p>
         <p>
             @Html.LabelFor(model => model.CategoriaPercentual.PERCENTUAL)
             @Html.TextBoxFor(model => model.CategoriaPercentual.PERCENTUAL, null, new { @class = "decimal" })

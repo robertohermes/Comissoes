@@ -16,6 +16,7 @@
         <div class="editorCategoria">
             <p><label for="idCategoriaSearchString">Categoria</label>@Html.DropDownList("idCategoriaSearchString", "--- Selecione ---")</p>
             <p><label for="atributoSearchString">Atributo</label>@Html.TextBox("atributoSearchString", null, new { maxlength = "255" })</p>
+            <p><label for="codigolojaalternateSearchString">Loja</label>@Html.DropDownList("codigolojaalternateSearchString", "--- Selecione ---")</p>
             <p><label for="percentualSearchString">Percentual de Comissão</label>@Html.TextBox("percentualSearchString", null, new { @class = "decimal" })</p>
             <p><label for="dtiniSearchString">Data inicial da vigência</label>@Html.TextBox("dtiniSearchString", null, new { @class = "dp" })</p>
             <p><label for="dtfimSearchString">Data final da vigência</label>@Html.TextBox("dtfimSearchString", null, new { @class = "dp" })</p>
@@ -44,7 +45,7 @@
                 {
                     sortOrder = ViewBag.DescCategoriaSortParam,
                     atributoSearchString = ViewBag.atributoFilter,
-                    //codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+                    codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
                     percentualSearchString = ViewBag.percentualFilter,
                     dtiniSearchString = ViewBag.dtiniFilter,
                     dtfimSearchString = ViewBag.dtfimFilter,
@@ -58,7 +59,7 @@
                 {
                     sortOrder = ViewBag.AtributoSortParam,
                     atributoSearchString = ViewBag.atributoFilter,
-                    //codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+                    codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
                     percentualSearchString = ViewBag.percentualFilter,
                     dtiniSearchString = ViewBag.dtiniFilter,
                     dtfimSearchString = ViewBag.dtfimFilter,
@@ -72,7 +73,7 @@
                 {
                     sortOrder = ViewBag.PercentualSortParam,
                     atributoSearchString = ViewBag.atributoFilter,
-                    //codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+                    codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
                     percentualSearchString = ViewBag.percentualFilter,
                     dtiniSearchString = ViewBag.dtiniFilter,
                     dtfimSearchString = ViewBag.dtfimFilter,
@@ -86,7 +87,7 @@
                 {
                     sortOrder = ViewBag.DtIniSortParam,
                     atributoSearchString = ViewBag.atributoFilter,
-                    //codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+                    codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
                     percentualSearchString = ViewBag.percentualFilter,
                     dtiniSearchString = ViewBag.dtiniFilter, 
                     dtfimSearchString = ViewBag.dtfimFilter, 
@@ -100,7 +101,7 @@
                 {
                     sortOrder = ViewBag.DtFimSortParam,
                     atributoSearchString = ViewBag.atributoFilter,
-                    //codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+                    codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
                     percentualSearchString = ViewBag.percentualFilter,
                     dtiniSearchString = ViewBag.dtiniFilter,
                     dtfimSearchString = ViewBag.dtfimFilter,
@@ -114,7 +115,7 @@
                 {
                     sortOrder = ViewBag.StatusSortParam,
                     atributoSearchString = ViewBag.atributoFilter,
-                    //codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+                    codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
                     percentualSearchString = ViewBag.percentualFilter,
                     dtiniSearchString = ViewBag.dtiniFilter,
                     dtfimSearchString = ViewBag.dtfimFilter,
@@ -171,7 +172,7 @@
     {
         sortOrder = ViewBag.CurrentSort,
         atributoSearchString = ViewBag.atributoFilter,
-        //codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+        codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
         percentualSearchString = ViewBag.percentualFilter,
         dtiniSearchString = ViewBag.dtiniFilter,
         dtfimSearchString = ViewBag.dtfimFilter,

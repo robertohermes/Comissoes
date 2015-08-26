@@ -27,7 +27,7 @@ namespace Dufry.Comissoes.Models
 
         [Required(ErrorMessage = "A escolha de uma loja é obrigatória")]
         [Display(Name = "Código da Loja")]
-        public decimal CODIGOLOJAALTERNATE { get; set; }
+        public string CODIGOLOJAALTERNATE { get; set; }
 
 
         [Required(ErrorMessage = "O percentual de comissão é obrigatório")]

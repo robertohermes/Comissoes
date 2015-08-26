@@ -1,16 +1,16 @@
-﻿@model CategoriaPercentual
+﻿@model CategoriaPercentualViewModel
 
 @{
     ViewBag.Title = "Exclusão de Categorias e Percentuais por Loja";
 }
 
 @{
-    string confirmMessage = "Tem certeza que deseja excluir esse percentual da categoria " + Html.DisplayFor(model => model.Categoria.DESC_CATEGORIA) + " ?";
+    string confirmMessage = "Tem certeza que deseja excluir esse percentual da categoria " + Html.DisplayFor(model => model.CategoriaPercentual.Categoria.DESC_CATEGORIA) + " ?";
     bool exibeBotaoExcluir = true;
 
-    if (Model.PlanoCategorias.Count() > 0)
+    if (Model.CategoriaPercentual.PlanoCategorias.Count() > 0)
     {
-        confirmMessage = "O percentual da categoria " + Html.DisplayFor(model => model.Categoria.DESC_CATEGORIA) + " não pode ser excluído, por haver Plano de Categoria associado. Exclua todos os respectivos planos de categoria primeiro.";
+        confirmMessage = "O percentual da categoria " + Html.DisplayFor(model => model.CategoriaPercentual.Categoria.DESC_CATEGORIA) + " não pode ser excluído, por haver Plano de Categoria associado. Exclua todos os respectivos planos de categoria primeiro.";
         exibeBotaoExcluir = false;
     }    
 }
@@ -27,13 +27,13 @@
 <div>   
 
     <div>
-        <p><label class="caption">@Html.DisplayNameFor(model => model.Categoria.DESC_CATEGORIA)</label><label>@Html.DisplayFor(model => model.Categoria.DESC_CATEGORIA)</label></p>
-        <p><label class="caption">@Html.DisplayNameFor(model => model.ATRIBUTO)</label><label>@Html.DisplayFor(model => model.ATRIBUTO)</label></p>
-        @*<p><label class="caption">@Html.DisplayNameFor(model => model.CODIGOLOJAALTERNATE)</label><label>@Html.DisplayFor(model => model.CODIGOLOJAALTERNATE)</label></p>*@
-        <p><label class="caption">@Html.DisplayNameFor(model => model.PERCENTUAL)</label><label>@Html.DisplayFor(model => model.PERCENTUAL)</label></p>
-        <p><label class="caption">@Html.DisplayNameFor(model => model.DT_INI)</label><label>@Html.DisplayFor(model => model.DT_INI)</label></p>
-        <p><label class="caption">@Html.DisplayNameFor(model => model.DT_FIM)</label><label>@Html.DisplayFor(model => model.DT_FIM)</label></p>
-        <p><label class="caption">@Html.DisplayNameFor(model => model.STATUS) </label><label>@Html.DisplayFor(model => model.STATUS)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.Categoria.DESC_CATEGORIA)</label><label>@Html.DisplayFor(model => model.CategoriaPercentual.Categoria.DESC_CATEGORIA)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.ATRIBUTO)</label><label>@Html.DisplayFor(model => model.CategoriaPercentual.ATRIBUTO)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.Loja.NomeLoja)</label><label>@Html.DisplayFor(model => model.Loja.NomeLoja)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.PERCENTUAL)</label><label>@Html.DisplayFor(model => model.CategoriaPercentual.PERCENTUAL)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.DT_INI)</label><label>@Html.DisplayFor(model => model.CategoriaPercentual.DT_INI)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.DT_FIM)</label><label>@Html.DisplayFor(model => model.CategoriaPercentual.DT_FIM)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.STATUS) </label><label>@Html.DisplayFor(model => model.CategoriaPercentual.STATUS)</label></p>
     </div>
 
     <p>
