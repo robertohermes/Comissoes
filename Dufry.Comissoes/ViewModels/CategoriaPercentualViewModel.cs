@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using AutoMapper;
+﻿using System.Collections.Generic;
 using Dufry.Comissoes.Domain.Entities;
-using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace Dufry.Comissoes.ViewModels
@@ -10,13 +7,13 @@ namespace Dufry.Comissoes.ViewModels
     public class CategoriaPercentualViewModel
     {
 
-        public IEnumerable<SelectListItem> CategoriasSelectListItem { get; set; }
-
-        public IEnumerable<SelectListItem> LojasSelectListItem { get; set; }
-
         public CategoriaPercentual CategoriaPercentual { get; set; }
 
         public Loja Loja { get; set; }
+
+        public IEnumerable<SelectListItem> CategoriasSelectListItem { get; set; }
+
+        public IEnumerable<SelectListItem> LojasSelectListItem { get; set; }
 
         public CategoriaPercentualViewModel(CategoriaPercentual categoriaPercentual, Loja loja)
         {
