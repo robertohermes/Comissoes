@@ -415,6 +415,10 @@
     <Content Include="Views\CategoriaPercentual\CategoriaPercentualEdit.cshtml" />
     <Content Include="Views\CategoriaPercentual\CategoriaPercentualDelete.cshtml" />
     <Content Include="Views\Plano\PlanoCreate.cshtml" />
+    <Content Include="Views\DSR\DsrCreate.cshtml" />
+    <Content Include="Views\DSR\DsrDelete.cshtml" />
+    <Content Include="Views\DSR\DsrEdit.cshtml" />
+    <Content Include="Views\DSR\DsrIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

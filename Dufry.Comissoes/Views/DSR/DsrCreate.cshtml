@@ -1,0 +1,83 @@
+﻿@model DSRViewModel
+
+@{
+    ViewBag.Title = "Inclusão de Descanso Semanal Remunerado";
+}
+
+<h1 class="headerForm">@ViewBag.Title</h1>
+
+
+@using (Html.BeginForm()) 
+{
+    @*@Html.AntiForgeryToken()*@
+
+    <div class="editorCategoria">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <p>
+            @Html.LabelFor(model => model.Dsr.CODIGOLOJAALTERNATE)
+            @Html.DropDownListFor(model => model.Dsr.CODIGOLOJAALTERNATE, Model.LojasSelectListItem, "--- Selecione ---", new { @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.Dsr.CODIGOLOJAALTERNATE, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Dsr.PERCENTUAL)
+            @Html.TextBoxFor(model => model.Dsr.PERCENTUAL, null, new { @class = "decimal", @Value = Model.Dsr.PERCENTUAL.ToString().Equals("0") ? string.Empty : Model.Dsr.PERCENTUAL.ToString("0") })
+            @Html.ValidationMessageFor(model => model.Dsr.PERCENTUAL, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Dsr.DT_INI)
+            @Html.TextBoxFor(model => model.Dsr.DT_INI, null, new { @class = "dp", @Value = Model.Dsr.DT_INI.ToString().Equals("01/01/0001 00:00:00") ? string.Empty : Model.Dsr.DT_INI.ToString("dd/MM/yyyy") })
+            @Html.ValidationMessageFor(model => model.Dsr.DT_INI, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Dsr.DT_FIM)
+            @Html.TextBoxFor(model => model.Dsr.DT_FIM, null, new { @class = "dp", @Value = Model.Dsr.DT_FIM.ToString().Equals("01/01/0001 00:00:00") ? string.Empty : Model.Dsr.DT_FIM.ToString("dd/MM/yyyy") })
+            @Html.ValidationMessageFor(model => model.Dsr.DT_FIM, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.Dsr.STATUS)
+            @Html.RadioButtonFor(model => model.Dsr.STATUS, "A") Ativo
+            @Html.RadioButtonFor(model => model.Dsr.STATUS, "I") Inativo
+            @Html.ValidationMessageFor(model => model.Dsr.STATUS, String.Empty, new { @style = "padding-left: 127px;!important" })
+        </p>
+
+    </div>
+
+    <input type="submit" id="salvaDsr" value="Salvar e incluir" class="botoesCategoria" />
+    @Html.ActionLink("Voltar", "DsrIndex", "DSR", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
+
+}
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('.dp').datepicker({
+                showAnim: "scale",
+                showOptions: {
+                    origin: ["top", "right"]
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('.dp').mask('00/00/0000', { 'translation': { 0: { pattern: /[0-9]/ } } });
+            //$('.decimal').mask('000,0000', { reverse: true });
+
+            $("input[name='Dsr.DT_FIM']").rules("add", {
+                DateGtEq: $("input[name='Dsr.DT_INI']"),
+                messages: { DateGtEq: "A data final da vigência deve ser maior que a data inicial" }
+            });
+        });
+
+        $(function () {
+            $("#Dsr_CODIGOLOJAALTERNATE").combobox();
+            $("#toggle").click(function () {
+                $("#Dsr_CODIGOLOJAALTERNATE").toggle();
+            });
+        });
+    </script>
+}
+
+
+

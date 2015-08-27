@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-using Dufry.Comissoes.Domain.Entities;
+﻿using Dufry.Comissoes.Domain.Entities;
+using System.Collections.Generic;
 using System.Web.Mvc;
+//using AutoMapper;
 
 namespace Dufry.Comissoes.ViewModels
 {

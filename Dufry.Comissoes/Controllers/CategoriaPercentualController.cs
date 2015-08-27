@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
-using Dufry.Comissoes.Application.Interfaces;
-using PagedList;
+﻿using Dufry.Comissoes.Application.Interfaces;
+using Dufry.Comissoes.Controllers.Helpers;
 using Dufry.Comissoes.Domain.Entities;
 using Dufry.Comissoes.Filters;
 using Dufry.Comissoes.ViewModels;
+using PagedList;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
-using Dufry.Comissoes.Controllers.Helpers;
 using System.Globalization;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace Dufry.Comissoes.Controllers
 {
@@ -105,7 +105,7 @@ namespace Dufry.Comissoes.Controllers
                 throw new Exception();
             }
 
-            var categorias = _categoriaAppService.Find(t => t.STATUS == "A");
+            var categorias = _categoriaAppService.All();
             IEnumerable<SelectListItem> categoriaSelectListItem = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA");
             ViewBag.ID_CATEGORIA = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA", categoriapercentual.ID_CATEGORIA);
 
@@ -186,7 +186,7 @@ namespace Dufry.Comissoes.Controllers
         {
 
             #region populaobjetos
-            var categorias = _categoriaAppService.Find(t => t.STATUS == "A");
+            var categorias = _categoriaAppService.All();
             ViewBag.idCategoriaSearchString = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA", idCategoriaSearchString);
 
             var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1"); ;

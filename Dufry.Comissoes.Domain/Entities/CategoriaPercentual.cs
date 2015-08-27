@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Dufry.Comissoes.Domain.Entities.Validations;
-using Dufry.Comissoes.Domain.Interfaces.Validation;
-using Dufry.Comissoes.Domain.Validation;
 using System.ComponentModel.DataAnnotations;
 
 

@@ -1,0 +1,44 @@
+﻿@model DSRViewModel
+
+@{
+    ViewBag.Title = "Exclusão de Descanso Semanal Remunerado";
+}
+
+@{
+    string confirmMessage = "Tem certeza que deseja excluir o DSR da loja " + Html.DisplayFor(model => model.Loja.NomeLoja) + " ?";
+    bool exibeBotaoExcluir = true;
+}
+
+
+
+<h1 class="headerForm">@ViewBag.Title</h1>
+<p class="errorMessage">@ViewBag.ErrorMessage</p>
+
+
+
+<p class="confirmMessage">@confirmMessage</p>
+
+<div>   
+
+    <div>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.Loja.NomeLoja)</label><label>@Html.DisplayFor(model => model.Loja.NomeLoja)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.Dsr.PERCENTUAL)</label><label>@Html.DisplayFor(model => model.Dsr.PERCENTUAL)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.Dsr.DT_INI)</label><label>@Html.DisplayFor(model => model.Dsr.DT_INI)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.Dsr.DT_FIM)</label><label>@Html.DisplayFor(model => model.Dsr.DT_FIM)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.Dsr.STATUS) </label><label>@Html.DisplayFor(model => model.Dsr.STATUS)</label></p>
+    </div>
+
+    <p>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            
+            if (exibeBotaoExcluir)
+            {
+                <input type="submit" value="Excluir" class="botoesCategoria" />                    
+            }
+            
+            @Html.ActionLink("Voltar", "DsrIndex", "DSR", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
+        }
+    </p>
+</div>

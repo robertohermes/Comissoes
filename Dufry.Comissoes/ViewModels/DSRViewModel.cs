@@ -1,25 +1,35 @@
-﻿using System;
-using AutoMapper;
-using Dufry.Comissoes.Domain.Entities;
+﻿using Dufry.Comissoes.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
+//using AutoMapper;
 
 namespace Dufry.Comissoes.ViewModels
 {
     public class DSRViewModel
     {
-        public int ID_DSR { get; set; }
-        public string CODIGOLOJAALTERNATE { get; set; }
-        public decimal PERCENTUAL { get; set; }
-        public DateTime DT_INI { get; set; }
-        public DateTime DT_FIM { get; set; }
-        public string STATUS { get; set; }
-        public DateTime CREATED_DATETIME { get; set; }
-        public string CREATED_USERNAME { get; set; }
-        public DateTime LAST_MODIFY_DATE { get; set; }
-        public string LAST_MODIFY_USERNAME { get; set; }
+        public DSR Dsr { get; set; }
 
-        public DSRViewModel ToViewModel(DSR dsr)
+        public Loja Loja { get; set; }
+
+        public IEnumerable<SelectListItem> LojasSelectListItem { get; set; }
+
+        public DSRViewModel(DSR dsr, Loja loja)
         {
-            return Mapper.Map<DSRViewModel>(dsr);
+            Dsr = dsr;
+            Loja = loja;
         }
+
+        public DSRViewModel(DSR dsr, IEnumerable<SelectListItem> lojaSelectListItem)
+        {
+            Dsr = dsr;
+            LojasSelectListItem = lojaSelectListItem;
+        }
+
+        //<REVER>
+        //public DSRViewModel ToViewModel(DSR dsr)
+        //{
+        //    return Mapper.Map<DSRViewModel>(dsr);
+        //}
     }
 }
