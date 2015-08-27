@@ -419,6 +419,7 @@
     <Content Include="Views\DSR\DsrDelete.cshtml" />
     <Content Include="Views\DSR\DsrEdit.cshtml" />
     <Content Include="Views\DSR\DsrIndex.cshtml" />
+    <Content Include="Views\DolarMedio\DolarMedioCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

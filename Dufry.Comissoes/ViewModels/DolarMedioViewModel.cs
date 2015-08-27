@@ -1,23 +1,32 @@
-﻿using System;
-using AutoMapper;
-using Dufry.Comissoes.Domain.Entities;
+﻿using Dufry.Comissoes.Domain.Entities;
+using System.Collections.Generic;
+using System.Web.Mvc;
+//using AutoMapper;
 
 namespace Dufry.Comissoes.ViewModels
 {
     public class DolarMedioViewModel
     {
-        public int ID_PLANO { get; set; }
-        public decimal VALOR_DOLAR_MEDIO { get; set; }
-        public DateTime DT_INI { get; set; }
-        public DateTime DT_FIM { get; set; }
-        public DateTime CREATED_DATETIME { get; set; }
-        public string CREATED_USERNAME { get; set; }
-        public DateTime LAST_MODIFY_DATE { get; set; }
-        public string LAST_MODIFY_USERNAME { get; set; }
 
-        public DolarMedioViewModel ToViewModel(DolarMedio dolarmedio)
+        public DolarMedio DolarMedio { get; set; }
+
+        public IEnumerable<SelectListItem> PlanosSelectListItem { get; set; }
+
+        public DolarMedioViewModel(DolarMedio dolarMedio)
         {
-            return Mapper.Map<DolarMedioViewModel>(dolarmedio);
+            DolarMedio = dolarMedio;
         }
+
+        public DolarMedioViewModel(DolarMedio dolarMedio, IEnumerable<SelectListItem> planosSelectListItem)
+        {
+            DolarMedio = dolarMedio;
+            PlanosSelectListItem = planosSelectListItem;
+        }
+
+        //<REVER>
+        //public DolarMedioViewModel ToViewModel(DolarMedio dolarmedio)
+        //{
+        //    return Mapper.Map<DolarMedioViewModel>(dolarmedio);
+        //}
     }
 }

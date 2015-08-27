@@ -1,0 +1,81 @@
+﻿@model DolarMedioViewModel
+
+@{
+    ViewBag.Title = "Inclusão de Taxa de Dólar";
+}
+
+<h1 class="headerForm">@ViewBag.Title</h1>
+
+
+@using (Html.BeginForm()) 
+{
+    @*@Html.AntiForgeryToken()*@
+
+    <div class="editorCategoria">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <p>
+            @Html.LabelFor(model => model.DolarMedio.ID_PLANO)
+            @Html.DropDownListFor(model => model.DolarMedio.ID_PLANO, Model.PlanosSelectListItem, "--- Selecione ---", new { @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.DolarMedio.ID_PLANO, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.DolarMedio.TIPO_TAXA)
+            @Html.RadioButtonFor(model => model.DolarMedio.TIPO_TAXA, "M") Média
+            @Html.RadioButtonFor(model => model.DolarMedio.TIPO_TAXA, "D") Diária
+            @Html.ValidationMessageFor(model => model.DolarMedio.TIPO_TAXA, String.Empty, new { @style = "padding-left: 127px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.DolarMedio.VALOR_DOLAR_MEDIO)
+            @Html.TextBoxFor(model => model.DolarMedio.VALOR_DOLAR_MEDIO, null, new { @class = "decimal", @Value = Model.DolarMedio.VALOR_DOLAR_MEDIO.ToString().Equals("0") ? string.Empty : Model.DolarMedio.VALOR_DOLAR_MEDIO.ToString("0") })
+            @Html.ValidationMessageFor(model => model.DolarMedio.VALOR_DOLAR_MEDIO, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.DolarMedio.DT_INI)
+            @Html.TextBoxFor(model => model.DolarMedio.DT_INI, null, new { @class = "dp", @Value = Model.DolarMedio.DT_INI.ToString().Equals("01/01/0001 00:00:00") ? string.Empty : Model.DolarMedio.DT_INI.ToString("dd/MM/yyyy") })
+            @Html.ValidationMessageFor(model => model.DolarMedio.DT_INI, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.DolarMedio.DT_FIM)
+            @Html.TextBoxFor(model => model.DolarMedio.DT_FIM, null, new { @class = "dp", @Value = Model.DolarMedio.DT_FIM.ToString().Equals("01/01/0001 00:00:00") ? string.Empty : Model.DolarMedio.DT_FIM.ToString("dd/MM/yyyy") })
+            @Html.ValidationMessageFor(model => model.DolarMedio.DT_FIM, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+    </div>
+
+    <input type="submit" id="salvaTaxaDolar" value="Salvar e incluir" class="botoesCategoria" />
+    @Html.ActionLink("Voltar", "TaxaDolarIndex", "TaxaDolar", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
+
+}
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('.dp').datepicker({
+                showAnim: "scale",
+                showOptions: {
+                    origin: ["top", "right"]
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('.dp').mask('00/00/0000', { 'translation': { 0: { pattern: /[0-9]/ } } });
+            //$('.decimal').mask('000,0000', { reverse: true });
+
+            $("input[name='DolarMedio.DT_FIM']").rules("add", {
+                DateGtEq: $("input[name='DolarMedio.DT_INI']"),
+                messages: { DateGtEq: "A data final da vigência deve ser maior que a data inicial" }
+            });
+        });
+
+        $(function () {
+            $("#DolarMedio_ID_PLANO").combobox();
+            $("#toggle").click(function () {
+                $("#DolarMedio_ID_PLANO").toggle();
+            });
+        });
+    </script>
+}
+
+
+

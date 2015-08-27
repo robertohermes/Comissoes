@@ -14,6 +14,10 @@ namespace Dufry.Comissoes.Data.Context.Mapping
             // Primary Key
             HasKey(t => new { t.ID_PLANO, t.DT_INI, t.DT_FIM });
 
+            Property(t => t.TIPO_TAXA)
+                .HasMaxLength(1)
+                .IsRequired();
+
             // Properties
             Property(t => t.VALOR_DOLAR_MEDIO)
                 .IsRequired();
