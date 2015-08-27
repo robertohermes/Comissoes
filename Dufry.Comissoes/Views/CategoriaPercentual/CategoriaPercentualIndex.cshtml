@@ -222,6 +222,20 @@
                 //$('.decimal').mask('000,0000', { reverse: true });
 
             });
+
+            $(function () {
+                $("#idCategoriaSearchString").combobox();
+                $("#toggle").click(function () {
+                    $("#idCategoriaSearchString").toggle();
+                });
+            });
+
+            $(function () {
+                $("#codigolojaalternateSearchString").combobox();
+                $("#toggle").click(function () {
+                    $("#codigolojaalternateSearchString").toggle();
+                });
+            });
         </script>
     }
 
