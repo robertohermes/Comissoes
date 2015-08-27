@@ -28,6 +28,7 @@ namespace Dufry.Comissoes.Data.Context.Mapping
                 .IsRequired();
 
             Property(t => t.CodigoLojaAlternate)
+                .HasMaxLength(10)
                 .IsRequired();
 
             Property(t => t.CodigoLojaLegado)
