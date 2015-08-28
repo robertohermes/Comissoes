@@ -5,6 +5,7 @@ namespace Dufry.Comissoes.Domain.Entities
 {
     public partial class DolarMedio
     {
+        public int ID_DOLAR_MEDIO { get; set; }
 
         [Required(ErrorMessage = "A escolha de um plano de comissões é obrigatória")]
         [Display(Name = "Plano de comissões")]

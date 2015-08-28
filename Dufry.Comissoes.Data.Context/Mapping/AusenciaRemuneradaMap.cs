@@ -25,7 +25,6 @@ namespace Dufry.Comissoes.Data.Context.Mapping
             Property(t => t.DT_INI)
                 .IsRequired();
 
-
             Property(t => t.DT_FIM)
                 .IsRequired();
 

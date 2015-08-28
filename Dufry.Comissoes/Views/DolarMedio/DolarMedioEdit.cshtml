@@ -1,7 +1,7 @@
 ﻿@model DolarMedioViewModel
 
 @{
-    ViewBag.Title = "Inclusão de Taxa de Dólar";
+    ViewBag.Title = "Edição de Taxa de Dólar";
 }
 
 <h1 class="headerForm">@ViewBag.Title</h1>
@@ -13,6 +13,7 @@
 
     <div class="editorCategoria">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.DolarMedio.ID_DOLAR_MEDIO)
         <p>
             @Html.LabelFor(model => model.DolarMedio.ID_PLANO)
             @Html.DropDownListFor(model => model.DolarMedio.ID_PLANO, Model.PlanosSelectListItem, "--- Selecione ---", new { @style = "padding-left: 7px;!important" })
@@ -26,22 +27,22 @@
         </p>
         <p>
             @Html.LabelFor(model => model.DolarMedio.VALOR_DOLAR_MEDIO)
-            @Html.TextBoxFor(model => model.DolarMedio.VALOR_DOLAR_MEDIO, null, new { @class = "decimal", @Value = Model.DolarMedio.VALOR_DOLAR_MEDIO.ToString().Equals("0") ? string.Empty : Model.DolarMedio.VALOR_DOLAR_MEDIO.ToString("0") })
+            @Html.TextBoxFor(model => model.DolarMedio.VALOR_DOLAR_MEDIO, null, new { @class = "decimal" })
             @Html.ValidationMessageFor(model => model.DolarMedio.VALOR_DOLAR_MEDIO, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
         <p>
             @Html.LabelFor(model => model.DolarMedio.DT_INI)
-            @Html.TextBoxFor(model => model.DolarMedio.DT_INI, null, new { @class = "dp", @Value = Model.DolarMedio.DT_INI.ToString().Equals("01/01/0001 00:00:00") ? string.Empty : Model.DolarMedio.DT_INI.ToString("dd/MM/yyyy") })
+            @Html.TextBoxFor(model => model.DolarMedio.DT_INI, null, new { @class = "dp", @Value = Model.DolarMedio.DT_INI.ToString("dd/MM/yyyy") })
             @Html.ValidationMessageFor(model => model.DolarMedio.DT_INI, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
         <p>
             @Html.LabelFor(model => model.DolarMedio.DT_FIM)
-            @Html.TextBoxFor(model => model.DolarMedio.DT_FIM, null, new { @class = "dp", @Value = Model.DolarMedio.DT_FIM.ToString().Equals("01/01/0001 00:00:00") ? string.Empty : Model.DolarMedio.DT_FIM.ToString("dd/MM/yyyy") })
+            @Html.TextBoxFor(model => model.DolarMedio.DT_FIM, null, new { @class = "dp", @Value = Model.DolarMedio.DT_FIM.ToString("dd/MM/yyyy") })
             @Html.ValidationMessageFor(model => model.DolarMedio.DT_FIM, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
     </div>
 
-    <input type="submit" id="salvaDolarMedio" value="Salvar e incluir" class="botoesCategoria" />
+    <input type="submit" id="salvaDolarMedio" value="Salvar" class="botoesCategoria" />
     @Html.ActionLink("Voltar", "DolarMedioIndex", "DolarMedio", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
 
 }

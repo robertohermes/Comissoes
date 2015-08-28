@@ -420,6 +420,7 @@
     <Content Include="Views\DSR\DsrEdit.cshtml" />
     <Content Include="Views\DSR\DsrIndex.cshtml" />
     <Content Include="Views\DolarMedio\DolarMedioCreate.cshtml" />
+    <Content Include="Views\DolarMedio\DolarMedioEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -34,10 +34,10 @@ namespace Dufry.Comissoes.Controllers
             DolarMedio dolarmedio = new DolarMedio();
            
             var planos = _planoAppService.Find(t => t.STATUS == "A"); ;
-            IEnumerable<SelectListItem> planoSelectListItem = new SelectList(planos, "ID_PLANO", "DESC_PLANO");
+            IEnumerable<SelectListItem> planosSelectListItem = new SelectList(planos, "ID_PLANO", "DESC_PLANO");
             ViewBag.CODIGOLOJAALTERNATE = new SelectList(planos, "ID_PLANO", "DESC_PLANO");
 
-            DolarMedioViewModel dolarmedioVM = new DolarMedioViewModel(dolarmedio, planoSelectListItem);
+            DolarMedioViewModel dolarmedioVM = new DolarMedioViewModel(dolarmedio, planosSelectListItem);
 
             return View(dolarmedioVM);
         }
@@ -81,6 +81,82 @@ namespace Dufry.Comissoes.Controllers
             }
 
             return View(dolarmedio);
+        }
+
+        // GET: /DolarMedio/DolarMedioEdit/5
+        public ActionResult DolarMedioEdit(int? id)
+        {
+            if (id == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception();
+            }
+            var dolarmedio = _dolarmedioAppService.Get(id ?? default(int));
+            if (dolarmedio == null)
+            {
+                //return HttpNotFound();
+                throw new Exception();
+            }
+
+            var planos = _planoAppService.All();
+            IEnumerable<SelectListItem> planosSelectListItem = new SelectList(planos, "ID_PLANO", "DESC_PLANO");
+            ViewBag.ID_PLANO = new SelectList(planos, "ID_PLANO", "DESC_PLANO", dolarmedio.ID_PLANO);
+
+            DolarMedioViewModel dolarmedioVM = new DolarMedioViewModel(dolarmedio, planosSelectListItem);
+
+            return View(dolarmedioVM);
+
+        }
+
+        // POST: /DolarMedio/DolarMedioEdit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost, ActionName("DolarMedioEdit")]
+        //[ValidateAntiForgeryToken]
+        public ActionResult DolarMedioEditConfirmed(int? id)
+        {
+
+            if (id == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception();
+            }
+
+            var dolarmedioToUpdate = _dolarmedioAppService.Get(id ?? default(int));
+
+            //---------------------------------------------------------------------------------------------
+            //<REVER>
+            //---------------------------------------------------------------------------------------------
+            dolarmedioToUpdate.ID_PLANO = Convert.ToInt32(Request["DolarMedio.ID_PLANO"]);
+            dolarmedioToUpdate.TIPO_TAXA = Request["DolarMedio.TIPO_TAXA"];
+            dolarmedioToUpdate.VALOR_DOLAR_MEDIO = Convert.ToDecimal(Request["DolarMedio.VALOR_DOLAR_MEDIO"]);
+            dolarmedioToUpdate.DT_INI = Convert.ToDateTime(Request["DolarMedio.DT_INI"]);
+            dolarmedioToUpdate.DT_FIM = Convert.ToDateTime(Request["DolarMedio.DT_FIM"]);
+            //---------------------------------------------------------------------------------------------
+
+            //---------------------------------------------------------------------------------------------
+            //<REVER>
+            //---------------------------------------------------------------------------------------------
+            dolarmedioToUpdate.LAST_MODIFY_DATE = DateTime.Now;
+            dolarmedioToUpdate.LAST_MODIFY_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
+            //---------------------------------------------------------------------------------------------
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _dolarmedioAppService.Update(dolarmedioToUpdate);
+
+                    return RedirectToAction("DolarMedioIndex");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Erro na alteração. Tente novamente ou, se o problema persistir, entre em contato com o suporte.");
+                }
+            }
+
+            return View(dolarmedioToUpdate);
         }
 
         protected override void Dispose(bool disposing)

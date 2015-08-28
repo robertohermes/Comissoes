@@ -28,6 +28,12 @@ namespace Dufry.Comissoes.Data.Context.Mapping
             Property(t => t.PERCENTUAL)
                 .IsRequired();
 
+            Property(t => t.DT_INI)
+                .IsRequired();
+
+            Property(t => t.DT_FIM)
+                .IsRequired();
+
             Property(t => t.STATUS)
                 .HasMaxLength(1)
                 .IsRequired();
