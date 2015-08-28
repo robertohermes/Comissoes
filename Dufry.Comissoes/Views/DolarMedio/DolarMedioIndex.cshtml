@@ -110,19 +110,12 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Plano.DESC_PLANO)
+                    @Html.ActionLink(item.Plano.DESC_PLANO, "DolarMedioEdit", "DolarMedio", new { id = item.ID_DOLAR_MEDIO }, new { @class = "tablerowlink" })
                 </td>
-                @if (item.TIPO_TAXA == "M")
-                {
-                    <td>Média</td>
-                }
-                else
-                {
-                    <td>Diária</td>
-                }
-                <td>
-                    @Html.ActionLink(item.VALOR_DOLAR_MEDIO.ToString(), "DolarMedioEdit", "DolarMedio", new { id = item.ID_DOLAR_MEDIO }, new { @class = "tablerowlink" })
-                </td>
+                @if (item.TIPO_TAXA == "M"){ <td>Média</td> } else { <td>Diária</td> }
+
+                @if (item.VALOR_DOLAR_MEDIO != null) {  <td>@item.VALOR_DOLAR_MEDIO</td> } else { <td></td> }
+
                 <td>
                     @Html.DisplayFor(modelItem => item.DT_INI)
                 </td>

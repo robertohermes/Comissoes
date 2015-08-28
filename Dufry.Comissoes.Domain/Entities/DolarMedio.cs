@@ -18,7 +18,7 @@ namespace Dufry.Comissoes.Domain.Entities
 
         [Required(ErrorMessage = "O valor é obrigatório")]
         [Display(Name = "Dólar - Valor Médio (em R$)")]
-        public decimal VALOR_DOLAR_MEDIO { get; set; }
+        public decimal ? VALOR_DOLAR_MEDIO { get; set; }
 
 
         [Required(ErrorMessage = "A data inicial da vigência é obrigatória")]

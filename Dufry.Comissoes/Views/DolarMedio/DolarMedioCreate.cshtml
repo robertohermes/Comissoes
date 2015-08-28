@@ -26,7 +26,7 @@
         </p>
         <p>
             @Html.LabelFor(model => model.DolarMedio.VALOR_DOLAR_MEDIO)
-            @Html.TextBoxFor(model => model.DolarMedio.VALOR_DOLAR_MEDIO, null, new { @class = "decimal", @Value = Model.DolarMedio.VALOR_DOLAR_MEDIO.ToString().Equals("0") ? string.Empty : Model.DolarMedio.VALOR_DOLAR_MEDIO.ToString("0") })
+            @Html.TextBoxFor(model => model.DolarMedio.VALOR_DOLAR_MEDIO, null, new { @class = "decimal" })
             @Html.ValidationMessageFor(model => model.DolarMedio.VALOR_DOLAR_MEDIO, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
         <p>
@@ -74,6 +74,18 @@
                 $("#DolarMedio_ID_PLANO").toggle();
             });
         });
+
+        //$(function () {
+        //    $("#DolarMedio_TIPO_TAXA").change(function () {
+        //        if ($(this).is(':checked')) {
+        //            $("#DolarMedio_VALOR_DOLAR_MEDIO-error").show();
+        //        }
+        //        else {
+        //            $("#DolarMedio_VALOR_DOLAR_MEDIO-error").hide();
+        //        }
+        //    });
+        //});
+
     </script>
 }
 
