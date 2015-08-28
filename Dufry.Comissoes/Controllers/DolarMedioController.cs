@@ -159,6 +159,167 @@ namespace Dufry.Comissoes.Controllers
             return View(dolarmedioToUpdate);
         }
 
+        // GET: /DolarMedio/DolarMedioIndex
+        //[ControleAcessoAdminFilter]
+        public ViewResult DolarMedioIndex(int? page
+            , string sortOrder
+            , int? idPlanoSearchString
+            , string tipoTaxaSearchString
+            , decimal? valorDolarMedioSearchString
+            , string dtiniSearchString
+            , string dtfimSearchString)
+        {
+
+            #region populaobjetos
+            var planos = _planoAppService.All();
+            ViewBag.idPlanoSearchString = new SelectList(planos, "ID_PLANO", "DESC_PLANO", idPlanoSearchString);
+            #endregion populaobjetos
+
+
+            #region trataParametrosOrdenacao
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.DescPlanoSortParam = sortOrder == "DESC_PLANO" ? "DESC_PLANOdesc" : "DESC_PLANO";
+            ViewBag.TipoTaxaSortParam = sortOrder == "TIPO_TAXA" ? "TIPO_TAXA_desc" : "TIPO_TAXA";
+            ViewBag.ValorSortParam = sortOrder == "VALOR_DOLAR_MEDIO" ? "VALOR_DOLAR_MEDIO_desc" : "VALOR_DOLAR_MEDIO";
+            ViewBag.DtIniSortParam = sortOrder == "DT_INI" ? "DT_INI_desc" : "DT_INI";
+            ViewBag.DtFimSortParam = sortOrder == "DT_FIM" ? "DT_FIM_desc" : "DT_FIM";
+            
+            #endregion trataParametrosOrdenacao
+
+            #region trataParametrosBusca
+
+            var predicate = PredicateBuilder.True<DolarMedio>();
+
+            if (idPlanoSearchString.HasValue)
+            {
+                int idPlanoFilter = idPlanoSearchString.GetValueOrDefault();
+                predicate = predicate.And(i => i.ID_PLANO.Equals(idPlanoFilter));
+                ViewBag.idPlanoFilter = idPlanoFilter;
+            }
+
+            if (!String.IsNullOrEmpty(tipoTaxaSearchString))
+            {
+                predicate = predicate.And(i => i.TIPO_TAXA.Equals(tipoTaxaSearchString));
+                ViewBag.tipoTaxaFilter = tipoTaxaSearchString;
+            }
+
+            if (valorDolarMedioSearchString.HasValue)
+            {
+                decimal valorDolarMedioFilter = valorDolarMedioSearchString.GetValueOrDefault();
+                predicate = predicate.And(i => i.VALOR_DOLAR_MEDIO.Equals(valorDolarMedioFilter));
+                ViewBag.valorDolarMedioFilter = valorDolarMedioFilter;
+            }
+
+            if (!String.IsNullOrEmpty(dtiniSearchString))
+            {
+                DateTime dtiniFilter = DateTime.ParseExact(dtiniSearchString, "dd/MM/yyyy", new CultureInfo("pt-BR"));
+                predicate = predicate.And(i => i.DT_INI.Equals(dtiniFilter));
+                ViewBag.dtiniFilter = dtiniFilter;
+            }
+
+            if (!String.IsNullOrEmpty(dtfimSearchString))
+            {
+                DateTime dtfimFilter = DateTime.ParseExact(dtfimSearchString, "dd/MM/yyyy", new CultureInfo("pt-BR"));
+                predicate = predicate.And(i => i.DT_FIM.Equals(dtfimFilter));
+                ViewBag.dtfimFilter = dtfimFilter;
+            }
+
+            #endregion trataParametrosBusca
+
+            IEnumerable<DolarMedio> dolarmedios = new List<DolarMedio>();
+
+            dolarmedios = _dolarmedioAppService.Find(predicate);
+
+            #region ordenacao
+            switch (sortOrder)
+            {
+                case "TIPO_TAXA":
+                    dolarmedios = dolarmedios.OrderBy(s => s.TIPO_TAXA);
+                    break;
+                case "VALOR_DOLAR_MEDIO":
+                    dolarmedios = dolarmedios.OrderBy(s => s.VALOR_DOLAR_MEDIO);
+                    break;
+                case "DT_INI":
+                    dolarmedios = dolarmedios.OrderBy(s => s.DT_INI); //mudar de chave para campo
+                    break;
+                case "DT_FIM":
+                    dolarmedios = dolarmedios.OrderBy(s => s.DT_FIM); //mudar de chave para campo
+                    break;
+                case "DESC_PLANO_desc":
+                    dolarmedios = dolarmedios.OrderByDescending(s => s.Plano.DESC_PLANO); //mudar de chave para campo
+                    break;
+                case "TIPO_TAXA_desc":
+                    dolarmedios = dolarmedios.OrderByDescending(s => s.TIPO_TAXA);
+                    break;
+                case "VALOR_DOLAR_MEDIO_desc":
+                    dolarmedios = dolarmedios.OrderByDescending(s => s.VALOR_DOLAR_MEDIO);
+                    break;
+                case "DT_INI_desc":
+                    dolarmedios = dolarmedios.OrderByDescending(s => s.DT_INI); //mudar de chave para campo
+                    break;
+                case "DT_FIM_desc":
+                    dolarmedios = dolarmedios.OrderByDescending(s => s.DT_FIM); //mudar de chave para campo
+                    break;
+                default:  // DESC_PLANO ascending 
+                    dolarmedios = dolarmedios.OrderBy(s => s.Plano.DESC_PLANO);
+                    break;
+            }
+            #endregion ordenacao
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(dolarmedios.ToPagedList(pageNumber, pageSize));
+        }
+
+        // GET: /DolarMedio/DolarMedioDelete/5
+        public ActionResult DolarMedioDelete(int? id, bool? saveChangesError = false)
+        {
+            if (id == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //throw new InvalidOperationException("Something very bad happened while doing important stuff");
+                throw new Exception();
+            }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Erro na exclusão. Tente novamente ou, se o problema persistir, entre em contato com o suporte.";
+            }
+
+            var dolarmedio = _dolarmedioAppService.Get(id ?? default(int));
+
+            if (dolarmedio == null)
+            {
+                //return HttpNotFound();
+                throw new Exception();
+            }
+
+            //return View(categoriapercentual);
+
+            DolarMedioViewModel dolarmedioVM = new DolarMedioViewModel(dolarmedio);
+
+            return View(dolarmedioVM);
+        }
+
+        //POST: /DolarMedio/DolarMedioDelete/5
+        [HttpPost, ActionName("DolarMedioDelete")]
+        public ActionResult DolarMedioDeleteConfirmed(int id)
+        {
+            try
+            {
+                var dolarmedio = _dolarmedioAppService.Get(id);
+
+                _dolarmedioAppService.Remove(dolarmedio);
+            }
+            catch (RetryLimitExceededException/* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                return RedirectToAction("DolarMedioDelete", new { id = id, saveChangesError = true });
+            }
+            return RedirectToAction("DolarMedioIndex");
+
+        }
+
         protected override void Dispose(bool disposing)
         {
             _dolarmedioAppService.Dispose();

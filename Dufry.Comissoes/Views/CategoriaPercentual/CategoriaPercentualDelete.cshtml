@@ -33,7 +33,8 @@
         <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.PERCENTUAL)</label><label>@Html.DisplayFor(model => model.CategoriaPercentual.PERCENTUAL)</label></p>
         <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.DT_INI)</label><label>@Html.DisplayFor(model => model.CategoriaPercentual.DT_INI)</label></p>
         <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.DT_FIM)</label><label>@Html.DisplayFor(model => model.CategoriaPercentual.DT_FIM)</label></p>
-        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.STATUS) </label><label>@Html.DisplayFor(model => model.CategoriaPercentual.STATUS)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.STATUS) </label>
+                                    @if (Model.CategoriaPercentual.STATUS == "A"){ <label>Ativo</label>}else{<label>Inativo</label>}</p>
     </div>
 
     <p>

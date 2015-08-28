@@ -25,7 +25,8 @@
         <p><label class="caption">@Html.DisplayNameFor(model => model.Dsr.PERCENTUAL)</label><label>@Html.DisplayFor(model => model.Dsr.PERCENTUAL)</label></p>
         <p><label class="caption">@Html.DisplayNameFor(model => model.Dsr.DT_INI)</label><label>@Html.DisplayFor(model => model.Dsr.DT_INI)</label></p>
         <p><label class="caption">@Html.DisplayNameFor(model => model.Dsr.DT_FIM)</label><label>@Html.DisplayFor(model => model.Dsr.DT_FIM)</label></p>
-        <p><label class="caption">@Html.DisplayNameFor(model => model.Dsr.STATUS) </label><label>@Html.DisplayFor(model => model.Dsr.STATUS)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.Dsr.STATUS) </label>
+                                    @if (Model.Dsr.STATUS == "A"){ <label>Ativo</label>}else{<label>Inativo</label>}</p>
     </div>
 
     <p>
