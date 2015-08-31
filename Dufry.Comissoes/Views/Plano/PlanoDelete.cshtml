@@ -34,14 +34,12 @@
 <div>   
 
     <div>
-        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.Categoria.DESC_CATEGORIA)</label><label>@Html.DisplayFor(model => model.CategoriaPercentual.Categoria.DESC_CATEGORIA)</label></p>
-        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.ATRIBUTO)</label><label>@Html.DisplayFor(model => model.CategoriaPercentual.ATRIBUTO)</label></p>
-        <p><label class="caption">@Html.DisplayNameFor(model => model.Loja.NomeLoja)</label><label>@Html.DisplayFor(model => model.Loja.NomeLoja)</label></p>
-        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.PERCENTUAL)</label><label>@Html.DisplayFor(model => model.CategoriaPercentual.PERCENTUAL)</label></p>
-        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.DT_INI)</label><label>@Html.DisplayFor(model => model.CategoriaPercentual.DT_INI)</label></p>
-        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.DT_FIM)</label><label>@Html.DisplayFor(model => model.CategoriaPercentual.DT_FIM)</label></p>
-        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.STATUS) </label>
-                                    @if (Model.CategoriaPercentual.STATUS == "A"){ <label>Ativo</label>}else{<label>Inativo</label>}</p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.Plano.DESC_PLANO)</label><label>@Html.DisplayFor(model => model.Plano.DESC_PLANO)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.Plano.DT_INI)</label><label>@Html.DisplayFor(model => model.Plano.DT_INI)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.Plano.DT_FIM)</label><label>@Html.DisplayFor(model => model.Plano.DT_FIM)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.Plano.STATUS) </label>
+                                    @if (Model.Plano.STATUS == "A")
+                                    { <label>Ativo</label>}else{<label>Inativo</label>}</p>
     </div>
 
     <p>
@@ -54,7 +52,7 @@
                 <input type="submit" value="Excluir" class="botoesCategoria" />                    
             }
             
-            @Html.ActionLink("Voltar", "CategoriaPercentualIndex", "CategoriaPercentual", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
+            @Html.ActionLink("Voltar", "PlanoIndex", "PlanoPercentual", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
         }
     </p>
 </div>
