@@ -22,7 +22,7 @@ namespace Dufry.Comissoes.Domain.Entities
 
 
         [Required(ErrorMessage = "A escolha de uma loja é obrigatória")]
-        [Display(Name = "Código da Loja")]
+        [Display(Name = "Loja")]
         public string CODIGOLOJAALTERNATE { get; set; }
 
 

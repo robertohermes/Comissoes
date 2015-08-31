@@ -25,6 +25,7 @@ namespace Dufry.Comissoes.Data.Context
             modelBuilder.Configurations.Add(new FilialMap());
             modelBuilder.Configurations.Add(new EmpresaMap());
             modelBuilder.Configurations.Add(new ColaboradorMap());
+            modelBuilder.Configurations.Add(new CargoMap());
 
         }
 
@@ -35,6 +36,7 @@ namespace Dufry.Comissoes.Data.Context
         public DbSet<Filial> Filiais { get; set; }
         public DbSet<Empresa> Empresas { get; set; }
         public DbSet<Colaborador> Colaboradors { get; set; }
+        public DbSet<Cargo> Cargos { get; set; }
 
 
 

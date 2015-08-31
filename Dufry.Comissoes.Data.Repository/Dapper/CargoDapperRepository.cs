@@ -9,7 +9,7 @@ using Dufry.Comissoes.Domain.Interfaces.Repository.ReadOnly;
 
 namespace Dufry.Comissoes.Data.Repository.Dapper
 {
-    public class CargoRepository : Common.Repository, ICargoReadOnlyRepository
+    public class CargoDapperRepository : Common.Repository, ICargoReadOnlyRepository
     {
         public Cargo Get(int id)
         {
