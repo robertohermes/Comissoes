@@ -60,6 +60,7 @@
     <Compile Include="Interfaces\IDbContext.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Mapping\AusenciaRemuneradaMap.cs" />
+    <Compile Include="Mapping\CargoMap.cs" />
     <Compile Include="Mapping\CategoriaMap.cs" />
     <Compile Include="Mapping\CategoriaPercentualMap.cs" />
     <Compile Include="Mapping\ControleAcessoMap.cs" />

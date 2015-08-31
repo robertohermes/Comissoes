@@ -53,12 +53,14 @@
   <ItemGroup>
     <Compile Include="AppService.cs" />
     <Compile Include="AusenciaRemuneradaAppService.cs" />
+    <Compile Include="CargoAppService.cs" />
     <Compile Include="CategoriaAppService.cs" />
     <Compile Include="CategoriaPercentualAppService.cs" />
     <Compile Include="ControleAcessoAppService.cs" />
     <Compile Include="DolarMedioAppService.cs" />
     <Compile Include="DSRAppService.cs" />
     <Compile Include="Interfaces\IAusenciaRemuneradaAppService.cs" />
+    <Compile Include="Interfaces\ICargoAppService.cs" />
     <Compile Include="Interfaces\ICategoriaAppService.cs" />
     <Compile Include="Interfaces\ICategoriaPercentualAppService.cs" />
     <Compile Include="Interfaces\IDolarMedioAppService.cs" />

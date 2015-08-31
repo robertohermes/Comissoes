@@ -15,9 +15,9 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var filiais = cn.Query<Empresa>("SELECT * FROM DimEmpresa WHERE Id_Empresa = @Id_Empresa",
-                    new { ColaboradorKey = id }).FirstOrDefault();
-                return filiais;
+                var empresas = cn.Query<Empresa>("SELECT * FROM DimEmpresa WHERE Id_Empresa = @Id_Empresa",
+                    new { EmpresaKey = id }).FirstOrDefault();
+                return empresas;
             }
         }
 
@@ -25,8 +25,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var filial = cn.Query<Empresa>("SELECT * FROM DimEmpresa");
-                return filial;
+                var empresa = cn.Query<Empresa>("SELECT * FROM DimEmpresa");
+                return empresa;
             }
         }
 
@@ -34,8 +34,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var filiais = cn.GetList<Empresa>(predicate);
-                return filiais;
+                var empresas = cn.GetList<Empresa>(predicate);
+                return empresas;
             }
         }
     }

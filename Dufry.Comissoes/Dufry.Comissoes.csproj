@@ -195,6 +195,7 @@
     <Compile Include="Models\Validations\DateGreaterThanAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AusenciaRemuneradaViewModel.cs" />
+    <Compile Include="ViewModels\CargoViewModel.cs" />
     <Compile Include="ViewModels\CategoriaPercentualViewModel.cs" />
     <Compile Include="ViewModels\CategoriaViewModel.cs" />
     <Compile Include="ViewModels\ControleAcessoViewModel.cs" />

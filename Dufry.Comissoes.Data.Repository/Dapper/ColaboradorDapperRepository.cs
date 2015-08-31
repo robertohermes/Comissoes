@@ -15,9 +15,9 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var filiais = cn.Query<Colaborador>("SELECT * FROM DimColaborador WHERE Id_Colaborador = @Id_Colaborador",
+                var colaboradores = cn.Query<Colaborador>("SELECT * FROM DimColaborador WHERE Id_Colaborador = @Id_Colaborador",
                     new { ColaboradorKey = id }).FirstOrDefault();
-                return filiais;
+                return colaboradores;
             }
         }
 
@@ -25,8 +25,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var filial = cn.Query<Colaborador>("SELECT * FROM DimColaborador");
-                return filial;
+                var colaborador = cn.Query<Colaborador>("SELECT * FROM DimColaborador");
+                return colaborador;
             }
         }
 
@@ -34,8 +34,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var filiais = cn.GetList<Colaborador>(predicate);
-                return filiais;
+                var colaboradores = cn.GetList<Colaborador>(predicate);
+                return colaboradores;
             }
         }
     }
