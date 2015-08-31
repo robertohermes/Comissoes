@@ -6,7 +6,6 @@
 
 @{
     string confirmMessage = "Tem certeza que deseja excluir o DSR da loja " + Html.DisplayFor(model => model.Loja.NomeLoja) + " ?";
-    bool exibeBotaoExcluir = true;
 }
 
 
@@ -34,10 +33,7 @@
         {
             @Html.AntiForgeryToken()
             
-            if (exibeBotaoExcluir)
-            {
-                <input type="submit" value="Excluir" class="botoesCategoria" />                    
-            }
+            <input type="submit" value="Excluir" class="botoesCategoria" />                    
             
             @Html.ActionLink("Voltar", "DsrIndex", "DSR", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
         }

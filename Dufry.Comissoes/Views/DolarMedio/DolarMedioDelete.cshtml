@@ -6,7 +6,6 @@
 
 @{
     string confirmMessage = "Tem certeza que deseja excluir essa taxa ?";
-    bool exibeBotaoExcluir = true;
 }
 
 
@@ -34,10 +33,7 @@
         {
             @Html.AntiForgeryToken()
             
-            if (exibeBotaoExcluir)
-            {
-                <input type="submit" value="Excluir" class="botoesCategoria" />                    
-            }
+            <input type="submit" value="Excluir" class="botoesCategoria" />                    
             
             @Html.ActionLink("Voltar", "DolarMedioIndex", "DolarMedio", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
         }

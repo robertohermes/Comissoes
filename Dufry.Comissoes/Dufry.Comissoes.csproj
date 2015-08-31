@@ -435,6 +435,8 @@
     <Content Include="Views\Plano\PlanoDelete.cshtml" />
     <Content Include="Views\Plano\PlanoIndex.cshtml" />
     <Content Include="Views\SelfService\SelfServiceEdit.cshtml" />
+    <Content Include="Views\SelfService\SelfServiceDelete.cshtml" />
+    <Content Include="Views\SelfService\SelfServiceIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

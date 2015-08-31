@@ -169,6 +169,174 @@ namespace Dufry.Comissoes.Controllers
             return View(selfserviceToUpdate);
         }
 
+        //
+        // GET: /SelfService/SelfServiceDelete/5
+        public ActionResult SelfServiceDelete(int? id, bool? saveChangesError = false)
+        {
+            if (id == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //throw new InvalidOperationException("Something very bad happened while doing important stuff");
+                throw new Exception();
+            }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Erro na exclusão. Tente novamente ou, se o problema persistir, entre em contato com o suporte.";
+            }
+
+            var selfservice = _selfserviceAppService.Get(id ?? default(int));
+
+            if (selfservice == null)
+            {
+                //return HttpNotFound();
+                throw new Exception();
+            }
+
+            Cargo cargo = _cargoAppService.Find(t => t.CodigoCargoAlternate == selfservice.CODIGOCARGOALTERNATE).FirstOrDefault();
+
+            Loja loja = _lojaAppService.Find(t => t.CodigoLojaAlternate == selfservice.CODIGOLOJAALTERNATE).FirstOrDefault();
+
+            SelfServiceViewModel selfServiceVM = new SelfServiceViewModel(selfservice, cargo, loja);
+
+            return View(selfServiceVM);
+        }
+
+        //POST: /SelfService/SelfServiceDelete/5
+        [HttpPost, ActionName("SelfServiceDelete")]
+        public ActionResult SelfServiceDeleteConfirmed(int id)
+        {
+            try
+            {
+                var selfservice = _selfserviceAppService.Get(id);
+
+                _selfserviceAppService.Remove(selfservice);
+            }
+            catch (RetryLimitExceededException/* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                return RedirectToAction("SelfServiceDelete", new { id = id, saveChangesError = true });
+            }
+            return RedirectToAction("SelfServiceIndex");
+
+        }
+
+        // GET: /SelfService/SelfServiceIndex
+        //[ControleAcessoAdminFilter]
+        public ViewResult SelfServiceIndex(int? page
+            , string sortOrder
+            , string codigocargoalternateSearchString
+            , string codigolojaalternateSearchString
+            , string dtiniSearchString
+            , string dtfimSearchString
+            , string statusSearchString)
+        {
+
+            #region populaobjetos
+            var cargos = _cargoAppService.Find(t => t.CodigoCargoAlternate.Trim() != "NA" && t.CodigoCargoAlternate.Trim() != "DS");
+            ViewBag.codigocargoalternateSearchString = new SelectList(cargos, "CodigoCargoAlternate", "NomeCargo", codigocargoalternateSearchString);
+
+            var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1"); ;
+            ViewBag.codigolojaalternateSearchString = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja", codigolojaalternateSearchString);
+            #endregion populaobjetos
+
+            #region trataParametrosOrdenacao
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.CodigoCargoAlternateSortParam = String.IsNullOrEmpty(sortOrder) ? "NomeCargo_desc" : "";
+            ViewBag.CodigoLojaAlternateSortParam = sortOrder == "NomeLoja" ? "NomeLoja_desc" : "NomeLoja";
+            ViewBag.DtIniSortParam = sortOrder == "DT_INI" ? "DT_INI_desc" : "DT_INI";
+            ViewBag.DtFimSortParam = sortOrder == "DT_FIM" ? "DT_FIM_desc" : "DT_FIM";
+            ViewBag.StatusSortParam = sortOrder == "STATUS" ? "STATUS_desc" : "STATUS";
+            #endregion trataParametrosOrdenacao
+
+            #region trataParametrosBusca
+
+            var predicate = PredicateBuilder.True<SelfService>();
+
+
+            if (!String.IsNullOrEmpty(codigocargoalternateSearchString))
+            {
+                string codigocargoalternateFilter = codigocargoalternateSearchString;
+                predicate = predicate.And(i => i.CODIGOCARGOALTERNATE.Equals(codigocargoalternateFilter));
+                ViewBag.codigocargoalternateFilter = codigocargoalternateFilter;
+            }
+
+
+            if (!String.IsNullOrEmpty(codigolojaalternateSearchString))
+            {
+                string codigolojaalternateFilter = codigolojaalternateSearchString;
+                predicate = predicate.And(i => i.CODIGOLOJAALTERNATE.Equals(codigolojaalternateFilter));
+                ViewBag.codigolojaalternateFilter = codigolojaalternateFilter;
+            }
+
+
+            if (!String.IsNullOrEmpty(dtiniSearchString))
+            {
+                DateTime dtiniFilter = DateTime.ParseExact(dtiniSearchString, "dd/MM/yyyy", new CultureInfo("pt-BR"));
+                predicate = predicate.And(i => i.DT_INI.Equals(dtiniFilter));
+                ViewBag.dtiniFilter = dtiniFilter;
+            }
+
+            if (!String.IsNullOrEmpty(dtfimSearchString))
+            {
+                DateTime dtfimFilter = DateTime.ParseExact(dtfimSearchString, "dd/MM/yyyy", new CultureInfo("pt-BR"));
+                predicate = predicate.And(i => i.DT_FIM.Equals(dtfimFilter));
+                ViewBag.dtfimFilter = dtfimFilter;
+            }
+
+            if (!String.IsNullOrEmpty(statusSearchString))
+            {
+                predicate = predicate.And(i => i.STATUS.Equals(statusSearchString));
+                ViewBag.statusFilter = statusSearchString;
+            }
+
+            #endregion trataParametrosBusca
+
+            IEnumerable<SelfService> selfservices = new List<SelfService>();
+
+            selfservices = _selfserviceAppService.Find(predicate);
+
+            #region ordenacao
+            switch (sortOrder)
+            {
+                case "NomeLoja":
+                    selfservices = selfservices.OrderBy(s => s.CODIGOLOJAALTERNATE); //mudar de chave para campo
+                    break;
+                case "DT_INI":
+                    selfservices = selfservices.OrderBy(s => s.DT_INI); //mudar de chave para campo
+                    break;
+                case "DT_FIM":
+                    selfservices = selfservices.OrderBy(s => s.DT_FIM); //mudar de chave para campo
+                    break;
+                case "STATUS":
+                    selfservices = selfservices.OrderBy(s => s.STATUS);
+                    break;
+                case "NomeCargo_desc":
+                    selfservices = selfservices.OrderByDescending(s => s.CODIGOCARGOALTERNATE);
+                    break;
+                case "NomeLoja_desc":
+                    selfservices = selfservices.OrderByDescending(s => s.CODIGOLOJAALTERNATE); //mudar de chave para campo
+                    break;
+                case "DT_INI_desc":
+                    selfservices = selfservices.OrderByDescending(s => s.DT_INI); //mudar de chave para campo
+                    break;
+                case "DT_FIM_desc":
+                    selfservices = selfservices.OrderByDescending(s => s.DT_FIM); //mudar de chave para campo
+                    break;
+                case "STATUS_desc":
+                    selfservices = selfservices.OrderByDescending(s => s.STATUS);
+                    break;
+                default:  // NomeCargo ascending 
+                    selfservices = selfservices.OrderBy(s => s.CODIGOCARGOALTERNATE);
+                    break;
+            }
+            #endregion ordenacao
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(selfservices.ToPagedList(pageNumber, pageSize));
+        }
+
         protected override void Dispose(bool disposing)
         {
             _controleacessoAppService.Dispose();
