@@ -281,7 +281,7 @@ namespace Dufry.Comissoes.Controllers
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 return RedirectToAction("PlanoDelete", new { id = id, saveChangesError = true });
             }
-            return RedirectToAction("PlanoDelete");
+            return RedirectToAction("PlanoIndex");
 
         }
 
