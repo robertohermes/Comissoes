@@ -5,31 +5,44 @@
 }
 
 @{
-    string confirmMessage = "Tem certeza que deseja excluir o plano de comissão " + Html.DisplayFor(model => model.Plano.DESC_PLANO) + " ?";
+    string confirmMessageOK = "Tem certeza que deseja excluir o plano de comissão " + Html.DisplayFor(model => model.Plano.DESC_PLANO) + " ?";
     bool exibeBotaoExcluir = true;
+    
+    List<String> confirmMessageErrorList = new List<String>();
 
-    if (Model.Plano.PlanoCategorias.Count() > 0 || Model.Plano.DolarMedios.Count() > 0)
+    if (Model.Plano.PlanoCategorias.Count() > 0)
     {
-        confirmMessage = "";
-        exibeBotaoExcluir = false;        
+        confirmMessageErrorList.Add("O plano de comissão " + Html.DisplayFor(model => model.Plano.DESC_PLANO) + " não pode ser excluído, por haver Plano de Categoria associado. Exclua todos os respectivos planos de categoria primeiro.");
+        exibeBotaoExcluir = false;
 
-        if (Model.Plano.PlanoCategorias.Count() > 0)
-        {
-            confirmMessage = confirmMessage + "O plano de comissão " + Html.DisplayFor(model => model.Plano.DESC_PLANO) + " não pode ser excluído, por haver Plano de Categoria associado. Exclua todos os respectivos planos de categoria primeiro. <BR>";
-            
-        }
-
-        if (Model.Plano.DolarMedios.Count() > 0)
-        {
-            confirmMessage = confirmMessage + "O plano de comissão " + Html.DisplayFor(model => model.Plano.DESC_PLANO) + " não pode ser excluído, por haver Taxa de Dólar associada. Exclua todas as taxas de dólar primeiro. <BR>";
-        }
     }
+
+    if (Model.Plano.DolarMedios.Count() > 0)
+    {
+        confirmMessageErrorList.Add("O plano de comissão " + Html.DisplayFor(model => model.Plano.DESC_PLANO) + " não pode ser excluído, por haver Taxa de Dólar associada. Exclua todas as taxas de dólar primeiro.");
+        exibeBotaoExcluir = false;
+    }    
+    
 }
 
 <h1 class="headerForm">@ViewBag.Title</h1>
 <p class="errorMessage">@ViewBag.ErrorMessage</p>
 
-<p class="confirmMessage">@confirmMessage</p>
+@{
+    if (exibeBotaoExcluir)
+    {
+        <p class="confirmMessage">@confirmMessageOK</p>
+    }
+    else
+    {
+        foreach (string item in confirmMessageErrorList)
+        {
+            <p class="confirmMessage">@item</p>
+        }        
+    }
+}
+
+
 
 <div>   
 
@@ -52,7 +65,7 @@
                 <input type="submit" value="Excluir" class="botoesCategoria" />                    
             }
             
-            @Html.ActionLink("Voltar", "PlanoIndex", "PlanoPercentual", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
+            @Html.ActionLink("Voltar", "PlanoIndex", "Plano", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
         }
     </p>
 </div>
