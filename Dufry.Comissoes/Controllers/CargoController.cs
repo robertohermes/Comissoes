@@ -11,7 +11,7 @@ namespace Dufry.Comissoes.Controllers
     {
         private readonly ICargoAppService _cargoAppService;
 
-        public CargoController(ILojaAppService CargoAppService)
+        public CargoController(ICargoAppService CargoAppService)
         {
             _cargoAppService = CargoAppService;
         }

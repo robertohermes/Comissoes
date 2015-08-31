@@ -173,6 +173,7 @@
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="Controllers\AusenciaRemuneradaController.cs" />
+    <Compile Include="Controllers\CargoController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\CategoriaPercentualController.cs" />
     <Compile Include="Controllers\ControleAcessoController.cs" />
@@ -187,7 +188,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlanoCategoriaController.cs" />
     <Compile Include="Controllers\PlanoController.cs" />
-    <Compile Include="Controllers\SelfServiceController.cs" />
+    <Compile Include="Controllers\SelfServiceController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Filters\ControleAcessoAdminFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -381,6 +384,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Plano\PlanoEdit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\SelfService\SelfServiceCreate.cshtml">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Web.config">

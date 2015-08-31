@@ -1,25 +1,42 @@
-﻿using System;
-using AutoMapper;
-using Dufry.Comissoes.Domain.Entities;
+﻿using Dufry.Comissoes.Domain.Entities;
+using System.Collections.Generic;
+using System.Web.Mvc;
+//using AutoMapper;
+
 
 namespace Dufry.Comissoes.ViewModels
 {
     public class SelfServiceViewModel
     {
-        public int ID_SELF_SERVICE { get; set; }
-        public string CODIGOCARGOALTERNATE { get; set; }
-        public string CODIGOLOJAALTERNATE { get; set; }
-        public DateTime DT_INI { get; set; }
-        public DateTime DT_FIM { get; set; }
-        public string STATUS { get; set; }
-        public DateTime CREATED_DATETIME { get; set; }
-        public string CREATED_USERNAME { get; set; }
-        public DateTime LAST_MODIFY_DATE { get; set; }
-        public string LAST_MODIFY_USERNAME { get; set; }
+        
+        public SelfService SelfService { get; set; }
 
-        public SelfServiceViewModel ToViewModel(SelfService selfservice)
+        public Cargo Cargo { get; set; }
+
+        public Loja Loja { get; set; }
+
+        public IEnumerable<SelectListItem> CargoSelectListItem { get; set; }
+
+        public IEnumerable<SelectListItem> LojaSelectListItem { get; set; }
+
+        public SelfServiceViewModel(SelfService selfService, Cargo cargo, Loja loja)
         {
-            return Mapper.Map<SelfServiceViewModel>(selfservice);
+            SelfService = selfService;
+            Cargo = cargo;
+            Loja = loja;
         }
+
+        public SelfServiceViewModel(SelfService selfService, IEnumerable<SelectListItem> cargoSelectListItem, IEnumerable<SelectListItem> lojaSelectListItem)
+        {
+            SelfService = selfService;
+            CargoSelectListItem = cargoSelectListItem;
+            LojaSelectListItem = lojaSelectListItem;
+        }
+
+        //<REVER>
+        //public SelfServiceViewModel ToViewModel(SelfService selfservice)
+        //{
+        //    return Mapper.Map<SelfServiceViewModel>(selfservice);
+        //}
     }
 }
