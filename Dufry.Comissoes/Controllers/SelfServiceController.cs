@@ -89,6 +89,86 @@ namespace Dufry.Comissoes.Controllers
             return View(selfservice);
         }
 
+        // GET: /SelfService/SelfServiceEdit/5
+        public ActionResult SelfServiceEdit(int? id)
+        {
+            if (id == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception();
+            }
+            var selfservice = _selfserviceAppService.Get(id ?? default(int));
+            if (selfservice == null)
+            {
+                //return HttpNotFound();
+                throw new Exception();
+            }
+
+            var cargos = _cargoAppService.Find(t => t.CodigoCargoAlternate.Trim() != "NA" && t.CodigoCargoAlternate.Trim() != "DS");
+            IEnumerable<SelectListItem> cargoSelectListItem = new SelectList(cargos, "CodigoCargoAlternate", "NomeCargo");
+            ViewBag.CodigoCargoAlternate = new SelectList(cargos, "CodigoCargoAlternate", "NomeCargo", selfservice.CODIGOCARGOALTERNATE);
+
+            var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1"); ;
+            IEnumerable<SelectListItem> lojaSelectListItem = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
+            ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja", selfservice.CODIGOLOJAALTERNATE);
+
+            SelfServiceViewModel selfServiceVM = new SelfServiceViewModel(selfservice, cargoSelectListItem, lojaSelectListItem);
+
+            return View(selfServiceVM);
+
+        }
+
+        // POST: /SelfService/SelfServiceEdit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost, ActionName("SelfServiceEdit")]
+        //[ValidateAntiForgeryToken]
+        public ActionResult SelfServiceEditConfirmed(int? id)
+        {
+
+            if (id == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception();
+            }
+
+            var selfserviceToUpdate = _selfserviceAppService.Get(id ?? default(int));
+
+            //---------------------------------------------------------------------------------------------
+            //<REVER>
+            //---------------------------------------------------------------------------------------------
+            selfserviceToUpdate.CODIGOCARGOALTERNATE = Request["SelfService.CODIGOCARGOALTERNATE"];
+            selfserviceToUpdate.CODIGOLOJAALTERNATE = Request["SelfService.CODIGOLOJAALTERNATE"];
+            selfserviceToUpdate.DT_INI = Convert.ToDateTime(Request["SelfService.DT_INI"]);
+            selfserviceToUpdate.DT_FIM = Convert.ToDateTime(Request["SelfService.DT_FIM"]);
+            selfserviceToUpdate.STATUS = Request["SelfService.STATUS"];
+            //---------------------------------------------------------------------------------------------
+
+            //---------------------------------------------------------------------------------------------
+            //<REVER>
+            //---------------------------------------------------------------------------------------------
+            selfserviceToUpdate.LAST_MODIFY_DATE = DateTime.Now;
+            selfserviceToUpdate.LAST_MODIFY_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
+            //---------------------------------------------------------------------------------------------
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _selfserviceAppService.Update(selfserviceToUpdate);
+
+                    return RedirectToAction("SelfServiceIndex");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Erro na alteração. Tente novamente ou, se o problema persistir, entre em contato com o suporte.");
+                }
+            }
+
+            return View(selfserviceToUpdate);
+        }
+
         protected override void Dispose(bool disposing)
         {
             _controleacessoAppService.Dispose();

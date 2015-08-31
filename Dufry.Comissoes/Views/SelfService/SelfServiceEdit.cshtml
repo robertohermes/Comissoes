@@ -1,0 +1,89 @@
+﻿@model SelfServiceViewModel
+
+@{
+    ViewBag.Title = "Edição de Comissões Self Service";
+}
+
+<h1 class="headerForm">@ViewBag.Title</h1>
+
+
+@using (Html.BeginForm()) 
+{
+    @*@Html.AntiForgeryToken()*@
+
+    <div class="editorCategoria">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.SelfService.ID_SELF_SERVICE)
+        <p>
+            @Html.LabelFor(model => model.SelfService.CODIGOCARGOALTERNATE)
+            @Html.DropDownListFor(model => model.SelfService.CODIGOCARGOALTERNATE, Model.CargoSelectListItem, "--- Selecione ---", new { @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.SelfService.CODIGOCARGOALTERNATE, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.SelfService.CODIGOLOJAALTERNATE)
+            @Html.DropDownListFor(model => model.SelfService.CODIGOLOJAALTERNATE, Model.LojaSelectListItem, "--- Selecione ---", new { @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.SelfService.CODIGOLOJAALTERNATE, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.SelfService.DT_INI)
+            @Html.TextBoxFor(model => model.SelfService.DT_INI, null, new { @class = "dp", @Value = Model.SelfService.DT_INI.ToString("dd/MM/yyyy") })
+            @Html.ValidationMessageFor(model => model.SelfService.DT_INI, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.SelfService.DT_FIM)
+            @Html.TextBoxFor(model => model.SelfService.DT_FIM, null, new { @class = "dp", @Value = Model.SelfService.DT_FIM.ToString("dd/MM/yyyy") })
+            @Html.ValidationMessageFor(model => model.SelfService.DT_FIM, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.SelfService.STATUS)
+            @Html.RadioButtonFor(model => model.SelfService.STATUS, "A") Ativo
+            @Html.RadioButtonFor(model => model.SelfService.STATUS, "I") Inativo
+            @Html.ValidationMessageFor(model => model.SelfService.STATUS, String.Empty, new { @style = "padding-left: 127px;!important" })
+        </p>
+
+    </div>
+
+    <input type="submit" id="salvaSelfService" value="Salvar" class="botoesCategoria" />
+    @Html.ActionLink("Voltar", "SelfServiceIndex", "SelfService", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
+
+}
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('.dp').datepicker({
+                showAnim: "scale",
+                showOptions: {
+                    origin: ["top", "right"]
+                }
+            });
+        });
+
+        $(document).ready(function () {
+
+            $("input[name='SelfService.DT_FIM']").rules("add", {
+                DateGtEq: $("input[name='SelfService.DT_INI']"),
+                messages: { DateGtEq: "A data final da vigência deve ser maior que a data inicial" }
+            });
+        });
+
+        $(function () {
+            $("#SelfService_CODIGOCARGOALTERNATE").combobox();
+            $("#toggle").click(function () {
+                $("#SelfService_CODIGOCARGOALTERNATE").toggle();
+            });
+        });
+
+        $(function () {
+            $("#SelfService_CODIGOLOJAALTERNATE").combobox();
+            $("#toggle").click(function () {
+                $("#SelfService_CODIGOLOJAALTERNATE").toggle();
+            });
+        });
+    </script>
+}
+
+
+
