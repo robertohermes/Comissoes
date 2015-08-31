@@ -1,0 +1,60 @@
+﻿@model PlanoViewModel
+
+@{
+    ViewBag.Title = "Exclusão de Planos de Comissões";
+}
+
+@{
+    string confirmMessage = "Tem certeza que deseja excluir o plano de comissão " + Html.DisplayFor(model => model.Plano.DESC_PLANO) + " ?";
+    bool exibeBotaoExcluir = true;
+
+    if (Model.Plano.PlanoCategorias.Count() > 0 || Model.Plano.DolarMedios.Count() > 0)
+    {
+        confirmMessage = "";
+        exibeBotaoExcluir = false;        
+
+        if (Model.Plano.PlanoCategorias.Count() > 0)
+        {
+            confirmMessage = confirmMessage + "O plano de comissão " + Html.DisplayFor(model => model.Plano.DESC_PLANO) + " não pode ser excluído, por haver Plano de Categoria associado. Exclua todos os respectivos planos de categoria primeiro. <BR>";
+            
+        }
+
+        if (Model.Plano.DolarMedios.Count() > 0)
+        {
+            confirmMessage = confirmMessage + "O plano de comissão " + Html.DisplayFor(model => model.Plano.DESC_PLANO) + " não pode ser excluído, por haver Taxa de Dólar associada. Exclua todas as taxas de dólar primeiro. <BR>";
+        }
+    }
+}
+
+<h1 class="headerForm">@ViewBag.Title</h1>
+<p class="errorMessage">@ViewBag.ErrorMessage</p>
+
+<p class="confirmMessage">@confirmMessage</p>
+
+<div>   
+
+    <div>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.Categoria.DESC_CATEGORIA)</label><label>@Html.DisplayFor(model => model.CategoriaPercentual.Categoria.DESC_CATEGORIA)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.ATRIBUTO)</label><label>@Html.DisplayFor(model => model.CategoriaPercentual.ATRIBUTO)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.Loja.NomeLoja)</label><label>@Html.DisplayFor(model => model.Loja.NomeLoja)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.PERCENTUAL)</label><label>@Html.DisplayFor(model => model.CategoriaPercentual.PERCENTUAL)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.DT_INI)</label><label>@Html.DisplayFor(model => model.CategoriaPercentual.DT_INI)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.DT_FIM)</label><label>@Html.DisplayFor(model => model.CategoriaPercentual.DT_FIM)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.CategoriaPercentual.STATUS) </label>
+                                    @if (Model.CategoriaPercentual.STATUS == "A"){ <label>Ativo</label>}else{<label>Inativo</label>}</p>
+    </div>
+
+    <p>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            
+            if (exibeBotaoExcluir)
+            {
+                <input type="submit" value="Excluir" class="botoesCategoria" />                    
+            }
+            
+            @Html.ActionLink("Voltar", "CategoriaPercentualIndex", "CategoriaPercentual", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
+        }
+    </p>
+</div>

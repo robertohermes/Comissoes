@@ -1,0 +1,150 @@
+﻿@model PagedList.IPagedList<Plano>
+    @using PagedList.Mvc;
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+    @{
+        ViewBag.Title = "Busca de Planos de Comissões";
+    }
+
+    <h1 class="headerForm">@ViewBag.Title</h1>
+
+    @**************************************************************************************************************************@
+    @*                                                 Filtros de Busca                                                       *@
+    @**************************************************************************************************************************@
+    @using (Html.BeginForm("PlanoIndex", "Plano", FormMethod.Get))
+    {
+        <div class="editorCategoria">
+            <p><label for="descplanoSearchString">Plano</label>@Html.TextBox("descplanoSearchString", null, new { maxlength = "255" })</p>
+            <p><label for="dtiniSearchString">Data inicial da vigência</label>@Html.TextBox("dtiniSearchString", null, new { @class = "dp" })</p>
+            <p><label for="dtfimSearchString">Data final da vigência</label>@Html.TextBox("dtfimSearchString", null, new { @class = "dp" })</p>
+            <p>
+                <label for="statusSearchString">Status</label>      @Html.RadioButton("statusSearchString", "A", true, ViewBag.StatusFilter as string)Ativo
+                @Html.RadioButton("statusSearchString", "I", ViewBag.StatusFilter as string)Inativo
+            </p>
+        </div>
+        <p>
+            <input type="submit" id="buscaPlano" value="Buscar" class="botoesCategoria" />
+            @Html.ActionLink("Limpar", "PlanoIndex", "Plano", null, new { @class = "botoesCategoria" })
+            @Html.ActionLink("Novo", "PlanoCreate", "Plano", null, new { @class = "botoesCategoria" })
+        </p>
+
+    }
+
+
+    @**************************************************************************************************************************@
+    @*                                          Cabeçalho e loop do resultado da busca                                        *@
+    @**************************************************************************************************************************@
+    <table class="dufry" width="80%">
+        <tr>
+            <th>
+                @Html.ActionLink("Plano", "PlanoIndex", "Plano"
+                , new
+                {
+                    sortOrder = ViewBag.DescPlanoSortParam,
+                    descplanoSearchString = ViewBag.descplanoFilter,
+                    dtiniSearchString = ViewBag.dtiniFilter,
+                    dtfimSearchString = ViewBag.dtfimFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
+                , new { @class = "tableheadlink" })
+            </th>
+            <th>
+                @Html.ActionLink("Data Inicial", "PlanoIndex", "Plano"
+                , new
+                {
+                    sortOrder = ViewBag.DtIniSortParam,
+                    descplanoSearchString = ViewBag.descplanoFilter,
+                    dtiniSearchString = ViewBag.dtiniFilter,
+                    dtfimSearchString = ViewBag.dtfimFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
+                , new { @class = "tableheadlink" })
+            </th>
+            <th>
+                @Html.ActionLink("Data Final", "PlanoIndex", "Plano"
+                , new
+                {
+                    sortOrder = ViewBag.DtFimSortParam,
+                    descplanoSearchString = ViewBag.descplanoFilter,
+                    dtiniSearchString = ViewBag.dtiniFilter,
+                    dtfimSearchString = ViewBag.dtfimFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
+                , new { @class = "tableheadlink" })
+            </th>
+            <th>
+                @Html.ActionLink("Status", "PlanoIndex", "Plano"
+                , new
+                {
+                    sortOrder = ViewBag.StatusSortParam,
+                    descplanoSearchString = ViewBag.descplanoFilter,
+                    dtiniSearchString = ViewBag.dtiniFilter,
+                    dtfimSearchString = ViewBag.dtfimFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
+                , new { @class = "tableheadlink" })
+
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.ActionLink(item.DESC_PLANO, "PlanoEdit", "Plano", new { id = item.ID_PLANO }, new { @class = "tablerowlink" })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DT_INI)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DT_FIM)
+                </td>
+                @if (item.STATUS == "A")
+                {
+                    <td>Ativo</td>
+                }
+                else
+                {
+                    <td>Inativo</td>
+                }
+                <td>
+                    @Html.ActionLink("Excluir", "PlanoDelete", "Plano", new { id = item.ID_PLANO }, new { @class = "tablerowlink" })
+                </td>
+            </tr>
+        }
+    </table>
+
+
+    @**************************************************************************************************************************@
+    @*                                                        Paginação                                                       *@
+    @**************************************************************************************************************************@
+    <br />
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("PlanoIndex"
+    , new
+    {
+        sortOrder = ViewBag.CurrentSort,
+        descplanoSearchString = ViewBag.descplanoFilter,
+        dtiniSearchString = ViewBag.dtiniFilter,
+        dtfimSearchString = ViewBag.dtfimFilter,
+        statusSearchString = ViewBag.StatusFilter,
+        page
+    }))
+
+
+    @section Scripts {
+        <script type="text/javascript">
+            $(function () {
+                $('.dp').datepicker({
+                    showAnim: "scale",
+                    showOptions: {
+                        origin: ["top", "right"]
+                    }
+                });
+            });
+        </script>
+    }
+

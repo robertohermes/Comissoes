@@ -425,6 +425,8 @@
     <Content Include="Views\DolarMedio\DolarMedioIndex.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Plano\PlanoDelete.cshtml" />
+    <Content Include="Views\Plano\PlanoIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

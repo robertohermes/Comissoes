@@ -35,7 +35,7 @@
             @Html.ValidationMessageFor(model => model.Plano.STATUS, String.Empty, new { @style = "padding-left: 127px;!important" })
         </p>
 
-        <p>
+        @*<p>
             @Html.LabelFor(model => model.CategoriaPercentual.ID_CATEGORIA)
             @Html.DropDownListFor(model => model.CategoriaPercentual.ID_CATEGORIA, Model.CategoriasSelectListItem, "--- Selecione ---", new { @style = "padding-left: 7px;!important" })
             @Html.ValidationMessageFor(model => model.CategoriaPercentual.ID_CATEGORIA, String.Empty, new { @style = "padding-left: 10px;!important" })
@@ -57,7 +57,7 @@
             @Html.LabelFor(model => model.PlanoCategoria.ORDEM_HIERARQUIA)
             @Html.TextBoxFor(model => model.PlanoCategoria.ORDEM_HIERARQUIA)
             @Html.ValidationMessageFor(model => model.PlanoCategoria.ORDEM_HIERARQUIA, String.Empty, new { @style = "padding-left: 10px;!important" })
-        </p>
+        </p>*@
 
     </div>
 
