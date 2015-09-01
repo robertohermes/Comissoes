@@ -92,6 +92,25 @@ jQuery.validator.addMethod(
     });
 
 
+jQuery.validator.addMethod(
+    "custom-combobox-input",
+    function (value, element)
+    {
+        if (element.value === "") {
+            return false;
+        }
+        else {
+            return true;
+        }
+    });
+
+
+//----------------------------------------------------------------------------
+
+$(function () {
+    $(".autocomplete-combobox").combobox();
+});
+
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 //Métodos do jqueryui autocomplete combobox
@@ -118,7 +137,7 @@ jQuery.validator.addMethod(
             this.input = $("<input>")
               .appendTo(this.wrapper)
               .val(value)
-              .attr("title", "digite ou selecione")
+              //.attr("title", "digite ou selecione")
               .addClass("custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left")
               .autocomplete({
                   delay: 0,
