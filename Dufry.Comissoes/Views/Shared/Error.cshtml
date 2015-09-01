@@ -6,14 +6,16 @@
 
 <h1 class="headerForm">Oops! Houve algum erro na aplicação</h1>
 
-<p>Controller = @Model.ControllerName</p>
-<p>Action = @Model.ActionName</p>
-<p>Message = @Model.Exception.Message</p>
-<p>StackTrace :</p>
-<pre>@Model.Exception.StackTrace</pre>
-<p></p>
-<p></p>
 <p>
     <a href="javascript:history.go(-1)">Clique aqui</a>
     para voltar para a página anterior.
 </p>
+<p>Controller = @Model.ControllerName</p>
+<p>Action = @Model.ActionName</p>
+<p>Message = @Model.Exception.Message</p>
+<p>Exception = @Model.Exception.GetType().FullName</p>
+<p>StackTrace :</p>
+<pre>@Model.Exception.StackTrace</pre>
+<p></p>
+<p></p>
+
