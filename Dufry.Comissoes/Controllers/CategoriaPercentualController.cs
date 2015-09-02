@@ -34,6 +34,7 @@ namespace Dufry.Comissoes.Controllers
         {
             CategoriaPercentual categoriapercentual = new CategoriaPercentual();
 
+            #region populaobjetos
             var categorias = _categoriaAppService.Find(t => t.STATUS == "A");
             IEnumerable<SelectListItem> categoriaSelectListItem = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA");
             ViewBag.ID_CATEGORIA = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA");
@@ -41,6 +42,7 @@ namespace Dufry.Comissoes.Controllers
             var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1"); ;
             IEnumerable<SelectListItem> lojaSelectListItem = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
             ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
+            #endregion populaobjetos
 
             CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel(categoriapercentual, categoriaSelectListItem, lojaSelectListItem);
 
@@ -54,30 +56,22 @@ namespace Dufry.Comissoes.Controllers
         {
             try
             {
-                //---------------------------------------------------------------------------------------------
-                //<REVER>
-                //---------------------------------------------------------------------------------------------
-                categoriapercentual.ID_CATEGORIA = Convert.ToInt32(Request["CategoriaPercentual.ID_CATEGORIA"]);
-                categoriapercentual.ATRIBUTO = Request["CategoriaPercentual.ATRIBUTO"];
-                categoriapercentual.CODIGOLOJAALTERNATE = Request["CategoriaPercentual.CODIGOLOJAALTERNATE"];
-                categoriapercentual.PERCENTUAL = Convert.ToDecimal(Request["CategoriaPercentual.PERCENTUAL"]);
-                categoriapercentual.DT_INI = Convert.ToDateTime(Request["CategoriaPercentual.DT_INI"]);
-                categoriapercentual.DT_FIM = Convert.ToDateTime(Request["CategoriaPercentual.DT_FIM"]);
-                categoriapercentual.STATUS = Request["CategoriaPercentual.STATUS"];
-
-                //---------------------------------------------------------------------------------------------
-                //<REVER>
-                //---------------------------------------------------------------------------------------------
-                categoriapercentual.CREATED_DATETIME = DateTime.Now;
-                categoriapercentual.CREATED_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
-
-                categoriapercentual.LAST_MODIFY_DATE = categoriapercentual.CREATED_DATETIME;
-                categoriapercentual.LAST_MODIFY_USERNAME = categoriapercentual.CREATED_USERNAME;
-                //---------------------------------------------------------------------------------------------
+                categoriapercentual = ObtemCategoriaPercentualForm(categoriapercentual, true);
 
                 if (ModelState.IsValid)
                 {
-                    _categoriapercentualAppService.Create(categoriapercentual);
+                    CategoriaPercentual categoriapercentualExiste = new CategoriaPercentual();
+                    categoriapercentualExiste = null;
+
+                    if (categoriapercentual.STATUS == "A")
+                    {
+                        categoriapercentualExiste = CategoriaPercentualAtivaVigente(categoriapercentual);
+                    }
+
+                    if (categoriapercentualExiste == null)
+                    {
+                        _categoriapercentualAppService.Create(categoriapercentual);
+                    }
                     return RedirectToAction("CategoriaPercentualIndex");
                 }
             }
@@ -105,13 +99,15 @@ namespace Dufry.Comissoes.Controllers
                 throw new Exception();
             }
 
+            #region populaobjetos
             var categorias = _categoriaAppService.All();
             IEnumerable<SelectListItem> categoriaSelectListItem = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA");
             ViewBag.ID_CATEGORIA = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA", categoriapercentual.ID_CATEGORIA);
 
-            var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1"); ;
+            var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1");
             IEnumerable<SelectListItem> lojaSelectListItem = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
             ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja", categoriapercentual.CODIGOLOJAALTERNATE);
+            #endregion populaobjetos
 
             CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel(categoriapercentual, categoriaSelectListItem, lojaSelectListItem);
 
@@ -135,30 +131,24 @@ namespace Dufry.Comissoes.Controllers
 
             var categoriapercentualToUpdate = _categoriapercentualAppService.Get(id ?? default(int));
 
-            //---------------------------------------------------------------------------------------------
-            //<REVER>
-            //---------------------------------------------------------------------------------------------
-            categoriapercentualToUpdate.ID_CATEGORIA = Convert.ToInt32(Request["CategoriaPercentual.ID_CATEGORIA"]);
-            categoriapercentualToUpdate.ATRIBUTO = Request["CategoriaPercentual.ATRIBUTO"];
-            categoriapercentualToUpdate.CODIGOLOJAALTERNATE = Request["CategoriaPercentual.CODIGOLOJAALTERNATE"];
-            categoriapercentualToUpdate.PERCENTUAL = Convert.ToDecimal(Request["CategoriaPercentual.PERCENTUAL"]);
-            categoriapercentualToUpdate.DT_INI = Convert.ToDateTime(Request["CategoriaPercentual.DT_INI"]);
-            categoriapercentualToUpdate.DT_FIM = Convert.ToDateTime(Request["CategoriaPercentual.DT_FIM"]);
-            categoriapercentualToUpdate.STATUS = Request["CategoriaPercentual.STATUS"];
-            //---------------------------------------------------------------------------------------------
-
-            //---------------------------------------------------------------------------------------------
-            //<REVER>
-            //---------------------------------------------------------------------------------------------
-            categoriapercentualToUpdate.LAST_MODIFY_DATE = DateTime.Now;
-            categoriapercentualToUpdate.LAST_MODIFY_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
-            //---------------------------------------------------------------------------------------------
+            categoriapercentualToUpdate = ObtemCategoriaPercentualForm(categoriapercentualToUpdate);
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _categoriapercentualAppService.Update(categoriapercentualToUpdate);
+                    CategoriaPercentual categoriapercentualExiste = new CategoriaPercentual();
+                    categoriapercentualExiste = null;
+
+                    if (categoriapercentualToUpdate.STATUS == "A")
+                    {
+                        categoriapercentualExiste = CategoriaPercentualAtivaVigente(categoriapercentualToUpdate);
+                    }
+
+                    if (categoriapercentualExiste == null)
+                    {
+                        _categoriapercentualAppService.Update(categoriapercentualToUpdate);
+                    }
 
                     return RedirectToAction("CategoriaPercentualIndex");
                 }
@@ -378,6 +368,45 @@ namespace Dufry.Comissoes.Controllers
 
             base.Dispose(disposing);
         }
+
+        private CategoriaPercentual CategoriaPercentualAtivaVigente (CategoriaPercentual cp)
+        {
+
+            return _categoriapercentualAppService.Find(t => t.ID_CATEGORIA == cp.ID_CATEGORIA
+                                                                                                && t.ATRIBUTO == cp.ATRIBUTO
+                                                                                                && t.CODIGOLOJAALTERNATE == cp.CODIGOLOJAALTERNATE
+                                                                                                && t.STATUS == "A"
+                                                                                                && (
+                                                                                                    (t.DT_INI <= cp.DT_INI && t.DT_FIM >= cp.DT_INI)
+                                                                                                    || (t.DT_FIM <= cp.DT_INI && t.DT_FIM >= cp.DT_FIM)
+                                                                                                    || (cp.DT_INI <= t.DT_INI && cp.DT_FIM >= t.DT_FIM)
+                                                                                                )
+                                                                                            ).FirstOrDefault();
+        }
+
+        private CategoriaPercentual ObtemCategoriaPercentualForm(CategoriaPercentual cp, bool insert = false)
+        {
+            cp.ID_CATEGORIA = Convert.ToInt32(Request["CategoriaPercentual.ID_CATEGORIA"]);
+            cp.ATRIBUTO = Request["CategoriaPercentual.ATRIBUTO"];
+            cp.CODIGOLOJAALTERNATE = Request["CategoriaPercentual.CODIGOLOJAALTERNATE"];
+            cp.PERCENTUAL = Convert.ToDecimal(Request["CategoriaPercentual.PERCENTUAL"]);
+            cp.DT_INI = Convert.ToDateTime(Request["CategoriaPercentual.DT_INI"]);
+            cp.DT_FIM = Convert.ToDateTime(Request["CategoriaPercentual.DT_FIM"]);
+            cp.STATUS = Request["CategoriaPercentual.STATUS"];
+
+            cp.LAST_MODIFY_DATE = DateTime.Now;
+            cp.LAST_MODIFY_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
+
+            if (insert)
+            {
+                cp.CREATED_DATETIME = cp.LAST_MODIFY_DATE;
+                cp.CREATED_USERNAME = cp.LAST_MODIFY_USERNAME;
+            }
+
+            return cp;
+        }
+
+
 
     }
 }
