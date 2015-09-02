@@ -437,6 +437,8 @@
     <Content Include="Views\SelfService\SelfServiceEdit.cshtml" />
     <Content Include="Views\SelfService\SelfServiceDelete.cshtml" />
     <Content Include="Views\SelfService\SelfServiceIndex.cshtml" />
+    <Content Include="Views\Shared\InvalidOperation.cshtml" />
+    <Content Include="Views\Shared\HttpException.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

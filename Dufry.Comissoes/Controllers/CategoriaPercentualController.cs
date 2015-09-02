@@ -9,11 +9,16 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Globalization;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Dufry.Comissoes.Controllers
 {
     [ControleAcessoAdminFilter]
+    [HandleError(ExceptionType = typeof(InvalidOperationException),
+            View = "InvalidOperation")]
+    [HandleError(ExceptionType = typeof(HttpException),
+                View = "HttpException")]
     public class CategoriaPercentualController : Controller
     {
         private readonly ICategoriaPercentualAppService _categoriapercentualAppService;
@@ -68,9 +73,13 @@ namespace Dufry.Comissoes.Controllers
                         categoriapercentualExiste = CategoriaPercentualAtivaVigente(categoriapercentual);
                     }
 
-                    if (categoriapercentualExiste == null)
+                    if (categoriapercentualExiste == null || categoriapercentualExiste.STATUS == "I")
                     {
                         _categoriapercentualAppService.Create(categoriapercentual);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Já existe um perído vigente e ativo que coincide com a tentativa de inclusão / alteração");
                     }
                     return RedirectToAction("CategoriaPercentualIndex");
                 }
@@ -145,9 +154,13 @@ namespace Dufry.Comissoes.Controllers
                         categoriapercentualExiste = CategoriaPercentualAtivaVigente(categoriapercentualToUpdate);
                     }
 
-                    if (categoriapercentualExiste == null)
+                    if (categoriapercentualExiste == null || categoriapercentualToUpdate.STATUS == "I")
                     {
                         _categoriapercentualAppService.Update(categoriapercentualToUpdate);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Já existe um perído vigente e ativo que coincide com a tentativa de inclusão / alteração");
                     }
 
                     return RedirectToAction("CategoriaPercentualIndex");
