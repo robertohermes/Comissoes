@@ -73,7 +73,7 @@ namespace Dufry.Comissoes.Controllers
                         categoriapercentualExiste = CategoriaPercentualAtivaVigente(categoriapercentual);
                     }
 
-                    if (categoriapercentualExiste == null || categoriapercentualExiste.STATUS == "I")
+                    if (categoriapercentualExiste == null || categoriapercentual.STATUS == "I")
                     {
                         _categoriapercentualAppService.Create(categoriapercentual);
                     }

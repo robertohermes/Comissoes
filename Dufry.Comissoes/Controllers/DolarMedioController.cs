@@ -9,11 +9,16 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Globalization;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Dufry.Comissoes.Controllers
 {
     [ControleAcessoAdminFilter]
+    [HandleError(ExceptionType = typeof(InvalidOperationException),
+        View = "InvalidOperation")]
+    [HandleError(ExceptionType = typeof(HttpException),
+                View = "HttpException")]
     public class DolarMedioController : Controller
     {
 
@@ -32,10 +37,12 @@ namespace Dufry.Comissoes.Controllers
         public ActionResult DolarMedioCreate()
         {
             DolarMedio dolarmedio = new DolarMedio();
-           
+
+            #region populaobjetos
             var planos = _planoAppService.Find(t => t.STATUS == "A"); ;
             IEnumerable<SelectListItem> planosSelectListItem = new SelectList(planos, "ID_PLANO", "DESC_PLANO");
             ViewBag.CODIGOLOJAALTERNATE = new SelectList(planos, "ID_PLANO", "DESC_PLANO");
+            #endregion populaobjetos
 
             DolarMedioViewModel dolarmedioVM = new DolarMedioViewModel(dolarmedio, planosSelectListItem);
 
@@ -49,28 +56,25 @@ namespace Dufry.Comissoes.Controllers
         {
             try
             {
-                //---------------------------------------------------------------------------------------------
-                //<REVER>
-                //---------------------------------------------------------------------------------------------
-                dolarmedio.ID_PLANO = Convert.ToInt32(Request["DolarMedio.ID_PLANO"]);
-                dolarmedio.TIPO_TAXA = Request["DolarMedio.TIPO_TAXA"];
-                dolarmedio.VALOR_DOLAR_MEDIO = Convert.ToDecimal(Request["DolarMedio.VALOR_DOLAR_MEDIO"]);
-                dolarmedio.DT_INI = Convert.ToDateTime(Request["DolarMedio.DT_INI"]);
-                dolarmedio.DT_FIM = Convert.ToDateTime(Request["DolarMedio.DT_FIM"]);
-
-                //---------------------------------------------------------------------------------------------
-                //<REVER>
-                //---------------------------------------------------------------------------------------------
-                dolarmedio.CREATED_DATETIME = DateTime.Now;
-                dolarmedio.CREATED_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
-
-                dolarmedio.LAST_MODIFY_DATE = dolarmedio.CREATED_DATETIME;
-                dolarmedio.LAST_MODIFY_USERNAME = dolarmedio.CREATED_USERNAME;
-                //---------------------------------------------------------------------------------------------
+                dolarmedio = ObtemDolarMedioForm(dolarmedio, true);
 
                 if (ModelState.IsValid)
                 {
-                    _dolarmedioAppService.Create(dolarmedio);
+                    DolarMedio dolarmedioExiste = new DolarMedio();
+                    dolarmedioExiste = null;
+
+                    dolarmedioExiste = DolarMedioVigente(dolarmedio);
+
+                    if (dolarmedioExiste == null)
+                    {
+                        _dolarmedioAppService.Create(dolarmedio);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Já existe um perído vigente e ativo que coincide com a tentativa de inclusão / alteração");
+                    }
+
+
                     return RedirectToAction("DolarMedioIndex");
                 }
             }
@@ -98,9 +102,11 @@ namespace Dufry.Comissoes.Controllers
                 throw new Exception();
             }
 
+            #region populaobjetos
             var planos = _planoAppService.All();
             IEnumerable<SelectListItem> planosSelectListItem = new SelectList(planos, "ID_PLANO", "DESC_PLANO");
             ViewBag.ID_PLANO = new SelectList(planos, "ID_PLANO", "DESC_PLANO", dolarmedio.ID_PLANO);
+            #endregion populaobjetos
 
             DolarMedioViewModel dolarmedioVM = new DolarMedioViewModel(dolarmedio, planosSelectListItem);
 
@@ -124,28 +130,25 @@ namespace Dufry.Comissoes.Controllers
 
             var dolarmedioToUpdate = _dolarmedioAppService.Get(id ?? default(int));
 
-            //---------------------------------------------------------------------------------------------
-            //<REVER>
-            //---------------------------------------------------------------------------------------------
-            dolarmedioToUpdate.ID_PLANO = Convert.ToInt32(Request["DolarMedio.ID_PLANO"]);
-            dolarmedioToUpdate.TIPO_TAXA = Request["DolarMedio.TIPO_TAXA"];
-            dolarmedioToUpdate.VALOR_DOLAR_MEDIO = Convert.ToDecimal(Request["DolarMedio.VALOR_DOLAR_MEDIO"]);
-            dolarmedioToUpdate.DT_INI = Convert.ToDateTime(Request["DolarMedio.DT_INI"]);
-            dolarmedioToUpdate.DT_FIM = Convert.ToDateTime(Request["DolarMedio.DT_FIM"]);
-            //---------------------------------------------------------------------------------------------
-
-            //---------------------------------------------------------------------------------------------
-            //<REVER>
-            //---------------------------------------------------------------------------------------------
-            dolarmedioToUpdate.LAST_MODIFY_DATE = DateTime.Now;
-            dolarmedioToUpdate.LAST_MODIFY_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
-            //---------------------------------------------------------------------------------------------
+            dolarmedioToUpdate = ObtemDolarMedioForm(dolarmedioToUpdate);
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _dolarmedioAppService.Update(dolarmedioToUpdate);
+                    DolarMedio dolarmedioExiste = new DolarMedio();
+                    dolarmedioExiste = null;
+
+                    dolarmedioExiste = DolarMedioVigente(dolarmedioToUpdate);
+
+                    if (dolarmedioExiste == null)
+                    {
+                        _dolarmedioAppService.Update(dolarmedioToUpdate);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Já existe um perído vigente que coincide com a tentativa de inclusão / alteração");
+                    }
 
                     return RedirectToAction("DolarMedioIndex");
                 }
@@ -327,6 +330,38 @@ namespace Dufry.Comissoes.Controllers
             _planoAppService.Dispose();
 
             base.Dispose(disposing);
+        }
+
+        private DolarMedio DolarMedioVigente(DolarMedio dm)
+        {
+
+            return _dolarmedioAppService.Find(t => t.ID_PLANO == dm.ID_PLANO
+                                                && (
+                                                    (t.DT_INI <= dm.DT_INI && t.DT_FIM >= dm.DT_INI)
+                                                    || (t.DT_FIM <= dm.DT_INI && t.DT_FIM >= dm.DT_FIM)
+                                                    || (dm.DT_INI <= t.DT_INI && dm.DT_FIM >= t.DT_FIM)
+                                                )
+                                            ).FirstOrDefault();
+        }
+
+        private DolarMedio ObtemDolarMedioForm(DolarMedio dm, bool insert = false)
+        {
+            dm.ID_PLANO = Convert.ToInt32(Request["DolarMedio.ID_PLANO"]);
+            dm.TIPO_TAXA = Request["DolarMedio.TIPO_TAXA"];
+            dm.VALOR_DOLAR_MEDIO = Convert.ToDecimal(Request["DolarMedio.VALOR_DOLAR_MEDIO"]);
+            dm.DT_INI = Convert.ToDateTime(Request["DolarMedio.DT_INI"]);
+            dm.DT_FIM = Convert.ToDateTime(Request["DolarMedio.DT_FIM"]);
+
+            dm.LAST_MODIFY_DATE = DateTime.Now;
+            dm.LAST_MODIFY_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
+
+            if (insert)
+            {
+                dm.CREATED_DATETIME = dm.LAST_MODIFY_DATE;
+                dm.CREATED_USERNAME = dm.LAST_MODIFY_USERNAME;
+            }
+
+            return dm;
         }
     }
 }

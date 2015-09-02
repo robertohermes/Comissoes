@@ -1,19 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
-using Dufry.Comissoes.Application.Interfaces;
-using PagedList;
+﻿using Dufry.Comissoes.Application.Interfaces;
+using Dufry.Comissoes.Controllers.Helpers;
 using Dufry.Comissoes.Domain.Entities;
 using Dufry.Comissoes.Filters;
 using Dufry.Comissoes.ViewModels;
+using PagedList;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
-using Dufry.Comissoes.Controllers.Helpers;
 using System.Globalization;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 
 namespace Dufry.Comissoes.Controllers
 {
     [ControleAcessoAdminFilter]
+    [HandleError(ExceptionType = typeof(InvalidOperationException),
+        View = "InvalidOperation")]
+    [HandleError(ExceptionType = typeof(HttpException),
+                View = "HttpException")]
     public class PlanoController : Controller
     {
         private readonly IControleAcessoAppService _controleacessoAppService;
@@ -42,26 +47,27 @@ namespace Dufry.Comissoes.Controllers
         {
             try
             {
-                //---------------------------------------------------------------------------------------------
-                //<REVER>
-                //---------------------------------------------------------------------------------------------
-                plano.DESC_PLANO = Request["Plano.DESC_PLANO"];
-                plano.DT_INI = Convert.ToDateTime(Request["Plano.DT_INI"]);
-                plano.DT_FIM = Convert.ToDateTime(Request["Plano.DT_FIM"]);
-                plano.STATUS = Request["Plano.STATUS"];
-                //---------------------------------------------------------------------------------------------
-                //<REVER>
-                //---------------------------------------------------------------------------------------------
-                plano.CREATED_DATETIME = DateTime.Now;
-                plano.CREATED_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
-
-                plano.LAST_MODIFY_DATE = plano.CREATED_DATETIME;
-                plano.LAST_MODIFY_USERNAME = plano.CREATED_USERNAME;
-                //---------------------------------------------------------------------------------------------
+                plano = ObtemPlanoForm(plano, true);
 
                 if (ModelState.IsValid)
                 {
-                    _planoAppService.Create(plano);
+                    Plano planoExiste = new Plano();
+                    planoExiste = null;
+
+                    if (plano.STATUS == "A")
+                    {
+                        planoExiste = PlanoAtivaVigente(plano);
+                    }
+
+                    if (planoExiste == null || plano.STATUS == "I")
+                    {
+                        _planoAppService.Create(plano);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Já existe um perído vigente e ativo que coincide com a tentativa de inclusão / alteração");
+                    }
+
                     return RedirectToAction("PlanoIndex");
                 }
             }
@@ -83,7 +89,9 @@ namespace Dufry.Comissoes.Controllers
                 //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 throw new Exception();
             }
+
             var plano = _planoAppService.Get(id ?? default(int));
+
             if (plano == null)
             {
                 //return HttpNotFound();
@@ -111,27 +119,28 @@ namespace Dufry.Comissoes.Controllers
 
             var planoToUpdate = _planoAppService.Get(id ?? default(int));
 
-            //---------------------------------------------------------------------------------------------
-            //<REVER>
-            //---------------------------------------------------------------------------------------------
-            planoToUpdate.DESC_PLANO = Request["Plano.DESC_PLANO"];
-            planoToUpdate.DT_INI = Convert.ToDateTime(Request["Plano.DT_INI"]);
-            planoToUpdate.DT_FIM = Convert.ToDateTime(Request["Plano.DT_FIM"]);
-            planoToUpdate.STATUS = Request["Plano.STATUS"];
-            //---------------------------------------------------------------------------------------------
-
-            //---------------------------------------------------------------------------------------------
-            //<REVER>
-            //---------------------------------------------------------------------------------------------
-            planoToUpdate.LAST_MODIFY_DATE = DateTime.Now;
-            planoToUpdate.LAST_MODIFY_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
-            //---------------------------------------------------------------------------------------------
+            planoToUpdate = ObtemPlanoForm(planoToUpdate);
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _planoAppService.Update(planoToUpdate);
+                    Plano planoExiste = new Plano();
+                    planoExiste = null;
+
+                    if (planoToUpdate.STATUS == "A")
+                    {
+                        planoExiste = PlanoAtivaVigente(planoToUpdate);
+                    }
+
+                    if (planoExiste == null || planoToUpdate.STATUS == "I")
+                    {
+                        _planoAppService.Update(planoToUpdate);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Já existe um perído vigente e ativo que coincide com a tentativa de inclusão / alteração");
+                    }
 
                     return RedirectToAction("PlanoIndex");
                 }
@@ -291,6 +300,38 @@ namespace Dufry.Comissoes.Controllers
             _controleacessoAppService.Dispose();
 
             base.Dispose(disposing);
+        }
+
+        private Plano PlanoAtivaVigente(Plano pl)
+        {
+
+            return _planoAppService.Find(t => t.DESC_PLANO == pl.DESC_PLANO
+                                            && t.STATUS == "A"
+                                            && (
+                                                (t.DT_INI <= pl.DT_INI && t.DT_FIM >= pl.DT_INI)
+                                                || (t.DT_FIM <= pl.DT_INI && t.DT_FIM >= pl.DT_FIM)
+                                                || (pl.DT_INI <= t.DT_INI && pl.DT_FIM >= t.DT_FIM)
+                                            )
+                                        ).FirstOrDefault();
+        }
+
+        private Plano ObtemPlanoForm(Plano pl, bool insert = false)
+        {
+            pl.DESC_PLANO = Request["Plano.DESC_PLANO"];
+            pl.DT_INI = Convert.ToDateTime(Request["Plano.DT_INI"]);
+            pl.DT_FIM = Convert.ToDateTime(Request["Plano.DT_FIM"]);
+            pl.STATUS = Request["Plano.STATUS"];
+
+            pl.LAST_MODIFY_DATE = DateTime.Now;
+            pl.LAST_MODIFY_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
+
+            if (insert)
+            {
+                pl.CREATED_DATETIME = pl.LAST_MODIFY_DATE;
+                pl.CREATED_USERNAME = pl.LAST_MODIFY_USERNAME;
+            }
+
+            return pl;
         }
 
     }

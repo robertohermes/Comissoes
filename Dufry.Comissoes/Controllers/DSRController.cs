@@ -9,12 +9,17 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Globalization;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 
 namespace Dufry.Comissoes.Controllers
 {
     [ControleAcessoAdminFilter]
+    [HandleError(ExceptionType = typeof(InvalidOperationException),
+        View = "InvalidOperation")]
+    [HandleError(ExceptionType = typeof(HttpException),
+                View = "HttpException")]
     public class DSRController : Controller
     {
         private readonly IControleAcessoAppService _controleacessoAppService;
@@ -35,9 +40,11 @@ namespace Dufry.Comissoes.Controllers
         {
             DSR dsr = new DSR();
 
+            #region populaobjetos
             var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1"); ;
             IEnumerable<SelectListItem> lojaSelectListItem = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
             ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
+            #endregion populaobjetos
 
             DSRViewModel dsrVM = new DSRViewModel(dsr, lojaSelectListItem);
 
@@ -51,28 +58,27 @@ namespace Dufry.Comissoes.Controllers
         {
             try
             {
-                //---------------------------------------------------------------------------------------------
-                //<REVER>
-                //---------------------------------------------------------------------------------------------
-                dsr.CODIGOLOJAALTERNATE = Request["Dsr.CODIGOLOJAALTERNATE"];
-                dsr.PERCENTUAL = Convert.ToDecimal(Request["Dsr.PERCENTUAL"]);
-                dsr.DT_INI = Convert.ToDateTime(Request["Dsr.DT_INI"]);
-                dsr.DT_FIM = Convert.ToDateTime(Request["Dsr.DT_FIM"]);
-                dsr.STATUS = Request["Dsr.STATUS"];
-
-                //---------------------------------------------------------------------------------------------
-                //<REVER>
-                //---------------------------------------------------------------------------------------------
-                dsr.CREATED_DATETIME = DateTime.Now;
-                dsr.CREATED_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
-
-                dsr.LAST_MODIFY_DATE = dsr.CREATED_DATETIME;
-                dsr.LAST_MODIFY_USERNAME = dsr.CREATED_USERNAME;
-                //---------------------------------------------------------------------------------------------
+                dsr = ObtemDsrForm(dsr, true);
 
                 if (ModelState.IsValid)
                 {
-                    _dsrAppService.Create(dsr);
+                    DSR dsrExiste = new DSR();
+                    dsrExiste = null;
+
+                    if (dsr.STATUS == "A")
+                    {
+                        dsrExiste = DsrAtivaVigente(dsr);
+                    }
+
+                    if (dsrExiste == null || dsr.STATUS == "I")
+                    {
+                        _dsrAppService.Create(dsr);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Já existe um perído vigente e ativo que coincide com a tentativa de inclusão / alteração");
+                    }
+
                     return RedirectToAction("DsrIndex");
                 }
             }
@@ -100,9 +106,11 @@ namespace Dufry.Comissoes.Controllers
                 throw new Exception();
             }
 
+            #region populaobjetos
             var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1");
             IEnumerable<SelectListItem> lojaSelectListItem = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
             ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja", dsr.CODIGOLOJAALTERNATE);
+            #endregion populaobjetos
 
             DSRViewModel dsrVM = new DSRViewModel(dsr, lojaSelectListItem);
 
@@ -126,28 +134,28 @@ namespace Dufry.Comissoes.Controllers
 
             var dsrToUpdate = _dsrAppService.Get(id ?? default(int));
 
-            //---------------------------------------------------------------------------------------------
-            //<REVER>
-            //---------------------------------------------------------------------------------------------
-            dsrToUpdate.CODIGOLOJAALTERNATE = Request["Dsr.CODIGOLOJAALTERNATE"];
-            dsrToUpdate.PERCENTUAL = Convert.ToDecimal(Request["Dsr.PERCENTUAL"]);
-            dsrToUpdate.DT_INI = Convert.ToDateTime(Request["Dsr.DT_INI"]);
-            dsrToUpdate.DT_FIM = Convert.ToDateTime(Request["Dsr.DT_FIM"]);
-            dsrToUpdate.STATUS = Request["Dsr.STATUS"];
-            //---------------------------------------------------------------------------------------------
-
-            //---------------------------------------------------------------------------------------------
-            //<REVER>
-            //---------------------------------------------------------------------------------------------
-            dsrToUpdate.LAST_MODIFY_DATE = DateTime.Now;
-            dsrToUpdate.LAST_MODIFY_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
-            //---------------------------------------------------------------------------------------------
+            dsrToUpdate = ObtemDsrForm(dsrToUpdate);
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _dsrAppService.Update(dsrToUpdate);
+                    DSR dsrExiste = new DSR();
+                    dsrExiste = null;
+
+                    if (dsrToUpdate.STATUS == "A")
+                    {
+                        dsrExiste = DsrAtivaVigente(dsrToUpdate);
+                    }
+
+                    if (dsrExiste == null || dsrToUpdate.STATUS == "I")
+                    {
+                        _dsrAppService.Update(dsrToUpdate);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Já existe um perído vigente e ativo que coincide com a tentativa de inclusão / alteração");
+                    }
 
                     return RedirectToAction("DsrIndex");
                 }
@@ -330,6 +338,39 @@ namespace Dufry.Comissoes.Controllers
             _lojaAppService.Dispose();
 
             base.Dispose(disposing);
+        }
+
+        private DSR DsrAtivaVigente(DSR dsr)
+        {
+
+            return _dsrAppService.Find(t => t.CODIGOLOJAALTERNATE == dsr.CODIGOLOJAALTERNATE
+                                        && t.STATUS == "A"
+                                        && (
+                                            (t.DT_INI <= dsr.DT_INI && t.DT_FIM >= dsr.DT_INI)
+                                            || (t.DT_FIM <= dsr.DT_INI && t.DT_FIM >= dsr.DT_FIM)
+                                            || (dsr.DT_INI <= t.DT_INI && dsr.DT_FIM >= t.DT_FIM)
+                                        )
+                                    ).FirstOrDefault();
+        }
+
+        private DSR ObtemDsrForm(DSR dsr, bool insert = false)
+        {
+            dsr.CODIGOLOJAALTERNATE = Request["Dsr.CODIGOLOJAALTERNATE"];
+            dsr.PERCENTUAL = Convert.ToDecimal(Request["Dsr.PERCENTUAL"]);
+            dsr.DT_INI = Convert.ToDateTime(Request["Dsr.DT_INI"]);
+            dsr.DT_FIM = Convert.ToDateTime(Request["Dsr.DT_FIM"]);
+            dsr.STATUS = Request["Dsr.STATUS"];
+
+            dsr.LAST_MODIFY_DATE = DateTime.Now;
+            dsr.LAST_MODIFY_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
+
+            if (insert)
+            {
+                dsr.CREATED_DATETIME = dsr.LAST_MODIFY_DATE;
+                dsr.CREATED_USERNAME = dsr.LAST_MODIFY_USERNAME;
+            }
+
+            return dsr;
         }
 
     }

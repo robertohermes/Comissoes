@@ -9,11 +9,16 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Globalization;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Dufry.Comissoes.Controllers
 {
     [ControleAcessoAdminFilter]
+    [HandleError(ExceptionType = typeof(InvalidOperationException),
+        View = "InvalidOperation")]
+    [HandleError(ExceptionType = typeof(HttpException),
+                View = "HttpException")]
     public class SelfServiceController : Controller
     {
         private readonly IControleAcessoAppService _controleacessoAppService;
@@ -35,6 +40,7 @@ namespace Dufry.Comissoes.Controllers
         {
             SelfService selfService = new SelfService();
 
+            #region populaobjetos
             var cargos = _cargoAppService.Find(t => t.CodigoCargoAlternate.Trim() != "NA" && t.CodigoCargoAlternate.Trim() != "DS");
             IEnumerable<SelectListItem> cargoSelectListItem = new SelectList(cargos, "CodigoCargoAlternate", "NomeCargo");
             ViewBag.CodigoCargoAlternate = new SelectList(cargos, "CodigoCargoAlternate", "NomeCargo");
@@ -42,6 +48,7 @@ namespace Dufry.Comissoes.Controllers
             var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1"); ;
             IEnumerable<SelectListItem> lojaSelectListItem = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
             ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
+            #endregion populaobjetos
 
             SelfServiceViewModel selfServiceVM = new SelfServiceViewModel(selfService, cargoSelectListItem, lojaSelectListItem);
 
@@ -55,28 +62,27 @@ namespace Dufry.Comissoes.Controllers
         {
             try
             {
-                //---------------------------------------------------------------------------------------------
-                //<REVER>
-                //---------------------------------------------------------------------------------------------
-                selfservice.CODIGOCARGOALTERNATE = Request["SelfService.CODIGOCARGOALTERNATE"];
-                selfservice.CODIGOLOJAALTERNATE = Request["SelfService.CODIGOLOJAALTERNATE"];
-                selfservice.DT_INI = Convert.ToDateTime(Request["SelfService.DT_INI"]);
-                selfservice.DT_FIM = Convert.ToDateTime(Request["SelfService.DT_FIM"]);
-                selfservice.STATUS = Request["SelfService.STATUS"];
-
-                //---------------------------------------------------------------------------------------------
-                //<REVER>
-                //---------------------------------------------------------------------------------------------
-                selfservice.CREATED_DATETIME = DateTime.Now;
-                selfservice.CREATED_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
-
-                selfservice.LAST_MODIFY_DATE = selfservice.CREATED_DATETIME;
-                selfservice.LAST_MODIFY_USERNAME = selfservice.CREATED_USERNAME;
-                //---------------------------------------------------------------------------------------------
+                selfservice = ObtemSelfServiceForm(selfservice, true);
 
                 if (ModelState.IsValid)
                 {
-                    _selfserviceAppService.Create(selfservice);
+                    SelfService selfserviceExiste = new SelfService();
+                    selfserviceExiste = null;
+
+                    if (selfservice.STATUS == "A")
+                    {
+                        selfserviceExiste = SelfServiceAtivaVigente(selfservice);
+                    }
+
+                    if (selfserviceExiste == null || selfservice.STATUS == "I")
+                    {
+                        _selfserviceAppService.Create(selfservice);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Já existe um perído vigente e ativo que coincide com a tentativa de inclusão / alteração");
+                    }
+
                     return RedirectToAction("SelfServiceIndex");
                 }
             }
@@ -104,6 +110,7 @@ namespace Dufry.Comissoes.Controllers
                 throw new Exception();
             }
 
+            #region populaobjetos
             var cargos = _cargoAppService.Find(t => t.CodigoCargoAlternate.Trim() != "NA" && t.CodigoCargoAlternate.Trim() != "DS");
             IEnumerable<SelectListItem> cargoSelectListItem = new SelectList(cargos, "CodigoCargoAlternate", "NomeCargo");
             ViewBag.CodigoCargoAlternate = new SelectList(cargos, "CodigoCargoAlternate", "NomeCargo", selfservice.CODIGOCARGOALTERNATE);
@@ -111,6 +118,7 @@ namespace Dufry.Comissoes.Controllers
             var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1"); ;
             IEnumerable<SelectListItem> lojaSelectListItem = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
             ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja", selfservice.CODIGOLOJAALTERNATE);
+            #endregion populaobjetos
 
             SelfServiceViewModel selfServiceVM = new SelfServiceViewModel(selfservice, cargoSelectListItem, lojaSelectListItem);
 
@@ -134,28 +142,28 @@ namespace Dufry.Comissoes.Controllers
 
             var selfserviceToUpdate = _selfserviceAppService.Get(id ?? default(int));
 
-            //---------------------------------------------------------------------------------------------
-            //<REVER>
-            //---------------------------------------------------------------------------------------------
-            selfserviceToUpdate.CODIGOCARGOALTERNATE = Request["SelfService.CODIGOCARGOALTERNATE"];
-            selfserviceToUpdate.CODIGOLOJAALTERNATE = Request["SelfService.CODIGOLOJAALTERNATE"];
-            selfserviceToUpdate.DT_INI = Convert.ToDateTime(Request["SelfService.DT_INI"]);
-            selfserviceToUpdate.DT_FIM = Convert.ToDateTime(Request["SelfService.DT_FIM"]);
-            selfserviceToUpdate.STATUS = Request["SelfService.STATUS"];
-            //---------------------------------------------------------------------------------------------
-
-            //---------------------------------------------------------------------------------------------
-            //<REVER>
-            //---------------------------------------------------------------------------------------------
-            selfserviceToUpdate.LAST_MODIFY_DATE = DateTime.Now;
-            selfserviceToUpdate.LAST_MODIFY_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
-            //---------------------------------------------------------------------------------------------
+            selfserviceToUpdate = ObtemSelfServiceForm(selfserviceToUpdate);
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _selfserviceAppService.Update(selfserviceToUpdate);
+                    SelfService selfserviceExiste = new SelfService();
+                    selfserviceExiste = null;
+
+                    if (selfserviceToUpdate.STATUS == "A")
+                    {
+                        selfserviceExiste = SelfServiceAtivaVigente(selfserviceToUpdate);
+                    }
+
+                    if (selfserviceExiste == null || selfserviceToUpdate.STATUS == "I")
+                    {
+                        _selfserviceAppService.Update(selfserviceToUpdate);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Já existe um perído vigente e ativo que coincide com a tentativa de inclusão / alteração");
+                    }
 
                     return RedirectToAction("SelfServiceIndex");
                 }
@@ -345,6 +353,40 @@ namespace Dufry.Comissoes.Controllers
             _cargoAppService.Dispose();
 
             base.Dispose(disposing);
+        }
+
+        private SelfService SelfServiceAtivaVigente(SelfService ss)
+        {
+
+            return _selfserviceAppService.Find(t => t.CODIGOCARGOALTERNATE == ss.CODIGOCARGOALTERNATE
+                                                && t.CODIGOLOJAALTERNATE == ss.CODIGOLOJAALTERNATE
+                                                && t.STATUS == "A"
+                                                && (
+                                                    (t.DT_INI <= ss.DT_INI && t.DT_FIM >= ss.DT_INI)
+                                                    || (t.DT_FIM <= ss.DT_INI && t.DT_FIM >= ss.DT_FIM)
+                                                    || (ss.DT_INI <= t.DT_INI && ss.DT_FIM >= t.DT_FIM)
+                                                )
+                                            ).FirstOrDefault();
+        }
+
+        private SelfService ObtemSelfServiceForm(SelfService ss, bool insert = false)
+        {
+            ss.CODIGOCARGOALTERNATE = Request["SelfService.CODIGOCARGOALTERNATE"];
+            ss.CODIGOLOJAALTERNATE = Request["SelfService.CODIGOLOJAALTERNATE"];
+            ss.DT_INI = Convert.ToDateTime(Request["SelfService.DT_INI"]);
+            ss.DT_FIM = Convert.ToDateTime(Request["SelfService.DT_FIM"]);
+            ss.STATUS = Request["SelfService.STATUS"];
+
+            ss.LAST_MODIFY_DATE = DateTime.Now;
+            ss.LAST_MODIFY_USERNAME = _controleacessoAppService.ObtainCurrentLoginFromAd();
+
+            if (insert)
+            {
+                ss.CREATED_DATETIME = ss.LAST_MODIFY_DATE;
+                ss.CREATED_USERNAME = ss.LAST_MODIFY_USERNAME;
+            }
+
+            return ss;
         }
 
 
