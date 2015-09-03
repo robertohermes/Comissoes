@@ -181,7 +181,7 @@ namespace Dufry.Comissoes.Controllers
 
             #region trataParametrosOrdenacao
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.DescPlanoSortParam = sortOrder == "DESC_PLANO" ? "DESC_PLANOdesc" : "DESC_PLANO";
+            ViewBag.DescPlanoSortParam = sortOrder == "DESC_PLANO" ? "DESC_PLANO_desc" : "DESC_PLANO";
             ViewBag.TipoTaxaSortParam = sortOrder == "TIPO_TAXA" ? "TIPO_TAXA_desc" : "TIPO_TAXA";
             ViewBag.ValorSortParam = sortOrder == "VALOR_DOLAR_MEDIO" ? "VALOR_DOLAR_MEDIO_desc" : "VALOR_DOLAR_MEDIO";
             ViewBag.DtIniSortParam = sortOrder == "DT_INI" ? "DT_INI_desc" : "DT_INI";

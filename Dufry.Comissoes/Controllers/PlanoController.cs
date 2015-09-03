@@ -166,7 +166,7 @@ namespace Dufry.Comissoes.Controllers
 
             #region trataParametrosOrdenacao
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.DescPlanoSortParam = String.IsNullOrEmpty(sortOrder) ? "DESC_PLANO" : "";
+            ViewBag.DescPlanoSortParam = String.IsNullOrEmpty(sortOrder) ? "DESC_PLANO_desc" : "";
             ViewBag.DtIniSortParam = sortOrder == "DT_INI" ? "DT_INI_desc" : "DT_INI";
             ViewBag.DtFimSortParam = sortOrder == "DT_FIM" ? "DT_FIM_desc" : "DT_FIM";
             ViewBag.StatusSortParam = sortOrder == "STATUS" ? "STATUS_desc" : "STATUS";
