@@ -1,25 +1,26 @@
-﻿using System;
-using AutoMapper;
-using Dufry.Comissoes.Domain.Entities;
+﻿using Dufry.Comissoes.Domain.Entities;
+using System.Collections.Generic;
+using System.Web.Mvc;
+//using AutoMapper;
 
 namespace Dufry.Comissoes.ViewModels
 {
     public class AusenciaRemuneradaViewModel
     {
-        public int ID_AUSENCIA_REMUNERADA { get; set; }
-        public int COLABORADORKEY { get; set; }
-        public string DESC_AUSENCIA { get; set; }
-        public DateTime DT_INI { get; set; }
-        public DateTime DT_FIM { get; set; }
-        public string STATUS { get; set; }
-        public DateTime CREATED_DATETIME { get; set; }
-        public string CREATED_USERNAME { get; set; }
-        public DateTime LAST_MODIFY_DATE { get; set; }
-        public string LAST_MODIFY_USERNAME { get; set; }
+        public AusenciaRemunerada AusenciaRemunerada { get; set; }
 
-        public AusenciaRemuneradaViewModel ToViewModel(AusenciaRemunerada ausenciaremunerada)
+        public IEnumerable<SelectListItem> ColaboradoresSelectListItem { get; set; }
+
+        public AusenciaRemuneradaViewModel(AusenciaRemunerada ausenciaRemunerada, IEnumerable<SelectListItem> colaboradoresSelectListItem)
         {
-            return Mapper.Map<AusenciaRemuneradaViewModel>(ausenciaremunerada);
+            AusenciaRemunerada = ausenciaRemunerada;
+            ColaboradoresSelectListItem = colaboradoresSelectListItem;
         }
+
+        //<REVER>
+        //public AusenciaRemuneradaViewModel ToViewModel(AusenciaRemunerada ausenciaremunerada)
+        //{
+        //    return Mapper.Map<AusenciaRemuneradaViewModel>(ausenciaremunerada);
+        //}
     }
 }
