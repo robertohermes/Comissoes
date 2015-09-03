@@ -180,6 +180,7 @@
     <Compile Include="Controllers\DSRController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\ColaboradorController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\Helpers\PredicateBuilder.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\LojaController.cs" />
@@ -438,6 +439,8 @@
     <Content Include="Views\SelfService\SelfServiceIndex.cshtml" />
     <Content Include="Views\Shared\InvalidOperation.cshtml" />
     <Content Include="Views\Shared\HttpException.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\InternalServer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
