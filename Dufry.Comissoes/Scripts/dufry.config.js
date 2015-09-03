@@ -166,7 +166,8 @@ $(function () {
 
             $("<a>")
               .attr("tabIndex", -1)
-              .attr("title", "Exibir todos os items")
+              //.attr("title", "Exibir todos os items")
+              .attr("title", "")
               .tooltip()
               .appendTo(this.wrapper)
               .button({
@@ -232,7 +233,8 @@ $(function () {
             // Remove invalid value
             this.input
               .val("")
-              .attr("title", "''" + value + "''" + " não existe na base de dados")
+              //.attr("title", "''" + value + "''" + " não existe na base de dados")
+                .attr("title", "")
               .tooltip("open");
             this.element.val("");
             this._delay(function () {
