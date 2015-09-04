@@ -57,6 +57,7 @@
     <Compile Include="AusenciaRemuneradaAppService.cs" />
     <Compile Include="CargoAppService.cs" />
     <Compile Include="CategoriaAppService.cs" />
+    <Compile Include="PlanoLojaAppService.cs" />
     <Compile Include="CategoriaPercentualAppService.cs" />
     <Compile Include="ControleAcessoAppService.cs" />
     <Compile Include="DolarMedioAppService.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Interfaces\IAusenciaRemuneradaAppService.cs" />
     <Compile Include="Interfaces\ICargoAppService.cs" />
     <Compile Include="Interfaces\ICategoriaAppService.cs" />
+    <Compile Include="Interfaces\IPlanoLojaAppService.cs" />
     <Compile Include="Interfaces\ICategoriaPercentualAppService.cs" />
     <Compile Include="Interfaces\IDolarMedioAppService.cs" />
     <Compile Include="Interfaces\IDSRAppService.cs" />

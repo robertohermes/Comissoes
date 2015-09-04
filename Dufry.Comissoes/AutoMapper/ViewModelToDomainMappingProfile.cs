@@ -27,6 +27,7 @@ namespace Dufry.Comissoes.AutoMapper
             Mapper.CreateMap<PlanoCategoriaViewModel, PlanoCategoria>();
             Mapper.CreateMap<SelfServiceViewModel, SelfService>();
             Mapper.CreateMap<CargoViewModel, Cargo>();
+            Mapper.CreateMap<PlanoLojaViewModel, PlanoLoja>();
         }
     }
 }

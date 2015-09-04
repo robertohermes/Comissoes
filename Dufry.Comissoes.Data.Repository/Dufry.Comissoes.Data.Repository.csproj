@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dapper\CargoDapperRepository.cs" />
+    <Compile Include="Dapper\PlanoLojaDapperRepository.cs" />
     <Compile Include="Dapper\EmpresaDapperRepository.cs" />
     <Compile Include="Dapper\ColaboradorDapperRepository.cs" />
     <Compile Include="Dapper\LojaDapperRepository.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Dapper\ControleAcessoDapperRepository.cs" />
     <Compile Include="Dapper\FilialDapperRepository.cs" />
     <Compile Include="EntityFramework\CargoRepository.cs" />
+    <Compile Include="EntityFramework\PlanoLojaRepository.cs" />
     <Compile Include="EntityFramework\CategoriaPercentualRepository.cs" />
     <Compile Include="EntityFramework\CategoriaRepository.cs" />
     <Compile Include="EntityFramework\Common\RepositoryBI.cs" />

@@ -18,6 +18,7 @@ namespace Dufry.Comissoes.CrossCutting.InversionOfControl.Modules
             Bind<IPlanoCategoriaAppService>().To<PlanoCategoriaAppService>();
             Bind<IDSRAppService>().To<DSRAppService>();
             Bind<ICategoriaPercentualAppService>().To<CategoriaPercentualAppService>();
+            Bind<IPlanoLojaAppService>().To<PlanoLojaAppService>();
 
             Bind<IFilialAppService>().To<FilialAppService>();
             Bind<ILojaAppService>().To<LojaAppService>();

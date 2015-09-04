@@ -31,6 +31,7 @@ namespace Dufry.Comissoes.Data.Context
             modelBuilder.Configurations.Add(new PlanoMap());
             modelBuilder.Configurations.Add(new PlanoCategoriaMap());
             modelBuilder.Configurations.Add(new SelfServiceMap());
+            modelBuilder.Configurations.Add(new PlanoLojaMap());
 
         }
   
