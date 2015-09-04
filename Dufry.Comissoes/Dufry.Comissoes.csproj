@@ -445,6 +445,9 @@
     <Content Include="Views\Error\InternalServer.cshtml" />
     <Content Include="Views\AusenciaRemunerada\AusenciaRemuneradaCreate.cshtml" />
     <Content Include="Views\PlanoLoja\PlanoLojaCreate.cshtml" />
+    <Content Include="Views\PlanoLoja\PlanoLojaEdit.cshtml" />
+    <Content Include="Views\PlanoLoja\PlanoLojaDelete.cshtml" />
+    <Content Include="Views\PlanoLoja\PlanoLojaIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

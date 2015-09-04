@@ -1,0 +1,191 @@
+﻿@model PagedList.IPagedList<PlanoLoja>
+    @using PagedList.Mvc;
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+    @{
+        ViewBag.Title = "Busca de Planos de Comissões por Loja";
+    }
+
+    <h1 class="headerForm">@ViewBag.Title</h1>
+
+    @**************************************************************************************************************************@
+    @*                                                 Filtros de Busca                                                       *@
+    @**************************************************************************************************************************@
+    @using (Html.BeginForm("PlanoLojaIndex", "PlanoLoja", FormMethod.Get))
+    {
+        <div class="editorCategoria">
+            <p><label for="idPlanoSearchString">Plano</label>@Html.DropDownList("idPlanoSearchString", "--- Selecione ---")</p>
+            <p><label for="codigolojaalternateSearchString">Loja</label>@Html.DropDownList("codigolojaalternateSearchString", "--- Selecione ---")</p>
+            <p><label for="dtiniSearchString">Data inicial da vigência</label>@Html.TextBox("dtiniSearchString", null, new { @class = "dp" })</p>
+            <p><label for="dtfimSearchString">Data final da vigência</label>@Html.TextBox("dtfimSearchString", null, new { @class = "dp" })</p>
+            <p>
+                <label for="statusSearchString">Status</label>      @Html.RadioButton("statusSearchString", "A", true, ViewBag.StatusFilter as string)Ativo
+                @Html.RadioButton("statusSearchString", "I", ViewBag.StatusFilter as string)Inativo
+            </p>
+        </div>
+        <p>
+            <input type="submit" id="buscaPlanoLoja" value="Buscar" class="botoesCategoria" />
+            @Html.ActionLink("Limpar", "PlanoLojaIndex", "PlanoLoja", null, new { @class = "botoesCategoria" })
+            @Html.ActionLink("Novo", "PlanoLojaCreate", "PlanoLoja", null, new { @class = "botoesCategoria" })
+        </p>
+
+    }
+
+
+    @**************************************************************************************************************************@
+    @*                                          Cabeçalho e loop do resultado da busca                                        *@
+    @**************************************************************************************************************************@
+    <table class="dufry" width="80%">
+        <tr>
+            <th>
+                @Html.ActionLink("Plano", "PlanoLojaIndex", "PlanoLoja"
+                , new
+                {
+                    sortOrder = ViewBag.DescPlanoSortParam,
+                    idPlanoSearchString = ViewBag.idPlanoFilter,
+                    codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+                    dtiniSearchString = ViewBag.dtiniFilter,
+                    dtfimSearchString = ViewBag.dtfimFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
+                , new { @class = "tableheadlink" })
+            </th>
+            <th>
+                @Html.ActionLink("Loja", "PlanoLojaIndex", "PlanoLoja"
+                , new
+                {
+                    sortOrder = ViewBag.CodigoLojaAlternateSortParam,
+                    idPlanoSearchString = ViewBag.idPlanoFilter,
+                    codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+                    dtiniSearchString = ViewBag.dtiniFilter,
+                    dtfimSearchString = ViewBag.dtfimFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
+                , new { @class = "tableheadlink" })
+            </th>
+            <th>
+                @Html.ActionLink("Data Inicial", "PlanoLojaIndex", "PlanoLoja"
+                , new
+                {
+                    sortOrder = ViewBag.DtIniSortParam,
+                    idPlanoSearchString = ViewBag.idPlanoFilter,
+                    codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+                    dtiniSearchString = ViewBag.dtiniFilter, 
+                    dtfimSearchString = ViewBag.dtfimFilter, 
+                    statusSearchString = ViewBag.StatusFilter
+                }
+                , new { @class = "tableheadlink" })
+            </th>
+            <th>
+                @Html.ActionLink("Data Final", "PlanoLojaIndex", "PlanoLoja"
+                , new
+                {
+                    sortOrder = ViewBag.DtFimSortParam,
+                    idPlanoSearchString = ViewBag.idPlanoFilter,
+                    codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+                    dtiniSearchString = ViewBag.dtiniFilter,
+                    dtfimSearchString = ViewBag.dtfimFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
+                , new { @class = "tableheadlink" })
+            </th>
+            <th>
+                @Html.ActionLink("Status", "PlanoLojaIndex", "PlanoLoja"
+                , new
+                {
+                    sortOrder = ViewBag.StatusSortParam,
+                    idPlanoSearchString = ViewBag.idPlanoFilter,
+                    codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+                    dtiniSearchString = ViewBag.dtiniFilter,
+                    dtfimSearchString = ViewBag.dtfimFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
+                , new { @class = "tableheadlink" })
+
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Plano.DESC_PLANO, "PlanoLojaEdit", "PlanoLoja", new { id = item.ID_PLANO_LOJA }, new { @class = "tablerowlink" })
+                </td>
+                <td>
+                    @Html.ActionLink(item.CODIGOLOJAALTERNATE, "PlanoLojaEdit", "PlanoLoja", new { id = item.ID_PLANO_LOJA }, new { @class = "tablerowlink" })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DT_INI)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DT_FIM)
+                </td>
+                @if (item.STATUS == "A")
+                {
+                    <td>Ativo</td>
+                }
+                else
+                {
+                    <td>Inativo</td>
+                }
+                <td>
+                    @Html.ActionLink("Excluir", "PlanoLojaDelete", "PlanoLoja", new { id = item.ID_PLANO_LOJA }, new { @class = "tablerowlink" })
+                </td>
+            </tr>
+        }
+    </table>
+
+
+    @**************************************************************************************************************************@
+    @*                                                        Paginação                                                       *@
+    @**************************************************************************************************************************@
+    <br />
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("PlanoLojaIndex"
+    , new
+    {
+        sortOrder = ViewBag.CurrentSort,
+        idPlanoSearchString = ViewBag.idPlanoFilter,
+        codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+        dtiniSearchString = ViewBag.dtiniFilter,
+        dtfimSearchString = ViewBag.dtfimFilter,
+        statusSearchString = ViewBag.StatusFilter,
+        page
+    }))
+
+
+    @section Scripts {
+        <script type="text/javascript">
+            $(function () {
+                $('.dp').datepicker({
+                    showAnim: "scale",
+                    showOptions: {
+                        origin: ["top", "right"]
+                    }
+                });
+            });
+
+            $(document).ready(function () {
+                $('.dp').mask('00/00/0000', { 'translation': { 0: { pattern: /[0-9]/ } } });
+                //$('.decimal').mask('000,0000', { reverse: true });
+
+            });
+
+            $(function () {
+                $("#idPlanoSearchString").combobox();
+                $("#toggle").click(function () {
+                    $("#idPlanoSearchString").toggle();
+                });
+            });
+
+            $(function () {
+                $("#codigolojaalternateSearchString").combobox();
+                $("#toggle").click(function () {
+                    $("#codigolojaalternateSearchString").toggle();
+                });
+            });
+        </script>
+    }
+
