@@ -448,6 +448,7 @@
     <Content Include="Views\PlanoLoja\PlanoLojaEdit.cshtml" />
     <Content Include="Views\PlanoLoja\PlanoLojaDelete.cshtml" />
     <Content Include="Views\PlanoLoja\PlanoLojaIndex.cshtml" />
+    <Content Include="Views\PlanoCategoria\PlanoCategoriaCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

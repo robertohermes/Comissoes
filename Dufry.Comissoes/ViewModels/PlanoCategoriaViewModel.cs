@@ -1,22 +1,33 @@
-﻿using System;
-using AutoMapper;
-using Dufry.Comissoes.Domain.Entities;
+﻿using Dufry.Comissoes.Domain.Entities;
+using System.Collections.Generic;
+using System.Web.Mvc;
+//using AutoMapper;
+
 
 namespace Dufry.Comissoes.ViewModels
 {
     public class PlanoCategoriaViewModel
     {
-        public int ID_PLANO { get; set; }
-        public int ID_CATEGORIA_PERCENTUAL { get; set; }
-        public int ORDEM_HIERARQUIA { get; set; }
-        public DateTime CREATED_DATETIME { get; set; }
-        public string CREATED_USERNAME { get; set; }
-        public DateTime LAST_MODIFY_DATE { get; set; }
-        public string LAST_MODIFY_USERNAME { get; set; }
 
-        public PlanoCategoriaViewModel ToViewModel(PlanoCategoria planocategoria)
+        public PlanoCategoria PlanoCategoria { get; set; }
+
+        public IEnumerable<SelectListItem> PlanosSelectListItem { get; set; }
+
+        public PlanoCategoriaViewModel(PlanoCategoria planoCategoria)
         {
-            return Mapper.Map<PlanoCategoriaViewModel>(planocategoria);
+            PlanoCategoria = planoCategoria;
         }
+
+        public PlanoCategoriaViewModel(PlanoCategoria planoCategoria, IEnumerable<SelectListItem> planosSelectListItem)
+        {
+            PlanoCategoria = planoCategoria;
+            PlanosSelectListItem = planosSelectListItem;
+        }
+
+        //<REVER>
+        //public PlanoCategoriaViewModel ToViewModel(PlanoCategoria planocategoria)
+        //{
+        //    return Mapper.Map<PlanoCategoriaViewModel>(planocategoria);
+        //}
     }
 }
