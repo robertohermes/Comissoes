@@ -31,6 +31,20 @@ namespace Dufry.Comissoes.Application
             return ValidationResult;
         }
 
+        public ValidationResult CreateBatch(List<PlanoCategoria> planocategoriaList)
+        {
+            BeginTransaction();
+
+            foreach (PlanoCategoria planocategoria in planocategoriaList)
+            {
+                ValidationResult.Add(_service.Add(planocategoria));                
+            }
+
+            if (ValidationResult.IsValid) Commit();
+
+            return ValidationResult;
+        }
+
         public ValidationResult Update(PlanoCategoria planocategoria)
         {
             BeginTransaction();

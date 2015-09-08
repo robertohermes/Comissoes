@@ -16,18 +16,23 @@ namespace Dufry.Comissoes.ViewModels
 
         public IEnumerable<SelectListItem> LojasSelectListItem { get; set; }
 
-        public CategoriaPercentualViewModel(CategoriaPercentual categoriaPercentual, Loja loja)
+        public CategoriaPercentualViewModel(CategoriaPercentual categoriaPercentual)
         {
             CategoriaPercentual = categoriaPercentual;
-            Loja = loja;
         }
 
-        public CategoriaPercentualViewModel(CategoriaPercentual categoriaPercentual, IEnumerable<SelectListItem> categoriaSelectListItem, IEnumerable<SelectListItem> lojaSelectListItem)
-        {
-            CategoriaPercentual = categoriaPercentual;
-            CategoriasSelectListItem = categoriaSelectListItem;
-            LojasSelectListItem = lojaSelectListItem;
-        }
+        //public CategoriaPercentualViewModel(CategoriaPercentual categoriaPercentual, Loja loja)
+        //{
+        //    CategoriaPercentual = categoriaPercentual;
+        //    Loja = loja;
+        //}
+
+        //public CategoriaPercentualViewModel(CategoriaPercentual categoriaPercentual, IEnumerable<SelectListItem> categoriaSelectListItem, IEnumerable<SelectListItem> lojaSelectListItem)
+        //{
+        //    CategoriaPercentual = categoriaPercentual;
+        //    CategoriasSelectListItem = categoriaSelectListItem;
+        //    LojasSelectListItem = lojaSelectListItem;
+        //}
 
         //<REVER> - Ajustar, deletar o método "CategoriaPercentualViewModel" e acrescentar Loja quando o modelo do BI estiver pronto
         //public CategoriaPercentualViewModel ToViewModel(CategoriaPercentual categoriaPercentual)

@@ -4,6 +4,28 @@
     ViewBag.Title = "Inclusão de Planos de Comissões e Hierarquias";
 }
 
+<style>
+    #sortable {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 35%;
+    }
+
+        #sortable li {
+            margin: 0 3px 3px 3px;
+            padding: 0.4em;
+            padding-left: 1.5em;
+            /*font-size: 1.4em;*/
+            /*height: 18px;*/
+        }
+
+            #sortable li span {
+                position: absolute;
+                margin-left: -1.3em;
+            }
+</style>
+
 <h1 class="headerForm">@ViewBag.Title</h1>
 
 
@@ -14,85 +36,117 @@
     <div class="editorCategoria">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <p>
-            @Html.LabelFor(model => model.PlanoCategoria.ID_PLANO)
-            @Html.DropDownListFor(model => model.PlanoCategoria.ID_PLANO, Model.PlanosSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
-            @Html.ValidationMessageFor(model => model.PlanoCategoria.ID_PLANO, String.Empty, new { @style = "padding-left: 40px;!important" })
-        </p>
-        @*<p>
-            @Html.LabelFor(model => model.PlanoCategoria.ATRIBUTO)
-            @Html.EditorFor(model => model.PlanoCategoria.ATRIBUTO)
-            @Html.ValidationMessageFor(model => model.PlanoCategoria.ATRIBUTO, String.Empty, new { @style = "padding-left: 10px;!important" })
-        </p>*@
-        @*<p>
-            @Html.LabelFor(model => model.PlanoCategoria.CODIGOLOJAALTERNATE)
-            @Html.DropDownListFor(model => model.PlanoCategoria.CODIGOLOJAALTERNATE, Model.LojasSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
-            @Html.ValidationMessageFor(model => model.PlanoCategoria.CODIGOLOJAALTERNATE, String.Empty, new { @style = "padding-left: 40px;!important" })
-        </p>
-        <p>
-            @Html.LabelFor(model => model.PlanoCategoria.PERCENTUAL)
-            @Html.TextBoxFor(model => model.PlanoCategoria.PERCENTUAL, null, new { @class = "decimal", @Value = Model.PlanoCategoria.PERCENTUAL.ToString().Equals("0") ? string.Empty : Model.PlanoCategoria.PERCENTUAL.ToString("0") })
-            @Html.ValidationMessageFor(model => model.PlanoCategoria.PERCENTUAL, String.Empty, new { @style = "padding-left: 10px;!important" })
-        </p>
-        <p>
-            @Html.LabelFor(model => model.PlanoCategoria.DT_INI)
-            @Html.TextBoxFor(model => model.PlanoCategoria.DT_INI, null, new { @class = "dp", @Value = Model.PlanoCategoria.DT_INI.ToString().Equals("01/01/0001 00:00:00") ? string.Empty : Model.PlanoCategoria.DT_INI.ToString("dd/MM/yyyy") })
-            @Html.ValidationMessageFor(model => model.PlanoCategoria.DT_INI, String.Empty, new { @style = "padding-left: 10px;!important" })
-        </p>
-        <p>
-            @Html.LabelFor(model => model.PlanoCategoria.DT_FIM)
-            @Html.TextBoxFor(model => model.PlanoCategoria.DT_FIM, null, new { @class = "dp", @Value = Model.PlanoCategoria.DT_FIM.ToString().Equals("01/01/0001 00:00:00") ? string.Empty : Model.PlanoCategoria.DT_FIM.ToString("dd/MM/yyyy") })
-            @Html.ValidationMessageFor(model => model.PlanoCategoria.DT_FIM, String.Empty, new { @style = "padding-left: 10px;!important" })
+            @Html.LabelFor(model => model.ID_PLANO)
+            @Html.DropDownListFor(model => model.ID_PLANO, Model.PlanosSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.ID_PLANO, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>
 
-        <p>
-            @Html.LabelFor(model => model.PlanoCategoria.STATUS)
-            @Html.RadioButtonFor(model => model.PlanoCategoria.STATUS, "A") Ativo
-            @Html.RadioButtonFor(model => model.PlanoCategoria.STATUS, "I") Inativo
-            @Html.ValidationMessageFor(model => model.PlanoCategoria.STATUS, String.Empty, new { @style = "padding-left: 127px;!important" })
-        </p>*@
+
+        @**************************************************************************************************************************@
+        @*                                          Cabeçalho e loop do resultado da busca                                        *@
+        @**************************************************************************************************************************@
+
+        <div id="CategoriasDisponiveis" style="margin-left:80px">
+            <ul id="sortable">
+                @foreach (var item in Model.CategoriasDisponiveisList)
+                {
+                    <li class="ui-state-default">
+                        <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>@Html.DisplayFor(modelItem => item.DESC_CATEGORIA)
+                        @Html.Hidden("hdnId-" + item.ID_CATEGORIA, item.ID_CATEGORIA, new { @class = "ItemId" })
+                    </li>
+                }
+            </ul>
+        </div>
 
     </div>
 
-    <input type="submit" id="salvaPlanoCategoria" value="Salvar e incluir" class="botoesCategoria" />
+    @*<input type="submit" id="salvaPlanoCategoria" value="Salvar e incluir" class="botoesCategoria" />*@
+    <input type="button" id="salvaPlanoCategoria" value="Salvar e incluir" class="botoesCategoria" />
     @Html.ActionLink("Voltar", "PlanoCategoriaIndex", "PlanoCategoria", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
 
-}
+    }
 
 
-@section Scripts {
-    <script type="text/javascript">
-        $(function () {
-            $('.dp').datepicker({
-                showAnim: "scale",
-                showOptions: {
-                    origin: ["top", "right"]
-                }
+    @section Scripts {
+        <script type="text/javascript">
+            $(function () {
+                $('.dp').datepicker({
+                    showAnim: "scale",
+                    showOptions: {
+                        origin: ["top", "right"]
+                    }
+                });
             });
-        });
 
-        //$(document).ready(function () {
-        //    $('.dp').mask('00/00/0000', { 'translation': { 0: { pattern: /[0-9]/ } } });
-        //    //$('.decimal').mask('000,0000', { reverse: true });
+            $(document).ready(function () {
 
-        //    $("input[name='PlanoCategoria.DT_FIM']").rules("add", {
-        //        DateGtEq: $("input[name='PlanoCategoria.DT_INI']"),
-        //        messages: { DateGtEq: "A data final da vigência deve ser maior que a data inicial" }
-        //    });
+                    $("#sortable").sortable();
+                    $("#sortable").disableSelection();
+                    $("#salvaPlanoCategoria").click(salvaCategoriasOrdenadas);
 
-        //});
+            });
 
-        //using combobox() function of jquery ui autocomplete hides the <select> tag generated by the DropDownListFor() 
-        //method and renders its own html.
-        //By default, hidden form controls are not validated by jquery.validate. This behaviour can be modified using the code above,
-        //which will validate all hidden form controls, or to keep ignoring all hidden elements except your select
-        $.validator.setDefaults({
-            //validate all hidden form controls - ignore: [] 
-            //ignore all hidden elements except those who are listed:
-            ignore: ':hidden:not(#PlanoCategoria_ID_CATEGORIA)'
-        });
+            function salvaCategoriasOrdenadas() {
 
-    </script>
-}
+                //alert('salvaCategoriasOrdenadas');
+
+                var planoCategoriaOrdenado = new Array();
+
+                $("#sortable li").each(function (index) {
+
+                    var planoCategoria = new Object();
+                    planoCategoria.ID_PLANO = $("#ID_PLANO").val();
+                    planoCategoria.ID_CATEGORIA = $(this).find($(".ItemId")).val();
+                    planoCategoria.ORDEM_HIERARQUIA = index + 1;
+                    planoCategoriaOrdenado.push(planoCategoria);
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/PlanoCategoria/PlanoCategoriaCreate',
+                    data: JSON.stringify(planoCategoriaOrdenado),
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function () {
+                        window.location.replace("PlanoCategoriaIndex");
+                    }
+                });
+
+
+                //var userViewPreferenceDetails = new Array();
+                //$("#sortable li").each(function (index) {
+                //    var userPreferenceItem = new Object();
+                //    userPreferenceItem.Id = $(this).find($(".ItemId")).val();
+                //    userPreferenceItem.IsEnabled = $(this).find($(".EnabledFlag")).attr("checked") == "checked" ? true : false;
+                //    userPreferenceItem.ColumnOrder = index;
+                //    userPreferenceDetails.push(userPreferenceItem);
+                //});
+                //$.ajax({
+                //    type: 'POST',
+                //    url: '/YourActionName/SaveUserViewPreferenceDetails',
+                //    data: JSON.stringify(userPreferenceDetails),
+                //    dataType: 'json',
+                //    contentType: 'application/json; charset=utf-8',
+                //    success: function () {
+                //        window.location.replace("http://whereyouwantogoafter.com");
+                //    }
+                //});
+            }
+
+
+
+            //using combobox() function of jquery ui autocomplete hides the <select> tag generated by the DropDownListFor()
+            //method and renders its own html.
+            //By default, hidden form controls are not validated by jquery.validate. This behaviour can be modified using the code above,
+            //which will validate all hidden form controls, or to keep ignoring all hidden elements except your select
+            $.validator.setDefaults({
+                //validate all hidden form controls - ignore: []
+                //ignore all hidden elements except those who are listed:
+                ignore: ':hidden:not(#ID_PLANO)'
+            });
+
+        </script>
+    }
 
 
 

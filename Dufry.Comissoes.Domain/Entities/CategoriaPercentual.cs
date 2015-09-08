@@ -12,18 +12,13 @@ namespace Dufry.Comissoes.Domain.Entities
 
         [Required(ErrorMessage = "A escolha de uma categoria é obrigatória")]
         [Display(Name = "Categoria")]
-        public int ID_CATEGORIA { get; set; }
+        public int ID_PLANO_CATEGORIA { get; set; }
 
 
         [Required(ErrorMessage = "A descrição do atributo é obrigatória")]
         [StringLength(255, ErrorMessage = "A descrição do atributo não deve exceder 255 caracteres")]
         [Display(Name = "Atributo")]
         public string ATRIBUTO { get; set; }
-
-
-        [Required(ErrorMessage = "A escolha de uma loja é obrigatória")]
-        [Display(Name = "Loja")]
-        public string CODIGOLOJAALTERNATE { get; set; }
 
 
         [Required(ErrorMessage = "O percentual de comissão é obrigatório")]

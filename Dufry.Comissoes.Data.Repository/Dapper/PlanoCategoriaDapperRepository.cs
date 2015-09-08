@@ -15,7 +15,7 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacessos = cn.Query<PlanoCategoria>("SELECT * FROM COMIS_PLANO_CATEGORIA WHERE ID_PLANO = @id_plano",
+                var controleacessos = cn.Query<PlanoCategoria>("SELECT * FROM COMIS_PLANO_CATEGORIA WHERE ID_PLANO_CATEGORIA = @id_plano_categoria",
                     new { ColaboradorKey = id }).FirstOrDefault();
                 return controleacessos;
             }

@@ -10,11 +10,16 @@ namespace Dufry.Comissoes.Data.Context.Mapping
         {
             ToTable(TableName);
 
-
             // Primary Key
-            HasKey(t => new { t.ID_PLANO, t.ID_CATEGORIA_PERCENTUAL });
+            HasKey(t => new { t.ID_PLANO_CATEGORIA });
 
             // Properties
+            Property(t => t.ID_PLANO)
+                .IsRequired();
+
+            Property(t => t.ID_CATEGORIA)
+                .IsRequired();
+
             Property(t => t.ORDEM_HIERARQUIA)
                 .IsRequired();
 

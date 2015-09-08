@@ -14,15 +14,11 @@ namespace Dufry.Comissoes.Data.Context.Mapping
             HasKey(t => t.ID_CATEGORIA_PERCENTUAL);
 
             // Properties
-            Property(t => t.ID_CATEGORIA)
+            Property(t => t.ID_PLANO_CATEGORIA)
                 .IsRequired();
 
             Property(t => t.ATRIBUTO)
                 .HasMaxLength(255)
-                .IsRequired();
-
-            Property(t => t.CODIGOLOJAALTERNATE)
-                .HasMaxLength(10)
                 .IsRequired();
 
             Property(t => t.PERCENTUAL)

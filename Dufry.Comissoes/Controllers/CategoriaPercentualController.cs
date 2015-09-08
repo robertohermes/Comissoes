@@ -39,17 +39,18 @@ namespace Dufry.Comissoes.Controllers
         {
             CategoriaPercentual categoriapercentual = new CategoriaPercentual();
 
-            #region populaobjetos
-            var categorias = _categoriaAppService.Find(t => t.STATUS == "A");
-            IEnumerable<SelectListItem> categoriaSelectListItem = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA");
-            ViewBag.ID_CATEGORIA = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA");
+            //#region populaobjetos
+            //var categorias = _categoriaAppService.Find(t => t.STATUS == "A");
+            //IEnumerable<SelectListItem> categoriaSelectListItem = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA");
+            //ViewBag.ID_CATEGORIA = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA");
 
-            var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1"); ;
-            IEnumerable<SelectListItem> lojaSelectListItem = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
-            ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
-            #endregion populaobjetos
+            //var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1"); ;
+            //IEnumerable<SelectListItem> lojaSelectListItem = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
+            //ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
+            //#endregion populaobjetos
 
-            CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel(categoriapercentual, categoriaSelectListItem, lojaSelectListItem);
+            //CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel(categoriapercentual, categoriaSelectListItem, lojaSelectListItem);
+            CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel(categoriapercentual);
 
             return View(categoriaPercentualVM);
         }
@@ -108,17 +109,19 @@ namespace Dufry.Comissoes.Controllers
                 throw new Exception();
             }
 
-            #region populaobjetos
-            var categorias = _categoriaAppService.All();
-            IEnumerable<SelectListItem> categoriaSelectListItem = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA");
-            ViewBag.ID_CATEGORIA = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA", categoriapercentual.ID_CATEGORIA);
+            //#region populaobjetos
+            //var categorias = _categoriaAppService.All();
+            //IEnumerable<SelectListItem> categoriaSelectListItem = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA");
+            //ViewBag.ID_CATEGORIA = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA", categoriapercentual.ID_CATEGORIA);
 
-            var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1");
-            IEnumerable<SelectListItem> lojaSelectListItem = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
-            ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja", categoriapercentual.CODIGOLOJAALTERNATE);
-            #endregion populaobjetos
+            //var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1");
+            //IEnumerable<SelectListItem> lojaSelectListItem = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
+            //ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja", categoriapercentual.CODIGOLOJAALTERNATE);
+            //#endregion populaobjetos
 
-            CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel(categoriapercentual, categoriaSelectListItem, lojaSelectListItem);
+            //CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel(categoriapercentual, categoriaSelectListItem, lojaSelectListItem);
+
+            CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel(categoriapercentual);
 
             return View(categoriaPercentualVM);
 
@@ -212,12 +215,12 @@ namespace Dufry.Comissoes.Controllers
             var predicate = PredicateBuilder.True<CategoriaPercentual>();
             //atributoSearchString = "";
 
-            if (idCategoriaSearchString.HasValue)
-            {
-                int idCategoriaFilter = idCategoriaSearchString.GetValueOrDefault();
-                predicate = predicate.And(i => i.ID_CATEGORIA.Equals(idCategoriaFilter));
-                ViewBag.idCategoriaFilter = idCategoriaFilter;
-            }
+            //if (idCategoriaSearchString.HasValue)
+            //{
+            //    int idCategoriaFilter = idCategoriaSearchString.GetValueOrDefault();
+            //    predicate = predicate.And(i => i.ID_CATEGORIA.Equals(idCategoriaFilter));
+            //    ViewBag.idCategoriaFilter = idCategoriaFilter;
+            //}
 
             if (!String.IsNullOrEmpty(atributoSearchString))
             {
@@ -225,12 +228,12 @@ namespace Dufry.Comissoes.Controllers
                 ViewBag.atributoFilter = atributoSearchString;
             }
 
-            if (!String.IsNullOrEmpty(codigolojaalternateSearchString))
-            {
-                string codigolojaalternateFilter = codigolojaalternateSearchString;
-                predicate = predicate.And(i => i.CODIGOLOJAALTERNATE.Equals(codigolojaalternateFilter));
-                ViewBag.codigolojaalternateFilter = codigolojaalternateFilter;
-            }
+            //if (!String.IsNullOrEmpty(codigolojaalternateSearchString))
+            //{
+            //    string codigolojaalternateFilter = codigolojaalternateSearchString;
+            //    predicate = predicate.And(i => i.CODIGOLOJAALTERNATE.Equals(codigolojaalternateFilter));
+            //    ViewBag.codigolojaalternateFilter = codigolojaalternateFilter;
+            //}
 
             if (percentualSearchString.HasValue)
             {
@@ -268,12 +271,12 @@ namespace Dufry.Comissoes.Controllers
             #region ordenacao
             switch (sortOrder)
             {
-                case "DESC_CATEGORIA":
-                    categoriapercentuals = categoriapercentuals.OrderBy(s => s.ID_CATEGORIA); //mudar de chave para campo
-                    break;
-                case "NomeLoja":
-                    categoriapercentuals = categoriapercentuals.OrderBy(s => s.CODIGOLOJAALTERNATE); //mudar de chave para campo
-                    break;
+                //case "DESC_CATEGORIA":
+                //    categoriapercentuals = categoriapercentuals.OrderBy(s => s.ID_CATEGORIA); //mudar de chave para campo
+                //    break;
+                //case "NomeLoja":
+                //    categoriapercentuals = categoriapercentuals.OrderBy(s => s.CODIGOLOJAALTERNATE); //mudar de chave para campo
+                //    break;
                 case "PERCENTUAL":
                     categoriapercentuals = categoriapercentuals.OrderBy(s => s.PERCENTUAL);
                     break;
@@ -289,12 +292,12 @@ namespace Dufry.Comissoes.Controllers
                 case "ATRIBUTO_desc":
                     categoriapercentuals = categoriapercentuals.OrderByDescending(s => s.ATRIBUTO);
                     break;
-                case "DESC_CATEGORIA_desc":
-                    categoriapercentuals = categoriapercentuals.OrderByDescending(s => s.ID_CATEGORIA); //mudar de chave para campo
-                    break;
-                case "NomeLoja_desc":
-                    categoriapercentuals = categoriapercentuals.OrderByDescending(s => s.CODIGOLOJAALTERNATE); //mudar de chave para campo
-                    break;
+                //case "DESC_CATEGORIA_desc":
+                //    categoriapercentuals = categoriapercentuals.OrderByDescending(s => s.ID_CATEGORIA); //mudar de chave para campo
+                //    break;
+                //case "NomeLoja_desc":
+                //    categoriapercentuals = categoriapercentuals.OrderByDescending(s => s.CODIGOLOJAALTERNATE); //mudar de chave para campo
+                //    break;
                 case "PERCENTUAL_desc":
                     categoriapercentuals = categoriapercentuals.OrderByDescending(s => s.PERCENTUAL);
                     break;
@@ -343,9 +346,10 @@ namespace Dufry.Comissoes.Controllers
             }
 
             //return View(categoriapercentual);
-            Loja loja = _lojaAppService.Find(t => t.CodigoLojaAlternate == categoriapercentual.CODIGOLOJAALTERNATE).FirstOrDefault();
+            //Loja loja = _lojaAppService.Find(t => t.CodigoLojaAlternate == categoriapercentual.CODIGOLOJAALTERNATE).FirstOrDefault();
 
-            CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel(categoriapercentual, loja);
+            //CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel(categoriapercentual, loja);
+            CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel(categoriapercentual);
             
             return View(categoriaPercentualVM);
         }
@@ -385,23 +389,34 @@ namespace Dufry.Comissoes.Controllers
         private CategoriaPercentual CategoriaPercentualAtivaVigente (CategoriaPercentual cp)
         {
 
-            return _categoriapercentualAppService.Find(t => t.ID_CATEGORIA == cp.ID_CATEGORIA
-                                                                                                && t.ATRIBUTO == cp.ATRIBUTO
-                                                                                                && t.CODIGOLOJAALTERNATE == cp.CODIGOLOJAALTERNATE
-                                                                                                && t.STATUS == "A"
-                                                                                                && (
-                                                                                                    (t.DT_INI <= cp.DT_INI && t.DT_FIM >= cp.DT_INI)
-                                                                                                    || (t.DT_FIM <= cp.DT_INI && t.DT_FIM >= cp.DT_FIM)
-                                                                                                    || (cp.DT_INI <= t.DT_INI && cp.DT_FIM >= t.DT_FIM)
-                                                                                                )
-                                                                                            ).FirstOrDefault();
+            //return _categoriapercentualAppService.Find(t => t.ID_CATEGORIA == cp.ID_CATEGORIA
+            //                                            && t.ATRIBUTO == cp.ATRIBUTO
+            //                                            && t.CODIGOLOJAALTERNATE == cp.CODIGOLOJAALTERNATE
+            //                                            && t.STATUS == "A"
+            //                                            && (
+            //                                                (t.DT_INI <= cp.DT_INI && t.DT_FIM >= cp.DT_INI)
+            //                                                || (t.DT_FIM <= cp.DT_INI && t.DT_FIM >= cp.DT_FIM)
+            //                                                || (cp.DT_INI <= t.DT_INI && cp.DT_FIM >= t.DT_FIM)
+            //                                            )
+            //                                        ).FirstOrDefault();
+
+            return _categoriapercentualAppService.Find(t => t.ID_PLANO_CATEGORIA == cp.ID_PLANO_CATEGORIA
+                                                        && t.ATRIBUTO == cp.ATRIBUTO
+                                                        && t.STATUS == "A"
+                                                        && (
+                                                            (t.DT_INI <= cp.DT_INI && t.DT_FIM >= cp.DT_INI)
+                                                            || (t.DT_FIM <= cp.DT_INI && t.DT_FIM >= cp.DT_FIM)
+                                                            || (cp.DT_INI <= t.DT_INI && cp.DT_FIM >= t.DT_FIM)
+                                                        )
+                                                    ).FirstOrDefault();
+
         }
 
         private CategoriaPercentual ObtemCategoriaPercentualForm(CategoriaPercentual cp, bool insert = false)
         {
-            cp.ID_CATEGORIA = Convert.ToInt32(Request["CategoriaPercentual.ID_CATEGORIA"]);
+            //cp.ID_CATEGORIA = Convert.ToInt32(Request["CategoriaPercentual.ID_CATEGORIA"]);
             cp.ATRIBUTO = Request["CategoriaPercentual.ATRIBUTO"];
-            cp.CODIGOLOJAALTERNATE = Request["CategoriaPercentual.CODIGOLOJAALTERNATE"];
+            //cp.CODIGOLOJAALTERNATE = Request["CategoriaPercentual.CODIGOLOJAALTERNATE"];
             cp.PERCENTUAL = Convert.ToDecimal(Request["CategoriaPercentual.PERCENTUAL"]);
             cp.DT_INI = Convert.ToDateTime(Request["CategoriaPercentual.DT_INI"]);
             cp.DT_FIM = Convert.ToDateTime(Request["CategoriaPercentual.DT_FIM"]);

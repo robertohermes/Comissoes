@@ -64,7 +64,6 @@
     <Compile Include="Entities\Specifications\AusenciaRemuneradaSpecs\AusenciaRemuneradaStatusLengthMustBeLowerThan1Spec.cs" />
     <Compile Include="Entities\Specifications\CategoriaPercentualSpecs\CategoriaPercentualAtributoIsRequiredSpec.cs" />
     <Compile Include="Entities\Specifications\CategoriaPercentualSpecs\CategoriaPercentualAtributoLengthMustBeLowerThan255Spec.cs" />
-    <Compile Include="Entities\Specifications\CategoriaPercentualSpecs\CategoriaPercentualCodigoLojaAlternateIsRequiredSpec.cs" />
     <Compile Include="Entities\Specifications\CategoriaPercentualSpecs\CategoriaPercentualDtFimIsRequiredSpec.cs" />
     <Compile Include="Entities\Specifications\CategoriaPercentualSpecs\CategoriaPercentualDtIniIsRequiredSpec.cs" />
     <Compile Include="Entities\Specifications\CategoriaPercentualSpecs\CategoriaPercentualPercentualShouldBeLowerThanOneSpec.cs" />
