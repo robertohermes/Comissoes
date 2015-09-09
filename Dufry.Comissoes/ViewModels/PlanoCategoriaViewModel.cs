@@ -10,7 +10,7 @@ namespace Dufry.Comissoes.ViewModels
     public class PlanoCategoriaViewModel
     {
 
-        [Required(ErrorMessage = "A escolha de um plano é obrigatório")]
+        [Required(ErrorMessage = "A escolha de um plano é obrigatória")]
         [Display(Name = "Plano")]
         public int ID_PLANO { get; set; }
 

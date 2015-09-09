@@ -5,31 +5,86 @@
 }
 
 <style>
-    #sortable {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        width: 35%;
+
+    .container {
+        border-radius: 5px;
+        box-shadow: 0 0 5px #888;
+        background: #fff;
+        width: 20%;
+        display: inline-block;
+        margin-left: 85px;
+        height: 234px;
     }
 
-        #sortable li {
-            margin: 0 3px 3px 3px;
-            padding: 0.4em;
-            padding-left: 1.5em;
-            /*font-size: 1.4em;*/
-            /*height: 18px;*/
-        }
+    #container2 {
+        margin-top: 0px;
+        margin-left: 20px;
 
-            #sortable li span {
-                position: absolute;
-                margin-left: -1.3em;
-            }
+    }
+
+    .header {
+        padding: 5px;
+        background: #eeeeee;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee');
+        height: 20px;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        border-bottom: 1px #888 solid;
+
+    }
+
+    /*.content {
+        padding: 0 5px 10px 5px;
+        margin-top: 3px;
+        background-color: #ffffff;
+        -moz-border-radius-bottomright: 5px;
+        -webkit-border-bottom-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        -moz-border-radius-bottomleft: 5px;
+        -webkit-border-bottom-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }*/
+
+    /*.content div {
+        padding: 5px 5px 5px 5px;
+        border-bottom: 1px #ccc solid;
+    }*/
+
+    .content .right {
+        float: right;
+        border: none;
+    }
+
+   
+    
+    #sortable1, #sortable3 {
+        list-style-type: none;
+        margin: 0;
+        float: left;
+        margin-right: 10px;
+        background: #eee;
+        padding: 5px;
+        width: 143px;
+    }
+
+    #sortable1 li, #sortable3 li {
+        margin: 5px;
+        padding: 5px;
+        /*font-size: 1.2em;*/
+        font-size: 12px;
+        width: 120px;
+    }
+
+    #CategoriasSelecionadasErrorMsg {
+        color: red;
+    }
+
 </style>
 
 <h1 class="headerForm">@ViewBag.Title</h1>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm(null, null, FormMethod.Get, new { name = "frmPlanoCategoria", id = "frmPlanoCategoria" })) 
 {
     @*@Html.AntiForgeryToken()*@
 
@@ -40,113 +95,129 @@
             @Html.DropDownListFor(model => model.ID_PLANO, Model.PlanosSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
             @Html.ValidationMessageFor(model => model.ID_PLANO, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>
+        <p>Selecione e ordene as Categorias de forma hierárquica</p>
+            <div class="container" id="container1">
+                <div class="header" id="header1">
+                    Categorias disponíveis
+                </div>
+                <div class="content" id="content1">
 
+                    <ul id="sortable1" class="droptrue">
+                        @foreach (var item in Model.CategoriasDisponiveisList)
+                        {
+                            <li class="ui-state-default">
+                                @Html.DisplayFor(modelItem => item.DESC_CATEGORIA)
+                                @Html.Hidden("hdnId-" + item.ID_CATEGORIA, item.ID_CATEGORIA, new { @class = "ItemId" })
+                            </li>
+                        }
+                    </ul>
 
-        @**************************************************************************************************************************@
-        @*                                          Cabeçalho e loop do resultado da busca                                        *@
-        @**************************************************************************************************************************@
+                </div>
+            </div>
 
-        <div id="CategoriasDisponiveis" style="margin-left:80px">
-            <ul id="sortable">
-                @foreach (var item in Model.CategoriasDisponiveisList)
-                {
-                    <li class="ui-state-default">
-                        <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>@Html.DisplayFor(modelItem => item.DESC_CATEGORIA)
-                        @Html.Hidden("hdnId-" + item.ID_CATEGORIA, item.ID_CATEGORIA, new { @class = "ItemId" })
-                    </li>
-                }
-            </ul>
+            <div class="container" id="container2">
+                <div class="header" id="header2">
+                    Categorias selecionadas
+                </div>
+                <div class="content" id="content2">
+
+                    <div id="CategoriasSelecionadas">
+                        <ul id="sortable3" class="droptrue"></ul>
+                    </div>
+
+                </div>
+            </div>
+<p><span id="CategoriasSelecionadasErrorMsg"></span>&nbsp;</p>
+        <div id="BotoesFormulario">
+            
+            <input type="button" id="salvaPlanoCategoria" value="Salvar e incluir" class="botoesCategoria" />
+            @Html.ActionLink("Voltar", "PlanoCategoriaIndex", "PlanoCategoria", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
         </div>
 
     </div>
 
-    @*<input type="submit" id="salvaPlanoCategoria" value="Salvar e incluir" class="botoesCategoria" />*@
-    <input type="button" id="salvaPlanoCategoria" value="Salvar e incluir" class="botoesCategoria" />
-    @Html.ActionLink("Voltar", "PlanoCategoriaIndex", "PlanoCategoria", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
-
-    }
 
 
-    @section Scripts {
-        <script type="text/javascript">
-            $(function () {
-                $('.dp').datepicker({
-                    showAnim: "scale",
-                    showOptions: {
-                        origin: ["top", "right"]
+}
+
+
+            @section Scripts {
+                <script type="text/javascript">
+                    $(function () {
+                        $('.dp').datepicker({
+                            showAnim: "scale",
+                            showOptions: {
+                                origin: ["top", "right"]
+                            }
+                        });
+                    });
+
+                    $(document).ready(function () {
+
+                        $("ul.droptrue").sortable({
+                            connectWith: "ul"
+                        });
+
+                        $("#sortable1, #sortable3").disableSelection();
+
+                        $("#salvaPlanoCategoria").click(salvaCategoriasOrdenadas);
+
+                    });
+
+                    function salvaCategoriasOrdenadas() {
+
+                        var planoCategoriaOrdenado = new Array();
+
+                        $("#sortable3 li").each(function (index) {
+                            var planoCategoria = new Object();
+                            planoCategoria.ID_PLANO = $("#ID_PLANO").val();
+                            planoCategoria.ID_CATEGORIA = $(this).find($(".ItemId")).val();
+                            planoCategoria.ORDEM_HIERARQUIA = index + 1;
+                            planoCategoriaOrdenado.push(planoCategoria);
+                        });
+
+                        var form = $("#frmPlanoCategoria");
+
+                        if ($("#sortable3 li").length == 0) {
+                            //$("#CategoriasSelecionadasErrorMsg").html("A escolha de, ao menos uma Categoria, é obrigatória").show().fadeOut("slow");
+                            $("#CategoriasSelecionadasErrorMsg").html("Selecione ao menos uma Categoria").show();
+                        }
+
+
+                        form.validate();
+
+                        if (form.valid() && ($("#sortable3 li").length > 0)) {
+                            $.ajax({
+                                type: 'POST',
+                                url: '/PlanoCategoria/PlanoCategoriaCreate',
+                                data: JSON.stringify(planoCategoriaOrdenado),
+                                dataType: 'json',
+                                contentType: 'application/json; charset=utf-8',
+                                success: function () {
+                                    window.location.replace("PlanoCategoriaIndex");
+                                }
+                            });
+                        }
+
+
+
+
                     }
-                });
-            });
-
-            $(document).ready(function () {
-
-                    $("#sortable").sortable();
-                    $("#sortable").disableSelection();
-                    $("#salvaPlanoCategoria").click(salvaCategoriasOrdenadas);
-
-            });
-
-            function salvaCategoriasOrdenadas() {
-
-                //alert('salvaCategoriasOrdenadas');
-
-                var planoCategoriaOrdenado = new Array();
-
-                $("#sortable li").each(function (index) {
-
-                    var planoCategoria = new Object();
-                    planoCategoria.ID_PLANO = $("#ID_PLANO").val();
-                    planoCategoria.ID_CATEGORIA = $(this).find($(".ItemId")).val();
-                    planoCategoria.ORDEM_HIERARQUIA = index + 1;
-                    planoCategoriaOrdenado.push(planoCategoria);
-                });
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/PlanoCategoria/PlanoCategoriaCreate',
-                    data: JSON.stringify(planoCategoriaOrdenado),
-                    dataType: 'json',
-                    contentType: 'application/json; charset=utf-8',
-                    success: function () {
-                        window.location.replace("PlanoCategoriaIndex");
-                    }
-                });
 
 
-                //var userViewPreferenceDetails = new Array();
-                //$("#sortable li").each(function (index) {
-                //    var userPreferenceItem = new Object();
-                //    userPreferenceItem.Id = $(this).find($(".ItemId")).val();
-                //    userPreferenceItem.IsEnabled = $(this).find($(".EnabledFlag")).attr("checked") == "checked" ? true : false;
-                //    userPreferenceItem.ColumnOrder = index;
-                //    userPreferenceDetails.push(userPreferenceItem);
-                //});
-                //$.ajax({
-                //    type: 'POST',
-                //    url: '/YourActionName/SaveUserViewPreferenceDetails',
-                //    data: JSON.stringify(userPreferenceDetails),
-                //    dataType: 'json',
-                //    contentType: 'application/json; charset=utf-8',
-                //    success: function () {
-                //        window.location.replace("http://whereyouwantogoafter.com");
-                //    }
-                //});
+
+                    //using combobox() function of jquery ui autocomplete hides the <select> tag generated by the DropDownListFor()
+                    //method and renders its own html.
+                    //By default, hidden form controls are not validated by jquery.validate. This behaviour can be modified using the code above,
+                    //which will validate all hidden form controls, or to keep ignoring all hidden elements except your select
+                    $.validator.setDefaults({
+                        //validate all hidden form controls - ignore: []
+                        //ignore all hidden elements except those who are listed:
+                        ignore: ':hidden:not(#ID_PLANO)'
+                    });
+
+                </script>
             }
-
-
-
-            //using combobox() function of jquery ui autocomplete hides the <select> tag generated by the DropDownListFor()
-            //method and renders its own html.
-            //By default, hidden form controls are not validated by jquery.validate. This behaviour can be modified using the code above,
-            //which will validate all hidden form controls, or to keep ignoring all hidden elements except your select
-            $.validator.setDefaults({
-                //validate all hidden form controls - ignore: []
-                //ignore all hidden elements except those who are listed:
-                ignore: ':hidden:not(#ID_PLANO)'
-            });
-
-        </script>
-    }
 
 
 
