@@ -7,10 +7,10 @@
 @{
     string confirmMessage = "Tem certeza que deseja excluir essa categoria?";
     bool exibeBotaoExcluir = true;
-    
-    if (Model.CategoriaPercentuals.Count() > 0)
+
+    if (Model.PlanoCategorias.Count() > 0)
     {
-        confirmMessage = "A Categoria não pode ser excluída, por haver Percentual associado. Exclua todos os respectivos percentuais primeiro.";
+        confirmMessage = "A Categoria não pode ser excluída, por haver Planos de Comissões associado. Exclua todos as respectivas associações com os planos primeiro.";
         exibeBotaoExcluir = false;
     }    
 }

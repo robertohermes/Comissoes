@@ -37,6 +37,8 @@ namespace Dufry.Comissoes.Domain.Entities
 
         public virtual Categoria Categoria { get; set; }
 
+        public virtual ICollection<CategoriaPercentual> CategoriaPercentuals { get; set; }
+
         //public ValidationResult ValidationResult { get; private set; }
 
         //public bool IsValid

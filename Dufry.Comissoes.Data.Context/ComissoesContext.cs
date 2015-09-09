@@ -28,10 +28,11 @@ namespace Dufry.Comissoes.Data.Context
             modelBuilder.Configurations.Add(new ControleAcessoMap());
             modelBuilder.Configurations.Add(new DolarMedioMap());
             modelBuilder.Configurations.Add(new DSRMap());
-            modelBuilder.Configurations.Add(new PlanoMap());
             modelBuilder.Configurations.Add(new PlanoCategoriaMap());
-            modelBuilder.Configurations.Add(new SelfServiceMap());
             modelBuilder.Configurations.Add(new PlanoLojaMap());
+            modelBuilder.Configurations.Add(new PlanoMap());
+            modelBuilder.Configurations.Add(new SelfServiceMap());
+
 
         }
   
@@ -43,8 +44,9 @@ namespace Dufry.Comissoes.Data.Context
         public DbSet<ControleAcesso> ControleAcessos { get; set; }
         public DbSet<DolarMedio> DolarMedios { get; set; }
         public DbSet<DSR> DSRs { get; set; }
-        public DbSet<Plano> Plano { get; set; }
+        public DbSet<Plano> Planos { get; set; }
         public DbSet<PlanoCategoria> PlanoCategorias { get; set; }
+        public DbSet<PlanoLoja> PlanoLojas { get; set; }
         public DbSet<SelfService> SelfServices { get; set; }
 
         #endregion

@@ -206,7 +206,7 @@ namespace Dufry.Comissoes.Controllers
             {
                 var categoria = _categoriaAppService.Get(id);
 
-                if (categoria.CategoriaPercentuals.Count() == 0)
+                if (categoria.PlanoCategorias.Count() == 0)
                 {
                     _categoriaAppService.Remove(categoria);
                 }
