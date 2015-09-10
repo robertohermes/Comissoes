@@ -45,6 +45,39 @@ namespace Dufry.Comissoes.Application
             return ValidationResult;
         }
 
+        public ValidationResult DeleteBatch(List<PlanoCategoria> planocategoriaList)
+        {
+            BeginTransaction();
+
+            foreach (PlanoCategoria planocategoria in planocategoriaList)
+            {
+                ValidationResult.Add(_service.Delete(planocategoria));
+            }
+
+            if (ValidationResult.IsValid) Commit();
+
+            return ValidationResult;
+        }
+
+        public ValidationResult UpdateBatch(List<PlanoCategoria> planocategoriaListToInsert, List<PlanoCategoria> planocategoriaListToDelete)
+        {
+            BeginTransaction();
+
+            foreach (PlanoCategoria planocategoriaDel in planocategoriaListToDelete)
+            {
+                ValidationResult.Add(_service.Delete(planocategoriaDel));
+            }
+
+            foreach (PlanoCategoria planocategoriaIns in planocategoriaListToInsert)
+            {
+                ValidationResult.Add(_service.Add(planocategoriaIns));
+            }
+
+            if (ValidationResult.IsValid) Commit();
+
+            return ValidationResult;
+        }
+
         public ValidationResult Update(PlanoCategoria planocategoria)
         {
             BeginTransaction();

@@ -15,7 +15,6 @@
         background: #fff;
     }
 
-
     .divCategorias {
         height: 201px;
         overflow-x: hidden;
@@ -95,14 +94,13 @@
 
 <h1 class="headerForm">@ViewBag.Title</h1>
 
-
 @using (Html.BeginForm(null, null, FormMethod.Get, new { name = "frmPlanoCategoria", id = "frmPlanoCategoria" })) 
 {
     @*@Html.AntiForgeryToken()*@
 
     <div class="editorCategoria">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @*@Html.HiddenFor(model => model.ID_PLANO)*@
+        @Html.HiddenFor(model => model.PlanoCategoriasList.First().ID_PLANO)
 
         <div class="divPlanoLabel"><b>@Html.DisplayNameFor(model => model.PlanoCategoriasList.First().Plano.DESC_PLANO)</b>&nbsp;
             @Html.DisplayFor(model => model.PlanoCategoriasList.First().Plano.DESC_PLANO)
@@ -129,7 +127,6 @@
             </div>
         </div>
 
-
         <div class ="divContainerCategorias">
             <div class="header" id="header2">
                 Categorias selecionadas
@@ -144,8 +141,6 @@
                                 @Html.Hidden("hdnId-" + item.ID_CATEGORIA, item.ID_CATEGORIA, new { @class = "ItemId" })
                             </li>
                         }
-
-
                     </ul>
                 </div>
             </div>
@@ -155,104 +150,81 @@
             <p><span id="CategoriasSelecionadasErrorMsg"></span>&nbsp;</p>
         </div>
 
-
         <div id="BotoesFormulario">
-            
             <input type="button" id="salvaPlanoCategoria" value="Salvar" class="botoesCategoria" />
             @Html.ActionLink("Voltar", "PlanoCategoriaIndex", "PlanoCategoria", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
         </div>
-
     </div>
-
-
-
 }
 
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('.dp').datepicker({
+                showAnim: "scale",
+                showOptions: {
+                    origin: ["top", "right"]
+                }
+            });
+        });
 
-            @section Scripts {
-                <script type="text/javascript">
-                    $(function () {
-                        $('.dp').datepicker({
-                            showAnim: "scale",
-                            showOptions: {
-                                origin: ["top", "right"]
-                            }
-                        });
-                    });
+        $(document).ready(function () {
 
-                    $(document).ready(function () {
+            $("ul.droptrue").sortable({
+                connectWith: "ul"
+            });
 
-                        $("ul.droptrue").sortable({
-                            connectWith: "ul"
-                        });
+            $("#sortable1, #sortable3").disableSelection();
 
-                        $("#sortable1, #sortable3").disableSelection();
+            $("#salvaPlanoCategoria").click(salvaCategoriasOrdenadas);
 
-                        $("#salvaPlanoCategoria").click(salvaCategoriasOrdenadas);
+        });
 
-                    });
+        function salvaCategoriasOrdenadas() {
 
-                    function salvaCategoriasOrdenadas() {
+            var idPlano = $("#ID_PLANO").val();
+            var planoCategoriaOrdenado = new Array();
 
-                        var planoCategoriaOrdenado = new Array();
+            $("#sortable3 li").each(function (index) {
+                var planoCategoria = new Object();
+                planoCategoria.ID_PLANO = $("#ID_PLANO").val();
+                planoCategoria.ID_CATEGORIA = $(this).find($(".ItemId")).val();
+                planoCategoria.ORDEM_HIERARQUIA = index + 1;
+                planoCategoriaOrdenado.push(planoCategoria);
+            });
 
-                        $("#sortable3 li").each(function (index) {
-                            var planoCategoria = new Object();
-                            planoCategoria.ID_PLANO = $("#ID_PLANO").val();
-                            planoCategoria.ID_CATEGORIA = $(this).find($(".ItemId")).val();
-                            planoCategoria.ORDEM_HIERARQUIA = index + 1;
-                            planoCategoriaOrdenado.push(planoCategoria);
-                        });
+            var form = $("#frmPlanoCategoria");
 
-                        var form = $("#frmPlanoCategoria");
-
-                        //------------------------------------------------------------------------------------------------------
-                        //<REVER>
-                        //------------------------------------------------------------------------------------------------------
-                        if ($("#sortable3 li").length == 0) {
-                            $("#CategoriasSelecionadasErrorMsg").html("Selecione ao menos uma Categoria").show();
-                        }
-                        else
-                        {
-                            $("#CategoriasSelecionadasErrorMsg").html("").show();
-                        }
-
-
-                        form.validate();
-                        //------------------------------------------------------------------------------------------------------
-
-                        if (form.valid() && ($("#sortable3 li").length > 0)) {  //<REVER>
-                            $.ajax({
-                                type: 'POST',
-                                url: '/PlanoCategoria/PlanoCategoriaCreate',
-                                data: JSON.stringify(planoCategoriaOrdenado),
-                                dataType: 'json',
-                                contentType: 'application/json; charset=utf-8',
-                                success: function () {
-                                    window.location.replace("PlanoCategoriaIndex");
-                                }
-                            });
-                        }
-
-
-
-
-                    }
-
-
-
-                    //using combobox() function of jquery ui autocomplete hides the <select> tag generated by the DropDownListFor()
-                    //method and renders its own html.
-                    //By default, hidden form controls are not validated by jquery.validate. This behaviour can be modified using the code above,
-                    //which will validate all hidden form controls, or to keep ignoring all hidden elements except your select
-                    $.validator.setDefaults({
-                        //validate all hidden form controls - ignore: []
-                        //ignore all hidden elements except those who are listed:
-                        ignore: ':hidden:not(#ID_PLANO)'
-                    });
-
-                </script>
+            //------------------------------------------------------------------------------------------------------
+            //<REVER>
+            //------------------------------------------------------------------------------------------------------
+            if ($("#sortable3 li").length == 0) {
+                $("#CategoriasSelecionadasErrorMsg").html("Selecione ao menos uma Categoria").show();
             }
+            else
+            {
+                $("#CategoriasSelecionadasErrorMsg").html("").show();
+            }
+
+            form.validate();
+            //------------------------------------------------------------------------------------------------------
+
+            if (form.valid() && ($("#sortable3 li").length > 0)) {  //<REVER>
+                $.ajax({
+                    type: 'POST',
+                    url: '/PlanoCategoria/PlanoCategoriaEdit',
+                    data: JSON.stringify(idPlano, planoCategoriaOrdenado),
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function () {
+                        window.location.replace("PlanoCategoriaIndex");
+                    }
+                });
+            }
+        }
+
+    </script>
+}
 
 
 

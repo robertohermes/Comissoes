@@ -9,5 +9,9 @@ namespace Dufry.Comissoes.Application.Interfaces
     {
         ValidationResult CreateBatch(List<PlanoCategoria> planocategoriaList);
 
+        ValidationResult DeleteBatch(List<PlanoCategoria> planocategoriaList);
+
+        ValidationResult UpdateBatch(List<PlanoCategoria> planocategoriaListToInsert, List<PlanoCategoria> planocategoriaListToDelete);
+
     }
 }

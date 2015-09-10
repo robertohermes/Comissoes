@@ -132,56 +132,46 @@ namespace Dufry.Comissoes.Controllers
 
         }
 
-        //// POST: /PlanoCategoria/PlanoCategoriaEdit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost, ActionName("PlanoCategoriaEdit")]
-        ////[ValidateAntiForgeryToken]
-        //public ActionResult PlanoCategoriaEditConfirmed(int? id)
-        //{
+        // POST: /PlanoCategoria/PlanoCategoriaEdit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost, ActionName("PlanoCategoriaEdit")]
+        //[ValidateAntiForgeryToken]
+        public ActionResult PlanoCategoriaEditConfirmed(int ? idPlano, List<PlanoCategoria> planoCategoriaOrdenado)
+        {
 
-        //    if (id == null)
-        //    {
-        //        //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //        throw new Exception();
-        //    }
+            if (idPlano == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception();
+            }
 
-        //    var categoriapercentualToUpdate = _categoriapercentualAppService.Get(id ?? default(int));
+            List<PlanoCategoria> planoCategoriaList = new List<PlanoCategoria>();
 
-        //    categoriapercentualToUpdate = ObtemCategoriaPercentualForm(categoriapercentualToUpdate);
+            foreach (PlanoCategoria planoCategoria in planoCategoriaOrdenado)
+            {
+                planoCategoriaList.Add(ObtemPlanoCategoriaForm(planoCategoria, true));
+            }
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            CategoriaPercentual categoriapercentualExiste = new CategoriaPercentual();
-        //            categoriapercentualExiste = null;
+            List<PlanoCategoria> planocategoriasToDelete = _planocategoriaAppService.Find(t => t.ID_PLANO == idPlano).ToList();
 
-        //            if (categoriapercentualToUpdate.STATUS == "A")
-        //            {
-        //                categoriapercentualExiste = CategoriaPercentualAtivaVigente(categoriapercentualToUpdate);
-        //            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _planocategoriaAppService.UpdateBatch(planoCategoriaList, planocategoriasToDelete);
 
-        //            if (categoriapercentualExiste == null || categoriapercentualToUpdate.STATUS == "I")
-        //            {
-        //                _categoriapercentualAppService.Update(categoriapercentualToUpdate);
-        //            }
-        //            else
-        //            {
-        //                throw new InvalidOperationException("Já existe um perído vigente e ativo que coincide com a tentativa de inclusão / alteração");
-        //            }
+                    return RedirectToAction("CategoriaPercentualIndex");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Erro na alteração. Tente novamente ou, se o problema persistir, entre em contato com o suporte.");
+                }
+            }
 
-        //            return RedirectToAction("CategoriaPercentualIndex");
-        //        }
-        //        catch (RetryLimitExceededException /* dex */)
-        //        {
-        //            //Log the error (uncomment dex variable name and add a line here to write a log.
-        //            ModelState.AddModelError("", "Erro na alteração. Tente novamente ou, se o problema persistir, entre em contato com o suporte.");
-        //        }
-        //    }
-
-        //    return View(categoriapercentualToUpdate);
-        //}
+            return View(planoCategoriaOrdenado);
+        }
 
         protected override void Dispose(bool disposing)
         {
