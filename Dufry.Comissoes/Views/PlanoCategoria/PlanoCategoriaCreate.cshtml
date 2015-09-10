@@ -6,75 +6,81 @@
 
 <style>
 
-    .container {
+    .divContainerCategorias {
         border-radius: 5px;
-        box-shadow: 0 0 5px #888;
-        background: #fff;
         width: 20%;
         display: inline-block;
         margin-left: 85px;
-        height: 234px;
+        box-shadow: 0 0 5px #c2101c;
+        background: #fff;
     }
 
-    #container2 {
-        margin-top: 0px;
-        margin-left: 20px;
 
+    .divCategorias {
+        height: 201px;
+        overflow-x: hidden;
+    }
+
+    .ui-state-default_dufry {
+        border: 1px solid #808080;
+        background: #808080;
+        border-radius: 5px;
+        color: #ffffff;
+    }
+
+    #divCategoriasSelecionadas {
+        margin-top: 0px;
+        margin-left: 0px;
     }
 
     .header {
         padding: 5px;
-        background: #eeeeee;
+        background: #c2101c;
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee');
         height: 20px;
         border-top-right-radius: 5px;
         border-top-left-radius: 5px;
-        border-bottom: 1px #888 solid;
-
+        border-bottom: 1px;
+        color: #ffffff;
+        font-size: 13px;
+        text-align: center;
     }
 
-    /*.content {
-        padding: 0 5px 10px 5px;
-        margin-top: 3px;
-        background-color: #ffffff;
-        -moz-border-radius-bottomright: 5px;
-        -webkit-border-bottom-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-        -moz-border-radius-bottomleft: 5px;
-        -webkit-border-bottom-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-    }*/
-
-    /*.content div {
-        padding: 5px 5px 5px 5px;
-        border-bottom: 1px #ccc solid;
-    }*/
-
-    .content .right {
-        float: right;
-        border: none;
-    }
-
-   
-    
     #sortable1, #sortable3 {
         list-style-type: none;
-        margin: 0;
         float: left;
-        margin-right: 10px;
-        background: #eee;
+        background: #ffffff;
         padding: 5px;
-        width: 143px;
+        height: 187px;
+        width: 212px;
+    }
+
+    #sortable1 {
+        margin: 0;
+    }
+
+    #sortable3 {
+        margin-left: 0px;
     }
 
     #sortable1 li, #sortable3 li {
         margin: 5px;
         padding: 5px;
-        /*font-size: 1.2em;*/
         font-size: 12px;
-        width: 120px;
+        /*width: 190px;*/
+        width: 180px;
     }
 
+    .divCategoriasSelecioneLabel {
+        margin-top: 10px;
+        margin-left: 85px;
+    }
+
+    .divCategoriasSelecionadasErrorMsg {
+        margin-top: 10px;
+        margin-left: 410px;
+    }
+   
     #CategoriasSelecionadasErrorMsg {
         color: red;
     }
@@ -95,39 +101,44 @@
             @Html.DropDownListFor(model => model.ID_PLANO, Model.PlanosSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
             @Html.ValidationMessageFor(model => model.ID_PLANO, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>
-        <p>Selecione e ordene as Categorias de forma hierárquica</p>
-            <div class="container" id="container1">
-                <div class="header" id="header1">
-                    Categorias disponíveis
-                </div>
-                <div class="content" id="content1">
+        <div class="divCategoriasSelecioneLabel">
+            <p>Selecione e ordene as Categorias de forma hierárquica</p>
+        </div>
 
-                    <ul id="sortable1" class="droptrue">
-                        @foreach (var item in Model.CategoriasDisponiveisList)
-                        {
-                            <li class="ui-state-default">
-                                @Html.DisplayFor(modelItem => item.DESC_CATEGORIA)
-                                @Html.Hidden("hdnId-" + item.ID_CATEGORIA, item.ID_CATEGORIA, new { @class = "ItemId" })
-                            </li>
-                        }
-                    </ul>
+        <div class="divContainerCategorias">
+            <div class="header" id="header1">
+                Categorias disponíveis
+            </div>
+            <div class="divCategorias" id="divCategoriasDisponiveis">
+                <ul id="sortable1" class="droptrue">
+                    @foreach (var item in Model.CategoriasDisponiveisList)
+                    {
+                        <li class="ui-state-default_dufry">
+                            @Html.DisplayFor(modelItem => item.DESC_CATEGORIA)
+                            @Html.Hidden("hdnId-" + item.ID_CATEGORIA, item.ID_CATEGORIA, new { @class = "ItemId" })
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
 
+
+        <div class ="divContainerCategorias">
+            <div class="header" id="header2">
+                Categorias selecionadas
+            </div>
+            <div class="divCategorias" id="divCategoriasSelecionadas">
+                <div id="CategoriasSelecionadas">
+                    <ul id="sortable3" class="droptrue"></ul>
                 </div>
             </div>
+        </div>
 
-            <div class="container" id="container2">
-                <div class="header" id="header2">
-                    Categorias selecionadas
-                </div>
-                <div class="content" id="content2">
+        <div class="divCategoriasSelecionadasErrorMsg">
+            <p><span id="CategoriasSelecionadasErrorMsg"></span>&nbsp;</p>
+        </div>
 
-                    <div id="CategoriasSelecionadas">
-                        <ul id="sortable3" class="droptrue"></ul>
-                    </div>
 
-                </div>
-            </div>
-<p><span id="CategoriasSelecionadasErrorMsg"></span>&nbsp;</p>
         <div id="BotoesFormulario">
             
             <input type="button" id="salvaPlanoCategoria" value="Salvar e incluir" class="botoesCategoria" />
@@ -178,15 +189,22 @@
 
                         var form = $("#frmPlanoCategoria");
 
+                        //------------------------------------------------------------------------------------------------------
+                        //<REVER>
+                        //------------------------------------------------------------------------------------------------------
                         if ($("#sortable3 li").length == 0) {
-                            //$("#CategoriasSelecionadasErrorMsg").html("A escolha de, ao menos uma Categoria, é obrigatória").show().fadeOut("slow");
                             $("#CategoriasSelecionadasErrorMsg").html("Selecione ao menos uma Categoria").show();
+                        }
+                        else
+                        {
+                            $("#CategoriasSelecionadasErrorMsg").html("").show();
                         }
 
 
                         form.validate();
+                        //------------------------------------------------------------------------------------------------------
 
-                        if (form.valid() && ($("#sortable3 li").length > 0)) {
+                        if (form.valid() && ($("#sortable3 li").length > 0)) {  //<REVER>
                             $.ajax({
                                 type: 'POST',
                                 url: '/PlanoCategoria/PlanoCategoriaCreate',
