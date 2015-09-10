@@ -43,13 +43,16 @@ namespace Dufry.Comissoes.Controllers
 
             #region populaobjetos
             var planos = _planoAppService.Find(t => t.STATUS == "A");
-            IEnumerable<SelectListItem> planosSelectListItem = new SelectList(planos, "ID_PLANO", "DESC_PLANO");
-            ViewBag.ID_PLANO = new SelectList(planos, "ID_PLANO", "DESC_PLANO");
+            var planocategorias = _planocategoriaAppService.All();
+            var planosdisponiveis = from p in planos 
+                                    where !
+                                    (from pc in planocategorias
+                                     select pc.ID_PLANO).Contains(p.ID_PLANO) 
+                                    select p;
+            IEnumerable<SelectListItem> planosSelectListItem = new SelectList(planosdisponiveis, "ID_PLANO", "DESC_PLANO");
+            ViewBag.ID_PLANO = new SelectList(planosdisponiveis, "ID_PLANO", "DESC_PLANO");
 
             List<Categoria> categoriasDisponiveisList = _categoriaAppService.Find(t => t.STATUS == "A").ToList();
-
-
-
             #endregion populaobjetos
 
             PlanoCategoriaViewModel categoriaPercentualVM = new PlanoCategoriaViewModel(planoCategoriasList, planosSelectListItem, categoriasDisponiveisList);
@@ -75,23 +78,6 @@ namespace Dufry.Comissoes.Controllers
                 {
                     _planocategoriaAppService.CreateBatch(planoCategoriaList);
 
-
-            //        CategoriaPercentual categoriapercentualExiste = new CategoriaPercentual();
-            //        categoriapercentualExiste = null;
-
-            //        if (categoriapercentual.STATUS == "A")
-            //        {
-            //            categoriapercentualExiste = CategoriaPercentualAtivaVigente(categoriapercentual);
-            //        }
-
-            //        if (categoriapercentualExiste == null || categoriapercentual.STATUS == "I")
-            //        {
-            //            _categoriapercentualAppService.Create(categoriapercentual);
-            //        }
-            //        else
-            //        {
-            //            throw new InvalidOperationException("Já existe um perído vigente e ativo que coincide com a tentativa de inclusão / alteração");
-            //        }
                     return RedirectToAction("PlanoCategoriaIndex");
                 }
             }
@@ -103,6 +89,99 @@ namespace Dufry.Comissoes.Controllers
 
             return View(planoCategoriaOrdenado);
         }
+
+        // GET: /PlanoCategoria/PlanoCategoriaEdit/5
+        public ActionResult PlanoCategoriaEdit(int? id)
+        {
+            if (id == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception();
+            }
+            var planocategorias = _planocategoriaAppService.Find(t => t.ID_PLANO == id);
+            if (planocategorias == null)
+            {
+                //return HttpNotFound();
+                throw new Exception();
+            }
+
+            #region populaobjetos
+            var plano = _planoAppService.Get(id ?? default(int));
+
+            var categorias = _categoriaAppService.Find(t => t.STATUS == "A").ToList();
+
+            var categoriasDisponiveis = from c in categorias
+                                            where !
+                                              (from pc in planocategorias
+                                               select pc.ID_CATEGORIA).Contains(c.ID_CATEGORIA)
+                                            select c;
+
+            var categoriasSelecionadas = from c in categorias
+                                             where 
+                                               (from pc in planocategorias
+                                                select pc.ID_CATEGORIA).Contains(c.ID_CATEGORIA)
+                                                         select c;
+
+            
+
+            #endregion populaobjetos
+
+            PlanoCategoriaViewModel planoCategoriaVM = new PlanoCategoriaViewModel(planocategorias.ToList(), categoriasDisponiveis.ToList(), categoriasSelecionadas.ToList());
+
+            return View(planoCategoriaVM);
+
+        }
+
+        //// POST: /PlanoCategoria/PlanoCategoriaEdit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost, ActionName("PlanoCategoriaEdit")]
+        ////[ValidateAntiForgeryToken]
+        //public ActionResult PlanoCategoriaEditConfirmed(int? id)
+        //{
+
+        //    if (id == null)
+        //    {
+        //        //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //        throw new Exception();
+        //    }
+
+        //    var categoriapercentualToUpdate = _categoriapercentualAppService.Get(id ?? default(int));
+
+        //    categoriapercentualToUpdate = ObtemCategoriaPercentualForm(categoriapercentualToUpdate);
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            CategoriaPercentual categoriapercentualExiste = new CategoriaPercentual();
+        //            categoriapercentualExiste = null;
+
+        //            if (categoriapercentualToUpdate.STATUS == "A")
+        //            {
+        //                categoriapercentualExiste = CategoriaPercentualAtivaVigente(categoriapercentualToUpdate);
+        //            }
+
+        //            if (categoriapercentualExiste == null || categoriapercentualToUpdate.STATUS == "I")
+        //            {
+        //                _categoriapercentualAppService.Update(categoriapercentualToUpdate);
+        //            }
+        //            else
+        //            {
+        //                throw new InvalidOperationException("Já existe um perído vigente e ativo que coincide com a tentativa de inclusão / alteração");
+        //            }
+
+        //            return RedirectToAction("CategoriaPercentualIndex");
+        //        }
+        //        catch (RetryLimitExceededException /* dex */)
+        //        {
+        //            //Log the error (uncomment dex variable name and add a line here to write a log.
+        //            ModelState.AddModelError("", "Erro na alteração. Tente novamente ou, se o problema persistir, entre em contato com o suporte.");
+        //        }
+        //    }
+
+        //    return View(categoriapercentualToUpdate);
+        //}
 
         protected override void Dispose(bool disposing)
         {
@@ -128,5 +207,6 @@ namespace Dufry.Comissoes.Controllers
 
             return pc;
         }
+
     }
 }

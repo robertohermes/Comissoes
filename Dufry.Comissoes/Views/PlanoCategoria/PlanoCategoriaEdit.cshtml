@@ -1,7 +1,7 @@
 ﻿@model PlanoCategoriaViewModel
 
 @{
-    ViewBag.Title = "Inclusão de Planos de Comissões e Hierarquias";
+    ViewBag.Title = "Edição de Planos de Comissões e Hierarquias";
 }
 
 <style>
@@ -72,8 +72,13 @@
         border-color:darkgray;
     }
 
+    .divPlanoLabel {
+        margin-top: 25px;
+        margin-left: 83px;
+    }
+
     .divCategoriasSelecioneLabel {
-        margin-top: 10px;
+        margin-top: 24px;
         margin-left: 85px;
     }
 
@@ -97,11 +102,12 @@
 
     <div class="editorCategoria">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <p>
-            @Html.LabelFor(model => model.ID_PLANO)
-            @Html.DropDownListFor(model => model.ID_PLANO, Model.PlanosSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
-            @Html.ValidationMessageFor(model => model.ID_PLANO, String.Empty, new { @style = "padding-left: 40px;!important" })
-        </p>
+        @*@Html.HiddenFor(model => model.ID_PLANO)*@
+
+        <div class="divPlanoLabel"><b>@Html.DisplayNameFor(model => model.PlanoCategoriasList.First().Plano.DESC_PLANO)</b>&nbsp;
+            @Html.DisplayFor(model => model.PlanoCategoriasList.First().Plano.DESC_PLANO)
+        </div>
+
         <div class="divCategoriasSelecioneLabel">
             <p>Selecione e ordene as Categorias de forma hierárquica</p>
         </div>
@@ -130,7 +136,17 @@
             </div>
             <div class="divCategorias" id="divCategoriasSelecionadas">
                 <div id="CategoriasSelecionadas">
-                    <ul id="sortable3" class="droptrue"></ul>
+                    <ul id="sortable3" class="droptrue">
+                        @foreach (var item in Model.CategoriasSelecionadasList)
+                        {
+                            <li class="ui-state-default_dufry">
+                                @Html.DisplayFor(modelItem => item.DESC_CATEGORIA)
+                                @Html.Hidden("hdnId-" + item.ID_CATEGORIA, item.ID_CATEGORIA, new { @class = "ItemId" })
+                            </li>
+                        }
+
+
+                    </ul>
                 </div>
             </div>
         </div>
@@ -142,7 +158,7 @@
 
         <div id="BotoesFormulario">
             
-            <input type="button" id="salvaPlanoCategoria" value="Salvar e incluir" class="botoesCategoria" />
+            <input type="button" id="salvaPlanoCategoria" value="Salvar" class="botoesCategoria" />
             @Html.ActionLink("Voltar", "PlanoCategoriaIndex", "PlanoCategoria", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
         </div>
 

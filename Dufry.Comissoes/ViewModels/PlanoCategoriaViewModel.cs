@@ -16,6 +16,8 @@ namespace Dufry.Comissoes.ViewModels
 
         public List<Categoria> CategoriasDisponiveisList { get; set; }
 
+        public List<Categoria> CategoriasSelecionadasList { get; set; }
+
         public List<PlanoCategoria> PlanoCategoriasList { get; set; }
 
         public IEnumerable<SelectListItem> PlanosSelectListItem { get; set; }
@@ -30,6 +32,13 @@ namespace Dufry.Comissoes.ViewModels
             PlanoCategoriasList = planoCategoriasList;
             PlanosSelectListItem = planosSelectListItem;
             CategoriasDisponiveisList = categoriasDisponiveisList;
+        }
+
+        public PlanoCategoriaViewModel(List<PlanoCategoria> planoCategoriasList, List<Categoria> categoriasDisponiveisList, List<Categoria> categoriasSelecionadasList)
+        {
+            PlanoCategoriasList = planoCategoriasList;
+            CategoriasDisponiveisList = categoriasDisponiveisList;
+            CategoriasSelecionadasList = categoriasSelecionadasList;
         }
 
         //<REVER>
