@@ -35,6 +35,20 @@
             @Html.RadioButtonFor(model => model.Plano.STATUS, "I") Inativo
             @Html.ValidationMessageFor(model => model.Plano.STATUS, String.Empty, new { @style = "padding-left: 127px;!important" })
         </p>
+        <div class="divBotoesFormulario">
+            <p>
+
+                @if (Model.Plano.PlanoCategorias.Count() == 0)
+                {
+                    @Html.ActionLink("Criar hierarquias", "PlanoCategoriaCreate", "PlanoCategoria", null, new { @class = "botoesFormulario" })
+                }
+                else
+                {
+                    @Html.ActionLink("Modificar hierarquias", "PlanoCategoriaEdit", "PlanoCategoria", new { id = Model.Plano.ID_PLANO }, new { @class = "botoesFormulario" })
+                }
+            </p>
+        </div>
+
     </div>
 
     <input type="submit" id="salvaPlano" value="Salvar" class="botoesCategoria" />
