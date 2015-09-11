@@ -100,7 +100,7 @@
 
     <div class="editorCategoria">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.PlanoCategoriasList.First().ID_PLANO)
+        @Html.HiddenFor(model => model.PlanoCategoriasList.First().Plano.ID_PLANO)
 
         <div class="divPlanoLabel"><b>@Html.DisplayNameFor(model => model.PlanoCategoriasList.First().Plano.DESC_PLANO)</b>&nbsp;
             @Html.DisplayFor(model => model.PlanoCategoriasList.First().Plano.DESC_PLANO)
@@ -182,16 +182,18 @@
 
         function salvaCategoriasOrdenadas() {
 
-            var idPlano = $("#ID_PLANO").val();
+            var idPlano = $("#Plano_ID_PLANO").val();
             var planoCategoriaOrdenado = new Array();
+
 
             $("#sortable3 li").each(function (index) {
                 var planoCategoria = new Object();
-                planoCategoria.ID_PLANO = $("#ID_PLANO").val();
+                planoCategoria.ID_PLANO = $("#Plano_ID_PLANO").val();
                 planoCategoria.ID_CATEGORIA = $(this).find($(".ItemId")).val();
                 planoCategoria.ORDEM_HIERARQUIA = index + 1;
                 planoCategoriaOrdenado.push(planoCategoria);
             });
+
 
             var form = $("#frmPlanoCategoria");
 
@@ -213,7 +215,7 @@
                 $.ajax({
                     type: 'POST',
                     url: '/PlanoCategoria/PlanoCategoriaEdit',
-                    data: JSON.stringify(idPlano, planoCategoriaOrdenado),
+                    data: JSON.stringify(planoCategoriaOrdenado),
                     dataType: 'json',
                     contentType: 'application/json; charset=utf-8',
                     success: function () {

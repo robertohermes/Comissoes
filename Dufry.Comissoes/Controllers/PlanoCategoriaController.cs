@@ -44,11 +44,7 @@ namespace Dufry.Comissoes.Controllers
             #region populaobjetos
             var planos = _planoAppService.Find(t => t.STATUS == "A");
             var planocategorias = _planocategoriaAppService.All();
-            var planosdisponiveis = from p in planos 
-                                    where !
-                                    (from pc in planocategorias
-                                     select pc.ID_PLANO).Contains(p.ID_PLANO) 
-                                    select p;
+            var planosdisponiveis = ObtemPlanosDisponiveis(planos, planocategorias);
             IEnumerable<SelectListItem> planosSelectListItem = new SelectList(planosdisponiveis, "ID_PLANO", "DESC_PLANO");
             ViewBag.ID_PLANO = new SelectList(planosdisponiveis, "ID_PLANO", "DESC_PLANO");
 
@@ -71,7 +67,7 @@ namespace Dufry.Comissoes.Controllers
 
                 foreach (PlanoCategoria planoCategoria in planoCategoriaOrdenado)
                 {
-                    planoCategoriaList.Add(ObtemPlanoCategoriaForm(planoCategoria, true));
+                    planoCategoriaList.Add(SetPlanoCategoriaUserData(planoCategoria, true));
                 }
 
                 if (ModelState.IsValid)
@@ -99,6 +95,7 @@ namespace Dufry.Comissoes.Controllers
                 throw new Exception();
             }
             var planocategorias = _planocategoriaAppService.Find(t => t.ID_PLANO == id);
+
             if (planocategorias == null)
             {
                 //return HttpNotFound();
@@ -108,25 +105,15 @@ namespace Dufry.Comissoes.Controllers
             #region populaobjetos
             var plano = _planoAppService.Get(id ?? default(int));
 
-            var categorias = _categoriaAppService.Find(t => t.STATUS == "A").ToList();
+            var categorias = _categoriaAppService.Find(t => t.STATUS == "A");
 
-            var categoriasDisponiveis = from c in categorias
-                                            where !
-                                              (from pc in planocategorias
-                                               select pc.ID_CATEGORIA).Contains(c.ID_CATEGORIA)
-                                            select c;
+            List<Categoria> categoriasDisponiveisList = ListaCategoriasDisponiveis(planocategorias, categorias);
 
-            var categoriasSelecionadas = from c in categorias
-                                             where 
-                                               (from pc in planocategorias
-                                                select pc.ID_CATEGORIA).Contains(c.ID_CATEGORIA)
-                                                         select c;
-
-            
+            List<Categoria> categoriasSelecionadasList = ListaCategoriasSelecionadas(planocategorias, categorias);
 
             #endregion populaobjetos
 
-            PlanoCategoriaViewModel planoCategoriaVM = new PlanoCategoriaViewModel(planocategorias.ToList(), categoriasDisponiveis.ToList(), categoriasSelecionadas.ToList());
+            PlanoCategoriaViewModel planoCategoriaVM = new PlanoCategoriaViewModel(planocategorias.ToList(), categoriasDisponiveisList, categoriasSelecionadasList);
 
             return View(planoCategoriaVM);
 
@@ -137,29 +124,26 @@ namespace Dufry.Comissoes.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("PlanoCategoriaEdit")]
         //[ValidateAntiForgeryToken]
-        public ActionResult PlanoCategoriaEditConfirmed(int ? idPlano, List<PlanoCategoria> planoCategoriaOrdenado)
+        public ActionResult PlanoCategoriaEditConfirmed(List<PlanoCategoria> planoCategoriaOrdenado)
         {
 
-            if (idPlano == null)
+            if (planoCategoriaOrdenado == null)
             {
                 //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 throw new Exception();
             }
 
-            List<PlanoCategoria> planoCategoriaList = new List<PlanoCategoria>();
+            int idPlano = planoCategoriaOrdenado.FirstOrDefault().ID_PLANO;
 
-            foreach (PlanoCategoria planoCategoria in planoCategoriaOrdenado)
-            {
-                planoCategoriaList.Add(ObtemPlanoCategoriaForm(planoCategoria, true));
-            }
+            List<PlanoCategoria> planoCategoriaListToInsert = ListaPlanoCategoriaToInsert(planoCategoriaOrdenado);
 
-            List<PlanoCategoria> planocategoriasToDelete = _planocategoriaAppService.Find(t => t.ID_PLANO == idPlano).ToList();
+            List<PlanoCategoria> planoCategoriaListToDelete = _planocategoriaAppService.Find(t => t.ID_PLANO == idPlano).ToList();
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _planocategoriaAppService.UpdateBatch(planoCategoriaList, planocategoriasToDelete);
+                    _planocategoriaAppService.UpdateBatch(planoCategoriaListToInsert, planoCategoriaListToDelete);
 
                     return RedirectToAction("CategoriaPercentualIndex");
                 }
@@ -183,7 +167,7 @@ namespace Dufry.Comissoes.Controllers
             base.Dispose(disposing);
         }
 
-        private PlanoCategoria ObtemPlanoCategoriaForm(PlanoCategoria pc, bool insert = false)
+        private PlanoCategoria SetPlanoCategoriaUserData(PlanoCategoria pc, bool insert = false)
         {
 
             pc.LAST_MODIFY_DATE = DateTime.Now;
@@ -196,6 +180,56 @@ namespace Dufry.Comissoes.Controllers
             }
 
             return pc;
+        }
+
+        private static IEnumerable<Plano> ObtemPlanosDisponiveis(IEnumerable<Plano> planos, IEnumerable<PlanoCategoria> planocategorias)
+        {
+            var planosdisponiveis = from p in planos
+                                    where !
+                                    (from pc in planocategorias
+                                     select pc.ID_PLANO).Contains(p.ID_PLANO)
+                                    select p;
+            return planosdisponiveis;
+        }
+
+        private static List<Categoria> ListaCategoriasDisponiveis(IEnumerable<PlanoCategoria> planocategorias, IEnumerable<Categoria> categorias)
+        {
+            List<Categoria> categoriasDisponiveisList = (from c in categorias.ToList()
+                                                         where !
+                                                           (from pc in planocategorias
+                                                            select pc.ID_CATEGORIA).Contains(c.ID_CATEGORIA)
+                                                         select c).ToList();
+            return categoriasDisponiveisList;
+        }
+
+        private static List<Categoria> ListaCategoriasSelecionadas(IEnumerable<PlanoCategoria> planocategorias, IEnumerable<Categoria> categorias)
+        {
+            var Hierarquia = (from ca in categorias
+                              join pc in planocategorias on ca.ID_CATEGORIA equals pc.ID_CATEGORIA
+                              select new { ca.ID_CATEGORIA, ca.DESC_CATEGORIA, pc.ORDEM_HIERARQUIA }).OrderBy(pc => pc.ORDEM_HIERARQUIA);
+
+            List<Categoria> categoriasSelecionadasList = new List<Categoria>();
+
+            foreach (var hierarquia in Hierarquia)
+            {
+                Categoria catAux = new Categoria();
+                catAux.ID_CATEGORIA = hierarquia.ID_CATEGORIA;
+                catAux.DESC_CATEGORIA = hierarquia.DESC_CATEGORIA;
+
+                categoriasSelecionadasList.Add(catAux);
+            }
+            return categoriasSelecionadasList;
+        }
+
+        private List<PlanoCategoria> ListaPlanoCategoriaToInsert(List<PlanoCategoria> planoCategoriaOrdenado)
+        {
+            List<PlanoCategoria> planoCategoriaListToInsert = new List<PlanoCategoria>();
+
+            foreach (PlanoCategoria planoCategoria in planoCategoriaOrdenado)
+            {
+                planoCategoriaListToInsert.Add(SetPlanoCategoriaUserData(planoCategoria, true));
+            }
+            return planoCategoriaListToInsert;
         }
 
     }
