@@ -19,7 +19,13 @@
 
     if (Model.Plano.DolarMedios.Count() > 0)
     {
-        confirmMessageErrorList.Add("O plano de comissão " + Html.DisplayFor(model => model.Plano.DESC_PLANO) + " não pode ser excluído, por haver Taxa de Dólar associada. Exclua todas as taxas de dólar primeiro.");
+        confirmMessageErrorList.Add("O plano de comissão " + Html.DisplayFor(model => model.Plano.DESC_PLANO) + " não pode ser excluído, por haver Taxa de Dólar associada. Exclua todas as respectivas taxas de dólar primeiro.");
+        exibeBotaoExcluir = false;
+    }
+
+    if (Model.Plano.PlanoLojas.Count() > 0)
+    {
+        confirmMessageErrorList.Add("O plano de comissão " + Html.DisplayFor(model => model.Plano.DESC_PLANO) + " não pode ser excluído, por haver Loja associada. Exclua todas as respectivas lojas primeiro.");
         exibeBotaoExcluir = false;
     }    
     

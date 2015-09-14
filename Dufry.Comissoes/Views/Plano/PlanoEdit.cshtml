@@ -37,14 +37,15 @@
         </p>
         <div class="divBotoesFormulario">
             <p>
-
-                @if (Model.Plano.PlanoCategorias.Count() == 0)
+                @{
+                string captionBotaoHierarquia = "Modificar hierarquias";
+                
+                if (Model.Plano.PlanoCategorias.Count() == 0)
                 {
-                    @Html.ActionLink("Criar hierarquias", "PlanoCategoriaCreate", "PlanoCategoria", null, new { @class = "botoesFormulario" })
+                    captionBotaoHierarquia = "Criar hierarquias";
                 }
-                else
-                {
-                    @Html.ActionLink("Modificar hierarquias", "PlanoCategoriaEdit", "PlanoCategoria", new { id = Model.Plano.ID_PLANO }, new { @class = "botoesFormulario" })
+
+                @Html.ActionLink(captionBotaoHierarquia, "PlanoCategoriaEdit", "PlanoCategoria", new { id = Model.Plano.ID_PLANO }, new { @class = "botoesFormulario" })                    
                 }
             </p>
         </div>

@@ -47,6 +47,8 @@ namespace Dufry.Comissoes.Domain.Entities
 
         public virtual ICollection<DolarMedio> DolarMedios { get; set; }
 
+        public virtual ICollection<PlanoLoja> PlanoLojas { get; set; }
+
 
         //public ValidationResult ValidationResult { get; private set; }
 

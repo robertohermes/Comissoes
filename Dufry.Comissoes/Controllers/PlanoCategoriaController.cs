@@ -36,56 +36,6 @@ namespace Dufry.Comissoes.Controllers
             _categoriaAppService = categoriaAppService;
         }
 
-        // GET: /PlanoCategoria/PlanoCategoriaCreate
-        public ActionResult PlanoCategoriaCreate()
-        {
-            List<PlanoCategoria> planoCategoriasList = new List<PlanoCategoria>();
-
-            #region populaobjetos
-            var planos = _planoAppService.Find(t => t.STATUS == "A");
-            var planocategorias = _planocategoriaAppService.All();
-            var planosdisponiveis = ObtemPlanosDisponiveis(planos, planocategorias);
-            IEnumerable<SelectListItem> planosSelectListItem = new SelectList(planosdisponiveis, "ID_PLANO", "DESC_PLANO");
-            ViewBag.ID_PLANO = new SelectList(planosdisponiveis, "ID_PLANO", "DESC_PLANO");
-
-            List<Categoria> categoriasDisponiveisList = _categoriaAppService.Find(t => t.STATUS == "A").ToList();
-            #endregion populaobjetos
-
-            PlanoCategoriaViewModel categoriaPercentualVM = new PlanoCategoriaViewModel(planoCategoriasList, planosSelectListItem, categoriasDisponiveisList);
-
-            return View(categoriaPercentualVM);
-        }
-
-        // POST: /PlanoCategoria/PlanoCategoriaCreate
-        [HttpPost, ActionName("PlanoCategoriaCreate")]
-        //[ValidateAntiForgeryToken]
-        public ActionResult PlanoCategoriaCreateConfirmed(List<PlanoCategoria> planoCategoriaOrdenado)
-        {
-            try
-            {
-                List<PlanoCategoria> planoCategoriaList = new List<PlanoCategoria>();
-
-                foreach (PlanoCategoria planoCategoria in planoCategoriaOrdenado)
-                {
-                    planoCategoriaList.Add(SetPlanoCategoriaUserData(planoCategoria, true));
-                }
-
-                if (ModelState.IsValid)
-                {
-                    _planocategoriaAppService.CreateBatch(planoCategoriaList);
-
-                    return RedirectToAction("PlanoCategoriaIndex");
-                }
-            }
-            catch (RetryLimitExceededException /* dex */)
-            {
-                //Log the error (uncomment dex variable name and add a line here to write a log.
-                ModelState.AddModelError("", "Erro ao salvar. Tente novamente ou, se o problema persistir, entre em contato com o suporte.");
-            }
-
-            return View(planoCategoriaOrdenado);
-        }
-
         // GET: /PlanoCategoria/PlanoCategoriaEdit/5
         public ActionResult PlanoCategoriaEdit(int? id)
         {
@@ -113,7 +63,7 @@ namespace Dufry.Comissoes.Controllers
 
             #endregion populaobjetos
 
-            PlanoCategoriaViewModel planoCategoriaVM = new PlanoCategoriaViewModel(planocategorias.ToList(), categoriasDisponiveisList, categoriasSelecionadasList);
+            PlanoCategoriaViewModel planoCategoriaVM = new PlanoCategoriaViewModel(planocategorias.ToList(), categoriasDisponiveisList, categoriasSelecionadasList, plano);
 
             return View(planoCategoriaVM);
 
@@ -124,7 +74,7 @@ namespace Dufry.Comissoes.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("PlanoCategoriaEdit")]
         //[ValidateAntiForgeryToken]
-        public ActionResult PlanoCategoriaEditConfirmed(List<PlanoCategoria> planoCategoriaOrdenado)
+        public ActionResult PlanoCategoriaEditConfirmed(int idPlano, List<PlanoCategoria> planoCategoriaOrdenado)
         {
 
             if (planoCategoriaOrdenado == null)
@@ -132,8 +82,6 @@ namespace Dufry.Comissoes.Controllers
                 //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 throw new Exception();
             }
-
-            int idPlano = planoCategoriaOrdenado.FirstOrDefault().ID_PLANO;
 
             List<PlanoCategoria> planoCategoriaListToInsert = ListaPlanoCategoriaToInsert(planoCategoriaOrdenado);
 

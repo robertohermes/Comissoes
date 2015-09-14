@@ -69,21 +69,21 @@ namespace Dufry.Comissoes.Domain.Services.Common
 
         #region CRUD Methods
 
-        public virtual ValidationResult Add(TEntity department)
+        public virtual ValidationResult Add(TEntity entity)
         {
             if (!ValidationResult.IsValid)
                 return ValidationResult;
 
-            _repository.Add(department);
+            _repository.Add(entity);
             return _validationResult;
         }
 
-        public virtual ValidationResult Update(TEntity department)
+        public virtual ValidationResult Update(TEntity entity)
         {
             if (!ValidationResult.IsValid)
                 return ValidationResult;
 
-            _repository.Update(department);
+            _repository.Update(entity);
             return _validationResult;
         }
 

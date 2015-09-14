@@ -10,9 +10,10 @@ namespace Dufry.Comissoes.ViewModels
     public class PlanoCategoriaViewModel
     {
 
-        [Required(ErrorMessage = "A escolha de um plano é obrigatória")]
-        [Display(Name = "Plano")]
-        public int ID_PLANO { get; set; }
+        //[Required(ErrorMessage = "A escolha de um plano é obrigatória")]
+        //[Display(Name = "Plano")]
+        //public int ID_PLANO { get; set; }
+        public Plano Plano { get; set; }
 
         public List<Categoria> CategoriasDisponiveisList { get; set; }
 
@@ -34,8 +35,9 @@ namespace Dufry.Comissoes.ViewModels
             CategoriasDisponiveisList = categoriasDisponiveisList;
         }
 
-        public PlanoCategoriaViewModel(List<PlanoCategoria> planoCategoriasList, List<Categoria> categoriasDisponiveisList, List<Categoria> categoriasSelecionadasList)
+        public PlanoCategoriaViewModel(List<PlanoCategoria> planoCategoriasList, List<Categoria> categoriasDisponiveisList, List<Categoria> categoriasSelecionadasList, Plano plano)
         {
+            Plano = plano;
             PlanoCategoriasList = planoCategoriasList;
             CategoriasDisponiveisList = categoriasDisponiveisList;
             CategoriasSelecionadasList = categoriasSelecionadasList;

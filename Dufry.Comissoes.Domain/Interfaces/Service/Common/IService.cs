@@ -11,8 +11,8 @@ namespace Dufry.Comissoes.Domain.Interfaces.Service.Common
         TEntity Get(int id, bool @readonly = false);
         IEnumerable<TEntity> All(bool @readonly = false);
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate, bool @readonly = false);
-        ValidationResult Add(TEntity department);
-        ValidationResult Update(TEntity department);
+        ValidationResult Add(TEntity entity);
+        ValidationResult Update(TEntity entity);
         ValidationResult Delete(TEntity entity);
     }
 }
