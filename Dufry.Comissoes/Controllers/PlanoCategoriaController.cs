@@ -130,16 +130,6 @@ namespace Dufry.Comissoes.Controllers
             return pc;
         }
 
-        private static IEnumerable<Plano> ObtemPlanosDisponiveis(IEnumerable<Plano> planos, IEnumerable<PlanoCategoria> planocategorias)
-        {
-            var planosdisponiveis = from p in planos
-                                    where !
-                                    (from pc in planocategorias
-                                     select pc.ID_PLANO).Contains(p.ID_PLANO)
-                                    select p;
-            return planosdisponiveis;
-        }
-
         private static List<Categoria> ListaCategoriasDisponiveis(IEnumerable<PlanoCategoria> planocategorias, IEnumerable<Categoria> categorias)
         {
             List<Categoria> categoriasDisponiveisList = (from c in categorias.ToList()
