@@ -59,42 +59,79 @@ namespace Dufry.Comissoes.Application
             return ValidationResult;
         }
 
-        public ValidationResult UpdateBatch(List<PlanoCategoria> planocategoriaListToInsert, List<PlanoCategoria> planocategoriaListToDelete)
+        public ValidationResult UpdateBatch(List<PlanoCategoria> planoCategoriaListNovos, List<PlanoCategoria> planoCategoriaListAtuais)
         {
             List<PlanoCategoria> planocategoriaListToUpdate = new List<PlanoCategoria>();
-            List<PlanoCategoria> planocategoriaListToRemove = new List<PlanoCategoria>();
+            List<PlanoCategoria> planocategoriaListToDelete = new List<PlanoCategoria>();
+            List<PlanoCategoria> planocategoriaListToinsert = new List<PlanoCategoria>();
 
-            planocategoriaListToUpdate = (from pci in planocategoriaListToInsert
-                                        join pcd in planocategoriaListToDelete
+            planocategoriaListToUpdate = (from pci in planoCategoriaListNovos
+                                        join pca in planoCategoriaListAtuais
                                         on new { pci.ID_PLANO, pci.ID_CATEGORIA }
-                                        equals new { pcd.ID_PLANO, pcd.ID_CATEGORIA }
+                                        equals new { pca.ID_PLANO, pca.ID_CATEGORIA }
                                         select pci).ToList();
 
-            //<Corrigir>
-            planocategoriaListToRemove = (from pcd in planocategoriaListToDelete
-                                          join pcu in planocategoriaListToUpdate
-                                          on new { pcd.ID_PLANO, pcd.ID_CATEGORIA }
-                                          equals new { pcu.ID_PLANO, pcu.ID_CATEGORIA }
-                                          select pcd).ToList();
+            planocategoriaListToDelete = (from pca in planoCategoriaListAtuais
+                                          where !planocategoriaListToUpdate.Any(pcu => pcu.ID_PLANO == pca.ID_PLANO && pcu.ID_CATEGORIA == pca.ID_CATEGORIA)
+                                        select pca).ToList();
 
-            //planocategoriaListToUpdate = from planocategoriaListToInsert
+            planocategoriaListToinsert = (from pcn in planoCategoriaListNovos
+                                          where !planocategoriaListToUpdate.Any(pcu => pcu.ID_PLANO == pcn.ID_PLANO && pcu.ID_CATEGORIA == pcn.ID_CATEGORIA)
+                                          select pcn).ToList();
 
-            BeginTransaction();
+            //BeginTransaction();
 
 
-            foreach (PlanoCategoria planocategoriaDel in planocategoriaListToDelete)
+            foreach (PlanoCategoria planocategoriaUpd in planocategoriaListToUpdate)
             {
-                ValidationResult.Add(_service.Delete(planocategoriaDel));
+                PlanoCategoria updAux = _service.Find(t => t.ID_PLANO == planocategoriaUpd.ID_PLANO
+                                                        && t.ID_CATEGORIA == planocategoriaUpd.ID_CATEGORIA).FirstOrDefault();
+
+                planocategoriaUpd.ID_PLANO_CATEGORIA = updAux.ID_PLANO_CATEGORIA;
+
+                _service.UpdateDapper(planocategoriaUpd);
+
             }
 
-            foreach (PlanoCategoria planocategoriaIns in planocategoriaListToInsert)
-            {
-                ValidationResult.Add(_service.Add(planocategoriaIns));
-            }
+            //foreach (PlanoCategoria planocategoriaUpd in planocategoriaListToUpdate)
+            //{
 
-            if (ValidationResult.IsValid) Commit();
+            //    PlanoCategoria updAux = _service.Find(t => t.ID_PLANO == planocategoriaUpd.ID_PLANO
+            //                                            && t.ID_CATEGORIA == planocategoriaUpd.ID_CATEGORIA).FirstOrDefault();
+
+            //    updAux.ORDEM_HIERARQUIA = planocategoriaUpd.ORDEM_HIERARQUIA;
+            //    updAux.CREATED_DATETIME = planocategoriaUpd.CREATED_DATETIME;
+            //    updAux.CREATED_USERNAME = planocategoriaUpd.CREATED_USERNAME;
+            //    updAux.LAST_MODIFY_DATE = planocategoriaUpd.LAST_MODIFY_DATE;
+            //    updAux.LAST_MODIFY_USERNAME = planocategoriaUpd.LAST_MODIFY_USERNAME;
+
+            //    ValidationResult.Add(_service.Update(updAux));
+                
+            //}
+
+            //foreach (PlanoCategoria planocategoriaIns in planoCategoriaListNovos)
+            //{
+            //    ValidationResult.Add(_service.Add(planocategoriaIns));
+            //}
+
+            //foreach (PlanoCategoria planocategoriaDel in planocategoriaListToDelete)
+            //{
+            //    ValidationResult.Add(_service.Delete(planocategoriaDel));
+            //}
+
+            //if (ValidationResult.IsValid) Commit();
 
             return ValidationResult;
+        }
+
+        public void UpdateHierarquia(List<PlanoCategoria> planoCategoriaListNovos, List<PlanoCategoria> planoCategoriaListAtuais)
+        {
+            foreach (PlanoCategoria planocategoriaIns in planoCategoriaListNovos)
+            {
+                //ValidationResult.Add(_service.UpdateDapper(planocategoriaIns));
+                _service.UpdateDapper(planocategoriaIns);
+            }
+            
         }
 
         public ValidationResult Update(PlanoCategoria planocategoria)

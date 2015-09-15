@@ -16,7 +16,7 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
             using (var cn = ComissoesConnection)
             {
                 var controleacessos = cn.Query<PlanoCategoria>("SELECT * FROM COMIS_PLANO_CATEGORIA WHERE ID_PLANO_CATEGORIA = @id_plano_categoria",
-                    new { ColaboradorKey = id }).FirstOrDefault();
+                    new { ColaboradorKey = id }).FirstOrDefault();  
                 return controleacessos;
             }
         }
@@ -36,6 +36,32 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
             {
                 var controleacessos = cn.GetList<PlanoCategoria>(predicate);
                 return controleacessos;
+            }
+        }
+
+        public void Update(PlanoCategoria planoCategoria)
+        {
+            string command = string.Concat("UPDATE "
+                                        , "COMIS_PLANO_CATEGORIA "
+                                        , "SET "
+                                        , "ORDEM_HIERARQUIA = @ORDEM_HIERARQUIA, "
+                                        , "LAST_MODIFY_DATE = @LAST_MODIFY_DATE, "
+                                        , "LAST_MODIFY_USERNAME = @LAST_MODIFY_USERNAME "
+                                        , "WHERE "
+                                        , "ID_PLANO_CATEGORIA = @ID_PLANO_CATEGORIA");
+
+            using (var cn = ComissoesConnection)
+            {
+                var planocategoria = cn.ExecuteScalar(command, new
+                {
+                    ORDEM_HIERARQUIA = planoCategoria.ORDEM_HIERARQUIA
+                                                                    ,
+                    LAST_MODIFY_DATE = planoCategoria.LAST_MODIFY_DATE
+                                                                    ,
+                    LAST_MODIFY_USERNAME = planoCategoria.LAST_MODIFY_USERNAME
+                                                                    ,
+                    ID_PLANO_CATEGORIA = planoCategoria.ID_PLANO_CATEGORIA
+                });
             }
         }
 

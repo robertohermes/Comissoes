@@ -18,6 +18,13 @@ namespace Dufry.Comissoes.Domain.Services
         }
 
 
+        public void UpdateDapper(PlanoCategoria planoCategoria)
+        {
+            //Acesso através do Dapper
+            _readOnlyRepository.Update(planoCategoria);
+
+        }
+
 
     }
 }

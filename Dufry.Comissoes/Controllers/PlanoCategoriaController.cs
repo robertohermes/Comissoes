@@ -83,15 +83,15 @@ namespace Dufry.Comissoes.Controllers
                 throw new Exception();
             }
 
-            List<PlanoCategoria> planoCategoriaListToInsert = ListaPlanoCategoriaToInsert(planoCategoriaOrdenado);
+            List<PlanoCategoria> planoCategoriaListNovos = ListaPlanoCategoriaNovos(planoCategoriaOrdenado);
 
-            List<PlanoCategoria> planoCategoriaListToDelete = _planocategoriaAppService.Find(t => t.ID_PLANO == idPlano).ToList();
+            List<PlanoCategoria> planoCategoriaListAtuais = ListaPlanoCategoriaAtuais(idPlano);
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _planocategoriaAppService.UpdateBatch(planoCategoriaListToInsert, planoCategoriaListToDelete);
+                    _planocategoriaAppService.UpdateBatch(planoCategoriaListNovos, planoCategoriaListAtuais);
 
                     return RedirectToAction("CategoriaPercentualIndex");
                 }
@@ -159,15 +159,20 @@ namespace Dufry.Comissoes.Controllers
             return categoriasSelecionadasList;
         }
 
-        private List<PlanoCategoria> ListaPlanoCategoriaToInsert(List<PlanoCategoria> planoCategoriaOrdenado)
+        private List<PlanoCategoria> ListaPlanoCategoriaNovos(List<PlanoCategoria> planoCategoriaOrdenado)
         {
-            List<PlanoCategoria> planoCategoriaListToInsert = new List<PlanoCategoria>();
+            List<PlanoCategoria> planoCategoriaListNovos = new List<PlanoCategoria>();
 
             foreach (PlanoCategoria planoCategoria in planoCategoriaOrdenado)
             {
-                planoCategoriaListToInsert.Add(SetPlanoCategoriaUserData(planoCategoria, true));
+                planoCategoriaListNovos.Add(SetPlanoCategoriaUserData(planoCategoria, true));
             }
-            return planoCategoriaListToInsert;
+            return planoCategoriaListNovos;
+        }
+
+        private List<PlanoCategoria> ListaPlanoCategoriaAtuais(int idPlano)
+        {
+            return _planocategoriaAppService.Find(t => t.ID_PLANO == idPlano).ToList(); ;
         }
 
     }

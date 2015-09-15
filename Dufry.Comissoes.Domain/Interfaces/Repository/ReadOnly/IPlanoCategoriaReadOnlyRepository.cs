@@ -5,7 +5,7 @@ namespace Dufry.Comissoes.Domain.Interfaces.Repository.ReadOnly
 {
     public interface IPlanoCategoriaReadOnlyRepository : IReadOnlyRepository<PlanoCategoria>
     {
-
+        void Update(PlanoCategoria planoCategoria);
     
     }
 }
