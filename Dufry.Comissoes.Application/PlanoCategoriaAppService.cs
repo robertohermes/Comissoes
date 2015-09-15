@@ -61,7 +61,26 @@ namespace Dufry.Comissoes.Application
 
         public ValidationResult UpdateBatch(List<PlanoCategoria> planocategoriaListToInsert, List<PlanoCategoria> planocategoriaListToDelete)
         {
+            List<PlanoCategoria> planocategoriaListToUpdate = new List<PlanoCategoria>();
+            List<PlanoCategoria> planocategoriaListToRemove = new List<PlanoCategoria>();
+
+            planocategoriaListToUpdate = (from pci in planocategoriaListToInsert
+                                        join pcd in planocategoriaListToDelete
+                                        on new { pci.ID_PLANO, pci.ID_CATEGORIA }
+                                        equals new { pcd.ID_PLANO, pcd.ID_CATEGORIA }
+                                        select pci).ToList();
+
+            //<Corrigir>
+            planocategoriaListToRemove = (from pcd in planocategoriaListToDelete
+                                          join pcu in planocategoriaListToUpdate
+                                          on new { pcd.ID_PLANO, pcd.ID_CATEGORIA }
+                                          equals new { pcu.ID_PLANO, pcu.ID_CATEGORIA }
+                                          select pcd).ToList();
+
+            //planocategoriaListToUpdate = from planocategoriaListToInsert
+
             BeginTransaction();
+
 
             foreach (PlanoCategoria planocategoriaDel in planocategoriaListToDelete)
             {
