@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dufry.Comissoes", "Dufry.Comissoes\Dufry.Comissoes.csproj", "{32DCD27D-A84C-4250-B657-408B3620A9AC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Presentation", "0 - Presentation", "{7C521CC2-BDA3-4108-979D-E0BEF86BA711}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Presentation", "{7C521CC2-BDA3-4108-979D-E0BEF86BA711}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", "{6651A5FE-54C8-440E-96B6-D9F5965D82BA}"
 EndProject

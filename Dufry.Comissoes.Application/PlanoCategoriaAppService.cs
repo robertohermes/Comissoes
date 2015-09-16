@@ -112,6 +112,7 @@ namespace Dufry.Comissoes.Application
                 transactionScope.Complete();
             }
 
+            //<REVER>
             return ValidationResult;
         }
 
