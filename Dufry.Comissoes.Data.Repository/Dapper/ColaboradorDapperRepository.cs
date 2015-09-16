@@ -38,5 +38,22 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
                 return colaboradores;
             }
         }
+
+        public IEnumerable<Colaborador> All_ID_COMPOSTO()
+        {
+            string command = string.Concat("SELECT distinct "
+                                          ,"cast(emp.CodigoEmpresaAlternate as nvarchar(20)) + '|' + fil.CodigoFilialAlternate + '|' + col.CodigoSecundario as IdColaboradorComposto, col.NomeCompleto "
+                                          ,"FROM        DimColaborador  col "
+                                          ,"INNER JOIN  DimLoja         loj ON col.Id_Loja          = loj.Id_Loja "
+                                          ,"INNER JOIN  DimFilial       fil on loj.Id_Filial        = fil.Id_Filial "
+                                          ,"INNER JOIN  DimTipoNegocio  neg ON fil.Id_TipoNegocio   = neg.Id_TipoNegocio  "
+                                          ,"INNER JOIN  DimEmpresa      emp ON neg.Id_Empresa       = emp.Id_Empresa ");
+
+            using (var cn = BIVendasConnection)
+            {
+                var colaborador = cn.Query<Colaborador>(command);
+                return colaborador;
+            }
+        }
     }
 }
