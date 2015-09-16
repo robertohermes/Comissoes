@@ -13,7 +13,5 @@ namespace Dufry.Comissoes.Application.Interfaces
 
         ValidationResult UpdateBatch(List<PlanoCategoria> planocategoriaListToInsert, List<PlanoCategoria> planocategoriaListToDelete);
 
-        void UpdateHierarquia(List<PlanoCategoria> planoCategoriaListNovos, List<PlanoCategoria> planoCategoriaListAtuais);
-
     }
 }

@@ -55,11 +55,48 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
                 var planocategoria = cn.ExecuteScalar(command, new
                 {
                     ORDEM_HIERARQUIA = planoCategoria.ORDEM_HIERARQUIA
-                                                                    ,
-                    LAST_MODIFY_DATE = planoCategoria.LAST_MODIFY_DATE
-                                                                    ,
-                    LAST_MODIFY_USERNAME = planoCategoria.LAST_MODIFY_USERNAME
-                                                                    ,
+                  , LAST_MODIFY_DATE = planoCategoria.LAST_MODIFY_DATE
+                  , LAST_MODIFY_USERNAME = planoCategoria.LAST_MODIFY_USERNAME
+                  , ID_PLANO_CATEGORIA = planoCategoria.ID_PLANO_CATEGORIA
+                });
+            }
+        }
+
+        public void Insert(PlanoCategoria planoCategoria)
+        {
+            string command = string.Concat("INSERT "
+                                        , "COMIS_PLANO_CATEGORIA "
+                                        , "(ID_PLANO, ID_CATEGORIA, ORDEM_HIERARQUIA, CREATED_DATETIME, CREATED_USERNAME, LAST_MODIFY_DATE, LAST_MODIFY_USERNAME) "
+                                        , "Values "
+                                        , "(@ID_PLANO, @ID_CATEGORIA, @ORDEM_HIERARQUIA, @CREATED_DATETIME, @CREATED_USERNAME, @LAST_MODIFY_DATE, @LAST_MODIFY_USERNAME)"
+                                        );
+
+            using (var cn = ComissoesConnection)
+            {
+                var planocategoria = cn.ExecuteScalar(command, new
+                {
+                    ID_PLANO = planoCategoria.ID_PLANO
+                  , ID_CATEGORIA = planoCategoria.ID_CATEGORIA
+                  , ORDEM_HIERARQUIA = planoCategoria.ORDEM_HIERARQUIA
+                  , CREATED_DATETIME = planoCategoria.CREATED_DATETIME
+                  , CREATED_USERNAME = planoCategoria.CREATED_USERNAME
+                  , LAST_MODIFY_DATE = planoCategoria.LAST_MODIFY_DATE
+                  , LAST_MODIFY_USERNAME = planoCategoria.LAST_MODIFY_USERNAME
+                });
+            }
+        }
+
+        public void Delete(PlanoCategoria planoCategoria)
+        {
+            string command = string.Concat("DELETE FROM "
+                                        , "COMIS_PLANO_CATEGORIA "
+                                        , "WHERE "
+                                        , "ID_PLANO_CATEGORIA = @ID_PLANO_CATEGORIA");
+
+            using (var cn = ComissoesConnection)
+            {
+                var planocategoria = cn.ExecuteScalar(command, new
+                {
                     ID_PLANO_CATEGORIA = planoCategoria.ID_PLANO_CATEGORIA
                 });
             }

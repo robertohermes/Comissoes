@@ -17,11 +17,24 @@ namespace Dufry.Comissoes.Domain.Services
             _repository = repository;
         }
 
+        public void InsertDapper(PlanoCategoria planoCategoria)
+        {
+            //Acesso através do Dapper
+            _readOnlyRepository.Insert(planoCategoria);
+
+        }
 
         public void UpdateDapper(PlanoCategoria planoCategoria)
         {
             //Acesso através do Dapper
             _readOnlyRepository.Update(planoCategoria);
+
+        }
+
+        public void DeleteDapper(PlanoCategoria planoCategoria)
+        {
+            //Acesso através do Dapper
+            _readOnlyRepository.Delete(planoCategoria);
 
         }
 
