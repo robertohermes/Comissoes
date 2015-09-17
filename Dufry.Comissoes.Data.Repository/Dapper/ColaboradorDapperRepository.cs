@@ -42,16 +42,19 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         public IEnumerable<KeyValuePair<string, string>> All_ID_COMPOSTO()
         {
             string command = string.Concat("SELECT distinct top 100 "
-                                          ,"cast(emp.CodigoEmpresaAlternate as nvarchar(20)) + '|' + fil.CodigoFilialAlternate + '|' + col.CodigoSecundario as IdColaboradorComposto, col.NomeCompleto "
+                                          , "cast(emp.CodigoEmpresaAlternate as nvarchar(20)) + '|' + fil.CodigoFilialAlternate + '|' + col.CodigoSecundario as IdColaboradorComposto, col.NomeCompleto as NomeCompleto "
                                           ,"FROM        DimColaborador  col "
                                           ,"INNER JOIN  DimLoja         loj ON col.Id_Loja          = loj.Id_Loja "
                                           ,"INNER JOIN  DimFilial       fil on loj.Id_Filial        = fil.Id_Filial "
                                           ,"INNER JOIN  DimTipoNegocio  neg ON fil.Id_TipoNegocio   = neg.Id_TipoNegocio  "
-                                          ,"INNER JOIN  DimEmpresa      emp ON neg.Id_Empresa       = emp.Id_Empresa ");
+                                          ,"INNER JOIN  DimEmpresa      emp ON neg.Id_Empresa       = emp.Id_Empresa "
+                                          , "ORDER BY NomeCompleto ");
 
             using (var cn = BIVendasConnection)
             {
-                var colaborador = cn.Query<KeyValuePair<string, string>>(command);
+                var colaborador = cn.Query(command).ToDictionary(
+                                                        row => (string)row.IdColaboradorComposto,
+                                                        row => (string)row.NomeCompleto); ;
                 return colaborador;
             }
         }

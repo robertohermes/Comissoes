@@ -5,6 +5,7 @@ using Dufry.Comissoes.Filters;
 using Dufry.Comissoes.ViewModels;
 using PagedList;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Globalization;
@@ -46,8 +47,8 @@ namespace Dufry.Comissoes.Controllers
 
             #region populaobjetos
             var superiores = ObtemColaboradores();
-            IEnumerable<SelectListItem> superioresSelectListItem = new SelectList(superiores);
-            IEnumerable<SelectListItem> funcionariosSelectListItem = new SelectList(superiores);
+            IEnumerable<SelectListItem> superioresSelectListItem = new SelectList((IEnumerable)superiores, "Key", "Value");
+            IEnumerable<SelectListItem> funcionariosSelectListItem = new SelectList((IEnumerable)superiores, "Key", "Value");
 
 
             //IEnumerable<SelectListItem> superioresSelectListItem = new SelectList(superiores, "ID_PLANO", "DESC_PLANO");
