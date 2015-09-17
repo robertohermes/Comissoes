@@ -64,6 +64,11 @@ namespace Dufry.Comissoes.Application
             return _service.Find(predicate, @readonly);
         }
 
+        public IEnumerable<KeyValuePair<string, string>> All_ID_COMPOSTO()
+        {
+            return _service.All_ID_COMPOSTO();
+        }
+
 
         public void Dispose()
         {

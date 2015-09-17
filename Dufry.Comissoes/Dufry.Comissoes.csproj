@@ -172,6 +172,9 @@
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="Controllers\AusenciaRemuneradaController.cs" />
+    <Compile Include="Controllers\CadastroAcessoController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\CargoController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\TipoNegocioController.cs" />
@@ -205,7 +208,7 @@
     <Compile Include="ViewModels\PlanoLojaViewModel.cs" />
     <Compile Include="ViewModels\CategoriaPercentualViewModel.cs" />
     <Compile Include="ViewModels\CategoriaViewModel.cs" />
-    <Compile Include="ViewModels\ControleAcessoViewModel.cs" />
+    <Compile Include="ViewModels\CadastroAcessoViewModel.cs" />
     <Compile Include="ViewModels\DolarMedioViewModel.cs" />
     <Compile Include="ViewModels\DSRViewModel.cs" />
     <Compile Include="ViewModels\EmpresaViewModel.cs" />
@@ -451,7 +454,7 @@
     <Content Include="Views\PlanoLoja\PlanoLojaDelete.cshtml" />
     <Content Include="Views\PlanoLoja\PlanoLojaIndex.cshtml" />
     <Content Include="Views\PlanoCategoria\PlanoCategoriaEdit.cshtml" />
-    <Content Include="Views\ControleAcesso\ControleAcessoCreate.cshtml" />
+    <Content Include="Views\CadastroAcesso\CadastroAcessoCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

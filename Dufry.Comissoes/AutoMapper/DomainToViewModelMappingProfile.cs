@@ -17,7 +17,7 @@ namespace Dufry.Comissoes.AutoMapper
             Mapper.CreateMap<Categoria, CategoriaViewModel>();
             Mapper.CreateMap<CategoriaPercentual, CategoriaPercentualViewModel>();
             Mapper.CreateMap<Colaborador, ColaboradorViewModel>();
-            Mapper.CreateMap<ControleAcesso, ControleAcessoViewModel>();
+            Mapper.CreateMap<ControleAcesso, CadastroAcessoViewModel>();
             Mapper.CreateMap<DolarMedio, DolarMedioViewModel>();
             Mapper.CreateMap<DSR, DSRViewModel>();
             Mapper.CreateMap<Empresa, EmpresaViewModel>();

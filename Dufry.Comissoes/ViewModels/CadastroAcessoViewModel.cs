@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace Dufry.Comissoes.ViewModels
 {
-    public class ControleAcessoViewModel
+    public class CadastroAcessoViewModel
     {
 
         public ControleAcesso ControleAcesso { get; set; }
@@ -14,7 +14,7 @@ namespace Dufry.Comissoes.ViewModels
 
         public IEnumerable<SelectListItem> FuncionariosSelectListItem { get; set; }
 
-        public ControleAcessoViewModel(ControleAcesso controleAcesso, IEnumerable<SelectListItem> superioresSelectListItem, IEnumerable<SelectListItem> funcionariosSelectListItem)
+        public CadastroAcessoViewModel(ControleAcesso controleAcesso, IEnumerable<SelectListItem> superioresSelectListItem, IEnumerable<SelectListItem> funcionariosSelectListItem)
         {
             ControleAcesso = controleAcesso;
             SuperioresSelectListItem = superioresSelectListItem;

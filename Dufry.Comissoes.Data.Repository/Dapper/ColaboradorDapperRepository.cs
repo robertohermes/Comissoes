@@ -39,9 +39,9 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
             }
         }
 
-        public IEnumerable<Colaborador> All_ID_COMPOSTO()
+        public IEnumerable<KeyValuePair<string, string>> All_ID_COMPOSTO()
         {
-            string command = string.Concat("SELECT distinct "
+            string command = string.Concat("SELECT distinct top 100 "
                                           ,"cast(emp.CodigoEmpresaAlternate as nvarchar(20)) + '|' + fil.CodigoFilialAlternate + '|' + col.CodigoSecundario as IdColaboradorComposto, col.NomeCompleto "
                                           ,"FROM        DimColaborador  col "
                                           ,"INNER JOIN  DimLoja         loj ON col.Id_Loja          = loj.Id_Loja "
@@ -51,7 +51,7 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
 
             using (var cn = BIVendasConnection)
             {
-                var colaborador = cn.Query<Colaborador>(command);
+                var colaborador = cn.Query<KeyValuePair<string, string>>(command);
                 return colaborador;
             }
         }

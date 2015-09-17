@@ -1,4 +1,4 @@
-﻿@model ControleAcessoViewModel
+﻿@model CadastroAcessoViewModel
 
 @{
     ViewBag.Title = "Inclusão de Usuários da Aplicação de Comissões";
@@ -11,7 +11,7 @@
 {
     @*@Html.AntiForgeryToken()*@
 
-    <div class="editorCategoria">
+    @*<div class="editorCategoria">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <p>
             @Html.LabelFor(model => model.PlanoLoja.ID_PLANO)
@@ -44,7 +44,7 @@
     </div>
 
     <input type="submit" id="salvaPlanoLoja" value="Salvar e incluir" class="botoesCategoria" />
-    @Html.ActionLink("Voltar", "PlanoLojaIndex", "PlanoLoja", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
+    @Html.ActionLink("Voltar", "PlanoLojaIndex", "PlanoLoja", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })*@
 
 }
 

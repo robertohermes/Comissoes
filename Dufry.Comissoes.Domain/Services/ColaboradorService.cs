@@ -3,6 +3,7 @@ using Dufry.Comissoes.Domain.Interfaces.Repository;
 using Dufry.Comissoes.Domain.Interfaces.Repository.ReadOnly;
 using Dufry.Comissoes.Domain.Interfaces.Service;
 using Dufry.Comissoes.Domain.Services.Common;
+using System.Collections.Generic;
 
 namespace Dufry.Comissoes.Domain.Services
 {
@@ -16,6 +17,13 @@ namespace Dufry.Comissoes.Domain.Services
         {
             _readOnlyRepository = readOnlyRepository1;
             _repository = repository;
+        }
+
+        public IEnumerable<KeyValuePair<string, string>> All_ID_COMPOSTO()
+        {
+            //Acesso através do Dapper
+            return _readOnlyRepository.All_ID_COMPOSTO();
+
         }
 
     }

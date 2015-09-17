@@ -63,6 +63,7 @@
     <Compile Include="Mapping\AusenciaRemuneradaMap.cs" />
     <Compile Include="Mapping\CargoMap.cs" />
     <Compile Include="Mapping\CategoriaMap.cs" />
+    <Compile Include="Mapping\TipoNegocioMap.cs" />
     <Compile Include="Mapping\PlanoLojaMap.cs" />
     <Compile Include="Mapping\CategoriaPercentualMap.cs" />
     <Compile Include="Mapping\ControleAcessoMap.cs" />

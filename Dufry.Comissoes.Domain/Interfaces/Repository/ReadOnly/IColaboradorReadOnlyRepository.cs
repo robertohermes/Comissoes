@@ -6,6 +6,6 @@ namespace Dufry.Comissoes.Domain.Interfaces.Repository.ReadOnly
 {
     public interface IColaboradorReadOnlyRepository : IReadOnlyRepository<Colaborador>
     {
-        IEnumerable<Colaborador> All_ID_COMPOSTO();
+        IEnumerable<KeyValuePair<string, string>> All_ID_COMPOSTO();
     }
 }
