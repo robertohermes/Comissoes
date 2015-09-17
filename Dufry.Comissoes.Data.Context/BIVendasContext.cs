@@ -26,6 +26,7 @@ namespace Dufry.Comissoes.Data.Context
             modelBuilder.Configurations.Add(new EmpresaMap());
             modelBuilder.Configurations.Add(new ColaboradorMap());
             modelBuilder.Configurations.Add(new CargoMap());
+            modelBuilder.Configurations.Add(new TipoNegocioMap());
 
         }
 
