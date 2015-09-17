@@ -25,6 +25,7 @@ namespace Dufry.Comissoes.CrossCutting.InversionOfControl.Modules
             Bind<IEmpresaAppService>().To<EmpresaAppService>();
             Bind<IColaboradorAppService>().To<ColaboradorAppService>();
             Bind<ICargoAppService>().To<CargoAppService>();
+            Bind<ITipoNegocioAppService>().To<TipoNegocioAppService>();
         }
     }
 }
