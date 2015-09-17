@@ -37,6 +37,7 @@ namespace Dufry.Comissoes.Data.Context
         public DbSet<Empresa> Empresas { get; set; }
         public DbSet<Colaborador> Colaboradors { get; set; }
         public DbSet<Cargo> Cargos { get; set; }
+        public DbSet<TipoNegocio> TipoNegocios { get; set; }
 
 
 

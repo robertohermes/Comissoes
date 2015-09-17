@@ -82,6 +82,10 @@ namespace Dufry.Comissoes.CrossCutting.InversionOfControl.Modules
             Bind<ICargoRepository>().To<CargoRepository>();
             Bind<ICargoReadOnlyRepository>().To<CargoDapperRepository>();
             Bind<IReadOnlyRepository<Cargo>>().To<CargoDapperRepository>();
+
+            Bind<ITipoNegocioRepository>().To<TipoNegocioRepository>();
+            Bind<ITipoNegocioReadOnlyRepository>().To<TipoNegocioDapperRepository>();
+            Bind<IReadOnlyRepository<TipoNegocio>>().To<TipoNegocioDapperRepository>();
            
         }
     }
