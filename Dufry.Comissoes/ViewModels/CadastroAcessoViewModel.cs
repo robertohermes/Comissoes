@@ -7,6 +7,7 @@ namespace Dufry.Comissoes.ViewModels
 {
     public class CadastroAcessoViewModel
     {
+        string IdSuperiorAlternate { get; set; }
 
         public ControleAcesso ControleAcesso { get; set; }
 

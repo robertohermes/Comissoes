@@ -11,14 +11,14 @@
 {
     @*@Html.AntiForgeryToken()*@
 
-    @*<div class="editorCategoria">
+    <div class="editorCategoria">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <p>
-            @Html.LabelFor(model => model.PlanoLoja.ID_PLANO)
-            @Html.DropDownListFor(model => model.PlanoLoja.ID_PLANO, Model.PlanosSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
-            @Html.ValidationMessageFor(model => model.PlanoLoja.ID_PLANO, String.Empty, new { @style = "padding-left: 40px;!important" })
-        </p>
-        <p>
+        @*<p>
+            @Html.LabelFor(model => model.IdSuperiorAlternate)
+            @Html.DropDownListFor(model => model.IdSuperiorAlternate, Model.superioresSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.IdSuperiorAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
+        </p>*@
+        @*<p>
             @Html.LabelFor(model => model.PlanoLoja.CODIGOLOJAALTERNATE)
             @Html.DropDownListFor(model => model.PlanoLoja.CODIGOLOJAALTERNATE, Model.LojasSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
             @Html.ValidationMessageFor(model => model.PlanoLoja.CODIGOLOJAALTERNATE, String.Empty, new { @style = "padding-left: 40px;!important" })
@@ -39,12 +39,12 @@
             @Html.RadioButtonFor(model => model.PlanoLoja.STATUS, "A") Ativo
             @Html.RadioButtonFor(model => model.PlanoLoja.STATUS, "I") Inativo
             @Html.ValidationMessageFor(model => model.PlanoLoja.STATUS, String.Empty, new { @style = "padding-left: 127px;!important" })
-        </p>
+        </p>*@
 
     </div>
 
-    <input type="submit" id="salvaPlanoLoja" value="Salvar e incluir" class="botoesCategoria" />
-    @Html.ActionLink("Voltar", "PlanoLojaIndex", "PlanoLoja", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })*@
+    <input type="submit" id="salvaCadastroAcesso" value="Salvar e incluir" class="botoesCategoria" />
+    @Html.ActionLink("Voltar", "CadastroAcessoIndex", "CadastroAcesso", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
 
 }
 
