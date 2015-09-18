@@ -13,11 +13,11 @@
 
     <div class="editorCategoria">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @*<p>
-            @Html.LabelFor(model => model.IdSuperiorAlternate)
-            @Html.DropDownListFor(model => model.IdSuperiorAlternate, Model.superioresSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
-            @Html.ValidationMessageFor(model => model.IdSuperiorAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
-        </p>*@
+        <p>
+            @Html.LabelFor(model => model.IdColaboradorComposto)
+            @Html.DropDownListFor(model => model.IdColaboradorComposto, Model.SuperioresSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.IdColaboradorComposto, String.Empty, new { @style = "padding-left: 40px;!important" })
+        </p>
         @*<p>
             @Html.LabelFor(model => model.PlanoLoja.CODIGOLOJAALTERNATE)
             @Html.DropDownListFor(model => model.PlanoLoja.CODIGOLOJAALTERNATE, Model.LojasSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })

@@ -1,5 +1,6 @@
 ﻿using Dufry.Comissoes.Domain.Entities;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 //using AutoMapper;
 
@@ -7,8 +8,9 @@ namespace Dufry.Comissoes.ViewModels
 {
     public class CadastroAcessoViewModel
     {
-        string IdSuperiorAlternate { get; set; }
-
+        [Required(ErrorMessage = "A escolha de um superior é obrigatória")]
+        [Display(Name = "Nome do superior")]
+        public string IdColaboradorComposto { get; set; }
         public ControleAcesso ControleAcesso { get; set; }
 
         public IEnumerable<SelectListItem> SuperioresSelectListItem { get; set; }
