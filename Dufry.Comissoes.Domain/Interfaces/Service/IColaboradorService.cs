@@ -7,5 +7,7 @@ namespace Dufry.Comissoes.Domain.Interfaces.Service
     public interface IColaboradorService : IService<Colaborador>
     {
         IEnumerable<KeyValuePair<string, string>> All_ID_COMPOSTO();
+
+        IEnumerable<dynamic> All_ID();
     }
 }

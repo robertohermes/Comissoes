@@ -8,20 +8,20 @@ namespace Dufry.Comissoes.ViewModels
 {
     public class CadastroAcessoViewModel
     {
-        [Required(ErrorMessage = "A escolha de um superior é obrigatória")]
-        [Display(Name = "Nome do superior")]
+        [Required(ErrorMessage = "A escolha de um colaborador é obrigatória")]
+        [Display(Name = "Nome do colaborador")]
         public string IdColaboradorComposto { get; set; }
         public ControleAcesso ControleAcesso { get; set; }
 
         public IEnumerable<SelectListItem> SuperioresSelectListItem { get; set; }
 
-        public IEnumerable<SelectListItem> FuncionariosSelectListItem { get; set; }
+        public IEnumerable<SelectListItem> ColaboradoresSelectListItem { get; set; }
 
-        public CadastroAcessoViewModel(ControleAcesso controleAcesso, IEnumerable<SelectListItem> superioresSelectListItem, IEnumerable<SelectListItem> funcionariosSelectListItem)
+        public CadastroAcessoViewModel(ControleAcesso controleAcesso, IEnumerable<SelectListItem> superioresSelectListItem, IEnumerable<SelectListItem> colaboradoresSelectListItem)
         {
             ControleAcesso = controleAcesso;
             SuperioresSelectListItem = superioresSelectListItem;
-            FuncionariosSelectListItem = funcionariosSelectListItem;
+            ColaboradoresSelectListItem = colaboradoresSelectListItem;
         }
 
         //<REVER>

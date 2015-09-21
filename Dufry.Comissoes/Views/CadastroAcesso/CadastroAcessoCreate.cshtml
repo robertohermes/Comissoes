@@ -14,16 +14,16 @@
     <div class="editorCategoria">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <p>
+            @Html.LabelFor(model => model.ControleAcesso.COLABORADORKEY_PAI)
+            @Html.DropDownListFor(model => model.ControleAcesso.COLABORADORKEY_PAI, Model.SuperioresSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.ControleAcesso.COLABORADORKEY_PAI, String.Empty, new { @style = "padding-left: 40px;!important" })
+        </p>
+        <p>
             @Html.LabelFor(model => model.IdColaboradorComposto)
-            @Html.DropDownListFor(model => model.IdColaboradorComposto, Model.SuperioresSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @Html.DropDownListFor(model => model.IdColaboradorComposto, Model.ColaboradoresSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
             @Html.ValidationMessageFor(model => model.IdColaboradorComposto, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>
         @*<p>
-            @Html.LabelFor(model => model.PlanoLoja.CODIGOLOJAALTERNATE)
-            @Html.DropDownListFor(model => model.PlanoLoja.CODIGOLOJAALTERNATE, Model.LojasSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
-            @Html.ValidationMessageFor(model => model.PlanoLoja.CODIGOLOJAALTERNATE, String.Empty, new { @style = "padding-left: 40px;!important" })
-        </p>
-        <p>
             @Html.LabelFor(model => model.PlanoLoja.DT_INI)
             @Html.TextBoxFor(model => model.PlanoLoja.DT_INI, null, new { @class = "dp", @Value = Model.PlanoLoja.DT_INI.ToString().Equals("01/01/0001 00:00:00") ? string.Empty : Model.PlanoLoja.DT_INI.ToString("dd/MM/yyyy") })
             @Html.ValidationMessageFor(model => model.PlanoLoja.DT_INI, String.Empty, new { @style = "padding-left: 10px;!important" })

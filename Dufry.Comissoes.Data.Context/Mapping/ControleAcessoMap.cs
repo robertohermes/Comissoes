@@ -22,7 +22,7 @@ namespace Dufry.Comissoes.Data.Context.Mapping
                 .IsRequired();
 
             Property(t => t.CODIGOEMPRESAALTERNATE)
-                .HasMaxLength(2)
+                .HasMaxLength(4)
                 .IsRequired();
 
             Property(t => t.CODIGOFILIALALTERNATE)

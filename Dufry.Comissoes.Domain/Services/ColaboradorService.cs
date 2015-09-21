@@ -26,5 +26,12 @@ namespace Dufry.Comissoes.Domain.Services
 
         }
 
+        public IEnumerable<dynamic> All_ID()
+        {
+            //Acesso através do Dapper
+            return _readOnlyRepository.All_ID();
+
+        }
+
     }
 }

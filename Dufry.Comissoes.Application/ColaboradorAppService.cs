@@ -69,6 +69,11 @@ namespace Dufry.Comissoes.Application
             return _service.All_ID_COMPOSTO();
         }
 
+        public IEnumerable<dynamic> All_ID()
+        {
+            return _service.All_ID();
+        }
+
 
         public void Dispose()
         {

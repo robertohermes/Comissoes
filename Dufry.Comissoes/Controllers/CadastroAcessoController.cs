@@ -46,20 +46,20 @@ namespace Dufry.Comissoes.Controllers
             ControleAcesso controleacesso = new ControleAcesso();
 
             #region populaobjetos
-            var superiores = ObtemColaboradores();
-            IEnumerable<SelectListItem> superioresSelectListItem = new SelectList((IEnumerable)superiores, "Key", "Value");
-            IEnumerable<SelectListItem> funcionariosSelectListItem = new SelectList((IEnumerable)superiores, "Key", "Value");
+
+            var bla = ObtemSuperiores();
+
+            var superiores = _controleacessoAppService.Find(t => t.STATUS == "A");
+            IEnumerable<SelectListItem> superioresSelectListItem = new SelectList(superiores, "COLABORADORKEY", "COLABORADORKEY");
+            ViewBag.COLABORADORKEY = new SelectList(superiores, "COLABORADORKEY", "COLABORADORKEY");
 
 
-            //IEnumerable<SelectListItem> superioresSelectListItem = new SelectList(superiores, "ID_PLANO", "DESC_PLANO");
-            //ViewBag.ID_PLANO = new SelectList(superiores, "ID_PLANO", "DESC_PLANO");
-
-            //var funcionarios = ObtemColaboradores(col);
-            //IEnumerable<SelectListItem> funcionariosSelectListItem = new SelectList(funcionarios, "CodigoLojaAlternate", "NomeLoja");
-            //ViewBag.CODIGOLOJAALTERNATE = new SelectList(funcionarios, "CodigoLojaAlternate", "NomeLoja");
+            var colaboradores = ObtemColaboradores();
+            IEnumerable<SelectListItem> colaboradoresSelectListItem = new SelectList((IEnumerable)colaboradores, "Key", "Value");
+            ViewBag.IdColaboradorComposto = new SelectList(colaboradores, "IdColaboradorComposto", "NomeCompleto");
             #endregion populaobjetos
 
-            CadastroAcessoViewModel cadastroAcessoVM = new CadastroAcessoViewModel(controleacesso, superioresSelectListItem, funcionariosSelectListItem);
+            CadastroAcessoViewModel cadastroAcessoVM = new CadastroAcessoViewModel(controleacesso, superioresSelectListItem, colaboradoresSelectListItem);
 
             return View(cadastroAcessoVM);
         }
@@ -78,10 +78,54 @@ namespace Dufry.Comissoes.Controllers
             base.Dispose(disposing);
         }
 
+        private IEnumerable<KeyValuePair<string, string>> ObtemSuperiores()
+        {
+
+            var superiores = _controleacessoAppService.Find(t => t.STATUS == "A");
+
+            List<Colabx> colabxList = new List<Colabx>();
+
+            var colaboradores = _colaboradorAppService.All_ID();
+
+            foreach (var item in colaboradores)
+            {
+                Colabx colabx = new Colabx();
+                colabx.CODIGOSECUNDARIO = item.CodigoSecundario;
+                colabx.CODIGOEMPRESAALTERNATE = item.CodigoEmpresaAlternate;
+                colabx.CODIGOFILIALALTERNATE = item.CodigoFilialAlternate;
+                colabx.NOME = item.NomeCompleto;
+
+                colabxList.Add(colabx);
+            }
+
+
+            //<REVER> CODIGOEMPRESAALTERNATE nchar(4) para nvarchar(4)
+
+            var sup = (from su in superiores
+                       join co in colabxList
+                       on new { su.CODIGOSECUNDARIO, su.CODIGOEMPRESAALTERNATE, su.CODIGOFILIALALTERNATE }
+                       equals new { co.CODIGOSECUNDARIO, co.CODIGOEMPRESAALTERNATE, co.CODIGOFILIALALTERNATE }
+                       select new { su.COLABORADORKEY, co.NOME });
+
+            return _colaboradorAppService.All_ID_COMPOSTO();
+        }
 
         private IEnumerable<KeyValuePair<string, string>> ObtemColaboradores()
         {
             return _colaboradorAppService.All_ID_COMPOSTO();
+        }
+
+
+        private class Colabx
+        {
+            public string CODIGOSECUNDARIO { get; set; }
+
+            public string CODIGOEMPRESAALTERNATE { get; set; }
+
+            public string CODIGOFILIALALTERNATE { get; set; }
+
+            public string NOME { get; set; }
+
         }
 
 
