@@ -16,10 +16,17 @@ namespace Dufry.Comissoes.Domain.Entities
 
         public string CODIGOFILIALALTERNATE { get; set; }
 
+        [Required(ErrorMessage = "O login é obrigatório")]
+        [StringLength(255, ErrorMessage = "O login não deve exceder 255 caracteres")]
+        [Display(Name = "Login")]
         public string LOGIN { get; set; }
 
+        [Display(Name = "Administrador do sistema")]
+        [Required(ErrorMessage = "Informe se é administrador ou não")]
         public string ADMIN { get; set; }
-        
+
+        [Display(Name = "Status")]
+        [Required(ErrorMessage = "O status é obrigatório")]
         public string STATUS { get; set; }
         public DateTime CREATED_DATETIME { get; set; }
         public string CREATED_USERNAME { get; set; }

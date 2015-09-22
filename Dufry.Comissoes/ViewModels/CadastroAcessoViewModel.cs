@@ -10,7 +10,7 @@ namespace Dufry.Comissoes.ViewModels
     {
         [Required(ErrorMessage = "A escolha de um colaborador é obrigatória")]
         [Display(Name = "Nome do colaborador")]
-        public string IdColaboradorComposto { get; set; }
+        public string COLABORADORKEY_ALT { get; set; }
         public ControleAcesso ControleAcesso { get; set; }
 
         public IEnumerable<SelectListItem> SuperioresSelectListItem { get; set; }

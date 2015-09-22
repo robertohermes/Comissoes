@@ -32,7 +32,7 @@ namespace Dufry.Comissoes.Domain.Entities
         
         
         [Display(Name = "Status")]
-        [Required(ErrorMessage = "O status da categoria é obrigatório")]
+        [Required(ErrorMessage = "O status é obrigatório")]
         public string STATUS { get; set; }
         
         

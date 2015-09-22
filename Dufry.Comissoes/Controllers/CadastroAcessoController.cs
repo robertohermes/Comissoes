@@ -54,7 +54,7 @@ namespace Dufry.Comissoes.Controllers
 
             var colaboradores = ObtemColaboradores();
             IEnumerable<SelectListItem> colaboradoresSelectListItem = new SelectList((IEnumerable)colaboradores, "Key", "Value");
-            ViewBag.IdColaboradorComposto = new SelectList(colaboradores, "IdColaboradorComposto", "NomeCompleto");
+            ViewBag.COLABORADORKEY_ALT = new SelectList(colaboradores, "COLABORADORKEY_ALT", "NomeCompleto");
             #endregion populaobjetos
 
             CadastroAcessoViewModel cadastroAcessoVM = new CadastroAcessoViewModel(controleacesso, superioresSelectListItem, colaboradoresSelectListItem);
@@ -81,30 +81,30 @@ namespace Dufry.Comissoes.Controllers
 
             var superiores = _controleacessoAppService.Find(t => t.STATUS == "A");
 
-            List<Colabx> colabxList = new List<Colabx>();
+            List<ColaboradorAux> colaboradorAuxList = new List<ColaboradorAux>();
 
             var colaboradores = _colaboradorAppService.All_ID();
 
             foreach (var item in colaboradores)
             {
-                Colabx colabx = new Colabx();
-                colabx.CODIGOSECUNDARIO = item.CodigoSecundario;
-                colabx.CODIGOEMPRESAALTERNATE = item.CodigoEmpresaAlternate;
-                colabx.CODIGOFILIALALTERNATE = item.CodigoFilialAlternate;
-                colabx.NOME = item.NomeCompleto;
+                ColaboradorAux colaboradorAux = new ColaboradorAux();
+                colaboradorAux.CODIGOSECUNDARIO = item.CodigoSecundario;
+                colaboradorAux.CODIGOEMPRESAALTERNATE = item.CodigoEmpresaAlternate;
+                colaboradorAux.CODIGOFILIALALTERNATE = item.CodigoFilialAlternate;
+                colaboradorAux.NomeCompleto = item.NomeCompleto;
 
-                colabxList.Add(colabx);
+                colaboradorAuxList.Add(colaboradorAux);
             }
 
 
-            IEnumerable<KeyValuePair<string, string>> sup = (from su in superiores
-                       join co in colabxList
-                       on new { su.CODIGOSECUNDARIO, su.CODIGOEMPRESAALTERNATE, su.CODIGOFILIALALTERNATE }
-                       equals new { co.CODIGOSECUNDARIO, co.CODIGOEMPRESAALTERNATE, co.CODIGOFILIALALTERNATE }
-                        select new { su.COLABORADORKEY, co.NOME }).ToDictionary(row => (string)row.COLABORADORKEY.ToString(),
-                                                                                row => (string)row.NOME);
-            
-            return sup;
+            IEnumerable<KeyValuePair<string, string>> superioresAux = (from su in superiores
+                                                                       join co in colaboradorAuxList
+                                                                       on new { su.CODIGOSECUNDARIO, su.CODIGOEMPRESAALTERNATE, su.CODIGOFILIALALTERNATE }
+                                                                       equals new { co.CODIGOSECUNDARIO, co.CODIGOEMPRESAALTERNATE, co.CODIGOFILIALALTERNATE }
+                                                                       select new { su.COLABORADORKEY, co.NomeCompleto }).ToDictionary(row => (string)row.COLABORADORKEY.ToString(),
+                                                                                                                                         row => (string)row.NomeCompleto);
+
+            return superioresAux;
         }
 
         private IEnumerable<KeyValuePair<string, string>> ObtemColaboradores()
@@ -113,7 +113,7 @@ namespace Dufry.Comissoes.Controllers
         }
 
 
-        private class Colabx
+        private class ColaboradorAux
         {
             public string CODIGOSECUNDARIO { get; set; }
 
@@ -121,7 +121,7 @@ namespace Dufry.Comissoes.Controllers
 
             public string CODIGOFILIALALTERNATE { get; set; }
 
-            public string NOME { get; set; }
+            public string NomeCompleto { get; set; }
 
         }
 
