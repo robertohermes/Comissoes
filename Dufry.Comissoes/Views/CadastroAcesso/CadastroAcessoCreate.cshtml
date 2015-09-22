@@ -14,9 +14,9 @@
     <div class="editorCategoria">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <p>
-            @Html.LabelFor(model => model.ControleAcesso.COLABORADORKEY_PAI)
-            @Html.DropDownListFor(model => model.ControleAcesso.COLABORADORKEY_PAI, Model.SuperioresSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
-            @Html.ValidationMessageFor(model => model.ControleAcesso.COLABORADORKEY_PAI, String.Empty, new { @style = "padding-left: 40px;!important" })
+            @Html.LabelFor(model => model.COLABORADORKEY_PAI)
+            @Html.DropDownListFor(model => model.COLABORADORKEY_PAI, Model.SuperioresSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.COLABORADORKEY_PAI, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>
         <p>
             @Html.LabelFor(model => model.COLABORADORKEY_ALT)
@@ -71,7 +71,7 @@
         $.validator.setDefaults({
             //validate all hidden form controls - ignore: [] 
             //ignore all hidden elements except those who are listed:
-            ignore: ':hidden:not(#COLABORADORKEY_ALT)'
+            ignore: ':hidden:not(#COLABORADORKEY_PAI, #COLABORADORKEY_ALT)'
         });
 
     </script>

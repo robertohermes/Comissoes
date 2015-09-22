@@ -8,6 +8,10 @@ namespace Dufry.Comissoes.ViewModels
 {
     public class CadastroAcessoViewModel
     {
+        [Required(ErrorMessage = "É necessário informar o superior")]
+        [Display(Name = "Nome do superior")]
+        public string COLABORADORKEY_PAI { get; set; }
+
         [Required(ErrorMessage = "A escolha de um colaborador é obrigatória")]
         [Display(Name = "Nome do colaborador")]
         public string COLABORADORKEY_ALT { get; set; }
