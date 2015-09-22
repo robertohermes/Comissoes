@@ -18,11 +18,11 @@ namespace Dufry.Comissoes.Data.Context.Mapping
                 .IsOptional();
 
             Property(t => t.CODIGOSECUNDARIO)
-                .HasMaxLength(40)
+                .HasMaxLength(4)
                 .IsRequired();
 
             Property(t => t.CODIGOEMPRESAALTERNATE)
-                .HasMaxLength(4)
+                .HasMaxLength(20)
                 .IsRequired();
 
             Property(t => t.CODIGOFILIALALTERNATE)

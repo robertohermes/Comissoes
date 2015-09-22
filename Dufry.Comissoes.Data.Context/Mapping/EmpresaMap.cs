@@ -25,7 +25,7 @@ namespace Dufry.Comissoes.Data.Context.Mapping
                 .IsRequired();
 
             Property(t => t.CodigoEmpresaAlternate)
-                .HasMaxLength(2)
+                .HasMaxLength(20)
                 .IsRequired();
 
             Property(t => t.NomeEmpresa)

@@ -47,11 +47,9 @@ namespace Dufry.Comissoes.Controllers
 
             #region populaobjetos
 
-            var bla = ObtemSuperiores();
-
-            var superiores = _controleacessoAppService.Find(t => t.STATUS == "A");
-            IEnumerable<SelectListItem> superioresSelectListItem = new SelectList(superiores, "COLABORADORKEY", "COLABORADORKEY");
-            ViewBag.COLABORADORKEY = new SelectList(superiores, "COLABORADORKEY", "COLABORADORKEY");
+            var superiores = ObtemSuperiores();
+            IEnumerable<SelectListItem> superioresSelectListItem = new SelectList(superiores, "Key", "Value");
+            ViewBag.COLABORADORKEY_PAI = new SelectList(superiores, "COLABORADORKEY_PAI", "NOME");
 
 
             var colaboradores = ObtemColaboradores();
@@ -99,15 +97,14 @@ namespace Dufry.Comissoes.Controllers
             }
 
 
-            //<REVER> CODIGOEMPRESAALTERNATE nchar(4) para nvarchar(4)
-
-            var sup = (from su in superiores
+            IEnumerable<KeyValuePair<string, string>> sup = (from su in superiores
                        join co in colabxList
                        on new { su.CODIGOSECUNDARIO, su.CODIGOEMPRESAALTERNATE, su.CODIGOFILIALALTERNATE }
                        equals new { co.CODIGOSECUNDARIO, co.CODIGOEMPRESAALTERNATE, co.CODIGOFILIALALTERNATE }
-                       select new { su.COLABORADORKEY, co.NOME });
-
-            return _colaboradorAppService.All_ID_COMPOSTO();
+                        select new { su.COLABORADORKEY, co.NOME }).ToDictionary(row => (string)row.COLABORADORKEY.ToString(),
+                                                                                row => (string)row.NOME);
+            
+            return sup;
         }
 
         private IEnumerable<KeyValuePair<string, string>> ObtemColaboradores()
