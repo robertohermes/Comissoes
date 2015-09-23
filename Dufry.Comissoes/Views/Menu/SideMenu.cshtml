@@ -30,7 +30,7 @@
             <li>Ausência Remunerada</li>
             <li>@Html.Raw(string.Format("<a href=\"{0}\">DSR</a>", Url.Content("~/DSR/DsrIndex?statusSearchString=A")))</li>
             <li>@Html.Raw(string.Format("<a href=\"{0}\">Taxa de dólar</a>", Url.Content("~/DolarMedio/DolarMedioIndex")))</li>
-            <li>Controle de Acesso</li>
+            <li>@Html.Raw(string.Format("<a href=\"{0}\">Controle de Acesso</a>", Url.Content("~/CadastroAcesso/CadastroAcessoIndex?statusSearchString=A")))</li>
         }
         <li>Comissões</li>        
     }

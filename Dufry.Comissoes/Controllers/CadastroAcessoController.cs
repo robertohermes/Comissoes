@@ -160,12 +160,14 @@ namespace Dufry.Comissoes.Controllers
             , string sortOrder
             , int? colaboradorkeySearchString
             , int? colaboradorkey_paiSearchString
+            , string loginSearchString
+            , string adminSearchString
             , string statusSearchString)
         {
 
             #region populaobjetos
             var colaboradores = ObtemColaboradoresAInserir();
-            ViewBag.colaboradorkeySearchString = new SelectList(colaboradores, "COLABORADORKEY_ALT", "NomeCompleto", colaboradorkeySearchString);
+            ViewBag.colaboradorkeySearchString = new SelectList(colaboradores, "Key", "Value", colaboradorkeySearchString);
 
             var superiores = ObtemSuperioresComPrimeiroItem(0);
             ViewBag.colaboradorkey_paiSearchString = new SelectList(superiores, "Key", "Value", colaboradorkey_paiSearchString);
@@ -174,6 +176,9 @@ namespace Dufry.Comissoes.Controllers
             #region trataParametrosOrdenacao
             ViewBag.CurrentSort = sortOrder;
             ViewBag.LoginSortParam = String.IsNullOrEmpty(sortOrder) ? "LOGIN_desc" : "";
+            ViewBag.SuperiorSortParam = sortOrder == "COLABORADORKEY_PAI" ? "COLABORADORKEY_PAI_desc" : "COLABORADORKEY_PAI";
+            ViewBag.ColaboradorSortParam = sortOrder == "COLABORADORKEY" ? "COLABORADORKEY_desc" : "COLABORADORKEY";
+            ViewBag.AdminSortParam = sortOrder == "ADMIN" ? "ADMIN_desc" : "ADMIN";
             ViewBag.StatusSortParam = sortOrder == "STATUS" ? "STATUS_desc" : "STATUS";
             #endregion trataParametrosOrdenacao
 
@@ -195,6 +200,12 @@ namespace Dufry.Comissoes.Controllers
                 ViewBag.colaboradorkey_paiFilter = colaboradorkey_paiFilter;
             }
 
+            if (!String.IsNullOrEmpty(loginSearchString))
+            {
+                predicate = predicate.And(i => i.LOGIN.Contains(loginSearchString));
+                ViewBag.loginFilter = loginSearchString;
+            }
+
             if (!String.IsNullOrEmpty(statusSearchString))
             {
                 predicate = predicate.And(i => i.STATUS.Equals(statusSearchString));
@@ -210,11 +221,29 @@ namespace Dufry.Comissoes.Controllers
             #region ordenacao
             switch (sortOrder)
             {
+                case "COLABORADORKEY":
+                    controleacessos = controleacessos.OrderBy(s => s.COLABORADORKEY);
+                    break;
+                case "COLABORADORKEY_PAI":
+                    controleacessos = controleacessos.OrderBy(s => s.COLABORADORKEY_PAI);
+                    break;
+                case "ADMIN":
+                    controleacessos = controleacessos.OrderBy(s => s.ADMIN);
+                    break;
                 case "STATUS":
                     controleacessos = controleacessos.OrderBy(s => s.STATUS);
                     break;
                 case "LOGIN_desc":
-                    controleacessos = controleacessos.OrderByDescending(s => s.LOGIN); //mudar de chave para campo
+                    controleacessos = controleacessos.OrderByDescending(s => s.LOGIN);
+                    break;
+                case "COLABORADORKEY_desc":
+                    controleacessos = controleacessos.OrderByDescending(s => s.COLABORADORKEY);
+                    break;
+                case "COLABORADORKEY_PAI_desc":
+                    controleacessos = controleacessos.OrderByDescending(s => s.COLABORADORKEY_PAI);
+                    break;
+                case "ADMIN_desc":
+                    controleacessos = controleacessos.OrderByDescending(s => s.ADMIN);
                     break;
                 case "STATUS_desc":
                     controleacessos = controleacessos.OrderByDescending(s => s.STATUS);
@@ -232,7 +261,6 @@ namespace Dufry.Comissoes.Controllers
 
         protected override void Dispose(bool disposing)
         {
-
             _controleacessoAppService.Dispose();
             _colaboradorAppService.Dispose();
             _lojaAppService.Dispose();

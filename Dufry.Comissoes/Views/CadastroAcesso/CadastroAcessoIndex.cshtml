@@ -11,10 +11,16 @@
     @**************************************************************************************************************************@
     @*                                                 Filtros de Busca                                                       *@
     @**************************************************************************************************************************@
-    @using (Html.BeginForm("CadastroAcessoIndex", "PlanoLoja", FormMethod.Get))
+    @using (Html.BeginForm("CadastroAcessoIndex", "CadastroAcesso", FormMethod.Get))
     {
         <div class="editorCategoria">
+            <p><label for="colaboradorkeySearchString">Superior</label>@Html.DropDownList("colaboradorkey_paiSearchString", "--- Selecione ---")</p>
             <p><label for="colaboradorkeySearchString">Colaborador</label>@Html.DropDownList("colaboradorkeySearchString", "--- Selecione ---")</p>
+            <p><label for="loginSearchString">Login</label>@Html.TextBox("loginSearchString", null, new { maxlength = "255" })</p>
+            <p>
+                <label for="adminSearchString">Administrador do sistema</label>      @Html.RadioButton("adminSearchString", "S", true, ViewBag.AdminFilter as string)Sim
+                @Html.RadioButton("adminSearchString", "N", ViewBag.AdminFilter as string)Não
+            </p>
             <p>
                 <label for="statusSearchString">Status</label>      @Html.RadioButton("statusSearchString", "A", true, ViewBag.StatusFilter as string)Ativo
                 @Html.RadioButton("statusSearchString", "I", ViewBag.StatusFilter as string)Inativo
@@ -22,8 +28,8 @@
         </div>
         <p>
             <input type="submit" id="buscaCadastroAcesso" value="Buscar" class="botoesCategoria" />
-            @Html.ActionLink("Limpar", "CadastroAcessoIndex", "PlanoLoja", null, new { @class = "botoesCategoria" })
-            @Html.ActionLink("Novo", "CadastroAcessoCreate", "PlanoLoja", null, new { @class = "botoesCategoria" })
+            @Html.ActionLink("Limpar", "CadastroAcessoIndex", "CadastroAcesso", null, new { @class = "botoesCategoria" })
+            @Html.ActionLink("Novo", "CadastroAcessoCreate", "CadastroAcesso", null, new { @class = "botoesCategoria" })
         </p>
 
     }
@@ -35,21 +41,68 @@
     <table class="dufry" width="80%">
         <tr>
             <th>
-                @Html.ActionLink("Login", "CadastroAcessoIndex", "CadastroAcesso"
+                @Html.ActionLink("Superior", "CadastroAcessoIndex", "CadastroAcesso"
                 , new
                 {
-                    sortOrder = ViewBag.DescPlanoSortParam,
+                    sortOrder = ViewBag.SuperiorSortParam,
+                    colaboradorkey_paiSearchString = ViewBag.colaboradorkey_paiFilter,
                     colaboradorkeySearchString = ViewBag.colaboradorkeyFilter,
+                    loginSearchString = ViewBag.loginFilter,
+                    adminSearchString = ViewBag.AdminFilter,
                     statusSearchString = ViewBag.StatusFilter
                 }
                 , new { @class = "tableheadlink" })
+            </th>
+            <th>
+                @Html.ActionLink("Colaborador", "CadastroAcessoIndex", "CadastroAcesso"
+                , new
+                {
+                    sortOrder = ViewBag.ColaboradorSortParam,
+                    colaboradorkey_paiSearchString = ViewBag.colaboradorkey_paiFilter,
+                    colaboradorkeySearchString = ViewBag.colaboradorkeyFilter,
+                    loginSearchString = ViewBag.loginFilter,
+                    adminSearchString = ViewBag.AdminFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
+                , new { @class = "tableheadlink" })
+            </th>
+
+            <th>
+                @Html.ActionLink("Login", "CadastroAcessoIndex", "CadastroAcesso"
+                , new
+                {
+                    sortOrder = ViewBag.LoginSortParam,
+                    colaboradorkey_paiSearchString = ViewBag.colaboradorkey_paiFilter,
+                    colaboradorkeySearchString = ViewBag.colaboradorkeyFilter,
+                    loginSearchString = ViewBag.loginFilter,
+                    adminSearchString = ViewBag.AdminFilter, 
+                    statusSearchString = ViewBag.StatusFilter
+                }
+                , new { @class = "tableheadlink" })
+            </th>
+            <th>
+                @Html.ActionLink("Administrador", "CadastroAcessoIndex", "CadastroAcesso"
+                , new
+                {
+                    sortOrder = ViewBag.AdminSortParam,
+                    colaboradorkey_paiSearchString = ViewBag.colaboradorkey_paiFilter,
+                    colaboradorkeySearchString = ViewBag.colaboradorkeyFilter,
+                    loginSearchString = ViewBag.loginFilter,
+                    adminSearchString = ViewBag.AdminFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
+                , new { @class = "tableheadlink" })
+
             </th>
             <th>
                 @Html.ActionLink("Status", "CadastroAcessoIndex", "CadastroAcesso"
                 , new
                 {
                     sortOrder = ViewBag.StatusSortParam,
+                    colaboradorkey_paiSearchString = ViewBag.colaboradorkey_paiFilter,
                     colaboradorkeySearchString = ViewBag.colaboradorkeyFilter,
+                    loginSearchString = ViewBag.loginFilter,
+                    adminSearchString = ViewBag.AdminFilter, 
                     statusSearchString = ViewBag.StatusFilter
                 }
                 , new { @class = "tableheadlink" })
@@ -62,8 +115,22 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.COLABORADORKEY_PAI)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.COLABORADORKEY)
+                </td>
+                <td>
                     @Html.ActionLink(item.LOGIN, "CadastroAcessoEdit", "CadastroAcesso", new { id = item.COLABORADORKEY }, new { @class = "tablerowlink" })
                 </td>
+                @if (item.ADMIN == "S")
+                {
+                    <td>Sim</td>
+                }
+                else
+                {
+                    <td>Não</td>
+                }
                 @if (item.STATUS == "A")
                 {
                     <td>Ativo</td>
@@ -86,14 +153,14 @@
     <br />
     Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
-    @Html.PagedListPager(Model, page => Url.Action("PlanoLojaIndex"
+    @Html.PagedListPager(Model, page => Url.Action("CadastroAcessoIndex"
     , new
     {
         sortOrder = ViewBag.CurrentSort,
-        idPlanoSearchString = ViewBag.idPlanoFilter,
-        codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
-        dtiniSearchString = ViewBag.dtiniFilter,
-        dtfimSearchString = ViewBag.dtfimFilter,
+        colaboradorkey_paiSearchString = ViewBag.colaboradorkey_paiFilter,
+        colaboradorkeySearchString = ViewBag.colaboradorkeyFilter,
+        loginSearchString = ViewBag.loginFilter,
+        adminSearchString = ViewBag.AdminFilter, 
         statusSearchString = ViewBag.StatusFilter,
         page
     }))
@@ -110,25 +177,21 @@
                 });
             });
 
-            $(document).ready(function () {
-                $('.dp').mask('00/00/0000', { 'translation': { 0: { pattern: /[0-9]/ } } });
-                //$('.decimal').mask('000,0000', { reverse: true });
-
-            });
-
             $(function () {
-                $("#idPlanoSearchString").combobox();
+                $("#colaboradorkey_paiSearchString").combobox();
                 $("#toggle").click(function () {
-                    $("#idPlanoSearchString").toggle();
+                    $("#colaboradorkey_paiSearchString").toggle();
                 });
             });
 
             $(function () {
-                $("#codigolojaalternateSearchString").combobox();
+                $("#colaboradorkeySearchString").combobox();
                 $("#toggle").click(function () {
-                    $("#codigolojaalternateSearchString").toggle();
+                    $("#colaboradorkeySearchString").toggle();
                 });
             });
+
+
         </script>
     }
 
