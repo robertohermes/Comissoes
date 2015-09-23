@@ -9,5 +9,7 @@ namespace Dufry.Comissoes.Domain.Interfaces.Service
         IEnumerable<KeyValuePair<string, string>> All_ID_COMPOSTO();
 
         IEnumerable<dynamic> All_ID();
+
+        IEnumerable<dynamic> GET_ID(string CodigoEmpresaAlternate, string CodigoFilialAlternate, string CodigoSecundario);
     }
 }

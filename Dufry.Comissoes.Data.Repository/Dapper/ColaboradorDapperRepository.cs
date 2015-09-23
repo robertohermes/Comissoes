@@ -78,5 +78,31 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
                 return result;
             }
         }
+
+        public IEnumerable<dynamic> GET_ID(string CodigoEmpresaAlternate, string CodigoFilialAlternate, string CodigoSecundario)
+        {
+            string command = string.Concat("SELECT distinct cast(emp.CodigoEmpresaAlternate as nvarchar(20)) as CodigoEmpresaAlternate, "
+                                          , "fil.CodigoFilialAlternate, "
+                                          , "col.CodigoSecundario, "
+                                          , "col.NomeCompleto "
+                                          , "FROM        DimColaborador  col "
+                                          , "INNER JOIN  DimLoja         loj ON col.Id_Loja          = loj.Id_Loja "
+                                          , "INNER JOIN  DimFilial       fil on loj.Id_Filial        = fil.Id_Filial "
+                                          , "INNER JOIN  DimTipoNegocio  neg ON fil.Id_TipoNegocio   = neg.Id_TipoNegocio "
+                                          , "INNER JOIN  DimEmpresa      emp ON neg.Id_Empresa       = emp.Id_Empresa "
+                                          , "WHERE emp.CodigoEmpresaAlternate = @CodigoEmpresaAlternate "
+                                          , "AND   fil.CodigoFilialAlternate = @CodigoFilialAlternate "
+                                          , "AND   col.CodigoSecundario = @CodigoSecundario "
+                                          , "ORDER BY NomeCompleto ");
+
+            using (var cn = BIVendasConnection)
+            {
+                var result = cn.Query(command, new { CodigoEmpresaAlternate = CodigoEmpresaAlternate
+                                                   , CodigoFilialAlternate = CodigoFilialAlternate
+                                                   , CodigoSecundario = CodigoSecundario
+                                                   });
+                return result;
+            }
+        }
     }
 }

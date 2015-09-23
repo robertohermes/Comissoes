@@ -33,5 +33,12 @@ namespace Dufry.Comissoes.Domain.Services
 
         }
 
+        public IEnumerable<dynamic> GET_ID(string CodigoEmpresaAlternate, string CodigoFilialAlternate, string CodigoSecundario)
+        {
+            //Acesso através do Dapper
+            return _readOnlyRepository.GET_ID(CodigoEmpresaAlternate, CodigoFilialAlternate, CodigoSecundario);
+
+        }
+
     }
 }

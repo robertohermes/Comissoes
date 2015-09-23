@@ -74,6 +74,11 @@ namespace Dufry.Comissoes.Application
             return _service.All_ID();
         }
 
+        public IEnumerable<dynamic> GET_ID(string CodigoEmpresaAlternate, string CodigoFilialAlternate, string CodigoSecundario)
+        {
+            return _service.GET_ID(CodigoEmpresaAlternate, CodigoFilialAlternate, CodigoSecundario);
+        }
+
 
         public void Dispose()
         {

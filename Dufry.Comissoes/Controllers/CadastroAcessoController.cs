@@ -46,23 +46,10 @@ namespace Dufry.Comissoes.Controllers
             ControleAcesso controleacesso = new ControleAcesso();
 
             #region populaobjetos
-            //<REVER>
-            #region rever
-            var semSuperiorKVP = new KeyValuePair<string, string>("0", "*** SEM SUPERIOR ***");
-
-            List <KeyValuePair<string, string>> superioresKVPList = new  List <KeyValuePair<string, string>>();
-
-            superioresKVPList.Add(semSuperiorKVP);
-            superioresKVPList.AddRange(ObtemSuperiores().ToList());
-
-            var superiores = superioresKVPList.AsEnumerable();
-            #endregion rever
-
+            var superiores = ObtemSuperioresComPrimeiroItem(0);
             IEnumerable<SelectListItem> superioresSelectListItem = new SelectList(superiores, "Key", "Value");
             ViewBag.COLABORADORKEY_PAI = new SelectList(superiores, "COLABORADORKEY_PAI", "NOME");
 
-
-            //var colaboradores = ObtemColaboradores();
             var colaboradores = ObtemColaboradoresAInserir();
             IEnumerable<SelectListItem> colaboradoresSelectListItem = new SelectList((IEnumerable)colaboradores, "Key", "Value");
             ViewBag.COLABORADORKEY_ALT = new SelectList(colaboradores, "COLABORADORKEY_ALT", "NomeCompleto");
@@ -97,6 +84,75 @@ namespace Dufry.Comissoes.Controllers
             return View(controleacesso);
         }
 
+        // GET: /CadastroAcesso/CadastroAcessoEdit/5
+        public ActionResult CadastroAcessoEdit(int? id)
+        {
+            if (id == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception();
+            }
+            var controleacesso = _controleacessoAppService.Get(id ?? default(int));
+            if (controleacesso == null)
+            {
+                //return HttpNotFound();
+                throw new Exception();
+            }
+
+            #region populaobjetos
+            //<REVER>
+            controleacesso.COLABORADORKEY_PAI = (controleacesso.COLABORADORKEY_PAI == null) ? 0 : controleacesso.COLABORADORKEY_PAI;
+
+            var superiores = ObtemSuperioresComPrimeiroItem(controleacesso.COLABORADORKEY);
+            IEnumerable<SelectListItem> superioresSelectListItem = new SelectList(superiores, "Key", "Value");
+            ViewBag.COLABORADORKEY_PAI = new SelectList(superiores, "Key", "Value", controleacesso.COLABORADORKEY_PAI);
+
+            var colaboradores = ObtemNomeColaborador(controleacesso.CODIGOEMPRESAALTERNATE, controleacesso.CODIGOFILIALALTERNATE, controleacesso.CODIGOSECUNDARIO).ToList();
+
+            #endregion populaobjetos
+
+            CadastroAcessoViewModel cadastroAcessoVM = new CadastroAcessoViewModel(controleacesso, superioresSelectListItem, colaboradores.FirstOrDefault().NomeCompleto);
+
+            return View(cadastroAcessoVM);
+
+        }
+
+        // POST: /CadastroAcesso/CadastroAcessoEdit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost, ActionName("CadastroAcessoEdit")]
+        //[ValidateAntiForgeryToken]
+        public ActionResult CadastroAcessoEditConfirmed(int? id)
+        {
+
+            if (id == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception();
+            }
+
+            var controleacessoToUpdate = _controleacessoAppService.Get(id ?? default(int));
+
+            controleacessoToUpdate = ObtemControleAcessoForm(controleacessoToUpdate);
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                    _controleacessoAppService.Update(controleacessoToUpdate);
+
+                    return RedirectToAction("CadastroAcessoIndex");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Erro na alteração. Tente novamente ou, se o problema persistir, entre em contato com o suporte.");
+                }
+            }
+
+            return View(controleacessoToUpdate);
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -111,11 +167,12 @@ namespace Dufry.Comissoes.Controllers
             base.Dispose(disposing);
         }
 
-        private IEnumerable<KeyValuePair<string, string>> ObtemSuperiores()
+        private IEnumerable<KeyValuePair<string, string>> ObtemSuperiores(int colaboradorKey)
         {
 
             //Obtidos do BD do Comissoes
-            var superiores = _controleacessoAppService.Find(t => t.STATUS == "A");
+            //var superiores = _controleacessoAppService.Find(t => t.STATUS == "A");
+            var superiores = _controleacessoAppService.Find(t => t.COLABORADORKEY != colaboradorKey);
 
             List<ColaboradorAux> colaboradorAuxList = new List<ColaboradorAux>();
 
@@ -144,6 +201,18 @@ namespace Dufry.Comissoes.Controllers
                                                                                      row => (string)row.NomeCompleto);
 
             return superioresAux;
+        }
+
+        private IEnumerable<KeyValuePair<string, string>> ObtemSuperioresComPrimeiroItem(int colaboradorKey)
+        {
+            var semSuperiorKVP = new KeyValuePair<string, string>("0", "*** SEM SUPERIOR ***");
+
+            List<KeyValuePair<string, string>> superioresKVPList = new List<KeyValuePair<string, string>>();
+
+            superioresKVPList.Add(semSuperiorKVP);
+            superioresKVPList.AddRange(ObtemSuperiores(colaboradorKey).ToList());
+
+            return superioresKVPList.AsEnumerable();
         }
 
         private IEnumerable<KeyValuePair<string, string>> ObtemColaboradores()
@@ -203,22 +272,28 @@ namespace Dufry.Comissoes.Controllers
             return colaboradoresAInserir;
         }
 
+        private IEnumerable<dynamic> ObtemNomeColaborador(string CodigoEmpresaAlternate, string CodigoFilialAlternate, string CodigoSecundario)
+        {
+            var colaboradores = _colaboradorAppService.GET_ID(CodigoEmpresaAlternate, CodigoFilialAlternate, CodigoSecundario);
+
+            return colaboradores;
+
+        }
+
         private ControleAcesso ObtemControleAcessoForm(ControleAcesso ca, bool insert = false)
         {
-            string aux = Request["COLABORADORKEY_ALT"];
-            string[] colaboradorkey_alt = aux.Split('|');
 
-            if (Request["COLABORADORKEY_PAI"] == "0")
+
+
+            if (Request["ControleAcesso.COLABORADORKEY_PAI"] == "0")
             {
                 ca.COLABORADORKEY_PAI = null;
             }
             else
             {
-                ca.COLABORADORKEY_PAI = Int32.Parse(Request["COLABORADORKEY_PAI"]);
+                ca.COLABORADORKEY_PAI = Int32.Parse(Request["ControleAcesso.COLABORADORKEY_PAI"]);
             }
-            ca.CODIGOSECUNDARIO = colaboradorkey_alt[2];
-            ca.CODIGOEMPRESAALTERNATE = colaboradorkey_alt[0];
-            ca.CODIGOFILIALALTERNATE = colaboradorkey_alt[1]; 
+
             ca.LOGIN = Request["ControleAcesso.LOGIN"];
             ca.ADMIN = Request["ControleAcesso.ADMIN"];
             ca.STATUS = Request["ControleAcesso.STATUS"];
@@ -228,6 +303,13 @@ namespace Dufry.Comissoes.Controllers
 
             if (insert)
             {
+                string aux = Request["COLABORADORKEY_ALT"];
+                string[] colaboradorkey_alt = aux.Split('|');
+
+                ca.CODIGOSECUNDARIO = colaboradorkey_alt[2];
+                ca.CODIGOEMPRESAALTERNATE = colaboradorkey_alt[0];
+                ca.CODIGOFILIALALTERNATE = colaboradorkey_alt[1]; 
+
                 ca.CREATED_DATETIME = ca.LAST_MODIFY_DATE;
                 ca.CREATED_USERNAME = ca.LAST_MODIFY_USERNAME;
             }

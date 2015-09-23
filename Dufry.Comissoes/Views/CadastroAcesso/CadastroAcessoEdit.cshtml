@@ -1,7 +1,7 @@
 ﻿@model CadastroAcessoViewModel
 
 @{
-    ViewBag.Title = "Inclusão de Usuários da Aplicação de Comissões";
+    ViewBag.Title = "Edição de Usuários da Aplicação de Comissões";
 }
 
 <h1 class="headerForm">@ViewBag.Title</h1>
@@ -13,16 +13,15 @@
 
     <div class="editorCategoria">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+        @Html.HiddenFor(model => model.ControleAcesso.COLABORADORKEY)
         <p>
             @Html.LabelFor(model => model.ControleAcesso.COLABORADORKEY_PAI)
             @Html.DropDownListFor(model => model.ControleAcesso.COLABORADORKEY_PAI, Model.SuperioresSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
             @Html.ValidationMessageFor(model => model.ControleAcesso.COLABORADORKEY_PAI, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>
-        <p>
-            @Html.LabelFor(model => model.COLABORADORKEY_ALT)
-            @Html.DropDownListFor(model => model.COLABORADORKEY_ALT, Model.ColaboradoresSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
-            @Html.ValidationMessageFor(model => model.COLABORADORKEY_ALT, String.Empty, new { @style = "padding-left: 40px;!important" })
+        <p style="display: inline-block">
+            @Html.LabelFor(model => model.NomeCompleto)
+            <label style="text-align: left">@Html.DisplayFor(model => model.NomeCompleto)</label>
         </p>
         <p>
             @Html.LabelFor(model => model.ControleAcesso.LOGIN)
@@ -43,7 +42,7 @@
         </p>
     </div>
 
-    <input type="submit" id="salvaCadastroAcesso" value="Salvar e incluir" class="botoesCategoria" />
+    <input type="submit" id="salvaCadastroAcesso" value="Salvar" class="botoesCategoria" />
     @Html.ActionLink("Voltar", "CadastroAcessoIndex", "CadastroAcesso", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
 
 }

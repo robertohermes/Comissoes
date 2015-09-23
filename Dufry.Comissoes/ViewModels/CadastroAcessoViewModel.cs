@@ -15,6 +15,10 @@ namespace Dufry.Comissoes.ViewModels
         [Required(ErrorMessage = "A escolha de um colaborador é obrigatória")]
         [Display(Name = "Nome do colaborador")]
         public string COLABORADORKEY_ALT { get; set; }
+
+        [Display(Name = "Nome do colaborador")]
+        public string NomeCompleto { get; set; }
+
         public ControleAcesso ControleAcesso { get; set; }
 
         public IEnumerable<SelectListItem> SuperioresSelectListItem { get; set; }
@@ -26,6 +30,15 @@ namespace Dufry.Comissoes.ViewModels
             ControleAcesso = controleAcesso;
             SuperioresSelectListItem = superioresSelectListItem;
             ColaboradoresSelectListItem = colaboradoresSelectListItem;
+            COLABORADORKEY_PAI = (controleAcesso.COLABORADORKEY_PAI == null) ? "0" : controleAcesso.COLABORADORKEY_PAI.ToString();
+        }
+
+        public CadastroAcessoViewModel(ControleAcesso controleAcesso, IEnumerable<SelectListItem> superioresSelectListItem, string nomeCompleto)
+        {
+            ControleAcesso = controleAcesso;
+            SuperioresSelectListItem = superioresSelectListItem;
+            COLABORADORKEY_PAI = (controleAcesso.COLABORADORKEY_PAI == null) ? "0" : controleAcesso.COLABORADORKEY_PAI.ToString();
+            NomeCompleto = nomeCompleto;
         }
 
         //<REVER>

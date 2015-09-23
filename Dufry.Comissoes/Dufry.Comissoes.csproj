@@ -455,6 +455,7 @@
     <Content Include="Views\PlanoLoja\PlanoLojaIndex.cshtml" />
     <Content Include="Views\PlanoCategoria\PlanoCategoriaEdit.cshtml" />
     <Content Include="Views\CadastroAcesso\CadastroAcessoCreate.cshtml" />
+    <Content Include="Views\CadastroAcesso\CadastroAcessoEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
