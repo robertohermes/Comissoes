@@ -7,6 +7,8 @@ namespace Dufry.Comissoes.Domain.Entities
     {
         public int COLABORADORKEY { get; set; }
 
+        [Required(ErrorMessage = "É necessário informar o superior")]
+        [Display(Name = "Nome do superior")]
         public int ? COLABORADORKEY_PAI { get; set; }
 
         public string CODIGOSECUNDARIO { get; set; }

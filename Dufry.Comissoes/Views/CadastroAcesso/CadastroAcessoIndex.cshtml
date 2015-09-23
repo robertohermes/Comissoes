@@ -1,0 +1,134 @@
+﻿@model PagedList.IPagedList<ControleAcesso>
+    @using PagedList.Mvc;
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+    @{
+        ViewBag.Title = "Busca de Usuários da Aplicação de Comissões";
+    }
+
+    <h1 class="headerForm">@ViewBag.Title</h1>
+
+    @**************************************************************************************************************************@
+    @*                                                 Filtros de Busca                                                       *@
+    @**************************************************************************************************************************@
+    @using (Html.BeginForm("CadastroAcessoIndex", "PlanoLoja", FormMethod.Get))
+    {
+        <div class="editorCategoria">
+            <p><label for="colaboradorkeySearchString">Colaborador</label>@Html.DropDownList("colaboradorkeySearchString", "--- Selecione ---")</p>
+            <p>
+                <label for="statusSearchString">Status</label>      @Html.RadioButton("statusSearchString", "A", true, ViewBag.StatusFilter as string)Ativo
+                @Html.RadioButton("statusSearchString", "I", ViewBag.StatusFilter as string)Inativo
+            </p>
+        </div>
+        <p>
+            <input type="submit" id="buscaCadastroAcesso" value="Buscar" class="botoesCategoria" />
+            @Html.ActionLink("Limpar", "CadastroAcessoIndex", "PlanoLoja", null, new { @class = "botoesCategoria" })
+            @Html.ActionLink("Novo", "CadastroAcessoCreate", "PlanoLoja", null, new { @class = "botoesCategoria" })
+        </p>
+
+    }
+
+
+    @**************************************************************************************************************************@
+    @*                                          Cabeçalho e loop do resultado da busca                                        *@
+    @**************************************************************************************************************************@
+    <table class="dufry" width="80%">
+        <tr>
+            <th>
+                @Html.ActionLink("Login", "CadastroAcessoIndex", "CadastroAcesso"
+                , new
+                {
+                    sortOrder = ViewBag.DescPlanoSortParam,
+                    colaboradorkeySearchString = ViewBag.colaboradorkeyFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
+                , new { @class = "tableheadlink" })
+            </th>
+            <th>
+                @Html.ActionLink("Status", "CadastroAcessoIndex", "CadastroAcesso"
+                , new
+                {
+                    sortOrder = ViewBag.StatusSortParam,
+                    colaboradorkeySearchString = ViewBag.colaboradorkeyFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
+                , new { @class = "tableheadlink" })
+
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.LOGIN, "CadastroAcessoEdit", "CadastroAcesso", new { id = item.COLABORADORKEY }, new { @class = "tablerowlink" })
+                </td>
+                @if (item.STATUS == "A")
+                {
+                    <td>Ativo</td>
+                }
+                else
+                {
+                    <td>Inativo</td>
+                }
+                <td>
+                    @Html.ActionLink("Excluir", "CadastroAcessoDelete", "CadastroAcesso", new { id = item.COLABORADORKEY }, new { @class = "tablerowlink" })
+                </td>
+            </tr>
+        }
+    </table>
+
+
+    @**************************************************************************************************************************@
+    @*                                                        Paginação                                                       *@
+    @**************************************************************************************************************************@
+    <br />
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("PlanoLojaIndex"
+    , new
+    {
+        sortOrder = ViewBag.CurrentSort,
+        idPlanoSearchString = ViewBag.idPlanoFilter,
+        codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+        dtiniSearchString = ViewBag.dtiniFilter,
+        dtfimSearchString = ViewBag.dtfimFilter,
+        statusSearchString = ViewBag.StatusFilter,
+        page
+    }))
+
+
+    @section Scripts {
+        <script type="text/javascript">
+            $(function () {
+                $('.dp').datepicker({
+                    showAnim: "scale",
+                    showOptions: {
+                        origin: ["top", "right"]
+                    }
+                });
+            });
+
+            $(document).ready(function () {
+                $('.dp').mask('00/00/0000', { 'translation': { 0: { pattern: /[0-9]/ } } });
+                //$('.decimal').mask('000,0000', { reverse: true });
+
+            });
+
+            $(function () {
+                $("#idPlanoSearchString").combobox();
+                $("#toggle").click(function () {
+                    $("#idPlanoSearchString").toggle();
+                });
+            });
+
+            $(function () {
+                $("#codigolojaalternateSearchString").combobox();
+                $("#toggle").click(function () {
+                    $("#codigolojaalternateSearchString").toggle();
+                });
+            });
+        </script>
+    }
+

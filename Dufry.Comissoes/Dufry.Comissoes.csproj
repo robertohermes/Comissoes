@@ -387,6 +387,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\CadastroAcesso\CadastroAcessoIndex.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Views\Home\Main.cshtml">
       <SubType>Code</SubType>
     </Content>

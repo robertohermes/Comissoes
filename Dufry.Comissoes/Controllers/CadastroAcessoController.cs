@@ -153,6 +153,82 @@ namespace Dufry.Comissoes.Controllers
 
             return View(controleacessoToUpdate);
         }
+        
+        // GET: /PlanoLoja/PlanoLojaIndex
+        //[ControleAcessoAdminFilter]
+        public ViewResult CadastroAcessoIndex(int? page
+            , string sortOrder
+            , int? colaboradorkeySearchString
+            , int? colaboradorkey_paiSearchString
+            , string statusSearchString)
+        {
+
+            #region populaobjetos
+            var colaboradores = ObtemColaboradoresAInserir();
+            ViewBag.colaboradorkeySearchString = new SelectList(colaboradores, "COLABORADORKEY_ALT", "NomeCompleto", colaboradorkeySearchString);
+
+            var superiores = ObtemSuperioresComPrimeiroItem(0);
+            ViewBag.colaboradorkey_paiSearchString = new SelectList(superiores, "Key", "Value", colaboradorkey_paiSearchString);
+            #endregion populaobjetos
+
+            #region trataParametrosOrdenacao
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.LoginSortParam = String.IsNullOrEmpty(sortOrder) ? "LOGIN_desc" : "";
+            ViewBag.StatusSortParam = sortOrder == "STATUS" ? "STATUS_desc" : "STATUS";
+            #endregion trataParametrosOrdenacao
+
+            #region trataParametrosBusca
+
+            var predicate = PredicateBuilder.True<ControleAcesso>();
+
+            if (colaboradorkeySearchString.HasValue)
+            {
+                int colaboradorkeyFilter = colaboradorkeySearchString.GetValueOrDefault();
+                predicate = predicate.And(i => i.COLABORADORKEY.Equals(colaboradorkeyFilter));
+                ViewBag.colaboradorkeyFilter = colaboradorkeyFilter;
+            }
+
+            if (colaboradorkey_paiSearchString.HasValue)
+            {
+                int colaboradorkey_paiFilter = colaboradorkey_paiSearchString.GetValueOrDefault();
+                predicate = predicate.And(i => i.COLABORADORKEY_PAI.Equals(colaboradorkey_paiFilter));
+                ViewBag.colaboradorkey_paiFilter = colaboradorkey_paiFilter;
+            }
+
+            if (!String.IsNullOrEmpty(statusSearchString))
+            {
+                predicate = predicate.And(i => i.STATUS.Equals(statusSearchString));
+                ViewBag.statusFilter = statusSearchString;
+            }
+
+            #endregion trataParametrosBusca
+
+            IEnumerable<ControleAcesso> controleacessos = new List<ControleAcesso>();
+
+            controleacessos = _controleacessoAppService.Find(predicate);
+
+            #region ordenacao
+            switch (sortOrder)
+            {
+                case "STATUS":
+                    controleacessos = controleacessos.OrderBy(s => s.STATUS);
+                    break;
+                case "LOGIN_desc":
+                    controleacessos = controleacessos.OrderByDescending(s => s.LOGIN); //mudar de chave para campo
+                    break;
+                case "STATUS_desc":
+                    controleacessos = controleacessos.OrderByDescending(s => s.STATUS);
+                    break;
+                default:  // LOGIN ascending 
+                    controleacessos = controleacessos.OrderBy(s => s.LOGIN);
+                    break;
+            }
+            #endregion ordenacao
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(controleacessos.ToPagedList(pageNumber, pageSize));
+        }
 
         protected override void Dispose(bool disposing)
         {
