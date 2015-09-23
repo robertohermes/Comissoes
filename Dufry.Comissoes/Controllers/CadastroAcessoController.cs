@@ -46,8 +46,6 @@ namespace Dufry.Comissoes.Controllers
             ControleAcesso controleacesso = new ControleAcesso();
 
             #region populaobjetos
-
-
             //<REVER>
             #region rever
             var semSuperiorKVP = new KeyValuePair<string, string>("0", "*** SEM SUPERIOR ***");
@@ -64,7 +62,8 @@ namespace Dufry.Comissoes.Controllers
             ViewBag.COLABORADORKEY_PAI = new SelectList(superiores, "COLABORADORKEY_PAI", "NOME");
 
 
-            var colaboradores = ObtemColaboradores();
+            //var colaboradores = ObtemColaboradores();
+            var colaboradores = ObtemColaboradoresAInserir();
             IEnumerable<SelectListItem> colaboradoresSelectListItem = new SelectList((IEnumerable)colaboradores, "Key", "Value");
             ViewBag.COLABORADORKEY_ALT = new SelectList(colaboradores, "COLABORADORKEY_ALT", "NomeCompleto");
             #endregion populaobjetos
@@ -115,10 +114,12 @@ namespace Dufry.Comissoes.Controllers
         private IEnumerable<KeyValuePair<string, string>> ObtemSuperiores()
         {
 
+            //Obtidos do BD do Comissoes
             var superiores = _controleacessoAppService.Find(t => t.STATUS == "A");
 
             List<ColaboradorAux> colaboradorAuxList = new List<ColaboradorAux>();
 
+            //Obtidos do BD do BI
             var colaboradores = _colaboradorAppService.All_ID();
 
             foreach (var item in colaboradores)
@@ -132,13 +133,15 @@ namespace Dufry.Comissoes.Controllers
                 colaboradorAuxList.Add(colaboradorAux);
             }
 
-
             IEnumerable<KeyValuePair<string, string>> superioresAux = (from su in superiores
                                                                        join co in colaboradorAuxList
                                                                        on new { su.CODIGOSECUNDARIO, su.CODIGOEMPRESAALTERNATE, su.CODIGOFILIALALTERNATE }
                                                                        equals new { co.CODIGOSECUNDARIO, co.CODIGOEMPRESAALTERNATE, co.CODIGOFILIALALTERNATE }
-                                                                       select new { su.COLABORADORKEY, co.NomeCompleto }).ToDictionary(row => (string)row.COLABORADORKEY.ToString(),
-                                                                                                                                         row => (string)row.NomeCompleto);
+                                                                       select new { su.COLABORADORKEY, NomeCompleto = string.Format("{0} ({1}-{2}-{3})",
+                                                                                    co.NomeCompleto, co.CODIGOEMPRESAALTERNATE, co.CODIGOFILIALALTERNATE, co.CODIGOSECUNDARIO) })
+                                                                       .OrderBy(co => co.NomeCompleto)
+                                                                       .ToDictionary(row => (string)row.COLABORADORKEY.ToString(),
+                                                                                     row => (string)row.NomeCompleto);
 
             return superioresAux;
         }
@@ -146,6 +149,58 @@ namespace Dufry.Comissoes.Controllers
         private IEnumerable<KeyValuePair<string, string>> ObtemColaboradores()
         {
             return _colaboradorAppService.All_ID_COMPOSTO();
+        }
+
+        private IEnumerable<KeyValuePair<string, string>> ObtemColaboradoresAInserir()
+        {
+            List<ColaboradorAux> colaboradorAuxList = new List<ColaboradorAux>();
+            List<ColaboradorAux> superiorAuxList = new List<ColaboradorAux>();
+
+            //Obtidos do BD do BI
+            var colaboradores = _colaboradorAppService.All_ID();
+
+            foreach (var item in colaboradores)
+            {
+                ColaboradorAux colaboradorAux = new ColaboradorAux();
+                colaboradorAux.CODIGOSECUNDARIO = item.CodigoSecundario.ToString().Trim();
+                colaboradorAux.CODIGOEMPRESAALTERNATE = item.CodigoEmpresaAlternate.ToString().Trim();
+                colaboradorAux.CODIGOFILIALALTERNATE = item.CodigoFilialAlternate.ToString().Trim();
+                colaboradorAux.NomeCompleto = item.NomeCompleto;
+
+                colaboradorAuxList.Add(colaboradorAux);
+            }
+
+            //Obtidos do BD do Comissoes
+            var superiores = _controleacessoAppService.All();
+
+            foreach (var item in superiores)
+            {
+                ColaboradorAux superiorAux = new ColaboradorAux();
+                superiorAux.CODIGOSECUNDARIO = item.CODIGOSECUNDARIO.ToString().Trim();
+                superiorAux.CODIGOEMPRESAALTERNATE = item.CODIGOEMPRESAALTERNATE.ToString().Trim();
+                superiorAux.CODIGOFILIALALTERNATE = item.CODIGOFILIALALTERNATE.ToString().Trim();
+                superiorAux.NomeCompleto = "";
+
+                superiorAuxList.Add(superiorAux);
+            }
+
+            var colaboradoresNaoInseridos = colaboradorAuxList
+                                       .Where(su => !superiorAuxList
+                                       .Any(co => co.CODIGOSECUNDARIO == su.CODIGOSECUNDARIO
+                                               && co.CODIGOEMPRESAALTERNATE == su.CODIGOEMPRESAALTERNATE
+                                               && co.CODIGOFILIALALTERNATE == su.CODIGOFILIALALTERNATE)
+                                        ).ToList();
+
+            IEnumerable<KeyValuePair<string, string>> colaboradoresAInserir = (from cn in colaboradoresNaoInseridos
+                                                                       join co in colaboradorAuxList
+                                                                       on new { cn.CODIGOSECUNDARIO, cn.CODIGOEMPRESAALTERNATE, cn.CODIGOFILIALALTERNATE }
+                                                                       equals new { co.CODIGOSECUNDARIO, co.CODIGOEMPRESAALTERNATE, co.CODIGOFILIALALTERNATE }
+                                                                       select new { COLABORADORKEY_ALT = string.Format("{0}|{1}|{2}", cn.CODIGOEMPRESAALTERNATE, cn.CODIGOFILIALALTERNATE, cn.CODIGOSECUNDARIO), 
+                                                                                    NomeCompleto = string.Format("{0} ({1}-{2}-{3})", co.NomeCompleto, cn.CODIGOEMPRESAALTERNATE, cn.CODIGOFILIALALTERNATE, cn.CODIGOSECUNDARIO)})
+                                                                       .ToDictionary(row => (string)row.COLABORADORKEY_ALT.ToString(), 
+                                                                                     row => (string)row.NomeCompleto);
+
+            return colaboradoresAInserir;
         }
 
         private ControleAcesso ObtemControleAcessoForm(ControleAcesso ca, bool insert = false)
