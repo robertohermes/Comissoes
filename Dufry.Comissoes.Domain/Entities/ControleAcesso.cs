@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Dufry.Comissoes.Domain.Entities
@@ -33,6 +34,8 @@ namespace Dufry.Comissoes.Domain.Entities
         public string CREATED_USERNAME { get; set; }
         public DateTime LAST_MODIFY_DATE { get; set; }
         public string LAST_MODIFY_USERNAME { get; set; }
+
+        public virtual ICollection<AusenciaRemunerada> AusenciaRemuneradas { get; set; }
 
         //public ValidationResult ValidationResult { get; private set; }
 

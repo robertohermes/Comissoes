@@ -107,7 +107,7 @@ namespace Dufry.Comissoes.Controllers
             IEnumerable<SelectListItem> superioresSelectListItem = new SelectList(superiores, "Key", "Value");
             ViewBag.COLABORADORKEY_PAI = new SelectList(superiores, "Key", "Value", controleacesso.COLABORADORKEY_PAI);
 
-            var colaboradores = ObtemNomeColaborador(controleacesso.CODIGOEMPRESAALTERNATE, controleacesso.CODIGOFILIALALTERNATE, controleacesso.CODIGOSECUNDARIO).ToList();
+            var colaboradores = ObtemColaborador(controleacesso.CODIGOEMPRESAALTERNATE, controleacesso.CODIGOFILIALALTERNATE, controleacesso.CODIGOSECUNDARIO).ToList();
 
             #endregion populaobjetos
 
@@ -259,6 +259,41 @@ namespace Dufry.Comissoes.Controllers
             return View(controleacessos.ToPagedList(pageNumber, pageSize));
         }
 
+        //
+        // GET: /CadastroAcesso/CadastroAcessoDelete/5
+        public ActionResult CadastroAcessoDelete(int? id, bool? saveChangesError = false)
+        {
+            if (id == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //throw new InvalidOperationException("Something very bad happened while doing important stuff");
+                throw new Exception();
+            }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Erro na exclusão. Tente novamente ou, se o problema persistir, entre em contato com o suporte.";
+            }
+
+            var controleacesso = _controleacessoAppService.Get(id ?? default(int));
+
+            if (controleacesso == null)
+            {
+                //return HttpNotFound();
+                throw new Exception();
+            }
+
+            var controleacessoSup = _controleacessoAppService.Get(controleacesso.COLABORADORKEY_PAI ?? default(int));
+
+            var superiores = ObtemColaborador(controleacessoSup.CODIGOEMPRESAALTERNATE, controleacessoSup.CODIGOFILIALALTERNATE, controleacessoSup.CODIGOSECUNDARIO).ToList();
+
+            var colaboradores = ObtemColaborador(controleacesso.CODIGOEMPRESAALTERNATE, controleacesso.CODIGOFILIALALTERNATE, controleacesso.CODIGOSECUNDARIO).ToList();
+
+            CadastroAcessoViewModel cadastroAcessoVM = new CadastroAcessoViewModel(controleacesso, superiores.FirstOrDefault().NomeCompleto, colaboradores.FirstOrDefault().NomeCompleto);
+
+            return View(cadastroAcessoVM);
+        }
+
         protected override void Dispose(bool disposing)
         {
             _controleacessoAppService.Dispose();
@@ -376,7 +411,7 @@ namespace Dufry.Comissoes.Controllers
             return colaboradoresAInserir;
         }
 
-        private IEnumerable<dynamic> ObtemNomeColaborador(string CodigoEmpresaAlternate, string CodigoFilialAlternate, string CodigoSecundario)
+        private IEnumerable<dynamic> ObtemColaborador(string CodigoEmpresaAlternate, string CodigoFilialAlternate, string CodigoSecundario)
         {
             var colaboradores = _colaboradorAppService.GET_ID(CodigoEmpresaAlternate, CodigoFilialAlternate, CodigoSecundario);
 

@@ -459,6 +459,7 @@
     <Content Include="Views\PlanoCategoria\PlanoCategoriaEdit.cshtml" />
     <Content Include="Views\CadastroAcesso\CadastroAcessoCreate.cshtml" />
     <Content Include="Views\CadastroAcesso\CadastroAcessoEdit.cshtml" />
+    <Content Include="Views\CadastroAcesso\CadastroAcessoDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
