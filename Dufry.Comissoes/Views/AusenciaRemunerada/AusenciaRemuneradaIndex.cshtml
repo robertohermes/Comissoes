@@ -1,9 +1,9 @@
-﻿@model PagedList.IPagedList<ControleAcesso>
+﻿@model PagedList.IPagedList<AusenciaRemunerada>
     @using PagedList.Mvc;
     <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
     @{
-        ViewBag.Title = "Busca de Usuários da Aplicação de Comissões";
+        ViewBag.Title = "Busca de Ausência Remunerada";
     }
 
     <h1 class="headerForm">@ViewBag.Title</h1>
@@ -11,25 +11,22 @@
     @**************************************************************************************************************************@
     @*                                                 Filtros de Busca                                                       *@
     @**************************************************************************************************************************@
-    @using (Html.BeginForm("CadastroAcessoIndex", "CadastroAcesso", FormMethod.Get))
+    @using (Html.BeginForm("AusenciaRemuneradaIndex", "AusenciaRemunerada", FormMethod.Get))
     {
         <div class="editorCategoria">
-            <p><label for="colaboradorkey_paiSearchString">Superior</label>@Html.DropDownList("colaboradorkey_paiSearchString", "--- Selecione ---")</p>
             <p><label for="colaboradorkeySearchString">Colaborador</label>@Html.DropDownList("colaboradorkeySearchString", "--- Selecione ---")</p>
-            <p><label for="loginSearchString">Login</label>@Html.TextBox("loginSearchString", null, new { maxlength = "255" })</p>
-            <p>
-                <label for="adminSearchString">Administrador do sistema</label>      @Html.RadioButton("adminSearchString", "S", true, ViewBag.AdminFilter as string)Sim
-                @Html.RadioButton("adminSearchString", "N", ViewBag.AdminFilter as string)Não
-            </p>
+            <p><label for="descausenciaSearchString">Descrição da Ausência</label>@Html.TextBox("descausenciaSearchString", null, new { maxlength = "255" })</p>
+            <p><label for="dtiniSearchString">Data inicial da vigência</label>@Html.TextBox("dtiniSearchString", null, new { @class = "dp" })</p>
+            <p><label for="dtfimSearchString">Data final da vigência</label>@Html.TextBox("dtfimSearchString", null, new { @class = "dp" })</p>
             <p>
                 <label for="statusSearchString">Status</label>      @Html.RadioButton("statusSearchString", "A", true, ViewBag.StatusFilter as string)Ativo
                 @Html.RadioButton("statusSearchString", "I", ViewBag.StatusFilter as string)Inativo
             </p>
         </div>
         <p>
-            <input type="submit" id="buscaCadastroAcesso" value="Buscar" class="botoesCategoria" />
-            @Html.ActionLink("Limpar", "CadastroAcessoIndex", "CadastroAcesso", null, new { @class = "botoesCategoria" })
-            @Html.ActionLink("Novo", "CadastroAcessoCreate", "CadastroAcesso", null, new { @class = "botoesCategoria" })
+            <input type="submit" id="buscaAusenciaRemunerada" value="Buscar" class="botoesCategoria" />
+            @Html.ActionLink("Limpar", "AusenciaRemuneradaIndex", "AusenciaRemunerada", null, new { @class = "botoesCategoria" })
+            @Html.ActionLink("Novo", "AusenciaRemuneradaCreate", "AusenciaRemunerada", null, new { @class = "botoesCategoria" })
         </p>
 
     }
@@ -41,68 +38,66 @@
     <table class="dufry" width="80%">
         <tr>
             <th>
-                @Html.ActionLink("Superior", "CadastroAcessoIndex", "CadastroAcesso"
-                , new
-                {
-                    sortOrder = ViewBag.SuperiorSortParam,
-                    colaboradorkey_paiSearchString = ViewBag.colaboradorkey_paiFilter,
-                    colaboradorkeySearchString = ViewBag.colaboradorkeyFilter,
-                    loginSearchString = ViewBag.loginFilter,
-                    adminSearchString = ViewBag.AdminFilter,
-                    statusSearchString = ViewBag.StatusFilter
-                }
-                , new { @class = "tableheadlink" })
-            </th>
-            <th>
-                @Html.ActionLink("Colaborador", "CadastroAcessoIndex", "CadastroAcesso"
+                @Html.ActionLink("Colaborador", "AusenciaRemuneradaIndex", "AusenciaRemunerada"
                 , new
                 {
                     sortOrder = ViewBag.ColaboradorSortParam,
-                    colaboradorkey_paiSearchString = ViewBag.colaboradorkey_paiFilter,
                     colaboradorkeySearchString = ViewBag.colaboradorkeyFilter,
-                    loginSearchString = ViewBag.loginFilter,
-                    adminSearchString = ViewBag.AdminFilter,
+                    descausenciaSearchString = ViewBag.descausenciaFilter,
+                    dtiniSearchString = ViewBag.dtiniFilter,
+                    dtfimSearchString = ViewBag.dtfimFilter,
                     statusSearchString = ViewBag.StatusFilter
                 }
                 , new { @class = "tableheadlink" })
             </th>
-
             <th>
-                @Html.ActionLink("Login", "CadastroAcessoIndex", "CadastroAcesso"
+                @Html.ActionLink("Descrição", "AusenciaRemuneradaIndex", "AusenciaRemunerada"
                 , new
                 {
-                    sortOrder = ViewBag.LoginSortParam,
-                    colaboradorkey_paiSearchString = ViewBag.colaboradorkey_paiFilter,
+                    sortOrder = ViewBag.DescricaoSortParam,
                     colaboradorkeySearchString = ViewBag.colaboradorkeyFilter,
-                    loginSearchString = ViewBag.loginFilter,
-                    adminSearchString = ViewBag.AdminFilter, 
+                    descausenciaSearchString = ViewBag.descausenciaFilter,
+                    dtiniSearchString = ViewBag.dtiniFilter,
+                    dtfimSearchString = ViewBag.dtfimFilter,
                     statusSearchString = ViewBag.StatusFilter
                 }
                 , new { @class = "tableheadlink" })
             </th>
             <th>
-                @Html.ActionLink("Administrador", "CadastroAcessoIndex", "CadastroAcesso"
+                @Html.ActionLink("Data Inicial", "AusenciaRemuneradaIndex", "AusenciaRemunerada"
                 , new
                 {
-                    sortOrder = ViewBag.AdminSortParam,
-                    colaboradorkey_paiSearchString = ViewBag.colaboradorkey_paiFilter,
+                    sortOrder = ViewBag.DtIniSortParam,
                     colaboradorkeySearchString = ViewBag.colaboradorkeyFilter,
-                    loginSearchString = ViewBag.loginFilter,
-                    adminSearchString = ViewBag.AdminFilter,
+                    descausenciaSearchString = ViewBag.descausenciaFilter,
+                    dtiniSearchString = ViewBag.dtiniFilter,
+                    dtfimSearchString = ViewBag.dtfimFilter,
                     statusSearchString = ViewBag.StatusFilter
                 }
                 , new { @class = "tableheadlink" })
-
             </th>
             <th>
-                @Html.ActionLink("Status", "CadastroAcessoIndex", "CadastroAcesso"
+                @Html.ActionLink("Data Final", "AusenciaRemuneradaIndex", "AusenciaRemunerada"
+                , new
+                {
+                    sortOrder = ViewBag.DtFimSortParam,
+                    colaboradorkeySearchString = ViewBag.colaboradorkeyFilter,
+                    descausenciaSearchString = ViewBag.descausenciaFilter,
+                    dtiniSearchString = ViewBag.dtiniFilter,
+                    dtfimSearchString = ViewBag.dtfimFilter,
+                    statusSearchString = ViewBag.StatusFilter
+                }
+                , new { @class = "tableheadlink" })
+            </th>
+            <th>
+                @Html.ActionLink("Status", "AusenciaRemuneradaIndex", "AusenciaRemunerada"
                 , new
                 {
                     sortOrder = ViewBag.StatusSortParam,
-                    colaboradorkey_paiSearchString = ViewBag.colaboradorkey_paiFilter,
                     colaboradorkeySearchString = ViewBag.colaboradorkeyFilter,
-                    loginSearchString = ViewBag.loginFilter,
-                    adminSearchString = ViewBag.AdminFilter, 
+                    descausenciaSearchString = ViewBag.descausenciaFilter,
+                    dtiniSearchString = ViewBag.dtiniFilter,
+                    dtfimSearchString = ViewBag.dtfimFilter,
                     statusSearchString = ViewBag.StatusFilter
                 }
                 , new { @class = "tableheadlink" })
@@ -115,22 +110,17 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.COLABORADORKEY_PAI)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.COLABORADORKEY)
                 </td>
                 <td>
-                    @Html.ActionLink(item.LOGIN, "CadastroAcessoEdit", "CadastroAcesso", new { id = item.COLABORADORKEY }, new { @class = "tablerowlink" })
+                    @Html.ActionLink(item.DESC_AUSENCIA, "AusenciaRemuneradaEdit", "AusenciaRemunerada", new { id = item.ID_AUSENCIA_REMUNERADA }, new { @class = "tablerowlink" })
                 </td>
-                @if (item.ADMIN == "S")
-                {
-                    <td>Sim</td>
-                }
-                else
-                {
-                    <td>Não</td>
-                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.DT_INI)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DT_FIM)
+                </td>
                 @if (item.STATUS == "A")
                 {
                     <td>Ativo</td>
@@ -140,7 +130,7 @@
                     <td>Inativo</td>
                 }
                 <td>
-                    @Html.ActionLink("Excluir", "CadastroAcessoDelete", "CadastroAcesso", new { id = item.COLABORADORKEY }, new { @class = "tablerowlink" })
+                    @Html.ActionLink("Excluir", "AusenciaRemuneradaDelete", "AusenciaRemunerada", new { id = item.ID_AUSENCIA_REMUNERADA }, new { @class = "tablerowlink" })
                 </td>
             </tr>
         }
@@ -153,14 +143,14 @@
     <br />
     Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
-    @Html.PagedListPager(Model, page => Url.Action("CadastroAcessoIndex"
+    @Html.PagedListPager(Model, page => Url.Action("AusenciaRemuneradaIndex"
     , new
     {
         sortOrder = ViewBag.CurrentSort,
-        colaboradorkey_paiSearchString = ViewBag.colaboradorkey_paiFilter,
         colaboradorkeySearchString = ViewBag.colaboradorkeyFilter,
-        loginSearchString = ViewBag.loginFilter,
-        adminSearchString = ViewBag.AdminFilter, 
+        descausenciaSearchString = ViewBag.descausenciaFilter,
+        dtiniSearchString = ViewBag.dtiniFilter,
+        dtfimSearchString = ViewBag.dtfimFilter,
         statusSearchString = ViewBag.StatusFilter,
         page
     }))
@@ -178,19 +168,11 @@
             });
 
             $(function () {
-                $("#colaboradorkey_paiSearchString").combobox();
-                $("#toggle").click(function () {
-                    $("#colaboradorkey_paiSearchString").toggle();
-                });
-            });
-
-            $(function () {
                 $("#colaboradorkeySearchString").combobox();
                 $("#toggle").click(function () {
                     $("#colaboradorkeySearchString").toggle();
                 });
             });
-
 
         </script>
     }

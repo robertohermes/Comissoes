@@ -38,7 +38,8 @@ namespace Dufry.Comissoes.Controllers
             AusenciaRemunerada ausenciaremunerada = new AusenciaRemunerada();
 
             #region populaobjetos
-            var colaboradores = ObtemColaboradores(ausenciaremunerada.COLABORADORKEY);
+            //var colaboradores = ObtemColaboradores(ausenciaremunerada.COLABORADORKEY);
+            var colaboradores = ObtemColaboradores();
             IEnumerable<SelectListItem> colaboradoresSelectListItem = new SelectList(colaboradores, "Key", "Value");
             ViewBag.COLABORADORKEY = new SelectList(colaboradores, "Key", "Value");
             #endregion populaobjetos
@@ -240,6 +241,109 @@ namespace Dufry.Comissoes.Controllers
 
         }
 
+        // GET: /AusenciaRemunerada/AusenciaRemuneradaIndex
+        //[ControleAcessoAdminFilter]
+        public ViewResult AusenciaRemuneradaIndex(int? page
+            , string sortOrder
+            , int? colaboradorkeySearchString
+            , string descausenciaSearchString
+            , string dtiniSearchString
+            , string dtfimSearchString
+            , string statusSearchString)
+        {
+
+            #region populaobjetos
+            var colaboradores = ObtemColaboradores();
+            ViewBag.colaboradorkeySearchString = new SelectList(colaboradores, "Key", "Value", colaboradorkeySearchString);
+            #endregion populaobjetos
+
+            #region trataParametrosOrdenacao
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.DescricaoSortParam = String.IsNullOrEmpty(sortOrder) ? "DESC_AUSENCIA_desc" : "";
+            ViewBag.DtIniSortParam = sortOrder == "DT_INI" ? "DT_INI_desc" : "DT_INI";
+            ViewBag.DtFimSortParam = sortOrder == "DT_FIM" ? "DT_FIM_desc" : "DT_FIM";
+            ViewBag.StatusSortParam = sortOrder == "STATUS" ? "STATUS_desc" : "STATUS";
+            #endregion trataParametrosOrdenacao
+
+            #region trataParametrosBusca
+
+            var predicate = PredicateBuilder.True<AusenciaRemunerada>();
+            //descausenciaSearchString = "";
+
+            //if (colaboradorkeySearchString.HasValue)
+            //{
+            //    int idCategoriaFilter = colaboradorkeySearchString.GetValueOrDefault();
+            //    predicate = predicate.And(i => i.ID_CATEGORIA.Equals(idCategoriaFilter));
+            //    ViewBag.idCategoriaFilter = idCategoriaFilter;
+            //}
+
+            if (!String.IsNullOrEmpty(descausenciaSearchString))
+            {
+                predicate = predicate.And(i => i.DESC_AUSENCIA.Contains(descausenciaSearchString));
+                ViewBag.descausenciaFilter = descausenciaSearchString;
+            }
+
+            if (!String.IsNullOrEmpty(dtiniSearchString))
+            {
+                DateTime dtiniFilter = DateTime.ParseExact(dtiniSearchString, "dd/MM/yyyy", new CultureInfo("pt-BR"));
+                predicate = predicate.And(i => i.DT_INI.Equals(dtiniFilter));
+                ViewBag.dtiniFilter = dtiniFilter;
+            }
+
+            if (!String.IsNullOrEmpty(dtfimSearchString))
+            {
+                DateTime dtfimFilter = DateTime.ParseExact(dtfimSearchString, "dd/MM/yyyy", new CultureInfo("pt-BR"));
+                predicate = predicate.And(i => i.DT_FIM.Equals(dtfimFilter));
+                ViewBag.dtfimFilter = dtfimFilter;
+            }
+
+            if (!String.IsNullOrEmpty(statusSearchString))
+            {
+                predicate = predicate.And(i => i.STATUS.Equals(statusSearchString));
+                ViewBag.statusFilter = statusSearchString;
+            }
+
+            #endregion trataParametrosBusca
+
+            IEnumerable<AusenciaRemunerada> ausenciaremuneradas = new List<AusenciaRemunerada>();
+
+            ausenciaremuneradas = _ausenciaremuneradaAppService.Find(predicate);
+
+            #region ordenacao
+            switch (sortOrder)
+            {
+                case "DT_INI":
+                    ausenciaremuneradas = ausenciaremuneradas.OrderBy(s => s.DT_INI); //mudar de chave para campo
+                    break;
+                case "DT_FIM":
+                    ausenciaremuneradas = ausenciaremuneradas.OrderBy(s => s.DT_FIM); //mudar de chave para campo
+                    break;
+                case "STATUS":
+                    ausenciaremuneradas = ausenciaremuneradas.OrderBy(s => s.STATUS);
+                    break;
+                case "DESC_AUSENCIA_desc":
+                    ausenciaremuneradas = ausenciaremuneradas.OrderByDescending(s => s.DESC_AUSENCIA);
+                    break;
+                case "DT_INI_desc":
+                    ausenciaremuneradas = ausenciaremuneradas.OrderByDescending(s => s.DT_INI); //mudar de chave para campo
+                    break;
+                case "DT_FIM_desc":
+                    ausenciaremuneradas = ausenciaremuneradas.OrderByDescending(s => s.DT_FIM); //mudar de chave para campo
+                    break;
+                case "STATUS_desc":
+                    ausenciaremuneradas = ausenciaremuneradas.OrderByDescending(s => s.STATUS);
+                    break;
+                default:  // DESC_AUSENCIA ascending 
+                    ausenciaremuneradas = ausenciaremuneradas.OrderBy(s => s.DESC_AUSENCIA);
+                    break;
+            }
+            #endregion ordenacao
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(ausenciaremuneradas.ToPagedList(pageNumber, pageSize));
+        }
+
 
         protected override void Dispose(bool disposing)
         {
@@ -250,7 +354,7 @@ namespace Dufry.Comissoes.Controllers
             base.Dispose(disposing);
         }
 
-        private IEnumerable<KeyValuePair<string, string>> ObtemColaboradores(int colaboradorKey)
+        private IEnumerable<KeyValuePair<string, string>> ObtemColaboradores()
         {
 
             //Obtidos do BD do Comissoes

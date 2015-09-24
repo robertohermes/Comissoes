@@ -461,8 +461,8 @@
     <Content Include="Views\CadastroAcesso\CadastroAcessoEdit.cshtml" />
     <Content Include="Views\CadastroAcesso\CadastroAcessoDelete.cshtml" />
     <Content Include="Views\AusenciaRemunerada\AusenciaRemuneradaEdit.cshtml" />
-    <Content Include="Views\AusenciaRemunerada\AusenciaRemuneradaIndex.cshtml" />
     <Content Include="Views\AusenciaRemunerada\AusenciaRemuneradaDelete.cshtml" />
+    <Content Include="Views\AusenciaRemunerada\AusenciaRemuneradaIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
