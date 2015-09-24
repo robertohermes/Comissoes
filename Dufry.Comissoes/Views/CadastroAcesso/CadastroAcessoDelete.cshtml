@@ -7,8 +7,16 @@
 @{
     string confirmMessageOK = "Tem certeza que deseja excluir o usuário " + Html.DisplayFor(model => model.NomeCompleto) + " ?";
     bool exibeBotaoExcluir = true;
-    
+
     List<String> confirmMessageErrorList = new List<String>();
+
+
+    if (Model.QtdSubordinados > 0)
+    {
+        confirmMessageErrorList.Add("O usuário " + Html.DisplayFor(model => model.NomeCompleto) + " não pode ser excluído, por haver usuários subordinados a ele. Exclua todos os respectivos subordinados primeiro.");
+        exibeBotaoExcluir = false;
+    }        
+    
 
     if (Model.ControleAcesso.AusenciaRemuneradas.Count() > 0)
     {
@@ -44,10 +52,10 @@
         <p><label class="caption">@Html.DisplayNameFor(model => model.NomeSuperiorCompleto)</label><label>@Html.DisplayFor(model => model.NomeSuperiorCompleto)</label></p>
         <p><label class="caption">@Html.DisplayNameFor(model => model.NomeCompleto)</label><label>@Html.DisplayFor(model => model.NomeCompleto)</label></p>
         <p><label class="caption">@Html.DisplayNameFor(model => model.ControleAcesso.LOGIN)</label><label>@Html.DisplayFor(model => model.ControleAcesso.LOGIN)</label></p>
-        <p><label class="caption">@Html.DisplayNameFor(model => model.ControleAcesso.ADMIN) </label>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.ControleAcesso.ADMIN)</label>
                                     @if (Model.ControleAcesso.ADMIN == "S")
                                     { <label>Sim</label>}else{<label>Não</label>}</p>
-        <p><label class="caption">@Html.DisplayNameFor(model => model.ControleAcesso.STATUS) </label>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.ControleAcesso.STATUS)</label>
                                     @if (Model.ControleAcesso.STATUS == "A")
                                     { <label>Ativo</label>}else{<label>Inativo</label>}</p>
     </div>
@@ -62,7 +70,7 @@
                 <input type="submit" value="Excluir" class="botoesCategoria" />                    
             }
             
-            @Html.ActionLink("Voltar", "CadastroAcessoIndex", "Plano", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
+            @Html.ActionLink("Voltar", "CadastroAcessoIndex", "CadastroAcesso", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
         }
     </p>
 </div>

@@ -10,5 +10,7 @@ namespace Dufry.Comissoes.Application.Interfaces
         ControleAcesso FindByActiveLogin(string login);
 
         string ObtainCurrentLoginFromAd();
+
+        ControleAcesso Get_FilhosDiretos(int id);
     }
 }

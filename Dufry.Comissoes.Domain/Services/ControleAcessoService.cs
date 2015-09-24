@@ -37,5 +37,10 @@ namespace Dufry.Comissoes.Domain.Services
             return _repository.FindByActiveLogin(login);
         }
 
+        public ControleAcesso Get_FilhosDiretos(int id)
+        {
+            return _readOnlyRepository.Get_FilhosDiretos(id);
+        }
+
     }
 }

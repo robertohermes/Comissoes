@@ -111,7 +111,13 @@ namespace Dufry.Comissoes.Controllers
 
             #endregion populaobjetos
 
-            CadastroAcessoViewModel cadastroAcessoVM = new CadastroAcessoViewModel(controleacesso, superioresSelectListItem, colaboradores.FirstOrDefault().NomeCompleto);
+            string nomeCompleto = "*** SEM NOME DE COLABORADOR ***";
+            if (colaboradores.Count() != 0)
+            {
+                nomeCompleto = colaboradores.FirstOrDefault().NomeCompleto;
+            }
+
+            CadastroAcessoViewModel cadastroAcessoVM = new CadastroAcessoViewModel(controleacesso, superioresSelectListItem, nomeCompleto);
 
             return View(cadastroAcessoVM);
 
@@ -206,6 +212,12 @@ namespace Dufry.Comissoes.Controllers
                 ViewBag.loginFilter = loginSearchString;
             }
 
+            if (!String.IsNullOrEmpty(adminSearchString))
+            {
+                predicate = predicate.And(i => i.ADMIN.Equals(adminSearchString));
+                ViewBag.adminFilter = adminSearchString;
+            }
+
             if (!String.IsNullOrEmpty(statusSearchString))
             {
                 predicate = predicate.And(i => i.STATUS.Equals(statusSearchString));
@@ -283,15 +295,52 @@ namespace Dufry.Comissoes.Controllers
                 throw new Exception();
             }
 
-            var controleacessoSup = _controleacessoAppService.Get(controleacesso.COLABORADORKEY_PAI ?? default(int));
+            string nomeSuperiorCompleto = "*** SEM SUPERIOR ***";
+            if (controleacesso.COLABORADORKEY_PAI != null)
+            {
+                var controleacessoSup = _controleacessoAppService.Get(controleacesso.COLABORADORKEY_PAI ?? default(int));
+                var superiores = ObtemColaborador(controleacessoSup.CODIGOEMPRESAALTERNATE, controleacessoSup.CODIGOFILIALALTERNATE, controleacessoSup.CODIGOSECUNDARIO).ToList();
+                nomeSuperiorCompleto = superiores.FirstOrDefault().NomeCompleto;
+            }
 
-            var superiores = ObtemColaborador(controleacessoSup.CODIGOEMPRESAALTERNATE, controleacessoSup.CODIGOFILIALALTERNATE, controleacessoSup.CODIGOSECUNDARIO).ToList();
-
+            
             var colaboradores = ObtemColaborador(controleacesso.CODIGOEMPRESAALTERNATE, controleacesso.CODIGOFILIALALTERNATE, controleacesso.CODIGOSECUNDARIO).ToList();
 
-            CadastroAcessoViewModel cadastroAcessoVM = new CadastroAcessoViewModel(controleacesso, superiores.FirstOrDefault().NomeCompleto, colaboradores.FirstOrDefault().NomeCompleto);
+            var subordinados = _controleacessoAppService.Find(t => t.COLABORADORKEY_PAI == controleacesso.COLABORADORKEY);
+
+            string nomeCompleto = "*** SEM NOME DE COLABORADOR ***";
+            if (colaboradores.Count() != 0)
+            {
+                nomeCompleto = colaboradores.FirstOrDefault().NomeCompleto;
+            }
+
+            CadastroAcessoViewModel cadastroAcessoVM = new CadastroAcessoViewModel(controleacesso, nomeSuperiorCompleto, nomeCompleto, subordinados.Count());
 
             return View(cadastroAcessoVM);
+        }
+
+        //POST: /CadastroAcesso/CadastroAcessoDelete/5
+        [HttpPost, ActionName("CadastroAcessoDelete")]
+        public ActionResult CadastroAcessoConfirmed(int id)
+        {
+            try
+            {
+                var controleacesso = _controleacessoAppService.Get(id);
+
+                var subordinados = _controleacessoAppService.Find(t => t.COLABORADORKEY_PAI == controleacesso.COLABORADORKEY);
+
+                if (controleacesso.AusenciaRemuneradas.Count() == 0 && subordinados.Count() == 0)
+                {
+                    _controleacessoAppService.Remove(controleacesso);
+                }
+            }
+            catch (RetryLimitExceededException/* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                return RedirectToAction("CadastroAcessoDelete", new { id = id, saveChangesError = true });
+            }
+            return RedirectToAction("CadastroAcessoIndex");
+
         }
 
         protected override void Dispose(bool disposing)

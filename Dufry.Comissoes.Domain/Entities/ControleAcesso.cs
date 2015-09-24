@@ -35,6 +35,9 @@ namespace Dufry.Comissoes.Domain.Entities
         public DateTime LAST_MODIFY_DATE { get; set; }
         public string LAST_MODIFY_USERNAME { get; set; }
 
+        //<REVER>
+        //public virtual ICollection<ControleAcesso> ControleAcessoFilho { get; set; }
+
         public virtual ICollection<AusenciaRemunerada> AusenciaRemuneradas { get; set; }
 
         //public ValidationResult ValidationResult { get; private set; }

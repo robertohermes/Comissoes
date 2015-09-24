@@ -90,6 +90,11 @@ namespace Dufry.Comissoes.Application
             return Name;
         }
 
+        public ControleAcesso Get_FilhosDiretos(int id)
+        {
+            return _service.Get_FilhosDiretos(id);
+        }
+
         
 
         public void Dispose()

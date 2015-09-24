@@ -57,5 +57,15 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
                 return controleacesso;
             }
         }
+
+        public ControleAcesso Get_FilhosDiretos(int id)
+        {
+            using (var cn = ComissoesConnection)
+            {
+                var controleacessos = cn.Query<ControleAcesso>("SELECT * FROM COMIS_CONTROLE_ACESSO WHERE COLABORADORKEY_PAI = @ColaboradorKey",
+                    new { ColaboradorKey = id }).FirstOrDefault();
+                return controleacessos;
+            }
+        }
     }
 }

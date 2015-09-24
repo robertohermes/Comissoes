@@ -8,5 +8,7 @@ namespace Dufry.Comissoes.Domain.Interfaces.Service
         ControleAcesso GetFirstLogin();
 
         ControleAcesso FindByActiveLogin(string login);
+
+        ControleAcesso Get_FilhosDiretos(int id);
     }
 }

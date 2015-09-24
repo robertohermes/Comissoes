@@ -22,6 +22,9 @@ namespace Dufry.Comissoes.ViewModels
         [Display(Name = "Nome do superior")]
         public string NomeSuperiorCompleto { get; set; }
 
+        //<REVER>
+        public int QtdSubordinados { get; set; }
+
         public ControleAcesso ControleAcesso { get; set; }
 
         public IEnumerable<SelectListItem> SuperioresSelectListItem { get; set; }
@@ -44,11 +47,12 @@ namespace Dufry.Comissoes.ViewModels
             NomeCompleto = nomeCompleto;
         }
 
-        public CadastroAcessoViewModel(ControleAcesso controleAcesso, string nomeSuperiorCompleto, string nomeCompleto)
+        public CadastroAcessoViewModel(ControleAcesso controleAcesso, string nomeSuperiorCompleto, string nomeCompleto, int qtdSubordinados = 0)
         {
             ControleAcesso = controleAcesso;
             NomeSuperiorCompleto = nomeSuperiorCompleto;
             NomeCompleto = nomeCompleto;
+            QtdSubordinados = qtdSubordinados;
         }
 
         //<REVER>
