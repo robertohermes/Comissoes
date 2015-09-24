@@ -32,6 +32,61 @@ namespace Dufry.Comissoes.Controllers
             _controleacessoAppService = controleacessoAppService;
         }
 
+        // GET: /AusenciaRemunerada/AusenciaRemuneradaCreate
+        public ActionResult AusenciaRemuneradaCreate()
+        {
+            AusenciaRemunerada ausenciaremunerada = new AusenciaRemunerada();
+
+            #region populaobjetos
+            var colaboradores = ObtemColaboradores(ausenciaremunerada.COLABORADORKEY);
+            IEnumerable<SelectListItem> superioresSelectListItem = new SelectList(colaboradores, "Key", "Value");
+            ViewBag.COLABORADORKEY_PAI = new SelectList(colaboradores, "Key", "Value");
+            #endregion populaobjetos
+
+            AusenciaRemuneradaViewModel ausenciaRemuneradaVM = new AusenciaRemuneradaViewModel(ausenciaremunerada, superioresSelectListItem);
+
+            return View(ausenciaRemuneradaVM);
+        }
+
+        // POST: /AusenciaRemunerada/AusenciaRemuneradaCreate
+        [HttpPost, ActionName("AusenciaRemuneradaCreate")]
+        //[ValidateAntiForgeryToken]
+        public ActionResult AusenciaRemuneradaCreateConfirmed(AusenciaRemunerada ausenciaremunerada)
+        {
+            try
+            {
+                ausenciaremunerada = ObtemAusenciaRemuneradaForm(ausenciaremunerada, true);
+
+                if (ModelState.IsValid)
+                {
+                    AusenciaRemunerada ausenciaremuneradaExiste = new AusenciaRemunerada();
+                    ausenciaremuneradaExiste = null;
+
+                    if (ausenciaremunerada.STATUS == "A")
+                    {
+                        ausenciaremuneradaExiste = AusenciaRemuneradaAtivaVigente(ausenciaremunerada);
+                    }
+
+                    if (ausenciaremuneradaExiste == null || ausenciaremunerada.STATUS == "I")
+                    {
+                        _ausenciaremuneradaAppService.Create(ausenciaremunerada);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Já existe um perído vigente e ativo que coincide com a tentativa de inclusão / alteração");
+                    }
+                    return RedirectToAction("PlanoLojaIndex");
+                }
+            }
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Erro ao salvar. Tente novamente ou, se o problema persistir, entre em contato com o suporte.");
+            }
+
+            return View(ausenciaremunerada);
+        }
+
 
         protected override void Dispose(bool disposing)
         {
@@ -42,6 +97,44 @@ namespace Dufry.Comissoes.Controllers
             base.Dispose(disposing);
         }
 
+        private IEnumerable<KeyValuePair<string, string>> ObtemColaboradores(int colaboradorKey)
+        {
+
+            //Obtidos do BD do Comissoes
+            var colaboradoresExistentes = _controleacessoAppService.Find(t => t.STATUS == "A");
+
+            List<ColaboradorAux> colaboradorAuxList = new List<ColaboradorAux>();
+
+            //Obtidos do BD do BI
+            var colaboradoresBI = _colaboradorAppService.All_ID();
+
+            foreach (var item in colaboradoresBI)
+            {
+                ColaboradorAux colaboradorAux = new ColaboradorAux();
+                colaboradorAux.CODIGOSECUNDARIO = item.CodigoSecundario;
+                colaboradorAux.CODIGOEMPRESAALTERNATE = item.CodigoEmpresaAlternate;
+                colaboradorAux.CODIGOFILIALALTERNATE = item.CodigoFilialAlternate;
+                colaboradorAux.NomeCompleto = item.NomeCompleto;
+
+                colaboradorAuxList.Add(colaboradorAux);
+            }
+
+            IEnumerable<KeyValuePair<string, string>> colaboradoresAux = (from col in colaboradoresExistentes
+                                                                       join aux in colaboradorAuxList
+                                                                       on new { col.CODIGOSECUNDARIO, col.CODIGOEMPRESAALTERNATE, col.CODIGOFILIALALTERNATE }
+                                                                       equals new { aux.CODIGOSECUNDARIO, aux.CODIGOEMPRESAALTERNATE, aux.CODIGOFILIALALTERNATE }
+                                                                       select new
+                                                                       {
+                                                                           col.COLABORADORKEY,
+                                                                           NomeCompleto = string.Format("{0} ({1}-{2}-{3})",
+                                                                               aux.NomeCompleto, aux.CODIGOEMPRESAALTERNATE, aux.CODIGOFILIALALTERNATE, aux.CODIGOSECUNDARIO)
+                                                                       })
+                                                                       .OrderBy(aux => aux.NomeCompleto)
+                                                                       .ToDictionary(row => (string)row.COLABORADORKEY.ToString(),
+                                                                                     row => (string)row.NomeCompleto);
+
+            return colaboradoresAux;
+        }
 
         private AusenciaRemunerada AusenciaRemuneradaAtivaVigente(AusenciaRemunerada ar)
         {
@@ -75,6 +168,19 @@ namespace Dufry.Comissoes.Controllers
             }
 
             return ar;
+        }
+
+
+        private class ColaboradorAux
+        {
+            public string CODIGOSECUNDARIO { get; set; }
+
+            public string CODIGOEMPRESAALTERNATE { get; set; }
+
+            public string CODIGOFILIALALTERNATE { get; set; }
+
+            public string NomeCompleto { get; set; }
+
         }
 
     }
