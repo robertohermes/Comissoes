@@ -175,6 +175,71 @@ namespace Dufry.Comissoes.Controllers
             return View(ausenciaremuneradaToUpdate);
         }
 
+        //
+        // GET: /AusenciaRemunerada/AusenciaRemuneradaDelete/5
+        public ActionResult AusenciaRemuneradaDelete(int? id, bool? saveChangesError = false)
+        {
+            if (id == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //throw new InvalidOperationException("Something very bad happened while doing important stuff");
+                throw new Exception();
+            }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Erro na exclusão. Tente novamente ou, se o problema persistir, entre em contato com o suporte.";
+            }
+
+            var ausenciaremunerada = _ausenciaremuneradaAppService.Get(id ?? default(int));
+
+            if (ausenciaremunerada == null)
+            {
+                //return HttpNotFound();
+                throw new Exception();
+            }
+
+            var controleacesso = _controleacessoAppService.Get(ausenciaremunerada.COLABORADORKEY);
+            if (controleacesso == null)
+            {
+                //return HttpNotFound();
+                throw new Exception();
+            }
+
+            var colaboradores = _colaboradorAppService.GET_ID(controleacesso.CODIGOEMPRESAALTERNATE, controleacesso.CODIGOFILIALALTERNATE, controleacesso.CODIGOSECUNDARIO).ToList();
+
+
+            string nomeCompleto = "*** SEM NOME DE COLABORADOR ***";
+            if (colaboradores.Count() != 0)
+            {
+                nomeCompleto = colaboradores.FirstOrDefault().NomeCompleto;
+            }
+
+
+            AusenciaRemuneradaViewModel ausenciaRemuneradaViewModelVM = new AusenciaRemuneradaViewModel(ausenciaremunerada, nomeCompleto);
+
+            return View(ausenciaRemuneradaViewModelVM);
+        }
+
+        //POST: /AusenciaRemunerada/AusenciaRemuneradaDelete/5
+        [HttpPost, ActionName("AusenciaRemuneradaDelete")]
+        public ActionResult AusenciaRemuneradaDeleteConfirmed(int id)
+        {
+            try
+            {
+                var ausenciaremunerada = _ausenciaremuneradaAppService.Get(id);
+
+                _ausenciaremuneradaAppService.Remove(ausenciaremunerada);
+            }
+            catch (RetryLimitExceededException/* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                return RedirectToAction("AusenciaRemuneradaDelete", new { id = id, saveChangesError = true });
+            }
+            return RedirectToAction("AusenciaRemuneradaIndex");
+
+        }
+
 
         protected override void Dispose(bool disposing)
         {

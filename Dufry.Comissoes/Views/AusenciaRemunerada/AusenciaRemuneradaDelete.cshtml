@@ -1,0 +1,42 @@
+﻿@model AusenciaRemuneradaViewModel
+
+@{
+    ViewBag.Title = "Exclusão de Ausência Remunerada";
+}
+
+@{
+    string confirmMessage = "Tem certeza que deseja excluir a ausência remunerada do colaborador " + Html.DisplayFor(model => model.NomeCompleto) + "?";
+    bool exibeBotaoExcluir = true;
+}
+
+
+
+<h1 class="headerForm">@ViewBag.Title</h1>
+<p class="errorMessage">@ViewBag.ErrorMessage</p>
+
+
+
+<p class="confirmMessage">@confirmMessage</p>
+
+<div>   
+
+    <div>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.NomeCompleto)</label><label>@Html.DisplayFor(model => model.NomeCompleto)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.AusenciaRemunerada.DESC_AUSENCIA)</label><label>@Html.DisplayFor(model => model.AusenciaRemunerada.DESC_AUSENCIA)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.AusenciaRemunerada.DT_INI)</label><label>@Html.DisplayFor(model => model.AusenciaRemunerada.DT_INI)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.AusenciaRemunerada.DT_FIM)</label><label>@Html.DisplayFor(model => model.AusenciaRemunerada.DT_FIM)</label></p>
+        <p><label class="caption">@Html.DisplayNameFor(model => model.AusenciaRemunerada.STATUS) </label>
+                                    @if (Model.AusenciaRemunerada.STATUS == "A"){ <label>Ativo</label>}else{<label>Inativo</label>}</p>
+    </div>
+
+    <p>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            
+            <input type="submit" value="Excluir" class="botoesCategoria" />                    
+            
+            @Html.ActionLink("Voltar", "AusenciaRemuneradaIndex", "AusenciaRemunerada", new { @statusSearchString = "A" }, new { @class = "botoesCategoria" })
+        }
+    </p>
+</div>
