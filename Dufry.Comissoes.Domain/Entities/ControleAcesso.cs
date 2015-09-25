@@ -6,6 +6,7 @@ namespace Dufry.Comissoes.Domain.Entities
 {
     public partial class ControleAcesso
     {
+        [Display(Name = "Nome do colaborador")]
         public int COLABORADORKEY { get; set; }
 
         [Required(ErrorMessage = "É necessário informar o superior")]

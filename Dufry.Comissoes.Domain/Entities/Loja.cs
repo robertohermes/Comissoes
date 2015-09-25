@@ -19,6 +19,7 @@ namespace Dufry.Comissoes.Domain.Entities
         public int Id_DataOpen { get; set; }
         public int Id_DataClose { get; set; }
         public int Id_Cidade { get; set; }
+        [Display(Name = "Nome da Loja")]
         public string CodigoLojaAlternate { get; set; }
         public string CodigoLojaLegado { get; set; }
 

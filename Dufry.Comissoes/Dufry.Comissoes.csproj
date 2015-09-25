@@ -171,6 +171,7 @@
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
+    <Compile Include="Controllers\ComissoesController.cs" />
     <Compile Include="Controllers\AusenciaRemuneradaController.cs" />
     <Compile Include="Controllers\CadastroAcessoController.cs">
       <SubType>Code</SubType>
@@ -202,6 +203,7 @@
     </Compile>
     <Compile Include="Models\Validations\DateGreaterThanAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ComissoesViewModel.cs" />
     <Compile Include="ViewModels\AusenciaRemuneradaViewModel.cs" />
     <Compile Include="ViewModels\CargoViewModel.cs" />
     <Compile Include="ViewModels\TipoNegocioViewModel.cs" />
@@ -463,6 +465,7 @@
     <Content Include="Views\AusenciaRemunerada\AusenciaRemuneradaEdit.cshtml" />
     <Content Include="Views\AusenciaRemunerada\AusenciaRemuneradaDelete.cshtml" />
     <Content Include="Views\AusenciaRemunerada\AusenciaRemuneradaIndex.cshtml" />
+    <Content Include="Views\Comissoes\ComissoesIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

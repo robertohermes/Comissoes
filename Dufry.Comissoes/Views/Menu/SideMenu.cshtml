@@ -22,7 +22,7 @@
         if (admin == "S")
         {
             <li>@Html.Raw(string.Format("<a href=\"{0}\">Categorias</a>", Url.Content("~/Categoria/CategoriaIndex?statusSearchString=A")))</li>
-            <li>@Html.Raw(string.Format("<a href=\"{0}\">Categorias e percentuais por loja</a>", Url.Content("~/CategoriaPercentual/CategoriaPercentualIndex?statusSearchString=A")))</li>
+            @*<li>@Html.Raw(string.Format("<a href=\"{0}\">Categorias e percentuais por loja</a>", Url.Content("~/CategoriaPercentual/CategoriaPercentualIndex?statusSearchString=A")))</li>*@
             <li>@Html.Raw(string.Format("<a href=\"{0}\">Planos de comissões</a>", Url.Content("~/Plano/PlanoIndex?statusSearchString=A")))</li>
             <li>@Html.Raw(string.Format("<a href=\"{0}\">Planos de Comissões por Loja</a>", Url.Content("~/PlanoLoja/PlanoLojaIndex?statusSearchString=A")))</li>
             @*<li>@Html.Raw(string.Format("<a href=\"{0}\">Planos de comissões e hierarquias</a>", Url.Content("~/PlanoCategoria/PlanoCategoriaIndex")))</li>*@
