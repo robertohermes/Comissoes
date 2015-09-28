@@ -45,6 +45,7 @@
     <Compile Include="Entities\Categoria.cs" />
     <Compile Include="Entities\Search\DSRSearch.cs" />
     <Compile Include="Entities\Search\PlanoLojaSearch.cs" />
+    <Compile Include="Entities\Search\SelfServiceSearch.cs" />
     <Compile Include="Entities\TipoNegocio.cs" />
     <Compile Include="Entities\PlanoLoja.cs" />
     <Compile Include="Entities\CategoriaPercentual.cs" />

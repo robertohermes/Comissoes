@@ -300,9 +300,8 @@ namespace Dufry.Comissoes.Controllers
 
             #endregion trataParametrosBusca
 
-            IEnumerable<SelfService> selfservices = new List<SelfService>();
+            IEnumerable<SelfServiceSearch> selfservices = MontaSearchList(_selfserviceAppService.Find(predicate));
 
-            selfservices = _selfserviceAppService.Find(predicate);
 
             #region ordenacao
             switch (sortOrder)
@@ -387,6 +386,32 @@ namespace Dufry.Comissoes.Controllers
             }
 
             return ss;
+        }
+
+        private IEnumerable<SelfServiceSearch> MontaSearchList(IEnumerable<SelfService> selfservicesAux)
+        {
+            List<SelfServiceSearch> selfServiceSearchList = new List<SelfServiceSearch>();
+
+            foreach (SelfService ss in selfservicesAux)
+            {
+                SelfServiceSearch sss = new SelfServiceSearch();
+
+                sss.ID_SELF_SERVICE = ss.ID_SELF_SERVICE;
+                sss.CODIGOCARGOALTERNATE = ss.CODIGOCARGOALTERNATE;
+                sss.CODIGOLOJAALTERNATE = ss.CODIGOLOJAALTERNATE;
+                sss.DT_INI = ss.DT_INI;
+                sss.DT_FIM = ss.DT_FIM;
+                sss.STATUS = ss.STATUS;
+
+                sss.Cargo = _cargoAppService.Find(t => t.CodigoCargoAlternate.Trim() == ss.CODIGOCARGOALTERNATE).FirstOrDefault();
+
+                sss.Loja = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() == ss.CODIGOLOJAALTERNATE).FirstOrDefault();
+
+                selfServiceSearchList.Add(sss);
+            }
+
+            IEnumerable<SelfServiceSearch> selfservices = selfServiceSearchList;
+            return selfservices;
         }
 
 

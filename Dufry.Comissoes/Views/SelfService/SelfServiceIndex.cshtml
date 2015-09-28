@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<SelfService>
+﻿@model PagedList.IPagedList<SelfServiceSearch>
     @using PagedList.Mvc;
     <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
@@ -110,10 +110,10 @@
         {
             <tr>
                 <td>
-                    @Html.ActionLink(item.CODIGOCARGOALTERNATE, "SelfServiceEdit", "SelfService", new { id = item.ID_SELF_SERVICE }, new { @class = "tablerowlink" })
+                    @Html.ActionLink(item.Cargo.NomeCargo, "SelfServiceEdit", "SelfService", new { id = item.ID_SELF_SERVICE }, new { @class = "tablerowlink" })
                 </td>
                 <td>
-                    @Html.ActionLink(item.CODIGOLOJAALTERNATE, "SelfServiceEdit", "SelfService", new { id = item.ID_SELF_SERVICE }, new { @class = "tablerowlink" })
+                    @Html.ActionLink(item.Loja.NomeLoja, "SelfServiceEdit", "SelfService", new { id = item.ID_SELF_SERVICE }, new { @class = "tablerowlink" })
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DT_INI)
@@ -143,7 +143,7 @@
     <br />
     Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
-                                   @Html.PagedListPager(Model, page => Url.Action("SelfServiceIndex"
+    @Html.PagedListPager(Model, page => Url.Action("SelfServiceIndex"
     , new
     {
         sortOrder = ViewBag.CurrentSort,
