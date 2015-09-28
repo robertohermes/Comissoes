@@ -298,31 +298,6 @@ namespace Dufry.Comissoes.Controllers
             return View(planolojas.ToPagedList(pageNumber, pageSize));
         }
 
-        private IEnumerable<PlanoLojaSearch> MontaSearchList(IEnumerable<PlanoLoja> planolojasAux)
-        {
-            List<PlanoLojaSearch> planoLojaSearchList = new List<PlanoLojaSearch>();
-
-            foreach (PlanoLoja pl in planolojasAux)
-            {
-                PlanoLojaSearch pls = new PlanoLojaSearch();
-
-                pls.ID_PLANO_LOJA = pl.ID_PLANO_LOJA;
-                pls.ID_PLANO = pl.ID_PLANO;
-                pls.CODIGOLOJAALTERNATE = pl.CODIGOLOJAALTERNATE;
-                pls.DT_INI = pl.DT_INI;
-                pls.DT_FIM = pl.DT_FIM;
-                pls.STATUS = pl.STATUS;
-                pls.Plano = pl.Plano;
-
-                pls.Loja = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() == pl.CODIGOLOJAALTERNATE).FirstOrDefault();
-
-                planoLojaSearchList.Add(pls);
-            }
-
-            IEnumerable<PlanoLojaSearch> planolojas = planoLojaSearchList;
-            return planolojas;
-        }
-
         //
         // GET: /PlanoLoja/PlanoLojaDelete/5
         public ActionResult PlanoLojaDelete(int? id, bool? saveChangesError = false)
@@ -406,6 +381,31 @@ namespace Dufry.Comissoes.Controllers
             }
 
             return pl;
+        }
+
+        private IEnumerable<PlanoLojaSearch> MontaSearchList(IEnumerable<PlanoLoja> planolojasAux)
+        {
+            List<PlanoLojaSearch> planoLojaSearchList = new List<PlanoLojaSearch>();
+
+            foreach (PlanoLoja pl in planolojasAux)
+            {
+                PlanoLojaSearch pls = new PlanoLojaSearch();
+
+                pls.ID_PLANO_LOJA = pl.ID_PLANO_LOJA;
+                pls.ID_PLANO = pl.ID_PLANO;
+                pls.CODIGOLOJAALTERNATE = pl.CODIGOLOJAALTERNATE;
+                pls.DT_INI = pl.DT_INI;
+                pls.DT_FIM = pl.DT_FIM;
+                pls.STATUS = pl.STATUS;
+                pls.Plano = pl.Plano;
+
+                pls.Loja = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() == pl.CODIGOLOJAALTERNATE).FirstOrDefault();
+
+                planoLojaSearchList.Add(pls);
+            }
+
+            IEnumerable<PlanoLojaSearch> planolojas = planoLojaSearchList;
+            return planolojas;
         }
 
     }
