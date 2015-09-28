@@ -254,42 +254,41 @@ namespace Dufry.Comissoes.Controllers
 
             #endregion trataParametrosBusca
 
-            IEnumerable<PlanoLoja> planolojas = new List<PlanoLoja>();
 
-            planolojas = _planolojaAppService.Find(predicate);
+            IEnumerable<PlanoLojaSearch> planolojas = MontaSearchList(_planolojaAppService.Find(predicate));
 
             #region ordenacao
             switch (sortOrder)
             {
                 case "NomeLoja":
-                    planolojas = planolojas.OrderBy(s => s.CODIGOLOJAALTERNATE); //mudar de chave para campo
+                    planolojas = planolojas.OrderBy(s => s.Loja.NomeLoja); //mudar de chave para campo
                     break;
                 case "DT_INI":
-                    planolojas = planolojas.OrderBy(s => s.DT_INI); //mudar de chave para campo
+                    planolojas = planolojas.OrderBy(s => s.DT_INI);
                     break;
                 case "DT_FIM":
-                    planolojas = planolojas.OrderBy(s => s.DT_FIM); //mudar de chave para campo
+                    planolojas = planolojas.OrderBy(s => s.DT_FIM);
                     break;
                 case "STATUS":
                     planolojas = planolojas.OrderBy(s => s.STATUS);
                     break;
                 case "DESC_CATEGORIA_desc":
-                    planolojas = planolojas.OrderByDescending(s => s.ID_PLANO); //mudar de chave para campo
+                    planolojas = planolojas.OrderByDescending(s => s.Plano.DESC_PLANO); //mudar de chave para campo
                     break;
                 case "NomeLoja_desc":
-                    planolojas = planolojas.OrderByDescending(s => s.CODIGOLOJAALTERNATE); //mudar de chave para campo
+                    planolojas = planolojas.OrderByDescending(s => s.Loja.NomeLoja); //mudar de chave para campo
                     break;
                 case "DT_INI_desc":
-                    planolojas = planolojas.OrderByDescending(s => s.DT_INI); //mudar de chave para campo
+                    planolojas = planolojas.OrderByDescending(s => s.DT_INI);
                     break;
                 case "DT_FIM_desc":
-                    planolojas = planolojas.OrderByDescending(s => s.DT_FIM); //mudar de chave para campo
+                    planolojas = planolojas.OrderByDescending(s => s.DT_FIM);
                     break;
                 case "STATUS_desc":
                     planolojas = planolojas.OrderByDescending(s => s.STATUS);
                     break;
                 default:  // DESC_CATEGORIA ascending 
-                    planolojas = planolojas.OrderBy(s => s.ID_PLANO);
+                    planolojas = planolojas.OrderBy(s => s.Plano.DESC_PLANO);
                     break;
             }
             #endregion ordenacao
@@ -297,6 +296,31 @@ namespace Dufry.Comissoes.Controllers
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(planolojas.ToPagedList(pageNumber, pageSize));
+        }
+
+        private IEnumerable<PlanoLojaSearch> MontaSearchList(IEnumerable<PlanoLoja> planolojasAux)
+        {
+            List<PlanoLojaSearch> planoLojaSearchList = new List<PlanoLojaSearch>();
+
+            foreach (PlanoLoja pl in planolojasAux)
+            {
+                PlanoLojaSearch pls = new PlanoLojaSearch();
+
+                pls.ID_PLANO_LOJA = pl.ID_PLANO_LOJA;
+                pls.ID_PLANO = pl.ID_PLANO;
+                pls.CODIGOLOJAALTERNATE = pl.CODIGOLOJAALTERNATE;
+                pls.DT_INI = pl.DT_INI;
+                pls.DT_FIM = pl.DT_FIM;
+                pls.STATUS = pl.STATUS;
+                pls.Plano = pl.Plano;
+
+                pls.Loja = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() == pl.CODIGOLOJAALTERNATE).FirstOrDefault();
+
+                planoLojaSearchList.Add(pls);
+            }
+
+            IEnumerable<PlanoLojaSearch> planolojas = planoLojaSearchList;
+            return planolojas;
         }
 
         //

@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<PlanoLoja>
+﻿@model PagedList.IPagedList<PlanoLojaSearch>
     @using PagedList.Mvc;
     <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
@@ -113,7 +113,7 @@
                     @Html.ActionLink(item.Plano.DESC_PLANO, "PlanoLojaEdit", "PlanoLoja", new { id = item.ID_PLANO_LOJA }, new { @class = "tablerowlink" })
                 </td>
                 <td>
-                    @Html.ActionLink(item.CODIGOLOJAALTERNATE, "PlanoLojaEdit", "PlanoLoja", new { id = item.ID_PLANO_LOJA }, new { @class = "tablerowlink" })
+                    @Html.ActionLink(item.Loja.NomeLoja, "PlanoLojaEdit", "PlanoLoja", new { id = item.ID_PLANO_LOJA }, new { @class = "tablerowlink" })
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DT_INI)
