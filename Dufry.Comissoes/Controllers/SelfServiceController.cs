@@ -307,34 +307,34 @@ namespace Dufry.Comissoes.Controllers
             switch (sortOrder)
             {
                 case "NomeLoja":
-                    selfservices = selfservices.OrderBy(s => s.CODIGOLOJAALTERNATE); //mudar de chave para campo
+                    selfservices = selfservices.OrderBy(s => s.Loja.NomeLoja);
                     break;
                 case "DT_INI":
-                    selfservices = selfservices.OrderBy(s => s.DT_INI); //mudar de chave para campo
+                    selfservices = selfservices.OrderBy(s => s.DT_INI);
                     break;
                 case "DT_FIM":
-                    selfservices = selfservices.OrderBy(s => s.DT_FIM); //mudar de chave para campo
+                    selfservices = selfservices.OrderBy(s => s.DT_FIM);
                     break;
                 case "STATUS":
                     selfservices = selfservices.OrderBy(s => s.STATUS);
                     break;
                 case "NomeCargo_desc":
-                    selfservices = selfservices.OrderByDescending(s => s.CODIGOCARGOALTERNATE);
+                    selfservices = selfservices.OrderByDescending(s => s.Cargo.NomeCargo);
                     break;
                 case "NomeLoja_desc":
-                    selfservices = selfservices.OrderByDescending(s => s.CODIGOLOJAALTERNATE); //mudar de chave para campo
+                    selfservices = selfservices.OrderByDescending(s => s.Loja.NomeLoja);
                     break;
                 case "DT_INI_desc":
-                    selfservices = selfservices.OrderByDescending(s => s.DT_INI); //mudar de chave para campo
+                    selfservices = selfservices.OrderByDescending(s => s.DT_INI);
                     break;
                 case "DT_FIM_desc":
-                    selfservices = selfservices.OrderByDescending(s => s.DT_FIM); //mudar de chave para campo
+                    selfservices = selfservices.OrderByDescending(s => s.DT_FIM);
                     break;
                 case "STATUS_desc":
                     selfservices = selfservices.OrderByDescending(s => s.STATUS);
                     break;
                 default:  // NomeCargo ascending 
-                    selfservices = selfservices.OrderBy(s => s.CODIGOCARGOALTERNATE);
+                    selfservices = selfservices.OrderBy(s => s.Cargo.NomeCargo);
                     break;
             }
             #endregion ordenacao
