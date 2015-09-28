@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Entities\Cargo.cs" />
     <Compile Include="Entities\Categoria.cs" />
+    <Compile Include="Entities\Search\DSRSearch.cs" />
     <Compile Include="Entities\Search\PlanoLojaSearch.cs" />
     <Compile Include="Entities\TipoNegocio.cs" />
     <Compile Include="Entities\PlanoLoja.cs" />

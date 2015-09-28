@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<DSR>
+﻿@model PagedList.IPagedList<DSRSearch>
     @using PagedList.Mvc;
     <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
@@ -70,8 +70,8 @@
                     sortOrder = ViewBag.DtIniSortParam,
                     codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
                     percentualSearchString = ViewBag.percentualFilter,
-                    dtiniSearchString = ViewBag.dtiniFilter, 
-                    dtfimSearchString = ViewBag.dtfimFilter, 
+                    dtiniSearchString = ViewBag.dtiniFilter,
+                    dtfimSearchString = ViewBag.dtfimFilter,
                     statusSearchString = ViewBag.StatusFilter
                 }
                 , new { @class = "tableheadlink" })
@@ -110,7 +110,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CODIGOLOJAALTERNATE)
+                    @Html.DisplayFor(modelItem => item.Loja.NomeLoja)
                 </td>
                 <td>
                     @Html.ActionLink(item.PERCENTUAL + "%", "DsrEdit", "DSR", new { id = item.ID_DSR }, new { @class = "tablerowlink" })

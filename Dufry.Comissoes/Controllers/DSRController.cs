@@ -235,21 +235,20 @@ namespace Dufry.Comissoes.Controllers
 
             #endregion trataParametrosBusca
 
-            IEnumerable<DSR> dsrs = new List<DSR>();
+            IEnumerable<DSRSearch> dsrs = MontaSearchList(_dsrAppService.Find(predicate));
 
-            dsrs = _dsrAppService.Find(predicate);
 
             #region ordenacao
             switch (sortOrder)
             {
                 case "NomeLoja":
-                    dsrs = dsrs.OrderBy(s => s.CODIGOLOJAALTERNATE); //mudar de chave para campo
+                    dsrs = dsrs.OrderBy(s => s.Loja.NomeLoja);
                     break;
                 case "DT_INI":
-                    dsrs = dsrs.OrderBy(s => s.DT_INI); //mudar de chave para campo
+                    dsrs = dsrs.OrderBy(s => s.DT_INI);
                     break;
                 case "DT_FIM":
-                    dsrs = dsrs.OrderBy(s => s.DT_FIM); //mudar de chave para campo
+                    dsrs = dsrs.OrderBy(s => s.DT_FIM);
                     break;
                 case "STATUS":
                     dsrs = dsrs.OrderBy(s => s.STATUS);
@@ -258,13 +257,13 @@ namespace Dufry.Comissoes.Controllers
                     dsrs = dsrs.OrderByDescending(s => s.PERCENTUAL);
                     break;
                 case "NomeLoja_desc":
-                    dsrs = dsrs.OrderByDescending(s => s.CODIGOLOJAALTERNATE); //mudar de chave para campo
+                    dsrs = dsrs.OrderByDescending(s => s.Loja.NomeLoja);
                     break;
                 case "DT_INI_desc":
-                    dsrs = dsrs.OrderByDescending(s => s.DT_INI); //mudar de chave para campo
+                    dsrs = dsrs.OrderByDescending(s => s.DT_INI);
                     break;
                 case "DT_FIM_desc":
-                    dsrs = dsrs.OrderByDescending(s => s.DT_FIM); //mudar de chave para campo
+                    dsrs = dsrs.OrderByDescending(s => s.DT_FIM);
                     break;
                 case "STATUS_desc":
                     dsrs = dsrs.OrderByDescending(s => s.STATUS);
@@ -371,6 +370,31 @@ namespace Dufry.Comissoes.Controllers
             }
 
             return dsr;
+        }
+
+        private IEnumerable<DSRSearch> MontaSearchList(IEnumerable<DSR> dsrsAux)
+        {
+            List<DSRSearch> dsrSearchList = new List<DSRSearch>();
+
+            foreach (DSR dsr in dsrsAux)
+            {
+                DSRSearch dsrse = new DSRSearch();
+
+                dsrse.ID_DSR = dsr.ID_DSR;
+                dsrse.CODIGOLOJAALTERNATE = dsr.CODIGOLOJAALTERNATE;
+                dsrse.PERCENTUAL = dsr.PERCENTUAL;
+                dsrse.DT_INI = dsr.DT_INI;
+                dsrse.DT_FIM = dsr.DT_FIM;
+                dsrse.STATUS = dsr.STATUS;
+
+
+                dsrse.Loja = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() == dsr.CODIGOLOJAALTERNATE).FirstOrDefault();
+
+                dsrSearchList.Add(dsrse);
+            }
+
+            IEnumerable<DSRSearch> dsrs = dsrSearchList;
+            return dsrs;
         }
 
     }
