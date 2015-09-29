@@ -1,6 +1,7 @@
 ﻿using Dufry.Comissoes.Application.Interfaces;
 using Dufry.Comissoes.Controllers.Helpers;
 using Dufry.Comissoes.Domain.Entities;
+using Dufry.Comissoes.Domain.Entities.Auxiliary;
 using Dufry.Comissoes.Filters;
 using Dufry.Comissoes.ViewModels;
 using PagedList;
@@ -504,20 +505,6 @@ namespace Dufry.Comissoes.Controllers
 
             return ca;
         }
-
-
-        private class ColaboradorAux
-        {
-            public string CODIGOSECUNDARIO { get; set; }
-
-            public string CODIGOEMPRESAALTERNATE { get; set; }
-
-            public string CODIGOFILIALALTERNATE { get; set; }
-
-            public string NomeCompleto { get; set; }
-
-        }
-
 
     }
 }
