@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Dufry.Comissoes.Domain.Entities.Search
+namespace Dufry.Comissoes.Domain.Entities
 {
     public partial class DSRSearch
     {

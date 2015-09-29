@@ -1,7 +1,6 @@
 ﻿using Dufry.Comissoes.Application.Interfaces;
 using Dufry.Comissoes.Controllers.Helpers;
 using Dufry.Comissoes.Domain.Entities;
-using Dufry.Comissoes.Domain.Entities.Search;
 using Dufry.Comissoes.Filters;
 using Dufry.Comissoes.ViewModels;
 using PagedList;
