@@ -42,6 +42,10 @@ namespace Dufry.Comissoes.Domain.Entities
         public DateTime LAST_MODIFY_DATE { get; set; }
         public string LAST_MODIFY_USERNAME { get; set; }
 
+        public virtual ControleAcesso ControleAcesso { get; set; }
+
+
+
         //public ValidationResult ValidationResult { get; private set; }
 
         //public bool IsValid

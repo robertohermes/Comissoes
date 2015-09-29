@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Auxiliary\ColaboradorAux.cs" />
     <Compile Include="Entities\Cargo.cs" />
     <Compile Include="Entities\Categoria.cs" />
+    <Compile Include="Entities\Search\AusenciaRemuneradaSearch.cs" />
     <Compile Include="Entities\Search\DSRSearch.cs" />
     <Compile Include="Entities\Search\PlanoLojaSearch.cs" />
     <Compile Include="Entities\Search\SelfServiceSearch.cs" />
