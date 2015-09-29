@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace Dufry.Comissoes.Domain.Entities
+namespace Dufry.Comissoes.Domain.Entities.Search
 {
     public partial class PlanoLojaSearch
     {
