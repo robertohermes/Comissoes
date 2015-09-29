@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<AusenciaRemunerada>
+﻿@model PagedList.IPagedList<AusenciaRemuneradaSearch>
     @using PagedList.Mvc;
     <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
@@ -110,7 +110,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.COLABORADORKEY)
+                    @Html.DisplayFor(modelItem => item.NomeCompleto)
                 </td>
                 <td>
                     @Html.ActionLink(item.DESC_AUSENCIA, "AusenciaRemuneradaEdit", "AusenciaRemunerada", new { id = item.ID_AUSENCIA_REMUNERADA }, new { @class = "tablerowlink" })

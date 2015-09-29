@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Dufry.Comissoes.Domain.Entities.Search
+namespace Dufry.Comissoes.Domain.Entities
 {
     public partial class AusenciaRemuneradaSearch
     {
@@ -23,7 +23,7 @@ namespace Dufry.Comissoes.Domain.Entities.Search
 
         public ControleAcesso ControleAcesso { get; set; }
 
-        public ColaboradorAux ColaboradorAux { get; set; }
+        public string NomeCompleto { get; set; }
 
     }
 }

@@ -261,6 +261,7 @@ namespace Dufry.Comissoes.Controllers
             #region trataParametrosOrdenacao
             ViewBag.CurrentSort = sortOrder;
             ViewBag.DescricaoSortParam = String.IsNullOrEmpty(sortOrder) ? "DESC_AUSENCIA_desc" : "";
+            ViewBag.ColaboradorSortParam = sortOrder == "NomeCompleto" ? "NomeCompleto_desc" : "NomeCompleto";
             ViewBag.DtIniSortParam = sortOrder == "DT_INI" ? "DT_INI_desc" : "DT_INI";
             ViewBag.DtFimSortParam = sortOrder == "DT_FIM" ? "DT_FIM_desc" : "DT_FIM";
             ViewBag.StatusSortParam = sortOrder == "STATUS" ? "STATUS_desc" : "STATUS";
@@ -271,12 +272,12 @@ namespace Dufry.Comissoes.Controllers
             var predicate = PredicateBuilder.True<AusenciaRemunerada>();
             //descausenciaSearchString = "";
 
-            //if (colaboradorkeySearchString.HasValue)
-            //{
-            //    int idCategoriaFilter = colaboradorkeySearchString.GetValueOrDefault();
-            //    predicate = predicate.And(i => i.ID_CATEGORIA.Equals(idCategoriaFilter));
-            //    ViewBag.idCategoriaFilter = idCategoriaFilter;
-            //}
+            if (colaboradorkeySearchString.HasValue)
+            {
+                int colaboradorKeyFilter = colaboradorkeySearchString.GetValueOrDefault();
+                predicate = predicate.And(i => i.COLABORADORKEY.Equals(colaboradorKeyFilter));
+                ViewBag.colaboradorKeyFilter = colaboradorKeyFilter;
+            }
 
             if (!String.IsNullOrEmpty(descausenciaSearchString))
             {
@@ -306,13 +307,14 @@ namespace Dufry.Comissoes.Controllers
 
             #endregion trataParametrosBusca
 
-            IEnumerable<AusenciaRemunerada> ausenciaremuneradas = new List<AusenciaRemunerada>();
-
-            ausenciaremuneradas = _ausenciaremuneradaAppService.Find(predicate);
+            IEnumerable<AusenciaRemuneradaSearch> ausenciaremuneradas = MontaSearchList(_ausenciaremuneradaAppService.Find(predicate));
 
             #region ordenacao
             switch (sortOrder)
             {
+                case "NomeCompleto":
+                    ausenciaremuneradas = ausenciaremuneradas.OrderBy(s => s.NomeCompleto);
+                    break;
                 case "DT_INI":
                     ausenciaremuneradas = ausenciaremuneradas.OrderBy(s => s.DT_INI); //mudar de chave para campo
                     break;
@@ -324,6 +326,9 @@ namespace Dufry.Comissoes.Controllers
                     break;
                 case "DESC_AUSENCIA_desc":
                     ausenciaremuneradas = ausenciaremuneradas.OrderByDescending(s => s.DESC_AUSENCIA);
+                    break;
+                case "NomeCompleto_desc":
+                    ausenciaremuneradas = ausenciaremuneradas.OrderByDescending(s => s.NomeCompleto);
                     break;
                 case "DT_INI_desc":
                     ausenciaremuneradas = ausenciaremuneradas.OrderByDescending(s => s.DT_INI); //mudar de chave para campo
@@ -426,6 +431,33 @@ namespace Dufry.Comissoes.Controllers
             }
 
             return ar;
+        }
+
+        private IEnumerable<AusenciaRemuneradaSearch> MontaSearchList(IEnumerable<AusenciaRemunerada> ausenciaremuneradasAux)
+        {
+            List<AusenciaRemuneradaSearch> ausenciaRemuneradaSearchList = new List<AusenciaRemuneradaSearch>();
+
+            
+
+            foreach (AusenciaRemunerada ar in ausenciaremuneradasAux)
+            {
+                AusenciaRemuneradaSearch araux = new AusenciaRemuneradaSearch();
+
+                araux.ID_AUSENCIA_REMUNERADA = ar.ID_AUSENCIA_REMUNERADA;
+                araux.COLABORADORKEY = ar.COLABORADORKEY;
+                araux.DESC_AUSENCIA = ar.DESC_AUSENCIA;
+                araux.DT_INI = ar.DT_INI;
+                araux.DT_FIM = ar.DT_FIM;
+                araux.STATUS = ar.STATUS;
+                araux.ControleAcesso = ar.ControleAcesso;
+
+                araux.NomeCompleto = _colaboradorAppService.GET_ID(ar.ControleAcesso.CODIGOEMPRESAALTERNATE, ar.ControleAcesso.CODIGOFILIALALTERNATE, ar.ControleAcesso.CODIGOSECUNDARIO).ToList().FirstOrDefault().NomeCompleto;
+
+                ausenciaRemuneradaSearchList.Add(araux);
+            }
+
+            IEnumerable<AusenciaRemuneradaSearch> ausenciaremuneradas = ausenciaRemuneradaSearchList;
+            return ausenciaremuneradas;
         }
 
     }
