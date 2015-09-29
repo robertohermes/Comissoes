@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<ControleAcesso>
+﻿@model PagedList.IPagedList<CadastroAcessoSearch>
     @using PagedList.Mvc;
     <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
@@ -115,10 +115,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.COLABORADORKEY_PAI)
+                    @Html.DisplayFor(modelItem => item.NomeSuperiorCompleto)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.COLABORADORKEY)
+                    @Html.DisplayFor(modelItem => item.NomeCompleto)
                 </td>
                 <td>
                     @Html.ActionLink(item.LOGIN, "CadastroAcessoEdit", "CadastroAcesso", new { id = item.COLABORADORKEY }, new { @class = "tablerowlink" })

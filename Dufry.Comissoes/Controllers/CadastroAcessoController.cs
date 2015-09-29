@@ -173,7 +173,8 @@ namespace Dufry.Comissoes.Controllers
         {
 
             #region populaobjetos
-            var colaboradores = ObtemColaboradoresAInserir();
+            var colaboradores = ObtemColaboradores();
+            
             ViewBag.colaboradorkeySearchString = new SelectList(colaboradores, "Key", "Value", colaboradorkeySearchString);
 
             var superiores = ObtemSuperioresComPrimeiroItem(0);
@@ -227,9 +228,7 @@ namespace Dufry.Comissoes.Controllers
 
             #endregion trataParametrosBusca
 
-            IEnumerable<ControleAcesso> controleacessos = new List<ControleAcesso>();
-
-            controleacessos = _controleacessoAppService.Find(predicate);
+            IEnumerable<CadastroAcessoSearch> controleacessos = MontaSearchList(_controleacessoAppService.Find(predicate));
 
             #region ordenacao
             switch (sortOrder)
@@ -471,9 +470,6 @@ namespace Dufry.Comissoes.Controllers
 
         private ControleAcesso ObtemControleAcessoForm(ControleAcesso ca, bool insert = false)
         {
-
-
-
             if (Request["ControleAcesso.COLABORADORKEY_PAI"] == "0")
             {
                 ca.COLABORADORKEY_PAI = null;
@@ -504,6 +500,59 @@ namespace Dufry.Comissoes.Controllers
             }
 
             return ca;
+        }
+
+        private IEnumerable<CadastroAcessoSearch> MontaSearchList(IEnumerable<ControleAcesso> controleacessosAux)
+        {
+            List<CadastroAcessoSearch> cadastroAcessoSearchList = new List<CadastroAcessoSearch>();
+
+            foreach (ControleAcesso ca in controleacessosAux)
+            {
+                CadastroAcessoSearch caaux = new CadastroAcessoSearch();
+
+                caaux.COLABORADORKEY = ca.COLABORADORKEY;
+                caaux.COLABORADORKEY_PAI = ca.COLABORADORKEY_PAI;
+                caaux.CODIGOSECUNDARIO = ca.CODIGOSECUNDARIO;
+                caaux.CODIGOEMPRESAALTERNATE = ca.CODIGOEMPRESAALTERNATE;
+                caaux.CODIGOFILIALALTERNATE = ca.CODIGOFILIALALTERNATE;
+                caaux.LOGIN = ca.LOGIN;
+                caaux.ADMIN = ca.ADMIN;
+                caaux.STATUS = ca.STATUS;
+                //ControleAcesso Superior
+
+                var colaboradores = ObtemColaborador(ca.CODIGOEMPRESAALTERNATE, ca.CODIGOFILIALALTERNATE, ca.CODIGOSECUNDARIO).ToList();
+
+                string nomeCompleto = "*** SEM NOME DE COLABORADOR ***";
+                if (colaboradores.Count() != 0)
+                {
+                    nomeCompleto = colaboradores.FirstOrDefault().NomeCompleto;
+                }
+                caaux.NomeCompleto = nomeCompleto;
+
+                string nomeSuperiorCompleto = "*** SEM SUPERIOR ***";
+                if (ca.COLABORADORKEY_PAI != null)
+                {
+
+                    var colaboradorSuperior = _controleacessoAppService.Get(ca.COLABORADORKEY_PAI ?? default(int));
+
+                    var superiores = ObtemColaborador(colaboradorSuperior.CODIGOEMPRESAALTERNATE, colaboradorSuperior.CODIGOFILIALALTERNATE, colaboradorSuperior.CODIGOSECUNDARIO).ToList();
+
+                    if (superiores.Count() != 0)
+                    {
+                        nomeSuperiorCompleto = superiores.FirstOrDefault().NomeCompleto;
+                    }
+                
+                }
+
+
+
+                caaux.NomeSuperiorCompleto = nomeSuperiorCompleto;
+
+                cadastroAcessoSearchList.Add(caaux);
+            }
+
+            IEnumerable<CadastroAcessoSearch> controleacessos = cadastroAcessoSearchList;
+            return controleacessos;
         }
 
     }
