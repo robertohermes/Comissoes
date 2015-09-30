@@ -171,6 +171,7 @@
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
+    <Compile Include="Controllers\ConfiguracaoController.cs" />
     <Compile Include="Controllers\InterfaceFolhaPagamentoController.cs" />
     <Compile Include="Controllers\ComissoesController.cs" />
     <Compile Include="Controllers\AusenciaRemuneradaController.cs" />

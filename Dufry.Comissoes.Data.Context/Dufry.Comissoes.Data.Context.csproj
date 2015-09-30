@@ -62,6 +62,7 @@
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Mapping\AusenciaRemuneradaMap.cs" />
     <Compile Include="Mapping\CargoMap.cs" />
+    <Compile Include="Mapping\ConfiguracaoMap.cs" />
     <Compile Include="Mapping\CategoriaMap.cs" />
     <Compile Include="Mapping\TipoNegocioMap.cs" />
     <Compile Include="Mapping\PlanoLojaMap.cs" />

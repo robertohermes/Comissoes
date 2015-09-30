@@ -58,6 +58,10 @@ namespace Dufry.Comissoes.CrossCutting.InversionOfControl.Modules
             Bind<IPlanoLojaReadOnlyRepository>().To<PlanoLojaDapperRepository>();
             Bind<IReadOnlyRepository<PlanoLoja>>().To<PlanoLojaDapperRepository>();
 
+            Bind<IConfiguracaoRepository>().To<ConfiguracaoRepository>();
+            Bind<IConfiguracaoReadOnlyRepository>().To<ConfiguracaoDapperRepository>();
+            Bind<IReadOnlyRepository<Configuracao>>().To<ConfiguracaoDapperRepository>();
+
 
 
 

@@ -22,6 +22,7 @@ namespace Dufry.Comissoes.CrossCutting.InversionOfControl.Modules
             Bind<IDSRService>().To<DSRService>();
             Bind<ICategoriaPercentualService>().To<CategoriaPercentualService>();
             Bind<IPlanoLojaService>().To<PlanoLojaService>();
+            Bind<IConfiguracaoService>().To<ConfiguracaoService>();
 
             Bind<IFilialService>().To<FilialService>();
             Bind<ILojaService>().To<LojaService>();
