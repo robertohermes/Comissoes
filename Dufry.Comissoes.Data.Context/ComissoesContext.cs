@@ -25,6 +25,7 @@ namespace Dufry.Comissoes.Data.Context
             modelBuilder.Configurations.Add(new AusenciaRemuneradaMap());
             modelBuilder.Configurations.Add(new CategoriaMap());
             modelBuilder.Configurations.Add(new CategoriaPercentualMap());
+            modelBuilder.Configurations.Add(new ConfiguracaoMap());
             modelBuilder.Configurations.Add(new ControleAcessoMap());
             modelBuilder.Configurations.Add(new DolarMedioMap());
             modelBuilder.Configurations.Add(new DSRMap());
@@ -41,6 +42,7 @@ namespace Dufry.Comissoes.Data.Context
         public DbSet<AusenciaRemunerada> AusenciaRemuneradas { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<CategoriaPercentual> CategoriaPercentuals { get; set; }
+        public DbSet<Configuracao> Configuracaos { get; set; }
         public DbSet<ControleAcesso> ControleAcessos { get; set; }
         public DbSet<DolarMedio> DolarMedios { get; set; }
         public DbSet<DSR> DSRs { get; set; }
