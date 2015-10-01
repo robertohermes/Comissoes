@@ -9,6 +9,17 @@ namespace Dufry.Comissoes.ViewModels
 {
     public class InterfaceFolhaPagamentoViewModel
     {
+        [Display(Name = "Codigo da Folha")]
+        public string CodigoFolha { get; set; }
+
+        [Display(Name = "Codigo do Cliente")]
+        public string CodigoClienteADP { get; set; }
+
+        [Required(ErrorMessage = "O Processo Folha é obrigatório")]
+        [Range(0, Int32.MaxValue, ErrorMessage = "O Processo Folha está em formato inválido")]
+        [Display(Name = "Processo Folha")]
+        public string NumeroProcessoFolha { get; set; }
+
         [Required(ErrorMessage = "A data inicial da vigência é obrigatória")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.Date, ErrorMessage = "A data inicial da vigência está em formato inválido")]
@@ -22,7 +33,7 @@ namespace Dufry.Comissoes.ViewModels
         [Display(Name = "Data final da vigência")]
         public DateTime DT_FIM { get; set; }
 
-        public ControleAcesso ControleAcesso { get; set; }
+        //public ControleAcesso ControleAcesso { get; set; }
 
         public Empresa Empresa { get; set; }
 
@@ -32,8 +43,10 @@ namespace Dufry.Comissoes.ViewModels
 
         public IEnumerable<SelectListItem> LojasSelectListItem { get; set; }
 
-        public InterfaceFolhaPagamentoViewModel(IEnumerable<SelectListItem> empresasSelectListItem, IEnumerable<SelectListItem> lojasSelectListItem)
+        public InterfaceFolhaPagamentoViewModel(string codigoFolha, string codigoClienteADP, IEnumerable<SelectListItem> empresasSelectListItem, IEnumerable<SelectListItem> lojasSelectListItem)
         {
+            CodigoFolha = codigoFolha;
+            CodigoClienteADP = codigoClienteADP;
             EmpresasSelectListItem = empresasSelectListItem;
             LojasSelectListItem = lojasSelectListItem;
         }

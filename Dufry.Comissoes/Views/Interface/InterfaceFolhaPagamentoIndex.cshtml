@@ -13,15 +13,28 @@
 
     <div class="editorCategoria">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <p>
+            @Html.LabelFor(model => model.CodigoFolha)
+            @Html.TextBoxFor(model => model.CodigoFolha, String.Empty, new { disabled = "disabled", @readonly = "readonly" })
+        </p>
         @*<p>
             @Html.LabelFor(model => model.Empresa.CodigoEmpresaAlternate)
-            @Html.DropDownListFor(model => model.Empresa.CodigoEmpresaAlternate, Model.ColaboradoresSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @Html.DropDownListFor(model => model.Empresa.CodigoEmpresaAlternate, Model.EmpresasSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
             @Html.ValidationMessageFor(model => model.Empresa.CodigoEmpresaAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>*@
         <p>
             @Html.LabelFor(model => model.Loja.CodigoLojaAlternate)
             @Html.DropDownListFor(model => model.Loja.CodigoLojaAlternate, Model.LojasSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
             @Html.ValidationMessageFor(model => model.Loja.CodigoLojaAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.CodigoClienteADP)
+            @Html.TextBoxFor(model => model.CodigoClienteADP, String.Empty, new { disabled = "disabled", @readonly = "readonly" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.NumeroProcessoFolha)
+            @Html.EditorFor(model => model.NumeroProcessoFolha)
+            @Html.ValidationMessageFor(model => model.NumeroProcessoFolha, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
         @*<p>
             @Html.LabelFor(model => model.DT_INI)

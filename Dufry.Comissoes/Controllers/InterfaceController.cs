@@ -19,17 +19,19 @@ namespace Dufry.Comissoes.Controllers
             View = "InvalidOperation")]
     [HandleError(ExceptionType = typeof(HttpException),
                 View = "HttpException")]
-    public class InterfaceFolhaPagamentoController : Controller
+    public class InterfaceController : Controller
     {
         private readonly IControleAcessoAppService _controleacessoAppService;
         private readonly IEmpresaAppService _empresaAppService;
         private readonly ILojaAppService _lojaAppService;
+        private readonly IConfiguracaoAppService _configuracaoAppService;
 
-        public InterfaceFolhaPagamentoController(IControleAcessoAppService controleacessoAppService, IEmpresaAppService empresaAppService, ILojaAppService lojaAppService)
+        public InterfaceController(IControleAcessoAppService controleacessoAppService, IEmpresaAppService empresaAppService, ILojaAppService lojaAppService, IConfiguracaoAppService configuracaoAppService)
         {
             _controleacessoAppService = controleacessoAppService;
             _empresaAppService = empresaAppService;
             _lojaAppService = lojaAppService;
+            _configuracaoAppService = configuracaoAppService;
         }
 
         protected override void Dispose(bool disposing)
@@ -37,6 +39,7 @@ namespace Dufry.Comissoes.Controllers
             _controleacessoAppService.Dispose();
             _empresaAppService.Dispose();
             _lojaAppService.Dispose();
+            _configuracaoAppService.Dispose();
 
             base.Dispose(disposing);
         }
@@ -46,9 +49,14 @@ namespace Dufry.Comissoes.Controllers
         public ActionResult InterfaceFolhaPagamentoIndex()
         {
             #region populaobjetos
-            var empresas = _empresaAppService.Find(t => t.CodigoEmpresaAlternate.Trim() != "-2" && t.CodigoEmpresaAlternate.Trim() != "-1"); ;
+
+            string codigoFolha = _configuracaoAppService.Find(t => t.DESC_CHAVE == "InterfaceFolhaPagamentoCodigoFolhaPagamento").FirstOrDefault().DESC_VALOR.Trim();
+
+            string codigoClienteADP = _configuracaoAppService.Find(t => t.DESC_CHAVE == "InterfaceFolhaPagamentoCodigoClienteADP").FirstOrDefault().DESC_VALOR.Trim();
+
+            var empresas = _empresaAppService.Find(t => t.CodigoEmpresaAlternate.ToString().Trim() != "-2" && t.CodigoEmpresaAlternate.ToString().Trim() != "-1"); ;
             IEnumerable<SelectListItem> empresasSelectListItem = new SelectList(empresas, "CodigoEmpresaAlternate", "NomeEmpresa");
-            ViewBag.COLABORADORKEY = new SelectList(empresas, "CodigoEmpresaAlternate", "NomeEmpresa");
+            ViewBag.CodigoEmpresaAlternate = new SelectList(empresas, "CodigoEmpresaAlternate", "NomeEmpresa");
 
             var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1"); ;
             IEnumerable<SelectListItem> lojasSelectListItem = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
@@ -56,7 +64,7 @@ namespace Dufry.Comissoes.Controllers
 
             #endregion populaobjetos
 
-            InterfaceFolhaPagamentoViewModel ifpVM = new InterfaceFolhaPagamentoViewModel(empresasSelectListItem, lojasSelectListItem);
+            InterfaceFolhaPagamentoViewModel ifpVM = new InterfaceFolhaPagamentoViewModel(codigoFolha, codigoClienteADP, empresasSelectListItem, lojasSelectListItem);
 
             return View(ifpVM);
         }

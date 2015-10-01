@@ -14,27 +14,15 @@ namespace Dufry.Comissoes.Data.Context.Mapping
             // Primary Key
             HasKey(t => t.Id_Empresa);
 
-            // Properties
-            Property(t => t.Id_TipoNegocio)
-                .IsRequired();
-
             Property(t => t.Id_Pais)
                 .IsRequired();
 
-            Property(t => t.Id_TipoRegimeAduaneiro)
-                .IsRequired();
-
             Property(t => t.CodigoEmpresaAlternate)
-                .HasMaxLength(20)
                 .IsRequired();
 
             Property(t => t.NomeEmpresa)
                 .HasMaxLength(50)
                 .IsRequired();
-
-            Property(t => t.NomeReduzido)
-                .HasMaxLength(11)
-                .IsOptional();
         }
     }
 }
