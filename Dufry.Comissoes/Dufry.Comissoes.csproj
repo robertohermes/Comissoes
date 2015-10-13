@@ -207,6 +207,7 @@
     </Compile>
     <Compile Include="Models\Validations\DateGreaterThanAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\InterfaceTransferPricingViewModel.cs" />
     <Compile Include="ViewModels\ComissoesViewModel.cs" />
     <Compile Include="ViewModels\AusenciaRemuneradaViewModel.cs" />
     <Compile Include="ViewModels\CargoViewModel.cs" />
@@ -476,6 +477,7 @@
     <Content Include="Views\AusenciaRemunerada\AusenciaRemuneradaDelete.cshtml" />
     <Content Include="Views\AusenciaRemunerada\AusenciaRemuneradaIndex.cshtml" />
     <Content Include="Views\Comissoes\ComissoesIndex.cshtml" />
+    <Content Include="Views\Interface\InterfaceTransferPricingIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

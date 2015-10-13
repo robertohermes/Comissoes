@@ -1,0 +1,64 @@
+﻿@model InterfaceTransferPricingViewModel
+
+@{
+    ViewBag.Title = "Interface com Transfer Pricing";
+}
+
+<h1 class="headerForm">@ViewBag.Title</h1>
+
+
+@using (Html.BeginForm())
+{
+    @*@Html.AntiForgeryToken()*@
+
+    <div class="editorCategoria">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <p>
+            @Html.LabelFor(model => model.DT_INI)
+            @Html.TextBoxFor(model => model.DT_INI, null, new { @class = "dp", @Value = Model.DT_INI.ToString().Equals("01/01/0001 00:00:00") ? string.Empty : Model.DT_INI.ToString("dd/MM/yyyy") })
+            @Html.ValidationMessageFor(model => model.DT_INI, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.DT_FIM)
+            @Html.TextBoxFor(model => model.DT_FIM, null, new { @class = "dp", @Value = Model.DT_FIM.ToString().Equals("01/01/0001 00:00:00") ? string.Empty : Model.DT_FIM.ToString("dd/MM/yyyy") })
+            @Html.ValidationMessageFor(model => model.DT_FIM, String.Empty, new { @style = "padding-left: 10px;!important" })
+        </p>
+    </div>
+
+    <input type="submit" id="arquivoInterfaceTransferPricing" value="Gerar Arquivo" class="botoesCategoria" />
+    @Html.ActionLink("Voltar", "InterfaceTransferPricingArquivo", "Interface", null, new { @class = "botoesCategoria" })
+
+}
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('.dp').datepicker({
+                showAnim: "scale",
+                showOptions: {
+                    origin: ["top", "right"]
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('.dp').mask('00/00/0000', { 'translation': { 0: { pattern: /[0-9]/ } } });
+
+            $("input[name='DT_FIM']").rules("add", {
+                DateGtEq: $("input[name='DT_INI']"),
+                messages: { DateGtEq: "A data final da vigência deve ser maior que a data inicial" }
+            });
+
+        });
+
+    </script>
+}
+
+
+
+
+
+
+
+

@@ -69,5 +69,15 @@ namespace Dufry.Comissoes.Controllers
             return View(ifpVM);
         }
 
+
+        // GET: /Interface/InterfaceTransferPricingIndex
+        public ActionResult InterfaceTransferPricingIndex()
+        {
+
+            InterfaceTransferPricingViewModel itpVM = new InterfaceTransferPricingViewModel();
+
+            return View(itpVM);
+        }
+
     }
 }
