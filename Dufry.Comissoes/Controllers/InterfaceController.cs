@@ -8,9 +8,11 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
 
 namespace Dufry.Comissoes.Controllers
 {
@@ -25,13 +27,15 @@ namespace Dufry.Comissoes.Controllers
         private readonly IEmpresaAppService _empresaAppService;
         private readonly ILojaAppService _lojaAppService;
         private readonly IConfiguracaoAppService _configuracaoAppService;
+        private readonly IProdutoAppService _produtoAppService;
 
-        public InterfaceController(IControleAcessoAppService controleacessoAppService, IEmpresaAppService empresaAppService, ILojaAppService lojaAppService, IConfiguracaoAppService configuracaoAppService)
+        public InterfaceController(IControleAcessoAppService controleacessoAppService, IEmpresaAppService empresaAppService, ILojaAppService lojaAppService, IConfiguracaoAppService configuracaoAppService, IProdutoAppService produtoAppService)
         {
             _controleacessoAppService = controleacessoAppService;
             _empresaAppService = empresaAppService;
             _lojaAppService = lojaAppService;
             _configuracaoAppService = configuracaoAppService;
+            _produtoAppService = produtoAppService;
         }
 
         protected override void Dispose(bool disposing)
@@ -40,6 +44,7 @@ namespace Dufry.Comissoes.Controllers
             _empresaAppService.Dispose();
             _lojaAppService.Dispose();
             _configuracaoAppService.Dispose();
+            _produtoAppService.Dispose();
 
             base.Dispose(disposing);
         }
@@ -73,11 +78,63 @@ namespace Dufry.Comissoes.Controllers
         // GET: /Interface/InterfaceTransferPricingIndex
         public ActionResult InterfaceTransferPricingIndex()
         {
-
             InterfaceTransferPricingViewModel itpVM = new InterfaceTransferPricingViewModel();
 
             return View(itpVM);
         }
 
+        // POST: /Interface/InterfaceTransferPricingIndex
+        [HttpPost, ActionName("InterfaceTransferPricingIndex")]
+        //[ValidateAntiForgeryToken]
+        public ActionResult ArquivoInterfaceTransferPricing()
+        {
+            InterfaceTransferPricingViewModel itpVM = new InterfaceTransferPricingViewModel();
+
+            try
+            {
+                string xmlStream;
+
+                DateTime dtIni;
+                DateTime dtFim;
+
+                dtIni = Convert.ToDateTime("01/02/2014");
+                dtFim = Convert.ToDateTime("28/02/2014");
+
+                List<TransferPricing> tp = _produtoAppService.InterfaceTransferPricing(dtIni, dtFim).ToList();
+
+                StringWriter sw = new StringWriter();
+
+                sw.WriteLine("\"COD_PRODUTO\";\"NEGOCIO\";\"MES\";\"VLR_DOLAR\";\"VLR_REAL\";\"COD_EMPRESA\"");
+
+                foreach (var line in tp)
+                {
+                    sw.WriteLine(string.Format("\"{0}\";\"{1}\";\"{2}\";\"{3}\";\"{4}\";\"{5}\"",
+                                               line.COD_PRODUTO,
+                                               line.NEGOCIO,
+                                               line.MES.ToString("dd/MM/yy"),
+                                               line.VLR_DOLAR,
+                                               line.VLR_REAL,
+                                               line.COD_EMPRESA));
+                }
+
+                xmlStream = sw.ToString();
+
+                return new ExcelResult
+                {
+                    FileName = string.Format("InterfaceTransferPricing{0}.csv", DateTime.Now.ToString("yyyyMMdd-HHmmss")),
+                    XMLStream = xmlStream
+                };
+
+            }
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Erro ao gerar arquivo. Tente novamente ou, se o problema persistir, entre em contato com o suporte.");
+            }
+
+            return View(itpVM);
+        }
+
     }
+
 }
