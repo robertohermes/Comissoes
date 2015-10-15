@@ -41,16 +41,6 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
 
         public IEnumerable<TransferPricing> InterfaceTransferPricing(DateTime dtIni, DateTime dtFim)
         {
-            //string command = string.Concat("select '0000019' as COD_PRODUTO, 'DF' as NEGOCIO,  '2014/01/31' as MES, 598.4743968 as VLR_DOLAR, 1423.74 as VLR_REAL, '003' as COD_EMPRESA "
-            //                              , "union "
-            //                              , "select '0000035' as COD_PRODUTO, 'DF' as NEGOCIO,  '2014/01/31' as MES, 379.80279936 as VLR_DOLAR, 904.37 as VLR_REAL, '003' as COD_EMPRESA "
-            //                              , "union "
-            //                              , "select '0000051' as COD_PRODUTO, 'DF' as NEGOCIO,  '2014/01/31' as MES, 230.4028416 as VLR_DOLAR, 548.4 as VLR_REAL, '003' as COD_EMPRESA "
-            //                              , "union "
-            //                              , "select '0000078' as COD_PRODUTO, 'DF' as NEGOCIO,  '2014/01/31' as MES, 68.03518464 as VLR_DOLAR, 163.39 as VLR_REAL, '003' as COD_EMPRESA "
-            //                              , "union "
-            //                              , "select '0000086' as COD_PRODUTO, 'DF' as NEGOCIO,  '2014/01/31' as MES, 1.32692736 as VLR_DOLAR, 3.15 as VLR_REAL, '003' as COD_EMPRESA ");
-
 
             string command = string.Concat("select COD_PRODUTO, NEGOCIO,  MES, VLR_DOLAR, VLR_REAL, COD_EMPRESA "
                                           , "from ( "
@@ -60,11 +50,11 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
                                           , "   union "
                                           , "   select '0000051' as COD_PRODUTO, 'DF' as NEGOCIO,  '2014/01/31' as MES, 230.4028416 as VLR_DOLAR, 548.4 as VLR_REAL, '003' as COD_EMPRESA "
                                           , "   union "
-                                          , "   select '0000078' as COD_PRODUTO, 'DF' as NEGOCIO,  '2014/02/20' as MES, 68.03518464 as VLR_DOLAR, 163.39 as VLR_REAL, '003' as COD_EMPRESA "
+                                          , "   select '0000078' as COD_PRODUTO, 'DF' as NEGOCIO,  '2015/10/15' as MES, 68.03518464 as VLR_DOLAR, 163.39 as VLR_REAL, '003' as COD_EMPRESA "
                                           , "   union "
-                                          , "   select '0000086' as COD_PRODUTO, 'DF' as NEGOCIO,  '2014/03/15' as MES, 1.32692736 as VLR_DOLAR, 3.15 as VLR_REAL, '003' as COD_EMPRESA "
+                                          , "   select '0000086' as COD_PRODUTO, 'DF' as NEGOCIO,  '2015/10/20' as MES, 1.32692736 as VLR_DOLAR, 3.15 as VLR_REAL, '003' as COD_EMPRESA "
                                           , ") ITP "
-                                          , "where ITP.MES Between  @dtIni AND  @dtFim ");
+                                          , "where ITP.MES Between @dtIni AND @dtFim ");
 
             using (var cn = BIVendasConnection)
             {

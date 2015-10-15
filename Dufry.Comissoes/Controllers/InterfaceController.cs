@@ -86,7 +86,7 @@ namespace Dufry.Comissoes.Controllers
         // POST: /Interface/InterfaceTransferPricingIndex
         [HttpPost, ActionName("InterfaceTransferPricingIndex")]
         //[ValidateAntiForgeryToken]
-        public ActionResult ArquivoInterfaceTransferPricing()
+        public ActionResult ArquivoInterfaceTransferPricing(string DT_INI, string DT_FIM)
         {
             InterfaceTransferPricingViewModel itpVM = new InterfaceTransferPricingViewModel();
 
@@ -94,13 +94,7 @@ namespace Dufry.Comissoes.Controllers
             {
                 string xmlStream;
 
-                DateTime dtIni;
-                DateTime dtFim;
-
-                dtIni = Convert.ToDateTime("01/02/2014");
-                dtFim = Convert.ToDateTime("28/02/2014");
-
-                List<TransferPricing> tp = _produtoAppService.InterfaceTransferPricing(dtIni, dtFim).ToList();
+                List<TransferPricing> tp = _produtoAppService.InterfaceTransferPricing(Convert.ToDateTime(DT_INI), Convert.ToDateTime(DT_FIM)).ToList();
 
                 StringWriter sw = new StringWriter();
 
@@ -121,7 +115,7 @@ namespace Dufry.Comissoes.Controllers
 
                 return new ExcelResult
                 {
-                    FileName = string.Format("InterfaceTransferPricing{0}.csv", DateTime.Now.ToString("yyyyMMdd-HHmmss")),
+                    FileName = string.Format("InterfaceTransferPricing-{0}.csv", DateTime.Now.ToString("yyyyMMdd-HHmmss")),
                     XMLStream = xmlStream
                 };
 
