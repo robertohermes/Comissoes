@@ -74,6 +74,53 @@ namespace Dufry.Comissoes.Controllers
             return View(ifpVM);
         }
 
+        // POST: /Interface/InterfaceFolhaPagamentoIndex
+        [HttpPost, ActionName("InterfaceFolhaPagamentoIndex")]
+        //[ValidateAntiForgeryToken]
+        public ActionResult ArquivoInterfaceFolhaPagamento(string CodigoFolha, string CodigoLojaAlternate, string CodigoClienteADP, string NumeroProcessoFolha)
+        {
+            InterfaceFolhaPagamentoViewModel itpVM = new InterfaceFolhaPagamentoViewModel();
+
+            try
+            {
+                string xmlStream;
+
+                List<FolhaPagamento> fp = _produtoAppService.InterfaceFolhaPagamento(CodigoFolha, CodigoLojaAlternate, CodigoClienteADP, NumeroProcessoFolha).ToList();
+
+                StringWriter sw = new StringWriter();
+
+                sw.WriteLine("\"Cód de Folha\";\"Cód. da Empresa\";\"Matricula\";\"Cód do cliente\";\"Processo de folha\";\"Valor do lançamento\"");
+
+                foreach (var line in fp)
+                {
+                    sw.WriteLine(string.Format("\"{0}\";\"{1}\";\"{2}\";\"{3}\";\"{4}\";\"{5}\"",
+                                               line.COD_FOLHA,
+                                               line.COD_EMPRESA,
+                                               line.MATRICULA,
+                                               line.COD_CLIENTE,
+                                               line.PROCESSO_FOLHA,
+                                               line.VALOR_LANCAMENTO));
+                }
+
+                xmlStream = sw.ToString();
+
+                return new ExcelResult
+                {
+                    FileName = string.Format("InterfaceFolhaPagamento-{0}.csv", DateTime.Now.ToString("yyyyMMdd-HHmmss")),
+                    XMLStream = xmlStream
+                };
+
+            }
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Erro ao gerar arquivo. Tente novamente ou, se o problema persistir, entre em contato com o suporte.");
+            }
+
+            return View(itpVM);
+        }
+
+
 
         // GET: /Interface/InterfaceTransferPricingIndex
         public ActionResult InterfaceTransferPricingIndex()

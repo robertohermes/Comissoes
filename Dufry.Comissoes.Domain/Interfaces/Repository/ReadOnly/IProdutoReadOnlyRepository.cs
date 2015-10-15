@@ -8,5 +8,7 @@ namespace Dufry.Comissoes.Domain.Interfaces.Repository.ReadOnly
     public interface IProdutoReadOnlyRepository : IReadOnlyRepository<Produto>
     {
         IEnumerable<TransferPricing> InterfaceTransferPricing(DateTime dtIni, DateTime dtFim);
+
+        IEnumerable<FolhaPagamento> InterfaceFolhaPagamento(string CodigoFolha, string CodigoLojaAlternate, string CodigoClienteADP, string NumeroProcessoFolha);
     }
 }

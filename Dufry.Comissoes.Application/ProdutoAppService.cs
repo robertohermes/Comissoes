@@ -69,6 +69,11 @@ namespace Dufry.Comissoes.Application
             return _service.InterfaceTransferPricing(dtIni, dtFim);
         }
 
+        public IEnumerable<FolhaPagamento> InterfaceFolhaPagamento(string CodigoFolha, string CodigoLojaAlternate, string CodigoClienteADP, string NumeroProcessoFolha)
+        {
+            return _service.InterfaceFolhaPagamento(CodigoFolha, CodigoLojaAlternate, CodigoClienteADP, NumeroProcessoFolha);
+        }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);

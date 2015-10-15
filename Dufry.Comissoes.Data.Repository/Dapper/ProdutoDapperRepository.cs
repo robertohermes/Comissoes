@@ -39,9 +39,35 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
             }
         }
 
+        public IEnumerable<FolhaPagamento> InterfaceFolhaPagamento(string CodigoFolha, string CodigoLojaAlternate, string CodigoClienteADP, string NumeroProcessoFolha)
+        {
+            //<REVER>
+            string command = string.Concat("select COD_FOLHA, COD_EMPRESA, MATRICULA, COD_CLIENTE, PROCESSO_FOLHA, VALOR_LANCAMENTO "
+                                          , "from ( "
+                                          , "   SELECT '620' as COD_FOLHA, '3' AS COD_EMPRESA, '10033' AS MATRICULA, '1514' AS COD_CLIENTE, '5082' AS PROCESSO_FOLHA, 1117.27 AS VALOR_LANCAMENTO "
+                                          , "   union "
+                                          , "   SELECT '620' as COD_FOLHA, '3' AS COD_EMPRESA, '1007' AS MATRICULA, '1514' AS COD_CLIENTE, '5082' AS PROCESSO_FOLHA, 3.97 AS VALOR_LANCAMENTO "
+                                          , "   union "
+                                          , "   SELECT '620' as COD_FOLHA, '3' AS COD_EMPRESA, '10154' AS MATRICULA, '1514' AS COD_CLIENTE, '5082' AS PROCESSO_FOLHA, 821.78 AS VALOR_LANCAMENTO "
+                                          , "   union "
+                                          , "   SELECT '500' as COD_FOLHA, '3' AS COD_EMPRESA, '10157' AS MATRICULA, '1514' AS COD_CLIENTE, '5082' AS PROCESSO_FOLHA, 1188.42 AS VALOR_LANCAMENTO "
+                                          , "   union "
+                                          , "   SELECT '500' as COD_FOLHA, '3' AS COD_EMPRESA, '10192' AS MATRICULA, '1514' AS COD_CLIENTE, '5082' AS PROCESSO_FOLHA, 0.58 AS VALOR_LANCAMENTO "
+                                          , ") IFP "
+                                          , "where IFP.COD_FOLHA = @CodigoFolha ");
+
+            using (var cn = BIVendasConnection)
+            {
+                var ifp = cn.Query<FolhaPagamento>(command, new { CodigoFolha = CodigoFolha
+                                                                 });
+                return ifp;
+            }
+        }
+
         public IEnumerable<TransferPricing> InterfaceTransferPricing(DateTime dtIni, DateTime dtFim)
         {
 
+            //<REVER>
             string command = string.Concat("select COD_PRODUTO, NEGOCIO,  MES, VLR_DOLAR, VLR_REAL, COD_EMPRESA "
                                           , "from ( "
                                           , "   select '0000019' as COD_PRODUTO, 'DF' as NEGOCIO,  '2014/01/31' as MES, 598.4743968 as VLR_DOLAR, 1423.74 as VLR_REAL, '003' as COD_EMPRESA "

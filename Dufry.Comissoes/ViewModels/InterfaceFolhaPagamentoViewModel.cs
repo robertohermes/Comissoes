@@ -51,6 +51,14 @@ namespace Dufry.Comissoes.ViewModels
             LojasSelectListItem = lojasSelectListItem;
         }
 
+        public InterfaceFolhaPagamentoViewModel()
+        {
+            CodigoFolha = null;
+            CodigoClienteADP = null;
+            EmpresasSelectListItem = null;
+            LojasSelectListItem = null;
+        }
+
 
     }
 }

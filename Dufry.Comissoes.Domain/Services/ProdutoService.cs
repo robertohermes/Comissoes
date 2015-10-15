@@ -28,5 +28,12 @@ namespace Dufry.Comissoes.Domain.Services
         }
 
 
+        public IEnumerable<FolhaPagamento> InterfaceFolhaPagamento(string CodigoFolha, string CodigoLojaAlternate, string CodigoClienteADP, string NumeroProcessoFolha)
+        {
+            //Acesso através do Dapper
+            return _readOnlyRepository.InterfaceFolhaPagamento(CodigoFolha, CodigoLojaAlternate, CodigoClienteADP, NumeroProcessoFolha);
+
+        }
+
     }
 }

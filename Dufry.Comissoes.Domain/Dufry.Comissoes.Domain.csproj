@@ -45,6 +45,7 @@
     <Compile Include="Entities\Configuracao.cs" />
     <Compile Include="Entities\Cargo.cs" />
     <Compile Include="Entities\Categoria.cs" />
+    <Compile Include="Entities\Output\FolhaPagamento.cs" />
     <Compile Include="Entities\Produto.cs" />
     <Compile Include="Entities\Output\TransferPricing.cs" />
     <Compile Include="Entities\Search\AusenciaRemuneradaSearch.cs" />
