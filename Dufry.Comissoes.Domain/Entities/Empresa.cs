@@ -18,6 +18,7 @@ namespace Dufry.Comissoes.Domain.Entities
         public int Id_Pais { get; set; }
 
         [Display(Name = "Nome da Empresa")]
+        [Required(ErrorMessage = "A Empresa é obrigatória")]
         public decimal CodigoEmpresaAlternate { get; set; }
 
         [Display(Name = "Nome da Empresa")]

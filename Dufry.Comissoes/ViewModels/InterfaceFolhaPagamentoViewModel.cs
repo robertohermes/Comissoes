@@ -20,23 +20,16 @@ namespace Dufry.Comissoes.ViewModels
         [Display(Name = "Processo Folha")]
         public string NumeroProcessoFolha { get; set; }
 
-        [Required(ErrorMessage = "A data inicial da vigência é obrigatória")]
+        [Required(ErrorMessage = "O Mês/Ano é obrigatório")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        [DataType(DataType.Date, ErrorMessage = "A data inicial da vigência está em formato inválido")]
-        [Display(Name = "Data inicial da vigência")]
-        public DateTime DT_INI { get; set; }
+        [DataType(DataType.Date, ErrorMessage = "O Mês/Ano está em formato inválido")]
+        [Display(Name = "Mês/Ano")]
+        public DateTime MES_ANO { get; set; }
 
-
-        [Required(ErrorMessage = "A data final da vigência é obrigatória")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        [DataType(DataType.Date, ErrorMessage = "A data final da vigência está em formato inválido")]
-        [Display(Name = "Data final da vigência")]
-        public DateTime DT_FIM { get; set; }
-
-        //public ControleAcesso ControleAcesso { get; set; }
-
+        [Display(Name = "Codigo da Empresa")]
         public Empresa Empresa { get; set; }
 
+        [Display(Name = "Codigo da Loja")]
         public Loja Loja { get; set; }
 
         public IEnumerable<SelectListItem> EmpresasSelectListItem { get; set; }
