@@ -43,7 +43,7 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             string command = string.Concat("SELECT      distinct Emp.Id_Empresa, Emp.Id_Pais, Emp.CodigoEmpresaAlternate, "
                                          , "            Case when Tin.CodigoEmpresaLegado = '02' Then '003 - ' + Emp.NomeEmpresa "
-                                         , "                 when Tin.CodigoEmpresaLegado = '20' Then '505 - ' + Emp.NomeEmpresa "
+                                         , "                 when Tin.CodigoEmpresaLegado = '20' Then '042 - ' + Emp.NomeEmpresa "
                                          , "                 Else '003 - ' +  + Emp.NomeEmpresa "
                                          , "            End as NomeEmpresa "
                                          , "FROM        DimEmpresa      Emp "
