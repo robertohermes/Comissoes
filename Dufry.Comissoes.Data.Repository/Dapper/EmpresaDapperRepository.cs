@@ -15,9 +15,9 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var empresas = cn.Query<Empresa>("SELECT * FROM DimEmpresa WHERE Id_Empresa = @Id_Empresa",
+                var empresa = cn.Query<Empresa>("SELECT * FROM DimEmpresa WHERE Id_Empresa = @Id_Empresa",
                     new { EmpresaKey = id }).FirstOrDefault();
-                return empresas;
+                return empresa;
             }
         }
 
@@ -25,8 +25,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var empresa = cn.Query<Empresa>("SELECT * FROM DimEmpresa");
-                return empresa;
+                var empresas = cn.Query<Empresa>("SELECT * FROM DimEmpresa");
+                return empresas;
             }
         }
 
@@ -38,5 +38,24 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
                 return empresas;
             }
         }
+
+        public IEnumerable<Empresa> AllConcatCodigoEmpresaLegado()
+        {
+            string command = string.Concat("SELECT      distinct Emp.Id_Empresa, Emp.Id_Pais, Emp.CodigoEmpresaAlternate, "
+                                         , "            Case when Tin.CodigoEmpresaLegado = '02' Then '003 - ' + Emp.NomeEmpresa "
+                                         , "                 when Tin.CodigoEmpresaLegado = '20' Then '505 - ' + Emp.NomeEmpresa "
+                                         , "                 Else '003 - ' +  + Emp.NomeEmpresa "
+                                         , "            End as NomeEmpresa "
+                                         , "FROM        DimEmpresa      Emp "
+                                         , "INNER JOIN  DimTipoNegocio  Tin ON Emp.Id_Empresa = Tin.Id_Empresa "
+                                         , "where       Emp.CodigoEmpresaAlternate not in (-1,-2)");
+
+            using (var cn = BIVendasConnection)
+            {
+                var empresas = cn.Query<Empresa>(command);
+                return empresas;
+            }
+        }
+
     }
 }

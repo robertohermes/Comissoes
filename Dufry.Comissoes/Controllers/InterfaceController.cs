@@ -59,7 +59,7 @@ namespace Dufry.Comissoes.Controllers
 
             string codigoClienteADP = _configuracaoAppService.Find(t => t.DESC_CHAVE == "InterfaceFolhaPagamentoCodigoClienteADP").FirstOrDefault().DESC_VALOR.Trim();
 
-            var empresas = _empresaAppService.Find(t => t.CodigoEmpresaAlternate.ToString().Trim() != "-2" && t.CodigoEmpresaAlternate.ToString().Trim() != "-1"); ;
+            var empresas = _empresaAppService.AllConcatCodigoEmpresaLegado();
             IEnumerable<SelectListItem> empresasSelectListItem = new SelectList(empresas, "CodigoEmpresaAlternate", "NomeEmpresa");
             ViewBag.CodigoEmpresaAlternate = new SelectList(empresas, "CodigoEmpresaAlternate", "NomeEmpresa");
 
@@ -89,7 +89,7 @@ namespace Dufry.Comissoes.Controllers
 
                 StringWriter sw = new StringWriter();
 
-                sw.WriteLine("\"Cód de Folha\";\"Cód. da Empresa\";\"Matricula\";\"Cód do cliente\";\"Processo de folha\";\"Valor do lançamento\"");
+                sw.WriteLine("\"Cod de Folha\";\"Cod da Empresa\";\"Matricula\";\"Cod do cliente\";\"Processo de folha\";\"Valor do lancamento\"");
 
                 foreach (var line in fp)
                 {

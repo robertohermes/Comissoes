@@ -64,6 +64,11 @@ namespace Dufry.Comissoes.Application
             return _service.Find(predicate, @readonly);
         }
 
+        public IEnumerable<Empresa> AllConcatCodigoEmpresaLegado()
+        {
+            return _service.AllConcatCodigoEmpresaLegado();
+        }
+
 
         public void Dispose()
         {

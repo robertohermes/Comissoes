@@ -44,15 +44,15 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
             //<REVER>
             string command = string.Concat("select COD_FOLHA, COD_EMPRESA, MATRICULA, COD_CLIENTE, PROCESSO_FOLHA, VALOR_LANCAMENTO "
                                           , "from ( "
-                                          , "   SELECT '620' as COD_FOLHA, '3' AS COD_EMPRESA, '10033' AS MATRICULA, '1514' AS COD_CLIENTE, '5082' AS PROCESSO_FOLHA, 1117.27 AS VALOR_LANCAMENTO "
+                                          , "   SELECT '620' as COD_FOLHA, '003' AS COD_EMPRESA, '10033' AS MATRICULA, '1514' AS COD_CLIENTE, '5082' AS PROCESSO_FOLHA, 1117.27 AS VALOR_LANCAMENTO "
                                           , "   union "
-                                          , "   SELECT '620' as COD_FOLHA, '3' AS COD_EMPRESA, '1007' AS MATRICULA, '1514' AS COD_CLIENTE, '5082' AS PROCESSO_FOLHA, 3.97 AS VALOR_LANCAMENTO "
+                                          , "   SELECT '620' as COD_FOLHA, '003' AS COD_EMPRESA, '1007' AS MATRICULA, '1514' AS COD_CLIENTE, '5082' AS PROCESSO_FOLHA, 3.97 AS VALOR_LANCAMENTO "
                                           , "   union "
-                                          , "   SELECT '620' as COD_FOLHA, '3' AS COD_EMPRESA, '10154' AS MATRICULA, '1514' AS COD_CLIENTE, '5082' AS PROCESSO_FOLHA, 821.78 AS VALOR_LANCAMENTO "
+                                          , "   SELECT '620' as COD_FOLHA, '003' AS COD_EMPRESA, '10154' AS MATRICULA, '1514' AS COD_CLIENTE, '5082' AS PROCESSO_FOLHA, 821.78 AS VALOR_LANCAMENTO "
                                           , "   union "
-                                          , "   SELECT '500' as COD_FOLHA, '3' AS COD_EMPRESA, '10157' AS MATRICULA, '1514' AS COD_CLIENTE, '5082' AS PROCESSO_FOLHA, 1188.42 AS VALOR_LANCAMENTO "
+                                          , "   SELECT '500' as COD_FOLHA, '003' AS COD_EMPRESA, '10157' AS MATRICULA, '1514' AS COD_CLIENTE, '5082' AS PROCESSO_FOLHA, 1188.42 AS VALOR_LANCAMENTO "
                                           , "   union "
-                                          , "   SELECT '500' as COD_FOLHA, '3' AS COD_EMPRESA, '10192' AS MATRICULA, '1514' AS COD_CLIENTE, '5082' AS PROCESSO_FOLHA, 0.58 AS VALOR_LANCAMENTO "
+                                          , "   SELECT '500' as COD_FOLHA, '003' AS COD_EMPRESA, '10192' AS MATRICULA, '1514' AS COD_CLIENTE, '5082' AS PROCESSO_FOLHA, 0.58 AS VALOR_LANCAMENTO "
                                           , ") IFP "
                                           , "where IFP.COD_FOLHA = @CodigoFolha ");
 
