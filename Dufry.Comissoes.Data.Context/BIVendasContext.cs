@@ -28,6 +28,7 @@ namespace Dufry.Comissoes.Data.Context
             modelBuilder.Configurations.Add(new CargoMap());
             modelBuilder.Configurations.Add(new TipoNegocioMap());
             modelBuilder.Configurations.Add(new ProdutoMap());
+            modelBuilder.Configurations.Add(new TipoBusinessMap());
 
         }
 
@@ -41,7 +42,7 @@ namespace Dufry.Comissoes.Data.Context
         public DbSet<Cargo> Cargos { get; set; }
         public DbSet<TipoNegocio> TipoNegocios { get; set; }
         public DbSet<Produto> Produtos { get; set; }
-
+        public DbSet<TipoBusiness> TipoBusineses { get; set; }
 
 
         #endregion

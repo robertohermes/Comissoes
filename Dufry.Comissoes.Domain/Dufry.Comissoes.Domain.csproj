@@ -53,6 +53,7 @@
     <Compile Include="Entities\Search\DSRSearch.cs" />
     <Compile Include="Entities\Search\PlanoLojaSearch.cs" />
     <Compile Include="Entities\Search\SelfServiceSearch.cs" />
+    <Compile Include="Entities\TipoBusiness.cs" />
     <Compile Include="Entities\TipoNegocio.cs" />
     <Compile Include="Entities\PlanoLoja.cs" />
     <Compile Include="Entities\CategoriaPercentual.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Interfaces\Repository\ICargoRepository.cs" />
     <Compile Include="Interfaces\Repository\IConfiguracaoRepository.cs" />
     <Compile Include="Interfaces\Repository\IProdutoRepository.cs" />
+    <Compile Include="Interfaces\Repository\ITipoBusinessRepository.cs" />
     <Compile Include="Interfaces\Repository\ITipoNegocioRepository.cs" />
     <Compile Include="Interfaces\Repository\IPlanoLojaRepository.cs" />
     <Compile Include="Interfaces\Repository\ICategoriaPercentualRepository.cs" />
@@ -160,6 +162,7 @@
     <Compile Include="Interfaces\Repository\ReadOnly\ICargoReadOnlyRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IConfiguracaoReadOnlyRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IProdutoReadOnlyRepository.cs" />
+    <Compile Include="Interfaces\Repository\ReadOnly\ITipoBusinessReadOnlyRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\ITipoNegocioReadOnlyRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IPlanoLojaReadOnlyRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\ICategoriaPercentualReadOnlyRepository.cs" />
@@ -180,6 +183,7 @@
     <Compile Include="Interfaces\Service\ICargoService.cs" />
     <Compile Include="Interfaces\Service\IConfiguracaoService.cs" />
     <Compile Include="Interfaces\Service\IProdutoService.cs" />
+    <Compile Include="Interfaces\Service\ITipoBusinessService.cs" />
     <Compile Include="Interfaces\Service\ITipoNegocioService.cs" />
     <Compile Include="Interfaces\Service\IPlanoLojaService.cs" />
     <Compile Include="Interfaces\Service\ICategoriaPercentualService.cs" />
@@ -203,6 +207,7 @@
     <Compile Include="Services\CargoService.cs" />
     <Compile Include="Services\ConfiguracaoService.cs" />
     <Compile Include="Services\ProdutoService.cs" />
+    <Compile Include="Services\TipoBusinessService.cs" />
     <Compile Include="Services\TipoNegocioService.cs" />
     <Compile Include="Services\PlanoLojaService.cs" />
     <Compile Include="Services\CategoriaPercentualService.cs" />

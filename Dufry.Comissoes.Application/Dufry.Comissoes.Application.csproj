@@ -59,10 +59,12 @@
     <Compile Include="CargoAppService.cs" />
     <Compile Include="ConfiguracaoAppService.cs" />
     <Compile Include="CategoriaAppService.cs" />
+    <Compile Include="Interfaces\ITipoBusinessAppService.cs" />
     <Compile Include="ProdutoAppService.cs" />
     <Compile Include="Interfaces\IConfiguracaoAppService.cs" />
     <Compile Include="Interfaces\IProdutoAppService.cs" />
     <Compile Include="Interfaces\ITipoNegocioAppService.cs" />
+    <Compile Include="TipoBusinessAppService.cs" />
     <Compile Include="TipoNegocioAppService.cs" />
     <Compile Include="PlanoLojaAppService.cs" />
     <Compile Include="CategoriaPercentualAppService.cs" />

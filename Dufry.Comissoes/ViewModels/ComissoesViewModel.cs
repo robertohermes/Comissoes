@@ -23,11 +23,11 @@ namespace Dufry.Comissoes.ViewModels
         public DateTime DT_FIM { get; set; }
 
         //<TODO> Classes que serão necessárias
-        //public Produto { get; set; }
+        public Produto Item { get; set; }
         //public ProdutoSubGrupo { get; set; }
         //public ProdutoGrupo { get; set; }
         //public ProdutoSegmento { get; set; }
-        //public TipoBusiness { get; set; }
+        public TipoBusiness TipoBusiness { get; set; }
         //public Aeroporto { get; set; }
         //public TipoNegocio { get; set; }
 
@@ -50,17 +50,20 @@ namespace Dufry.Comissoes.ViewModels
 
         public IEnumerable<SelectListItem> SegmentosSelectListItem { get; set; }
 
-        public IEnumerable<SelectListItem> TipoBusinessesSelectListItem { get; set; }
+        public IEnumerable<SelectListItem> TipoBusinesesSelectListItem { get; set; }
 
         public IEnumerable<SelectListItem> LojasSelectListItem { get; set; }
 
         public IEnumerable<SelectListItem> AeroportosSelectListItem { get; set; }
 
 
-        public ComissoesViewModel(IEnumerable<SelectListItem> colaboradoresSelectListItem, IEnumerable<SelectListItem> lojasSelectListItem)
+        public ComissoesViewModel(IEnumerable<SelectListItem> colaboradoresSelectListItem, IEnumerable<SelectListItem> lojasSelectListItem, IEnumerable<SelectListItem> itensSelectListItem, IEnumerable<SelectListItem> tipobusinesesSelectListItem, IEnumerable<SelectListItem>  cargosSelectListItem)
         {
             ColaboradoresSelectListItem = colaboradoresSelectListItem;
             LojasSelectListItem = lojasSelectListItem;
+            ItensSelectListItem = itensSelectListItem;
+            TipoBusinesesSelectListItem = tipobusinesesSelectListItem;
+            CargosSelectListItem = cargosSelectListItem;
         }
 
 

@@ -25,12 +25,18 @@ namespace Dufry.Comissoes.Controllers
         private readonly IControleAcessoAppService _controleacessoAppService;
         private readonly IColaboradorAppService _colaboradorAppService;
         private readonly ILojaAppService _lojaAppService;
+        private readonly IProdutoAppService _produtoAppService;
+        private readonly ITipoBusinessAppService _tipobusinessAppService;
+        private readonly ICargoAppService _cargoAppService;
 
-        public ComissoesController(IControleAcessoAppService controleacessoAppService, IColaboradorAppService colaboradorAppService, ILojaAppService lojaAppService)
+        public ComissoesController(IControleAcessoAppService controleacessoAppService, IColaboradorAppService colaboradorAppService, ILojaAppService lojaAppService, IProdutoAppService produtoAppService, ITipoBusinessAppService tipobusinessAppService, ICargoAppService cargoAppService)
         {
             _controleacessoAppService = controleacessoAppService;
             _colaboradorAppService = colaboradorAppService;
             _lojaAppService = lojaAppService;
+            _produtoAppService = produtoAppService;
+            _tipobusinessAppService = tipobusinessAppService;
+            _cargoAppService = cargoAppService;
         }
 
         protected override void Dispose(bool disposing)
@@ -38,11 +44,14 @@ namespace Dufry.Comissoes.Controllers
             _controleacessoAppService.Dispose();
             _colaboradorAppService.Dispose();
             _lojaAppService.Dispose();
+            _produtoAppService.Dispose();
+            _tipobusinessAppService.Dispose();
+            _cargoAppService.Dispose();
 
             base.Dispose(disposing);
         }
 
-
+        
         // GET: /Comissoes/ComissoesIndex
         public ActionResult ComissoesIndex()
         {
@@ -51,13 +60,38 @@ namespace Dufry.Comissoes.Controllers
             IEnumerable<SelectListItem> colaboradoresSelectListItem = new SelectList(colaboradores, "Key", "Value");
             ViewBag.COLABORADORKEY = new SelectList(colaboradores, "Key", "Value");
 
-            var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1"); ;
+            var cargos = _cargoAppService.Find(t => t.Id_Cargo.ToString().Trim() != "-1" && t.Id_Cargo.ToString().Trim() != "-2");
+            IEnumerable<SelectListItem> cargosSelectListItem = new SelectList(cargos, "CodigoCargoAlternate", "NomeCargo");
+            ViewBag.CodigoCargoAlternate = new SelectList(cargosSelectListItem, "CodigoCargoAlternate", "NomeCargo");
+            
+            var tipobusineses = _tipobusinessAppService.Find(t => t.CodigoTipoBusinessAlternate.ToString().Trim() != "-1" && t.CodigoTipoBusinessAlternate.ToString().Trim() != "-2");
+            IEnumerable<SelectListItem> tipobusinesesSelectListItem = new SelectList(tipobusineses, "CodigoTipoBusinessAlternate", "NomeTipoBusiness");
+            ViewBag.CodigoTipoBusinessAlternate = new SelectList(tipobusinesesSelectListItem, "CodigoTipoBusinessAlternate", "NomeTipoBusiness");
+
+            var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1");
             IEnumerable<SelectListItem> lojasSelectListItem = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
-            ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
+            ViewBag.CodigoLojaAlternate = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
+
+
+            //<REVER>
+            //var itens = _produtoAppService.Find(t => t.CodigoProdutoAlternate.Trim() != "N/A" && t.CodigoProdutoAlternate.Trim() != "DSC"); ;
+            var itens = _produtoAppService.Find(t => t.CodigoProdutoAlternate.Trim() == "100000019" 
+                                             || t.CodigoProdutoAlternate.Trim() == "100000027"
+                                             || t.CodigoProdutoAlternate.Trim() == "100000035"
+                                             || t.CodigoProdutoAlternate.Trim() == "100000043"
+                                             || t.CodigoProdutoAlternate.Trim() == "100000051"
+                                             || t.CodigoProdutoAlternate.Trim() == "100000060"
+                                             || t.CodigoProdutoAlternate.Trim() == "100000078"
+                                             || t.CodigoProdutoAlternate.Trim() == "100000086"
+                                             || t.CodigoProdutoAlternate.Trim() == "100000094"
+                                             || t.CodigoProdutoAlternate.Trim() == "100000108"
+                                             ); 
+            IEnumerable<SelectListItem> itensSelectListItem = new SelectList(itens, "CodigoProdutoAlternate", "DescricaoProdutoNome");
+            ViewBag.CodigoProdutoAlternate = new SelectList(lojas, "CodigoProdutoAlternate", "DescricaoProdutoNome");
 
             #endregion populaobjetos
 
-            ComissoesViewModel comissoesVM = new ComissoesViewModel(colaboradoresSelectListItem, lojasSelectListItem);
+            ComissoesViewModel comissoesVM = new ComissoesViewModel(colaboradoresSelectListItem, lojasSelectListItem, itensSelectListItem, tipobusinesesSelectListItem, cargosSelectListItem);
 
             return View(comissoesVM);
         }

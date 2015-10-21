@@ -31,6 +31,7 @@ namespace Dufry.Comissoes.CrossCutting.InversionOfControl.Modules
             Bind<ICargoService>().To<CargoService>();
             Bind<ITipoNegocioService>().To<TipoNegocioService>();
             Bind<IProdutoService>().To<ProdutoService>();
+            Bind<ITipoBusinessService>().To<TipoBusinessService>();
         }
     }
 }

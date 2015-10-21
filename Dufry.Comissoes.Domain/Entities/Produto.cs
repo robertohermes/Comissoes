@@ -10,7 +10,10 @@ namespace Dufry.Comissoes.Domain.Entities
         public int Id_ProdutoTipo { get; set; }
         public int Id_ProdutoSubGrupoDufry { get; set; }
         public int Id_TipoBusiness { get; set; }
+        [Display(Name = "Item")]
+        [Required(ErrorMessage = "O Item é obrigatório")]
         public string CodigoProdutoAlternate { get; set; }
+        [Display(Name = "Item")]
         public string DescricaoProdutoNome { get; set; }
         public string DescricaoProdutoNomeIngles { get; set; }
         public string Cor { get; set; }

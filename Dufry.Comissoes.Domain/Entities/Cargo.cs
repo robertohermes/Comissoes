@@ -15,6 +15,8 @@ namespace Dufry.Comissoes.Domain.Entities
     {
         public int Id_Cargo { get; set; }
 
+        [Display(Name = "Cargo")]
+        [Required(ErrorMessage = "O Cargo é obrigatório")]
         public string CodigoCargoAlternate { get; set; }
 
         [Display(Name = "Nome do Cargo")]

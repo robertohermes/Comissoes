@@ -19,9 +19,40 @@
             @Html.ValidationMessageFor(model => model.ControleAcesso.COLABORADORKEY, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>
         <p>
+            @Html.LabelFor(model => model.Cargo.CodigoCargoAlternate)
+            @Html.DropDownListFor(model => model.Cargo.CodigoCargoAlternate, Model.CargosSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.Cargo.CodigoCargoAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Item.CodigoProdutoAlternate)
+            @Html.DropDownListFor(model => model.Item.CodigoProdutoAlternate, Model.ItensSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.Item.CodigoProdutoAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
+        </p>
+        <p>
+            @Html.Label("Subgrupo")
+            @Html.DropDownList("NameOfField", new List<SelectListItem>(), "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+        </p>
+        <p>
+            @Html.Label("Grupo")
+            @Html.DropDownList("NameOfField", new List<SelectListItem>(), "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+        </p>
+        <p>
+            @Html.Label("Segmento")
+            @Html.DropDownList("NameOfField", new List<SelectListItem>(), "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.TipoBusiness.CodigoTipoBusinessAlternate)
+            @Html.DropDownListFor(model => model.TipoBusiness.CodigoTipoBusinessAlternate, Model.TipoBusinesesSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.TipoBusiness.CodigoTipoBusinessAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
+        </p>
+        <p>
             @Html.LabelFor(model => model.Loja.CodigoLojaAlternate)
             @Html.DropDownListFor(model => model.Loja.CodigoLojaAlternate, Model.LojasSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
             @Html.ValidationMessageFor(model => model.Loja.CodigoLojaAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
+        </p>
+        <p>
+            @Html.Label("Aeroporto")
+            @Html.DropDownList("NameOfField", new List<SelectListItem>(), "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
         </p>
         <p>
             @Html.LabelFor(model => model.DT_INI)
@@ -72,7 +103,7 @@
         $.validator.setDefaults({
             //validate all hidden form controls - ignore: [] 
             //ignore all hidden elements except those who are listed:
-            ignore: ':hidden:not(#ControleAcesso_COLABORADORKEY)'
+            ignore: ':hidden:not(#ControleAcesso_COLABORADORKEY, #Loja_CodigoLojaAlternate, #Item_CodigoProdutoAlternate, #TipoBusiness_CodigoTipoBusinessAlternate, #Cargo_CodigoCargoAlternate)'
         });
 
     </script>
