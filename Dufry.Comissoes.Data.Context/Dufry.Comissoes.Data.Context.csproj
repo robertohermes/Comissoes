@@ -66,6 +66,7 @@
     <Compile Include="Mapping\CategoriaMap.cs" />
     <Compile Include="Mapping\ProdutoMap.cs" />
     <Compile Include="Mapping\TipoBusinessMap.cs" />
+    <Compile Include="Mapping\AeroportoMap.cs" />
     <Compile Include="Mapping\TipoNegocioMap.cs" />
     <Compile Include="Mapping\PlanoLojaMap.cs" />
     <Compile Include="Mapping\CategoriaPercentualMap.cs" />

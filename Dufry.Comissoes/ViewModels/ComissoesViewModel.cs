@@ -28,7 +28,7 @@ namespace Dufry.Comissoes.ViewModels
         //public ProdutoGrupo { get; set; }
         //public ProdutoSegmento { get; set; }
         public TipoBusiness TipoBusiness { get; set; }
-        //public Aeroporto { get; set; }
+        public Aeroporto Aeroporto { get; set; }
         //public TipoNegocio { get; set; }
 
         public ControleAcesso ControleAcesso { get; set; }
@@ -57,13 +57,14 @@ namespace Dufry.Comissoes.ViewModels
         public IEnumerable<SelectListItem> AeroportosSelectListItem { get; set; }
 
 
-        public ComissoesViewModel(IEnumerable<SelectListItem> colaboradoresSelectListItem, IEnumerable<SelectListItem> lojasSelectListItem, IEnumerable<SelectListItem> itensSelectListItem, IEnumerable<SelectListItem> tipobusinesesSelectListItem, IEnumerable<SelectListItem>  cargosSelectListItem)
+        public ComissoesViewModel(IEnumerable<SelectListItem> colaboradoresSelectListItem, IEnumerable<SelectListItem> lojasSelectListItem, IEnumerable<SelectListItem> itensSelectListItem, IEnumerable<SelectListItem> tipobusinesesSelectListItem, IEnumerable<SelectListItem> cargosSelectListItem, IEnumerable<SelectListItem> aeroportosSelectListItem)
         {
             ColaboradoresSelectListItem = colaboradoresSelectListItem;
             LojasSelectListItem = lojasSelectListItem;
             ItensSelectListItem = itensSelectListItem;
             TipoBusinesesSelectListItem = tipobusinesesSelectListItem;
             CargosSelectListItem = cargosSelectListItem;
+            AeroportosSelectListItem = aeroportosSelectListItem;
         }
 
 

@@ -51,8 +51,9 @@
             @Html.ValidationMessageFor(model => model.Loja.CodigoLojaAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>
         <p>
-            @Html.Label("Aeroporto")
-            @Html.DropDownList("NameOfField", new List<SelectListItem>(), "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @Html.LabelFor(model => model.Aeroporto.Id_Aeroporto)
+            @Html.DropDownListFor(model => model.Aeroporto.Id_Aeroporto, Model.AeroportosSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.Aeroporto.Id_Aeroporto, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>
         <p>
             @Html.LabelFor(model => model.DT_INI)
@@ -103,7 +104,7 @@
         $.validator.setDefaults({
             //validate all hidden form controls - ignore: [] 
             //ignore all hidden elements except those who are listed:
-            ignore: ':hidden:not(#ControleAcesso_COLABORADORKEY, #Loja_CodigoLojaAlternate, #Item_CodigoProdutoAlternate, #TipoBusiness_CodigoTipoBusinessAlternate, #Cargo_CodigoCargoAlternate)'
+            ignore: ':hidden:not(#ControleAcesso_COLABORADORKEY, #Loja_CodigoLojaAlternate, #Item_CodigoProdutoAlternate, #TipoBusiness_CodigoTipoBusinessAlternate, #Cargo_CodigoCargoAlternate, #Aeroporto_Id_Aeroporto)'
         });
 
     </script>
