@@ -25,7 +25,7 @@ namespace Dufry.Comissoes.ViewModels
         //<TODO> Classes que serão necessárias
         public Produto Item { get; set; }
 
-        //public ProdutoCategoria { get; set; }
+        public ProdutoCategoria ProdutoCategoria { get; set; }
 
         //public ProdutoGrupoDufry { get; set; }
         public ProdutoSubGrupoDufry ProdutoSubGrupoDufry { get; set; }
@@ -51,7 +51,7 @@ namespace Dufry.Comissoes.ViewModels
 
         public IEnumerable<SelectListItem> GruposSelectListItem { get; set; }
 
-        public IEnumerable<SelectListItem> CategoriasSelectListItem { get; set; }
+        public IEnumerable<SelectListItem> ProdutoCategoriasSelectListItem { get; set; }
 
         public IEnumerable<SelectListItem> TipoBusinesesSelectListItem { get; set; }
 
@@ -60,7 +60,7 @@ namespace Dufry.Comissoes.ViewModels
         public IEnumerable<SelectListItem> AeroportosSelectListItem { get; set; }
 
 
-        public ComissoesViewModel(IEnumerable<SelectListItem> colaboradoresSelectListItem, IEnumerable<SelectListItem> lojasSelectListItem, IEnumerable<SelectListItem> itensSelectListItem, IEnumerable<SelectListItem> tipobusinesesSelectListItem, IEnumerable<SelectListItem> cargosSelectListItem, IEnumerable<SelectListItem> aeroportosSelectListItem, IEnumerable<SelectListItem> subGruposDufrySelectListItem)
+        public ComissoesViewModel(IEnumerable<SelectListItem> colaboradoresSelectListItem, IEnumerable<SelectListItem> lojasSelectListItem, IEnumerable<SelectListItem> itensSelectListItem, IEnumerable<SelectListItem> tipobusinesesSelectListItem, IEnumerable<SelectListItem> cargosSelectListItem, IEnumerable<SelectListItem> aeroportosSelectListItem, IEnumerable<SelectListItem> subGruposDufrySelectListItem, IEnumerable<SelectListItem> produtoCategoriasSelectListItem)
         {
             ColaboradoresSelectListItem = colaboradoresSelectListItem;
             LojasSelectListItem = lojasSelectListItem;
@@ -69,6 +69,7 @@ namespace Dufry.Comissoes.ViewModels
             CargosSelectListItem = cargosSelectListItem;
             AeroportosSelectListItem = aeroportosSelectListItem;
             SubGruposDufrySelectListItem = subGruposDufrySelectListItem;
+            ProdutoCategoriasSelectListItem = produtoCategoriasSelectListItem;
         }
 
 

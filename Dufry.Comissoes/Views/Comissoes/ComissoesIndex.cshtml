@@ -40,7 +40,8 @@
         </p>
         <p>
             @Html.Label("Categoria")
-            @Html.DropDownList("NameOfField", new List<SelectListItem>(), "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @Html.DropDownListFor(model => model.ProdutoCategoria.CodigoProdutoCategoriaAlternate, Model.ProdutoCategoriasSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.ProdutoCategoria.CodigoProdutoCategoriaAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>
         <p>
             @Html.Label("Grupo")

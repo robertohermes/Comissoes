@@ -45,6 +45,7 @@
     <Compile Include="Entities\Configuracao.cs" />
     <Compile Include="Entities\Cargo.cs" />
     <Compile Include="Entities\Categoria.cs" />
+    <Compile Include="Entities\ProdutoCategoria.cs" />
     <Compile Include="Entities\Output\FolhaPagamento.cs" />
     <Compile Include="Entities\ProdutoSubGrupoDufry.cs" />
     <Compile Include="Entities\Produto.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Interfaces\Repository\IAusenciaRemuneradaRepository.cs" />
     <Compile Include="Interfaces\Repository\ICargoRepository.cs" />
     <Compile Include="Interfaces\Repository\IConfiguracaoRepository.cs" />
+    <Compile Include="Interfaces\Repository\IProdutoCategoriaRepository.cs" />
     <Compile Include="Interfaces\Repository\IProdutoSubGrupoDufryRepository.cs" />
     <Compile Include="Interfaces\Repository\IProdutoRepository.cs" />
     <Compile Include="Interfaces\Repository\ITipoBusinessRepository.cs" />
@@ -165,6 +167,7 @@
     <Compile Include="Interfaces\Repository\ReadOnly\IAusenciaRemuneradaReadOnlyRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\ICargoReadOnlyRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IConfiguracaoReadOnlyRepository.cs" />
+    <Compile Include="Interfaces\Repository\ReadOnly\IProdutoCategoriaReadOnlyRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IProdutoSubGrupoDufryReadOnlyRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IProdutoReadOnlyRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\ITipoBusinessReadOnlyRepository.cs" />
@@ -188,6 +191,7 @@
     <Compile Include="Interfaces\Service\IAusenciaRemuneradaService.cs" />
     <Compile Include="Interfaces\Service\ICargoService.cs" />
     <Compile Include="Interfaces\Service\IConfiguracaoService.cs" />
+    <Compile Include="Interfaces\Service\IProdutoCategoriaService.cs" />
     <Compile Include="Interfaces\Service\IProdutoSubGrupoDufryService.cs" />
     <Compile Include="Interfaces\Service\IProdutoService.cs" />
     <Compile Include="Interfaces\Service\ITipoBusinessService.cs" />
@@ -214,6 +218,7 @@
     <Compile Include="Services\AusenciaRemuneradaService.cs" />
     <Compile Include="Services\CargoService.cs" />
     <Compile Include="Services\ConfiguracaoService.cs" />
+    <Compile Include="Services\ProdutoCategoriaService.cs" />
     <Compile Include="Services\ProdutoSubGrupoDufryService.cs" />
     <Compile Include="Services\ProdutoService.cs" />
     <Compile Include="Services\TipoBusinessService.cs" />

@@ -59,9 +59,11 @@
     <Compile Include="CargoAppService.cs" />
     <Compile Include="ConfiguracaoAppService.cs" />
     <Compile Include="CategoriaAppService.cs" />
+    <Compile Include="Interfaces\IProdutoCategoriaAppService.cs" />
     <Compile Include="Interfaces\IProdutoSubGrupoDufryAppService.cs" />
     <Compile Include="Interfaces\ITipoBusinessAppService.cs" />
     <Compile Include="Interfaces\IAeroportoAppService.cs" />
+    <Compile Include="ProdutoCategoriaAppService.cs" />
     <Compile Include="ProdutoSubGrupoDufryAppService.cs" />
     <Compile Include="ProdutoAppService.cs" />
     <Compile Include="Interfaces\IConfiguracaoAppService.cs" />

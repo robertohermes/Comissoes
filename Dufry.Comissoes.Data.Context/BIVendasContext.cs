@@ -31,11 +31,11 @@ namespace Dufry.Comissoes.Data.Context
             modelBuilder.Configurations.Add(new TipoBusinessMap());
             modelBuilder.Configurations.Add(new AeroportoMap());
             modelBuilder.Configurations.Add(new ProdutoSubGrupoDufryMap());
+            modelBuilder.Configurations.Add(new ProdutoCategoriaMap());
 
         }
 
         #region DbSet
-
 
         public DbSet<Loja> Lojas { get; set; }
         public DbSet<Filial> Filiais { get; set; }
@@ -47,6 +47,7 @@ namespace Dufry.Comissoes.Data.Context
         public DbSet<TipoBusiness> TipoBusineses { get; set; }
         public DbSet<Aeroporto> Aeroportos { get; set; }
         public DbSet<ProdutoSubGrupoDufry> ProdutoSubGrupos { get; set; }
+        public DbSet<ProdutoCategoria> ProdutoCategorias { get; set; }
 
 
         #endregion
