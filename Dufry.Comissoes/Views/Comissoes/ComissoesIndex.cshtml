@@ -24,26 +24,14 @@
             @Html.ValidationMessageFor(model => model.Cargo.CodigoCargoAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>
         <p>
-            @Html.LabelFor(model => model.Item.CodigoProdutoAlternate)
-            @Html.DropDownListFor(model => model.Item.CodigoProdutoAlternate, Model.ItensSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
-            @Html.ValidationMessageFor(model => model.Item.CodigoProdutoAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
-        </p>
-        <p>
-            @Html.Label("Subgrupo")
-            @Html.DropDownList("NameOfField", new List<SelectListItem>(), "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
-        </p>
-        <p>
-            @Html.Label("Grupo")
-            @Html.DropDownList("NameOfField", new List<SelectListItem>(), "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
-        </p>
-        <p>
-            @Html.Label("Segmento")
-            @Html.DropDownList("NameOfField", new List<SelectListItem>(), "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
-        </p>
-        <p>
             @Html.LabelFor(model => model.TipoBusiness.CodigoTipoBusinessAlternate)
             @Html.DropDownListFor(model => model.TipoBusiness.CodigoTipoBusinessAlternate, Model.TipoBusinesesSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
             @Html.ValidationMessageFor(model => model.TipoBusiness.CodigoTipoBusinessAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Aeroporto.Id_Aeroporto)
+            @Html.DropDownListFor(model => model.Aeroporto.Id_Aeroporto, Model.AeroportosSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.Aeroporto.Id_Aeroporto, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>
         <p>
             @Html.LabelFor(model => model.Loja.CodigoLojaAlternate)
@@ -51,9 +39,22 @@
             @Html.ValidationMessageFor(model => model.Loja.CodigoLojaAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>
         <p>
-            @Html.LabelFor(model => model.Aeroporto.Id_Aeroporto)
-            @Html.DropDownListFor(model => model.Aeroporto.Id_Aeroporto, Model.AeroportosSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
-            @Html.ValidationMessageFor(model => model.Aeroporto.Id_Aeroporto, String.Empty, new { @style = "padding-left: 40px;!important" })
+            @Html.Label("Categoria")
+            @Html.DropDownList("NameOfField", new List<SelectListItem>(), "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+        </p>
+        <p>
+            @Html.Label("Grupo")
+            @Html.DropDownList("NameOfField", new List<SelectListItem>(), "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+        </p>
+        <p>
+            @Html.Label("Subgrupo")
+            @Html.DropDownListFor(model => model.ProdutoSubGrupoDufry.CodigoProdutoSubGrupoDufryAlternate, Model.SubGruposDufrySelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.ProdutoSubGrupoDufry.CodigoProdutoSubGrupoDufryAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
+        </p>
+        <p>
+            @Html.LabelFor(model => model.Item.CodigoProdutoAlternate)
+            @Html.DropDownListFor(model => model.Item.CodigoProdutoAlternate, Model.ItensSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.Item.CodigoProdutoAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>
         <p>
             @Html.LabelFor(model => model.DT_INI)

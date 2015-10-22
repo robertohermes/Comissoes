@@ -30,6 +30,7 @@ namespace Dufry.Comissoes.CrossCutting.InversionOfControl.Modules
             Bind<IProdutoAppService>().To<ProdutoAppService>();
             Bind<ITipoBusinessAppService>().To<TipoBusinessAppService>();
             Bind<IAeroportoAppService>().To<AeroportoAppService>();
+            Bind<IProdutoSubGrupoDufryAppService>().To<ProdutoSubGrupoDufryAppService>();
         }
     }
 }

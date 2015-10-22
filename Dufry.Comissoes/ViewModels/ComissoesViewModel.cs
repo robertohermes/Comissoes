@@ -24,12 +24,15 @@ namespace Dufry.Comissoes.ViewModels
 
         //<TODO> Classes que serão necessárias
         public Produto Item { get; set; }
-        //public ProdutoSubGrupo { get; set; }
-        //public ProdutoGrupo { get; set; }
-        //public ProdutoSegmento { get; set; }
+
+        //public ProdutoCategoria { get; set; }
+
+        //public ProdutoGrupoDufry { get; set; }
+        public ProdutoSubGrupoDufry ProdutoSubGrupoDufry { get; set; }
+
+
         public TipoBusiness TipoBusiness { get; set; }
         public Aeroporto Aeroporto { get; set; }
-        //public TipoNegocio { get; set; }
 
         public ControleAcesso ControleAcesso { get; set; }
 
@@ -44,11 +47,11 @@ namespace Dufry.Comissoes.ViewModels
 
         public IEnumerable<SelectListItem> ItensSelectListItem { get; set; }
 
-        public IEnumerable<SelectListItem> SubGruposSelectListItem { get; set; }
+        public IEnumerable<SelectListItem> SubGruposDufrySelectListItem { get; set; }
 
         public IEnumerable<SelectListItem> GruposSelectListItem { get; set; }
 
-        public IEnumerable<SelectListItem> SegmentosSelectListItem { get; set; }
+        public IEnumerable<SelectListItem> CategoriasSelectListItem { get; set; }
 
         public IEnumerable<SelectListItem> TipoBusinesesSelectListItem { get; set; }
 
@@ -57,7 +60,7 @@ namespace Dufry.Comissoes.ViewModels
         public IEnumerable<SelectListItem> AeroportosSelectListItem { get; set; }
 
 
-        public ComissoesViewModel(IEnumerable<SelectListItem> colaboradoresSelectListItem, IEnumerable<SelectListItem> lojasSelectListItem, IEnumerable<SelectListItem> itensSelectListItem, IEnumerable<SelectListItem> tipobusinesesSelectListItem, IEnumerable<SelectListItem> cargosSelectListItem, IEnumerable<SelectListItem> aeroportosSelectListItem)
+        public ComissoesViewModel(IEnumerable<SelectListItem> colaboradoresSelectListItem, IEnumerable<SelectListItem> lojasSelectListItem, IEnumerable<SelectListItem> itensSelectListItem, IEnumerable<SelectListItem> tipobusinesesSelectListItem, IEnumerable<SelectListItem> cargosSelectListItem, IEnumerable<SelectListItem> aeroportosSelectListItem, IEnumerable<SelectListItem> subGruposDufrySelectListItem)
         {
             ColaboradoresSelectListItem = colaboradoresSelectListItem;
             LojasSelectListItem = lojasSelectListItem;
@@ -65,6 +68,7 @@ namespace Dufry.Comissoes.ViewModels
             TipoBusinesesSelectListItem = tipobusinesesSelectListItem;
             CargosSelectListItem = cargosSelectListItem;
             AeroportosSelectListItem = aeroportosSelectListItem;
+            SubGruposDufrySelectListItem = subGruposDufrySelectListItem;
         }
 
 

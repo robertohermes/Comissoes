@@ -102,6 +102,10 @@ namespace Dufry.Comissoes.CrossCutting.InversionOfControl.Modules
             Bind<IAeroportoRepository>().To<AeroportoRepository>();
             Bind<IAeroportoReadOnlyRepository>().To<AeroportoDapperRepository>();
             Bind<IReadOnlyRepository<Aeroporto>>().To<AeroportoDapperRepository>();
+
+            Bind<IProdutoSubGrupoDufryRepository>().To<ProdutoSubGrupoDufryRepository>();
+            Bind<IProdutoSubGrupoDufryReadOnlyRepository>().To<ProdutoSubGrupoDufryDapperRepository>();
+            Bind<IReadOnlyRepository<ProdutoSubGrupoDufry>>().To<ProdutoSubGrupoDufryDapperRepository>();
            
         }
     }

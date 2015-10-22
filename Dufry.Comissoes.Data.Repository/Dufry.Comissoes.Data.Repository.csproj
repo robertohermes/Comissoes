@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Dapper\CargoDapperRepository.cs" />
     <Compile Include="Dapper\ConfiguracaoDapperRepository.cs" />
+    <Compile Include="Dapper\ProdutoSubGrupoDufryDapperRepository.cs" />
     <Compile Include="Dapper\ProdutoDapperRepository.cs" />
     <Compile Include="Dapper\TipoBusinessDapperRepository.cs" />
     <Compile Include="Dapper\AeroportoDapperRepository.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Dapper\FilialDapperRepository.cs" />
     <Compile Include="EntityFramework\CargoRepository.cs" />
     <Compile Include="EntityFramework\ConfiguracaoRepository.cs" />
+    <Compile Include="EntityFramework\ProdutoSubGrupoDufryRepository.cs" />
     <Compile Include="EntityFramework\ProdutoRepository.cs" />
     <Compile Include="EntityFramework\TipoBusinessRepository.cs" />
     <Compile Include="EntityFramework\AeroportoRepository.cs" />

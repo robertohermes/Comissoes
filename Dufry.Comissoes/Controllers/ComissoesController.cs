@@ -29,8 +29,9 @@ namespace Dufry.Comissoes.Controllers
         private readonly ITipoBusinessAppService _tipobusinessAppService;
         private readonly ICargoAppService _cargoAppService;
         private readonly IAeroportoAppService _aeroportoAppService;
+        private readonly IProdutoSubGrupoDufryAppService _produtoSubGrupoDufryAppService;
 
-        public ComissoesController(IControleAcessoAppService controleacessoAppService, IColaboradorAppService colaboradorAppService, ILojaAppService lojaAppService, IProdutoAppService produtoAppService, ITipoBusinessAppService tipobusinessAppService, ICargoAppService cargoAppService, IAeroportoAppService aeroportoAppService)
+        public ComissoesController(IControleAcessoAppService controleacessoAppService, IColaboradorAppService colaboradorAppService, ILojaAppService lojaAppService, IProdutoAppService produtoAppService, ITipoBusinessAppService tipobusinessAppService, ICargoAppService cargoAppService, IAeroportoAppService aeroportoAppService, IProdutoSubGrupoDufryAppService produtoSubGrupoDufryAppService)
         {
             _controleacessoAppService = controleacessoAppService;
             _colaboradorAppService = colaboradorAppService;
@@ -39,6 +40,7 @@ namespace Dufry.Comissoes.Controllers
             _tipobusinessAppService = tipobusinessAppService;
             _cargoAppService = cargoAppService;
             _aeroportoAppService = aeroportoAppService;
+            _produtoSubGrupoDufryAppService = produtoSubGrupoDufryAppService;
         }
 
         protected override void Dispose(bool disposing)
@@ -50,6 +52,7 @@ namespace Dufry.Comissoes.Controllers
             _tipobusinessAppService.Dispose();
             _cargoAppService.Dispose();
             _aeroportoAppService.Dispose();
+            _produtoSubGrupoDufryAppService.Dispose();
 
             base.Dispose(disposing);
         }
@@ -66,6 +69,10 @@ namespace Dufry.Comissoes.Controllers
             var cargos = _cargoAppService.Find(t => t.Id_Cargo.ToString().Trim() != "-1" && t.Id_Cargo.ToString().Trim() != "-2");
             IEnumerable<SelectListItem> cargosSelectListItem = new SelectList(cargos, "CodigoCargoAlternate", "NomeCargo");
             ViewBag.CodigoCargoAlternate = new SelectList(cargosSelectListItem, "CodigoCargoAlternate", "NomeCargo");
+
+            var subgruposdufry = _produtoSubGrupoDufryAppService.Find(t => t.Id_ProdutoSubGrupoDufry.ToString().Trim() != "-1" && t.Id_ProdutoSubGrupoDufry.ToString().Trim() != "-2");
+            IEnumerable<SelectListItem> subGruposDufrySelectListItem = new SelectList(subgruposdufry, "CodigoProdutoSubGrupoDufryAlternate", "NomeProdutoSubGrupoDufry");
+            ViewBag.CodigoProdutoSubGrupoDufryAlternate = new SelectList(subGruposDufrySelectListItem, "CodigoProdutoSubGrupoDufryAlternate", "NomeProdutoSubGrupoDufry");
             
             var tipobusineses = _tipobusinessAppService.Find(t => t.CodigoTipoBusinessAlternate.ToString().Trim() != "-1" && t.CodigoTipoBusinessAlternate.ToString().Trim() != "-2");
             IEnumerable<SelectListItem> tipobusinesesSelectListItem = new SelectList(tipobusineses, "CodigoTipoBusinessAlternate", "NomeTipoBusiness");
@@ -97,7 +104,7 @@ namespace Dufry.Comissoes.Controllers
 
             #endregion populaobjetos
 
-            ComissoesViewModel comissoesVM = new ComissoesViewModel(colaboradoresSelectListItem, lojasSelectListItem, itensSelectListItem, tipobusinesesSelectListItem, cargosSelectListItem, aeroportosSelectListItem);
+            ComissoesViewModel comissoesVM = new ComissoesViewModel(colaboradoresSelectListItem, lojasSelectListItem, itensSelectListItem, tipobusinesesSelectListItem, cargosSelectListItem, aeroportosSelectListItem, subGruposDufrySelectListItem);
 
             return View(comissoesVM);
         }
