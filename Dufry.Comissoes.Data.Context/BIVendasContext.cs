@@ -32,6 +32,7 @@ namespace Dufry.Comissoes.Data.Context
             modelBuilder.Configurations.Add(new AeroportoMap());
             modelBuilder.Configurations.Add(new ProdutoSubGrupoDufryMap());
             modelBuilder.Configurations.Add(new ProdutoCategoriaMap());
+            modelBuilder.Configurations.Add(new ProdutoGrupoDufryMap());
 
         }
 
@@ -48,6 +49,7 @@ namespace Dufry.Comissoes.Data.Context
         public DbSet<Aeroporto> Aeroportos { get; set; }
         public DbSet<ProdutoSubGrupoDufry> ProdutoSubGrupos { get; set; }
         public DbSet<ProdutoCategoria> ProdutoCategorias { get; set; }
+        public DbSet<ProdutoGrupoDufry> ProdutoGrupoDufrys { get; set; }
 
 
         #endregion
