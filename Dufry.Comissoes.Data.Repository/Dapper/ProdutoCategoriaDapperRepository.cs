@@ -15,9 +15,9 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var lojas = cn.Query<ProdutoCategoria>("SELECT * FROM DimProdutoCategoria WHERE Id_ProdutoCategoria = @Id_ProdutoCategoria",
+                var produtoCategorias = cn.Query<ProdutoCategoria>("SELECT * FROM DimProdutoCategoria WHERE Id_ProdutoCategoria = @Id_ProdutoCategoria",
                     new { ProdutoCategoriaKey = id }).FirstOrDefault();
-                return lojas;
+                return produtoCategorias;
             }
         }
 
@@ -25,8 +25,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var produtoCategoria = cn.Query<ProdutoCategoria>("SELECT * FROM DimProdutoCategoria");
-                return produtoCategoria;
+                var produtoCategorias = cn.Query<ProdutoCategoria>("SELECT * FROM DimProdutoCategoria");
+                return produtoCategorias;
             }
         }
 

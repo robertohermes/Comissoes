@@ -15,9 +15,9 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacessos = cn.Query<SelfService>("SELECT * FROM COMIS_SELF_SERVICE WHERE ID_SELF_SERVICE = @id_self_service",
-                    new { ColaboradorKey = id }).FirstOrDefault();
-                return controleacessos;
+                var selfServices = cn.Query<SelfService>("SELECT * FROM COMIS_SELF_SERVICE WHERE ID_SELF_SERVICE = @id_self_service",
+                    new { SelfServiceKey = id }).FirstOrDefault();
+                return selfServices;
             }
         }
 
@@ -25,8 +25,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacesso = cn.Query<SelfService>("SELECT * FROM COMIS_SELF_SERVICE");
-                return controleacesso;
+                var selfServices = cn.Query<SelfService>("SELECT * FROM COMIS_SELF_SERVICE");
+                return selfServices;
             }
         }
 
@@ -34,8 +34,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacessos = cn.GetList<SelfService>(predicate);
-                return controleacessos;
+                var selfServices = cn.GetList<SelfService>(predicate);
+                return selfServices;
             }
         }
 

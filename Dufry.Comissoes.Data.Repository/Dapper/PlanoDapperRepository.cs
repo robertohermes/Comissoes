@@ -15,9 +15,9 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacessos = cn.Query<Plano>("SELECT * FROM COMIS_PLANO WHERE ID_PLANO = @id_plano",
-                    new { ColaboradorKey = id }).FirstOrDefault();
-                return controleacessos;
+                var planos = cn.Query<Plano>("SELECT * FROM COMIS_PLANO WHERE ID_PLANO = @id_plano",
+                    new { PlanoKey = id }).FirstOrDefault();
+                return planos;
             }
         }
 
@@ -25,8 +25,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacesso = cn.Query<Plano>("SELECT * FROM COMIS_PLANO");
-                return controleacesso;
+                var planos = cn.Query<Plano>("SELECT * FROM COMIS_PLANO");
+                return planos;
             }
         }
 
@@ -34,8 +34,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacessos = cn.GetList<Plano>(predicate);
-                return controleacessos;
+                var planos = cn.GetList<Plano>(predicate);
+                return planos;
             }
         }
 

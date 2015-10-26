@@ -15,9 +15,9 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacessos = cn.Query<ControleAcesso>("SELECT * FROM COMIS_CONTROLE_ACESSO WHERE COLABORADORKEY = @ColaboradorKey",
-                    new { ColaboradorKey = id }).FirstOrDefault();
-                return controleacessos;
+                var controleAcessos = cn.Query<ControleAcesso>("SELECT * FROM COMIS_CONTROLE_ACESSO WHERE COLABORADORKEY = @ColaboradorKey",
+                    new { ControleAcessoKey = id }).FirstOrDefault();
+                return controleAcessos;
             }
         }
 
@@ -25,8 +25,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacesso = cn.Query<ControleAcesso>("SELECT * FROM COMIS_CONTROLE_ACESSO");
-                return controleacesso;
+                var controleAcessos = cn.Query<ControleAcesso>("SELECT * FROM COMIS_CONTROLE_ACESSO");
+                return controleAcessos;
             }
         }
 
@@ -34,8 +34,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacessos = cn.GetList<ControleAcesso>(predicate);
-                return controleacessos;
+                var controleAcessos = cn.GetList<ControleAcesso>(predicate);
+                return controleAcessos;
             }
         }
 
@@ -43,8 +43,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacesso = cn.Query<ControleAcesso>("SELECT * FROM COMIS_CONTROLE_ACESSO").FirstOrDefault();
-                return controleacesso;
+                var controleAcesso = cn.Query<ControleAcesso>("SELECT * FROM COMIS_CONTROLE_ACESSO").FirstOrDefault();
+                return controleAcesso;
             }
         }
 
@@ -52,9 +52,9 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacesso = cn.Query<ControleAcesso>("SELECT * FROM COMIS_CONTROLE_ACESSO WHERE LOGIN = @Login AND STATUS = @Status ",
+                var controleAcesso = cn.Query<ControleAcesso>("SELECT * FROM COMIS_CONTROLE_ACESSO WHERE LOGIN = @Login AND STATUS = @Status ",
                     new { Login = login, Status = "A" }).FirstOrDefault();
-                return controleacesso;
+                return controleAcesso;
             }
         }
 
@@ -62,9 +62,9 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacessos = cn.Query<ControleAcesso>("SELECT * FROM COMIS_CONTROLE_ACESSO WHERE COLABORADORKEY_PAI = @ColaboradorKey",
+                var controleAcessos = cn.Query<ControleAcesso>("SELECT * FROM COMIS_CONTROLE_ACESSO WHERE COLABORADORKEY_PAI = @ColaboradorKey",
                     new { ColaboradorKey = id }).FirstOrDefault();
-                return controleacessos;
+                return controleAcessos;
             }
         }
     }

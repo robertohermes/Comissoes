@@ -16,7 +16,7 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
             using (var cn = ComissoesConnection)
             {
                 var categoriaPercentuals = cn.Query<CategoriaPercentual>("SELECT * FROM COMIS_CATEGORIA_PERCENTUAL WHERE ID_CATEGORIA_PERCENTUAL = @id_categoria_percentual",
-                    new { ColaboradorKey = id }).FirstOrDefault();
+                    new { CategoriaPercentualKey = id }).FirstOrDefault();
                 return categoriaPercentuals;
             }
         }

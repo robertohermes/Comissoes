@@ -17,7 +17,7 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
             {
                 //<REVER>
                 var dolarMedios = cn.Query<DolarMedio>("SELECT * FROM COMIS_DOLAR_MEDIO WHERE ID_PLANO = @id_plano",
-                    new { ID_DOLAR_MEDIO = id }).FirstOrDefault();
+                    new { DolarMedioKey = id }).FirstOrDefault();
                 return dolarMedios;
             }
         }

@@ -15,9 +15,9 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var produtosSubGrupoDufry = cn.Query<ProdutoSubGrupoDufry>("SELECT * FROM DimProdutoSubGrupoDufry WHERE Id_ProdutoSubGrupoDufry = @Id_ProdutoSubGrupoDufry",
+                var produtoSubGrupoDufrys = cn.Query<ProdutoSubGrupoDufry>("SELECT * FROM DimProdutoSubGrupoDufry WHERE Id_ProdutoSubGrupoDufry = @Id_ProdutoSubGrupoDufry",
                     new { ProdutoSubGrupoDufryKey = id }).FirstOrDefault();
-                return produtosSubGrupoDufry;
+                return produtoSubGrupoDufrys;
             }
         }
 
@@ -25,8 +25,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var produtosSubGrupoDufry = cn.Query<ProdutoSubGrupoDufry>("SELECT * FROM DimProdutoSubGrupoDufry");
-                return produtosSubGrupoDufry;
+                var produtoSubGrupoDufrys = cn.Query<ProdutoSubGrupoDufry>("SELECT * FROM DimProdutoSubGrupoDufry");
+                return produtoSubGrupoDufrys;
             }
         }
 
@@ -34,8 +34,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var produtosSubGrupoDufry = cn.GetList<ProdutoSubGrupoDufry>(predicate);
-                return produtosSubGrupoDufry;
+                var produtoSubGrupoDufrys = cn.GetList<ProdutoSubGrupoDufry>(predicate);
+                return produtoSubGrupoDufrys;
             }
         }
     }

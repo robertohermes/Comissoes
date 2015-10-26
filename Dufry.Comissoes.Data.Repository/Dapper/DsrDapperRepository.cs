@@ -16,7 +16,7 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
             using (var cn = ComissoesConnection)
             {
                 var dsrs = cn.Query<DSR>("SELECT * FROM COMIS_DSR WHERE ID_DSR = @id_dsr",
-                    new { ColaboradorKey = id }).FirstOrDefault();
+                    new { DSRKey = id }).FirstOrDefault();
                 return dsrs;
             }
         }

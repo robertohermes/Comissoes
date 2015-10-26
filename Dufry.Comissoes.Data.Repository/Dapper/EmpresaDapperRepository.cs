@@ -15,9 +15,9 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var empresa = cn.Query<Empresa>("SELECT * FROM DimEmpresa WHERE Id_Empresa = @Id_Empresa",
+                var empresas = cn.Query<Empresa>("SELECT * FROM DimEmpresa WHERE Id_Empresa = @Id_Empresa",
                     new { EmpresaKey = id }).FirstOrDefault();
-                return empresa;
+                return empresas;
             }
         }
 

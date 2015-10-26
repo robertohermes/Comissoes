@@ -15,12 +15,12 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var categoria = cn.Query<Categoria>
+                var categorias = cn.Query<Categoria>
                     ("SELECT * " +
                      "FROM COMIS_CATEGORIA CAT " +
                      "WHERE CAT.ID_CATEGORIA = @ID_CATEGORIA",
-                        new { ID_CATEGORIA = id }).FirstOrDefault();
-                return categoria;
+                        new { CategoriaKey = id }).FirstOrDefault();
+                return categorias;
             }
         }
 

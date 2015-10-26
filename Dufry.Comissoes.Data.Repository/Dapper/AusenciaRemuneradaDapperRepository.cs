@@ -16,7 +16,7 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
             using (var cn = ComissoesConnection)
             {
                 var ausenciaRemuneradas = cn.Query<AusenciaRemunerada>("SELECT * FROM COMIS_AUSENCIA_REMUNERADA WHERE ID_AUSENCIA_REMUNERADA = @id_ausencia_remunerada",
-                    new { ColaboradorKey = id }).FirstOrDefault();
+                    new { AusenciaRemuneradaKey = id }).FirstOrDefault();
                 return ausenciaRemuneradas;
             }
         }

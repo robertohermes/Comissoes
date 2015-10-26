@@ -25,8 +25,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var produto = cn.Query<Produto>("SELECT * FROM DimProduto");
-                return produto;
+                var produtos = cn.Query<Produto>("SELECT * FROM DimProduto");
+                return produtos;
             }
         }
 

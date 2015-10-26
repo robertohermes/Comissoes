@@ -16,7 +16,7 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
             using (var cn = BIVendasConnection)
             {
                 var filiais = cn.Query<Filial>("SELECT * FROM DimFilial WHERE Id_Filial = @Id_Filial",
-                    new { ColaboradorKey = id }).FirstOrDefault();
+                    new { FilialKey = id }).FirstOrDefault();
                 return filiais;
             }
         }
@@ -25,8 +25,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var filial = cn.Query<Filial>("SELECT * FROM DimFilial");
-                return filial;
+                var filiais = cn.Query<Filial>("SELECT * FROM DimFilial");
+                return filiais;
             }
         }
 

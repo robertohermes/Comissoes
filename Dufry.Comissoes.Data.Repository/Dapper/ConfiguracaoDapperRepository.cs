@@ -15,12 +15,12 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var configuracao = cn.Query<Configuracao>
+                var configuracaos = cn.Query<Configuracao>
                     ("SELECT * " +
                      "FROM COMIS_CONFIGURACAO CON " +
                      "WHERE CAT.ID_CONFIGURACAO = @ID_CONFIGURACAO",
-                        new { ID_CONFIGURACAO = id }).FirstOrDefault();
-                return configuracao;
+                        new { ConfiguracaoKey = id }).FirstOrDefault();
+                return configuracaos;
             }
         }
 
