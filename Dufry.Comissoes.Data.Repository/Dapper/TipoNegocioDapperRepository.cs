@@ -15,9 +15,9 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var tiponegocios = cn.Query<TipoNegocio>("SELECT * FROM DimTipoNegocio WHERE Id_TipoNegocio = @Id_TipoNegocio",
+                var tipoNegocios = cn.Query<TipoNegocio>("SELECT * FROM DimTipoNegocio WHERE Id_TipoNegocio = @Id_TipoNegocio",
                     new { TipoNegocioKey = id }).FirstOrDefault();
-                return tiponegocios;
+                return tipoNegocios;
             }
         }
 
@@ -25,8 +25,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var tiponegocios = cn.Query<TipoNegocio>("SELECT * FROM DimTipoNegocio");
-                return tiponegocios;
+                var tipoNegocios = cn.Query<TipoNegocio>("SELECT * FROM DimTipoNegocio");
+                return tipoNegocios;
             }
         }
 
@@ -34,8 +34,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = BIVendasConnection)
             {
-                var tiponegocios = cn.GetList<TipoNegocio>(predicate);
-                return tiponegocios;
+                var tipoNegocios = cn.GetList<TipoNegocio>(predicate);
+                return tipoNegocios;
             }
         }
     }
