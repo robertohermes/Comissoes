@@ -14,7 +14,11 @@ namespace Dufry.Comissoes.Domain.Entities
     public partial class ProdutoCategoria
     {
         public int Id_ProdutoCategoria { get; set; }
+
+        [Display(Name = "Categoria")]
+        [Required(ErrorMessage = "A Categoria é obrigatória")]
         public string CodigoProdutoCategoriaAlternate { get; set; }
+
         public string NomeProdutoCategoria { get; set; }
     }
 }

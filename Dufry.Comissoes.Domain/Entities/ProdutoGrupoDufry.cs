@@ -15,7 +15,11 @@ namespace Dufry.Comissoes.Domain.Entities
     {
         public int Id_ProdutoGrupoDufry { get; set; }
         public int Id_ProdutoCategoria { get; set; }
+
+        [Display(Name = "Grupo")]
+        [Required(ErrorMessage = "O Grupo é obrigatório")]
         public string CodigoProdutoGrupoDufryAlternate { get; set; }
+
         public string NomeProdutoGrupoDufry { get; set; }
     }
 }

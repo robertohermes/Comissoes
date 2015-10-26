@@ -39,16 +39,20 @@
             @Html.ValidationMessageFor(model => model.Loja.CodigoLojaAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>
         <p>
-            @Html.Label("Categoria")
+            @*@Html.Label("Categoria")*@
+            @Html.LabelFor(model => model.ProdutoCategoria.CodigoProdutoCategoriaAlternate)
             @Html.DropDownListFor(model => model.ProdutoCategoria.CodigoProdutoCategoriaAlternate, Model.ProdutoCategoriasSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
             @Html.ValidationMessageFor(model => model.ProdutoCategoria.CodigoProdutoCategoriaAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>
         <p>
-            @Html.Label("Grupo")
-            @Html.DropDownList("NameOfField", new List<SelectListItem>(), "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @*@Html.Label("Grupo")*@
+            @Html.LabelFor(model => model.ProdutoGrupoDufry.CodigoProdutoGrupoDufryAlternate)
+            @Html.DropDownListFor(model => model.ProdutoGrupoDufry.CodigoProdutoGrupoDufryAlternate, Model.ProdutoGruposDufrySelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
+            @Html.ValidationMessageFor(model => model.ProdutoGrupoDufry.CodigoProdutoGrupoDufryAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>
         <p>
-            @Html.Label("Subgrupo")
+            @*@Html.Label("Subgrupo")*@
+            @Html.LabelFor(model => model.ProdutoSubGrupoDufry.CodigoProdutoSubGrupoDufryAlternate)
             @Html.DropDownListFor(model => model.ProdutoSubGrupoDufry.CodigoProdutoSubGrupoDufryAlternate, Model.SubGruposDufrySelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
             @Html.ValidationMessageFor(model => model.ProdutoSubGrupoDufry.CodigoProdutoSubGrupoDufryAlternate, String.Empty, new { @style = "padding-left: 40px;!important" })
         </p>
@@ -106,7 +110,7 @@
         $.validator.setDefaults({
             //validate all hidden form controls - ignore: [] 
             //ignore all hidden elements except those who are listed:
-            ignore: ':hidden:not(#ControleAcesso_COLABORADORKEY, #Loja_CodigoLojaAlternate, #Item_CodigoProdutoAlternate, #TipoBusiness_CodigoTipoBusinessAlternate, #Cargo_CodigoCargoAlternate, #Aeroporto_Id_Aeroporto)'
+            ignore: ':hidden:not(#ControleAcesso_COLABORADORKEY, #Loja_CodigoLojaAlternate, #Item_CodigoProdutoAlternate, #TipoBusiness_CodigoTipoBusinessAlternate, #Cargo_CodigoCargoAlternate, #Aeroporto_Id_Aeroporto, #ProdutoCategoria_CodigoProdutoCategoriaAlternate, #ProdutoGrupoDufry_CodigoProdutoGrupoDufryAlternate, #ProdutoSubGrupoDufry_CodigoProdutoSubGrupoDufryAlternate)'
         });
 
     </script>

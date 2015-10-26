@@ -9,7 +9,11 @@ namespace Dufry.Comissoes.Domain.Entities
         public int Id_ProdutoSubGrupoDufry { get; set; }
         public int Id_ProdutoGrupoDufry { get; set; }
         public int Id_ProdutoCategoria { get; set; }
+
+        [Display(Name = "Subgrupo")]
+        [Required(ErrorMessage = "O Subgrupo é obrigatório")]
         public string CodigoProdutoSubGrupoDufryAlternate { get; set; }
+
         public string NomeProdutoSubGrupoDufry { get; set; }
 
     }
