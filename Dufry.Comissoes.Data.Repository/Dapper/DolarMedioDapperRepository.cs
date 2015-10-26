@@ -16,9 +16,9 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
             using (var cn = ComissoesConnection)
             {
                 //<REVER>
-                var controleacessos = cn.Query<DolarMedio>("SELECT * FROM COMIS_DOLAR_MEDIO WHERE ID_PLANO = @id_plano",
-                    new { ColaboradorKey = id }).FirstOrDefault();
-                return controleacessos;
+                var dolarMedios = cn.Query<DolarMedio>("SELECT * FROM COMIS_DOLAR_MEDIO WHERE ID_PLANO = @id_plano",
+                    new { ID_DOLAR_MEDIO = id }).FirstOrDefault();
+                return dolarMedios;
             }
         }
 
@@ -26,8 +26,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacesso = cn.Query<DolarMedio>("SELECT * FROM COMIS_DOLAR_MEDIO");
-                return controleacesso;
+                var dolarMedios = cn.Query<DolarMedio>("SELECT * FROM COMIS_DOLAR_MEDIO");
+                return dolarMedios;
             }
         }
 
@@ -35,8 +35,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacessos = cn.GetList<DolarMedio>(predicate);
-                return controleacessos;
+                var dolarMedios = cn.GetList<DolarMedio>(predicate);
+                return dolarMedios;
             }
         }
 

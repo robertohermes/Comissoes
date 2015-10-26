@@ -22,16 +22,16 @@ namespace Dufry.Comissoes.ViewModels
         [Display(Name = "Data final da vigência")]
         public DateTime DT_FIM { get; set; }
 
-        //<TODO> Classes que serão necessárias
         public Produto Item { get; set; }
 
         public ProdutoCategoria ProdutoCategoria { get; set; }
 
-        //public ProdutoGrupoDufry { get; set; }
+        //public ProdutoGrupoDufry ProdutoGrupoDufry { get; set; }
+
         public ProdutoSubGrupoDufry ProdutoSubGrupoDufry { get; set; }
 
-
         public TipoBusiness TipoBusiness { get; set; }
+        
         public Aeroporto Aeroporto { get; set; }
 
         public ControleAcesso ControleAcesso { get; set; }
@@ -49,7 +49,7 @@ namespace Dufry.Comissoes.ViewModels
 
         public IEnumerable<SelectListItem> SubGruposDufrySelectListItem { get; set; }
 
-        public IEnumerable<SelectListItem> GruposSelectListItem { get; set; }
+        public IEnumerable<SelectListItem> GruposDufrySelectListItem { get; set; }
 
         public IEnumerable<SelectListItem> ProdutoCategoriasSelectListItem { get; set; }
 

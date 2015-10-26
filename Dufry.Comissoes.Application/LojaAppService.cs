@@ -17,33 +17,33 @@ namespace Dufry.Comissoes.Application
     {
         private readonly ILojaService _service;
 
-        public LojaAppService(ILojaService LojaService)
+        public LojaAppService(ILojaService lojaService)
         {
-            _service = LojaService;
+            _service = lojaService;
         }
 
-        public ValidationResult Create(Loja Loja)
+        public ValidationResult Create(Loja loja)
         {
             BeginTransaction();
-            ValidationResult.Add(_service.Add(Loja));
+            ValidationResult.Add(_service.Add(loja));
             if (ValidationResult.IsValid) Commit();
 
             return ValidationResult;
         }
 
-        public ValidationResult Update(Loja Loja)
+        public ValidationResult Update(Loja loja)
         {
             BeginTransaction();
-            ValidationResult.Add(_service.Update(Loja));
+            ValidationResult.Add(_service.Update(loja));
             if (ValidationResult.IsValid) Commit();
 
             return ValidationResult;
         }
 
-        public ValidationResult Remove(Loja Loja)
+        public ValidationResult Remove(Loja loja)
         {
             BeginTransaction();
-            ValidationResult.Add(_service.Delete(Loja));
+            ValidationResult.Add(_service.Delete(loja));
             if (ValidationResult.IsValid) Commit();
 
             return ValidationResult;

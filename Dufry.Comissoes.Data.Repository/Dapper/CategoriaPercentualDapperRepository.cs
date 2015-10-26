@@ -15,9 +15,9 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacessos = cn.Query<CategoriaPercentual>("SELECT * FROM COMIS_CATEGORIA_PERCENTUAL WHERE ID_CATEGORIA_PERCENTUAL = @id_categoria_percentual",
+                var categoriaPercentuals = cn.Query<CategoriaPercentual>("SELECT * FROM COMIS_CATEGORIA_PERCENTUAL WHERE ID_CATEGORIA_PERCENTUAL = @id_categoria_percentual",
                     new { ColaboradorKey = id }).FirstOrDefault();
-                return controleacessos;
+                return categoriaPercentuals;
             }
         }
 
@@ -25,8 +25,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacesso = cn.Query<CategoriaPercentual>("SELECT * FROM COMIS_CATEGORIA_PERCENTUAL");
-                return controleacesso;
+                var categoriaPercentuals = cn.Query<CategoriaPercentual>("SELECT * FROM COMIS_CATEGORIA_PERCENTUAL");
+                return categoriaPercentuals;
             }
         }
 
@@ -34,8 +34,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacessos = cn.GetList<CategoriaPercentual>(predicate);
-                return controleacessos;
+                var categoriaPercentuals = cn.GetList<CategoriaPercentual>(predicate);
+                return categoriaPercentuals;
             }
         }
 

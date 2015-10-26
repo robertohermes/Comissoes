@@ -11,9 +11,9 @@ namespace Dufry.Comissoes.Controllers
     {
         private readonly ILojaAppService _lojaAppService;
 
-        public LojaController(ILojaAppService LojaAppService)
+        public LojaController(ILojaAppService lojaAppService)
         {
-            _lojaAppService = LojaAppService;
+            _lojaAppService = lojaAppService;
         }
     }
 }

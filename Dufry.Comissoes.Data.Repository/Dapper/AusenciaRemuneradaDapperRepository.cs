@@ -15,9 +15,9 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacessos = cn.Query<AusenciaRemunerada>("SELECT * FROM COMIS_AUSENCIA_REMUNERADA WHERE ID_AUSENCIA_REMUNERADA = @id_ausencia_remunerada",
+                var ausenciaRemuneradas = cn.Query<AusenciaRemunerada>("SELECT * FROM COMIS_AUSENCIA_REMUNERADA WHERE ID_AUSENCIA_REMUNERADA = @id_ausencia_remunerada",
                     new { ColaboradorKey = id }).FirstOrDefault();
-                return controleacessos;
+                return ausenciaRemuneradas;
             }
         }
 
@@ -25,8 +25,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacesso = cn.Query<AusenciaRemunerada>("SELECT * FROM COMIS_AUSENCIA_REMUNERADA");
-                return controleacesso;
+                var ausenciaRemuneradas = cn.Query<AusenciaRemunerada>("SELECT * FROM COMIS_AUSENCIA_REMUNERADA");
+                return ausenciaRemuneradas;
             }
         }
 
@@ -34,8 +34,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacessos = cn.GetList<AusenciaRemunerada>(predicate);
-                return controleacessos;
+                var ausenciaRemuneradas = cn.GetList<AusenciaRemunerada>(predicate);
+                return ausenciaRemuneradas;
             }
         }
 

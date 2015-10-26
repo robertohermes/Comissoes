@@ -15,9 +15,9 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacessos = cn.Query<DSR>("SELECT * FROM COMIS_DSR WHERE ID_DSR = @id_dsr",
+                var dsrs = cn.Query<DSR>("SELECT * FROM COMIS_DSR WHERE ID_DSR = @id_dsr",
                     new { ColaboradorKey = id }).FirstOrDefault();
-                return controleacessos;
+                return dsrs;
             }
         }
 
@@ -25,8 +25,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacesso = cn.Query<DSR>("SELECT * FROM COMIS_DSR");
-                return controleacesso;
+                var dsrs = cn.Query<DSR>("SELECT * FROM COMIS_DSR");
+                return dsrs;
             }
         }
 
@@ -34,8 +34,8 @@ namespace Dufry.Comissoes.Data.Repository.Dapper
         {
             using (var cn = ComissoesConnection)
             {
-                var controleacessos = cn.GetList<DSR>(predicate);
-                return controleacessos;
+                var dsrs = cn.GetList<DSR>(predicate);
+                return dsrs;
             }
         }
 
