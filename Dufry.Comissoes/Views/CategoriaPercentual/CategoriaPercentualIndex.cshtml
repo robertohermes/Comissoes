@@ -14,9 +14,9 @@
     @using (Html.BeginForm("CategoriaPercentualIndex", "CategoriaPercentual", FormMethod.Get))
     {
         <div class="editorCategoria">
-            <p><label for="idCategoriaSearchString">Categoria</label>@Html.DropDownList("idCategoriaSearchString", "--- Selecione ---")</p>
+            @*<p><label for="idPlanoSearchString">Plano</label>@Html.DropDownList("idPlanoSearchString", "--- Selecione ---")</p>*@
+            @*<p><label for="idCategoriaSearchString">Categoria</label>@Html.DropDownList("idCategoriaSearchString", "--- Selecione ---")</p>*@
             <p><label for="atributoSearchString">Atributo</label>@Html.TextBox("atributoSearchString", null, new { maxlength = "255" })</p>
-            <p><label for="codigolojaalternateSearchString">Loja</label>@Html.DropDownList("codigolojaalternateSearchString", "--- Selecione ---")</p>
             <p><label for="percentualSearchString">Percentual de Comissão</label>@Html.TextBox("percentualSearchString", null, new { @class = "decimal" })</p>
             <p><label for="dtiniSearchString">Data inicial da vigência</label>@Html.TextBox("dtiniSearchString", null, new { @class = "dp" })</p>
             <p><label for="dtfimSearchString">Data final da vigência</label>@Html.TextBox("dtfimSearchString", null, new { @class = "dp" })</p>
@@ -39,7 +39,7 @@
     @**************************************************************************************************************************@
     <table class="dufry" width="80%">
         <tr>
-            <th>
+            @*<th>
                 @Html.ActionLink("Categoria", "CategoriaPercentualIndex", "CategoriaPercentual"
                 , new
                 {
@@ -53,15 +53,15 @@
                     statusSearchString = ViewBag.StatusFilter
                 }
                 , new { @class = "tableheadlink" })
-            </th>
+            </th>*@
             <th>
                 @Html.ActionLink("Atributo", "CategoriaPercentualIndex", "CategoriaPercentual"
                 , new
                 {
                     sortOrder = ViewBag.AtributoSortParam,
-                    idCategoriaSearchString = ViewBag.idCategoriaFilter,
+                    //idCategoriaSearchString = ViewBag.idCategoriaFilter,
                     atributoSearchString = ViewBag.atributoFilter,
-                    codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+                    idPlanoSearchString = ViewBag.idPlanoFilter,
                     percentualSearchString = ViewBag.percentualFilter,
                     dtiniSearchString = ViewBag.dtiniFilter,
                     dtfimSearchString = ViewBag.dtfimFilter,
@@ -70,13 +70,13 @@
                 , new { @class = "tableheadlink" })
             </th>
             <th>
-                @Html.ActionLink("Loja", "CategoriaPercentualIndex", "CategoriaPercentual"
+                @Html.ActionLink("Plano", "CategoriaPercentualIndex", "CategoriaPercentual"
                 , new
                 {
                     sortOrder = ViewBag.CodigoLojaAlternateSortParam,
-                    idCategoriaSearchString = ViewBag.idCategoriaFilter,
+                    //idCategoriaSearchString = ViewBag.idCategoriaFilter,
                     atributoSearchString = ViewBag.atributoFilter,
-                    codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+                    idPlanoSearchString = ViewBag.idPlanoFilter,
                     percentualSearchString = ViewBag.percentualFilter,
                     dtiniSearchString = ViewBag.dtiniFilter,
                     dtfimSearchString = ViewBag.dtfimFilter,
@@ -89,9 +89,9 @@
                 , new
                 {
                     sortOrder = ViewBag.PercentualSortParam,
-                    idCategoriaSearchString = ViewBag.idCategoriaFilter,
+                    //idCategoriaSearchString = ViewBag.idCategoriaFilter,
                     atributoSearchString = ViewBag.atributoFilter,
-                    codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+                    idPlanoSearchString = ViewBag.idPlanoFilter,
                     percentualSearchString = ViewBag.percentualFilter,
                     dtiniSearchString = ViewBag.dtiniFilter,
                     dtfimSearchString = ViewBag.dtfimFilter,
@@ -104,9 +104,9 @@
                 , new
                 {
                     sortOrder = ViewBag.DtIniSortParam,
-                    idCategoriaSearchString = ViewBag.idCategoriaFilter,
+                    //idCategoriaSearchString = ViewBag.idCategoriaFilter,
                     atributoSearchString = ViewBag.atributoFilter,
-                    codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+                    idPlanoSearchString = ViewBag.idPlanoFilter,
                     percentualSearchString = ViewBag.percentualFilter,
                     dtiniSearchString = ViewBag.dtiniFilter, 
                     dtfimSearchString = ViewBag.dtfimFilter, 
@@ -119,9 +119,9 @@
                 , new
                 {
                     sortOrder = ViewBag.DtFimSortParam,
-                    idCategoriaSearchString = ViewBag.idCategoriaFilter,
+                    //idCategoriaSearchString = ViewBag.idCategoriaFilter,
                     atributoSearchString = ViewBag.atributoFilter,
-                    codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+                    idPlanoSearchString = ViewBag.idPlanoFilter,
                     percentualSearchString = ViewBag.percentualFilter,
                     dtiniSearchString = ViewBag.dtiniFilter,
                     dtfimSearchString = ViewBag.dtfimFilter,
@@ -134,9 +134,9 @@
                 , new
                 {
                     sortOrder = ViewBag.StatusSortParam,
-                    idCategoriaSearchString = ViewBag.idCategoriaFilter,
+                    //idCategoriaSearchString = ViewBag.idCategoriaFilter,
                     atributoSearchString = ViewBag.atributoFilter,
-                    codigolojaalternateSearchString = ViewBag.codigolojaalternateFilter,
+                    idPlanoSearchString = ViewBag.idPlanoFilter,
                     percentualSearchString = ViewBag.percentualFilter,
                     dtiniSearchString = ViewBag.dtiniFilter,
                     dtfimSearchString = ViewBag.dtfimFilter,
@@ -151,15 +151,15 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.Categoria.DESC_CATEGORIA)
-                </td>
+                </td>*@
                 <td>
                     @Html.ActionLink(item.ATRIBUTO, "CategoriaPercentualEdit", "CategoriaPercentual", new { id = item.ID_CATEGORIA_PERCENTUAL }, new { @class = "tablerowlink" })
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CODIGOLOJAALTERNATE)
-                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Plano.DESC_PLANO)
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.PERCENTUAL)%
                 </td>

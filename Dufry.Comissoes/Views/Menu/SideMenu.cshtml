@@ -22,10 +22,9 @@
         if (admin == "S")
         {
             <li>@Html.Raw(string.Format("<a href=\"{0}\">Categorias</a>", Url.Content("~/Categoria/CategoriaIndex?statusSearchString=A")))</li>
-            @*<li>@Html.Raw(string.Format("<a href=\"{0}\">Categorias e percentuais por loja</a>", Url.Content("~/CategoriaPercentual/CategoriaPercentualIndex?statusSearchString=A")))</li>*@
             <li>@Html.Raw(string.Format("<a href=\"{0}\">Planos de comissões</a>", Url.Content("~/Plano/PlanoIndex?statusSearchString=A")))</li>
+            <li>@Html.Raw(string.Format("<a href=\"{0}\">Categorias e % de comissões</a>", Url.Content("~/CategoriaPercentual/CategoriaPercentualIndex?statusSearchString=A")))</li>    
             <li>@Html.Raw(string.Format("<a href=\"{0}\">Planos de Comissões por Loja</a>", Url.Content("~/PlanoLoja/PlanoLojaIndex?statusSearchString=A")))</li>
-            @*<li>@Html.Raw(string.Format("<a href=\"{0}\">Planos de comissões e hierarquias</a>", Url.Content("~/PlanoCategoria/PlanoCategoriaIndex")))</li>*@
             <li>@Html.Raw(string.Format("<a href=\"{0}\">Comissões Self Service</a>", Url.Content("~/SelfService/SelfServiceIndex?statusSearchString=A")))</li>
             <li>@Html.Raw(string.Format("<a href=\"{0}\">Ausência Remunerada</a>", Url.Content("~/AusenciaRemunerada/AusenciaRemuneradaIndex?statusSearchString=A")))</li>
             <li>@Html.Raw(string.Format("<a href=\"{0}\">DSR</a>", Url.Content("~/DSR/DsrIndex?statusSearchString=A")))</li>

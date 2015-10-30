@@ -15,21 +15,21 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.CategoriaPercentual.ID_CATEGORIA_PERCENTUAL)
 
-        <p>
+        @*<p>
             @Html.LabelFor(model => model.CategoriaPercentual.ID_CATEGORIA)
             @Html.DropDownListFor(model => model.CategoriaPercentual.ID_CATEGORIA, Model.CategoriasSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
             @Html.ValidationMessageFor(model => model.CategoriaPercentual.ID_CATEGORIA, String.Empty, new { @style = "padding-left: 40px;!important" })
-        </p>
+        </p>*@
         <p>
             @Html.LabelFor(model => model.CategoriaPercentual.ATRIBUTO)
             @Html.EditorFor(model => model.CategoriaPercentual.ATRIBUTO)
             @Html.ValidationMessageFor(model => model.CategoriaPercentual.ATRIBUTO, String.Empty, new { @style = "padding-left: 10px;!important" })
         </p>
-        <p>
+        @*<p>
             @Html.LabelFor(model => model.CategoriaPercentual.CODIGOLOJAALTERNATE)
             @Html.DropDownListFor(model => model.CategoriaPercentual.CODIGOLOJAALTERNATE, Model.LojasSelectListItem, "--- Selecione ---", new { @class = "autocomplete-combobox", @style = "padding-left: 7px;!important" })
             @Html.ValidationMessageFor(model => model.CategoriaPercentual.CODIGOLOJAALTERNATE, String.Empty, new { @style = "padding-left: 40px;!important" })
-        </p>
+        </p>*@
         <p>
             @Html.LabelFor(model => model.CategoriaPercentual.PERCENTUAL)
             @Html.TextBoxFor(model => model.CategoriaPercentual.PERCENTUAL, null, new { @class = "decimal" })

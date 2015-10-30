@@ -22,16 +22,23 @@ namespace Dufry.Comissoes.Controllers
     public class CategoriaPercentualController : Controller
     {
         private readonly ICategoriaPercentualAppService _categoriapercentualAppService;
-        private readonly ICategoriaAppService _categoriaAppService;
-        private readonly ILojaAppService _lojaAppService;
+        //private readonly ICategoriaAppService _categoriaAppService;
+        private readonly IPlanoAppService _planoAppService;
         private readonly IControleAcessoAppService _controleacessoAppService;
 
-        public CategoriaPercentualController(ICategoriaPercentualAppService categoriapercentualAppService, ICategoriaAppService categoriaAppService, IControleAcessoAppService controleacessoAppService, ILojaAppService lojaAppService)
+        //public CategoriaPercentualController(ICategoriaPercentualAppService categoriapercentualAppService, ICategoriaAppService categoriaAppService, IControleAcessoAppService controleacessoAppService, ILojaAppService lojaAppService)
+        //{
+        //    _categoriapercentualAppService = categoriapercentualAppService;
+        //    _categoriaAppService = categoriaAppService;
+        //    _lojaAppService = lojaAppService;
+        //    _controleacessoAppService = controleacessoAppService;
+        //}
+
+        public CategoriaPercentualController(ICategoriaPercentualAppService categoriapercentualAppService, IControleAcessoAppService controleacessoAppService, IPlanoAppService planoAppService)
         {
             _categoriapercentualAppService = categoriapercentualAppService;
-            _categoriaAppService = categoriaAppService;
-            _lojaAppService = lojaAppService;
             _controleacessoAppService = controleacessoAppService;
+            _planoAppService = planoAppService;
         }
 
         // GET: /CategoriaPercentual/CategoriaPercentualCreate
@@ -46,7 +53,7 @@ namespace Dufry.Comissoes.Controllers
 
             //var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1"); ;
             //IEnumerable<SelectListItem> lojaSelectListItem = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
-            //ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
+            //ViewBag.ID_PLANO = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
             //#endregion populaobjetos
 
             //CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel(categoriapercentual, categoriaSelectListItem, lojaSelectListItem);
@@ -116,7 +123,7 @@ namespace Dufry.Comissoes.Controllers
 
             //var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1");
             //IEnumerable<SelectListItem> lojaSelectListItem = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja");
-            //ViewBag.CODIGOLOJAALTERNATE = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja", categoriapercentual.CODIGOLOJAALTERNATE);
+            //ViewBag.ID_PLANO = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja", categoriapercentual.ID_PLANO);
             //#endregion populaobjetos
 
             //CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel(categoriapercentual, categoriaSelectListItem, lojaSelectListItem);
@@ -166,7 +173,9 @@ namespace Dufry.Comissoes.Controllers
                         throw new InvalidOperationException("Já existe um perído vigente e ativo que coincide com a tentativa de inclusão / alteração");
                     }
 
-                    return RedirectToAction("CategoriaPercentualIndex");
+                    //<REVER>
+                    //return RedirectToAction("CategoriaPercentualIndex");
+                    return RedirectToAction("Index", "Home");
                 }
                 catch (RetryLimitExceededException /* dex */)
                 {
@@ -184,20 +193,20 @@ namespace Dufry.Comissoes.Controllers
             , string sortOrder
             , int? idCategoriaSearchString
             , decimal? percentualSearchString
-            , string codigolojaalternateSearchString
+            , string idPlanoSearchString
             , string atributoSearchString
             , string dtiniSearchString
             , string dtfimSearchString
             , string statusSearchString)
         {
 
-            #region populaobjetos
-            var categorias = _categoriaAppService.All();
-            ViewBag.idCategoriaSearchString = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA", idCategoriaSearchString);
+            //#region populaobjetos
+            //var categorias = _categoriaAppService.All();
+            //ViewBag.idCategoriaSearchString = new SelectList(categorias, "ID_CATEGORIA", "DESC_CATEGORIA", idCategoriaSearchString);
 
-            var lojas = _lojaAppService.Find(t => t.CodigoLojaAlternate.Trim() != "-2" && t.CodigoLojaAlternate.Trim() != "-1"); ;
-            ViewBag.codigolojaalternateSearchString = new SelectList(lojas, "CodigoLojaAlternate", "NomeLoja", codigolojaalternateSearchString);
-            #endregion populaobjetos
+            //var planos = _planoAppService.All();
+            //ViewBag.idPlanoSearchString = new SelectList(planos, "ID_PLANO", "DESC_PLANO", idPlanoSearchString);
+            //#endregion populaobjetos
 
             #region trataParametrosOrdenacao
             ViewBag.CurrentSort = sortOrder;
@@ -228,11 +237,11 @@ namespace Dufry.Comissoes.Controllers
                 ViewBag.atributoFilter = atributoSearchString;
             }
 
-            //if (!String.IsNullOrEmpty(codigolojaalternateSearchString))
+            //if (!String.IsNullOrEmpty(idPlanoSearchString))
             //{
-            //    string codigolojaalternateFilter = codigolojaalternateSearchString;
-            //    predicate = predicate.And(i => i.CODIGOLOJAALTERNATE.Equals(codigolojaalternateFilter));
-            //    ViewBag.codigolojaalternateFilter = codigolojaalternateFilter;
+            //    string idPlanoFilter = idPlanoSearchString;
+            //    predicate = predicate.And(i => i.ID_PLANO.Equals(idPlanoFilter));
+            //    ViewBag.idPlanoFilter = idPlanoFilter;
             //}
 
             if (percentualSearchString.HasValue)
@@ -275,7 +284,7 @@ namespace Dufry.Comissoes.Controllers
                 //    categoriapercentuals = categoriapercentuals.OrderBy(s => s.ID_CATEGORIA); //mudar de chave para campo
                 //    break;
                 //case "NomeLoja":
-                //    categoriapercentuals = categoriapercentuals.OrderBy(s => s.CODIGOLOJAALTERNATE); //mudar de chave para campo
+                //    categoriapercentuals = categoriapercentuals.OrderBy(s => s.ID_PLANO); //mudar de chave para campo
                 //    break;
                 case "PERCENTUAL":
                     categoriapercentuals = categoriapercentuals.OrderBy(s => s.PERCENTUAL);
@@ -296,7 +305,7 @@ namespace Dufry.Comissoes.Controllers
                 //    categoriapercentuals = categoriapercentuals.OrderByDescending(s => s.ID_CATEGORIA); //mudar de chave para campo
                 //    break;
                 //case "NomeLoja_desc":
-                //    categoriapercentuals = categoriapercentuals.OrderByDescending(s => s.CODIGOLOJAALTERNATE); //mudar de chave para campo
+                //    categoriapercentuals = categoriapercentuals.OrderByDescending(s => s.ID_PLANO); //mudar de chave para campo
                 //    break;
                 case "PERCENTUAL_desc":
                     categoriapercentuals = categoriapercentuals.OrderByDescending(s => s.PERCENTUAL);
@@ -346,7 +355,7 @@ namespace Dufry.Comissoes.Controllers
             }
 
             //return View(categoriapercentual);
-            //Loja loja = _lojaAppService.Find(t => t.CodigoLojaAlternate == categoriapercentual.CODIGOLOJAALTERNATE).FirstOrDefault();
+            //Loja loja = _lojaAppService.Find(t => t.CodigoLojaAlternate == categoriapercentual.ID_PLANO).FirstOrDefault();
 
             //CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel(categoriapercentual, loja);
             CategoriaPercentualViewModel categoriaPercentualVM = new CategoriaPercentualViewModel(categoriapercentual);
@@ -362,10 +371,10 @@ namespace Dufry.Comissoes.Controllers
             {
                 var categoriapercentual = _categoriapercentualAppService.Get(id);
 
-                if (categoriapercentual.PlanoCategorias.Count() == 0)
-                {
-                    _categoriapercentualAppService.Remove(categoriapercentual);
-                }
+                //if (categoriapercentual.PlanoCategorias.Count() == 0)
+                //{
+                //    _categoriapercentualAppService.Remove(categoriapercentual);
+                //}
             }
             catch (RetryLimitExceededException/* dex */)
             {
@@ -380,25 +389,14 @@ namespace Dufry.Comissoes.Controllers
         {
             _categoriapercentualAppService.Dispose();
             _controleacessoAppService.Dispose();
-            _categoriaAppService.Dispose();
-            _lojaAppService.Dispose();
+            _planoAppService.Dispose();
+            //_categoriaAppService.Dispose();
 
             base.Dispose(disposing);
         }
 
         private CategoriaPercentual CategoriaPercentualAtivaVigente (CategoriaPercentual cp)
         {
-
-            //return _categoriapercentualAppService.Find(t => t.ID_CATEGORIA == cp.ID_CATEGORIA
-            //                                            && t.ATRIBUTO == cp.ATRIBUTO
-            //                                            && t.CODIGOLOJAALTERNATE == cp.CODIGOLOJAALTERNATE
-            //                                            && t.STATUS == "A"
-            //                                            && (
-            //                                                (t.DT_INI <= cp.DT_INI && t.DT_FIM >= cp.DT_INI)
-            //                                                || (t.DT_FIM <= cp.DT_INI && t.DT_FIM >= cp.DT_FIM)
-            //                                                || (cp.DT_INI <= t.DT_INI && cp.DT_FIM >= t.DT_FIM)
-            //                                            )
-            //                                        ).FirstOrDefault();
 
             return _categoriapercentualAppService.Find(t => t.ID_PLANO_CATEGORIA == cp.ID_PLANO_CATEGORIA
                                                         && t.ATRIBUTO == cp.ATRIBUTO

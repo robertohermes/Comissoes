@@ -10,21 +10,22 @@ namespace Dufry.Comissoes.ViewModels
 
         public CategoriaPercentual CategoriaPercentual { get; set; }
 
-        public Loja Loja { get; set; }
+        public Plano Plano { get; set; }
 
-        public IEnumerable<SelectListItem> CategoriasSelectListItem { get; set; }
+        //public IEnumerable<SelectListItem> CategoriasSelectListItem { get; set; }
 
-        public IEnumerable<SelectListItem> LojasSelectListItem { get; set; }
+        //public IEnumerable<SelectListItem> LojasSelectListItem { get; set; }
 
         public CategoriaPercentualViewModel(CategoriaPercentual categoriaPercentual)
         {
             CategoriaPercentual = categoriaPercentual;
         }
 
-        //public CategoriaPercentualViewModel(CategoriaPercentual categoriaPercentual, Loja loja)
+
+        //public CategoriaPercentualViewModel(CategoriaPercentual categoriaPercentual, Plano plano)
         //{
         //    CategoriaPercentual = categoriaPercentual;
-        //    Loja = loja;
+        //    Plano = plano;
         //}
 
         //public CategoriaPercentualViewModel(CategoriaPercentual categoriaPercentual, IEnumerable<SelectListItem> categoriaSelectListItem, IEnumerable<SelectListItem> lojaSelectListItem)
